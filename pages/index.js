@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import {
   Link, Text, Flex, Box, Img, AspectRatio, useBreakpointValue,
-  Table, Thead, Tr, Th, Tbody, Td, useDisclosure,
-  Modal, ModalOverlay, ModalContent, SlideFade
+  Table, Thead, Tr, Th, useDisclosure, SlideFade,
+  Modal, ModalOverlay, ModalContent
 } from "@chakra-ui/react";
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
@@ -42,22 +42,20 @@ function SlideShow(props) {
 
 function AgendaCell(props) {
   return (
-    <Td>
-      <Flex flexDirection="row">
-        <Box minW="60px" height="60px" mr={{ base: 2 }} m={{ xl: 2 }} textAlign="center" border="2px">
-          <Text mt="10px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
-          <Text fontSize="xs">{props.hariBulan}</Text>
-        </Box>
-        <Box alignSelf="center">
-          <Text fontSize={{ base: "xs", xl: "md" }}>
-            <Link fontWeight="semibold" href="http://jurnal.radenfatah.ac.id/index.php/jusifo">
-              {props.kegiatan}
-            </Link>
-          </Text>
-          <Text fontSize="sm">{props.tanggal}</Text>
-        </Box>
-      </Flex>
-    </Td>
+    <Flex flexDirection="row" flex="1">
+      <Box minW="60px" height="60px" m={{ base: "3vw", xl: "1.425vw" }} textAlign="center" border="2px">
+        <Text mt="5px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
+        <Text fontSize="xs">{props.hariBulan}</Text>
+      </Box>
+      <Box alignSelf="center" m={{ base: "3vw", xl: "1.425vw" }}>
+        <Text fontSize="md">
+          <Link fontWeight="semibold" href="http://jurnal.radenfatah.ac.id/index.php/jusifo">
+            {props.kegiatan}
+          </Link>
+        </Text>
+        <Text fontSize="sm">{props.tanggal}</Text>
+      </Box>
+    </Flex>
   )
 }
 
@@ -118,13 +116,13 @@ export default function Home() {
       />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 380, xl: 540 }}>
+        <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
           {
             width < 1280 &&
             <iframe
               title="Profil SI"
-              width="450"
-              height="380"
+              width="410"
+              height="310"
               src="https://www.youtube.com/embed/Y3MALDulv10?rel=0"
               allowFullScreen
             />
@@ -141,53 +139,49 @@ export default function Home() {
           }
         </ModalContent>
       </Modal>
-      <Flex flexDirection={responsive} zIndex="2">
-        <Box overflowX="auto">
-          <Table size="md">
-            <Thead>
-              <Tr>
-                <Th colSpan="2" textAlign="center" bgColor="black" color="white">
-                  AGENDA
-              </Th>
-              </Tr>
-            </Thead>
-            <Tbody>
-              {
-                daftarAgenda !== null &&
-                <>
-                  <Tr>
-                    <AgendaCell key={daftarAgenda[0].id}
-                      hari={days[dayjs(daftarAgenda[0].waktu).format('d')]}
-                      hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
-                      kegiatan={dots(daftarAgenda[0].detail_kegiatan)}
-                      tanggal={dots(daftarAgenda[0].tempat)}
-                    />
-                    <AgendaCell key={daftarAgenda[1].id}
-                      hari={days[dayjs(daftarAgenda[1].waktu).format('d')]}
-                      hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
-                      kegiatan={dots(daftarAgenda[1].detail_kegiatan)}
-                      tanggal={dots(daftarAgenda[1].tempat)}
-                    />
-                  </Tr>
-                  <Tr>
-                    <AgendaCell key={daftarAgenda[2].id}
-                      hari={days[dayjs(daftarAgenda[2].waktu).format('d')]}
-                      hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
-                      kegiatan={dots(daftarAgenda[2].detail_kegiatan)}
-                      tanggal={dots(daftarAgenda[2].tempat)}
-                    />
-                    <AgendaCell key={daftarAgenda[3].id}
-                      hari={days[dayjs(daftarAgenda[3].waktu).format('d')]}
-                      hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
-                      kegiatan={dots(daftarAgenda[3].detail_kegiatan)}
-                      tanggal={dots(daftarAgenda[3].tempat)}
-                    />
-                  </Tr>
-                </>
-              }
-            </Tbody>
-          </Table>
-        </Box>
+      <Flex flexDirection={responsive}>
+        <Table size="md">
+          <Thead>
+            <Tr>
+              <Th colSpan="2" textAlign="center" bgColor="black" color="white">
+                AGENDA
+                </Th>
+            </Tr>
+          </Thead>
+          {
+            daftarAgenda !== null &&
+            <>
+              <Flex flexDirection="row">
+                <AgendaCell key={daftarAgenda[0].id}
+                  hari={days[dayjs(daftarAgenda[0].waktu).format('d')]}
+                  hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
+                  kegiatan={dots(daftarAgenda[0].detail_kegiatan)}
+                  tanggal={dots(daftarAgenda[0].tempat)}
+                />
+                <AgendaCell key={daftarAgenda[1].id}
+                  hari={days[dayjs(daftarAgenda[1].waktu).format('d')]}
+                  hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
+                  kegiatan={dots(daftarAgenda[1].detail_kegiatan)}
+                  tanggal={dots(daftarAgenda[1].tempat)}
+                />
+              </Flex>
+              <Flex flexDirection="row">
+                <AgendaCell key={daftarAgenda[2].id}
+                  hari={days[dayjs(daftarAgenda[2].waktu).format('d')]}
+                  hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
+                  kegiatan={dots(daftarAgenda[2].detail_kegiatan)}
+                  tanggal={dots(daftarAgenda[2].tempat)}
+                />
+                <AgendaCell key={daftarAgenda[3].id}
+                  hari={days[dayjs(daftarAgenda[3].waktu).format('d')]}
+                  hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
+                  kegiatan={dots(daftarAgenda[3].detail_kegiatan)}
+                  tanggal={dots(daftarAgenda[3].tempat)}
+                />
+              </Flex>
+            </>
+          }
+        </Table>
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <Img src="yt.png" sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} />
