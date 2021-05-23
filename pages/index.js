@@ -44,14 +44,16 @@ function AgendaCell(props) {
   return (
     <Td>
       <Flex flexDirection="row">
-        <Box minW="60px" height="60px" mr={{ base: 1 }} m={{ xl: 2 }} textAlign="center" border="2px">
+        <Box minW="60px" height="60px" mr={{ base: 2 }} m={{ xl: 2 }} textAlign="center" border="2px">
           <Text mt="10px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
           <Text fontSize="xs">{props.hariBulan}</Text>
         </Box>
-        <Box alignSelf="center" m={{ base: 0 }}>
-          <Link fontWeight="bold" href="http://jurnal.radenfatah.ac.id/index.php/jusifo">
-            {props.kegiatan}
-          </Link>
+        <Box alignSelf="center">
+          <Text fontSize={{ base: "xs", xl: "md" }}>
+            <Link fontWeight="semibold" href="http://jurnal.radenfatah.ac.id/index.php/jusifo">
+              {props.kegiatan}
+            </Link>
+          </Text>
           <Text fontSize="sm">{props.tanggal}</Text>
         </Box>
       </Flex>
@@ -192,7 +194,7 @@ export default function Home() {
           </Box>
         </AspectRatio>
         <Flex flexDirection="column" color="white">
-          <Box bgColor="teal.700" width={{ base: "100%", xl: "422px", '2xl': "600px" }} height="142px">
+          <Box bgColor="teal.700" width={{ base: "100%", xl: "422px", '2xl': "609px" }} height="142px">
             <Box m="12">
               <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" isExternal>
                 <Flex flexDirection="row">
@@ -204,7 +206,7 @@ export default function Home() {
               <Text fontSize="xs">p-ISSN 2460-092X</Text>
             </Box>
           </Box>
-          <Box bgColor="teal.600" width={{ base: "100%", xl: "422px", '2xl': "600px" }} height="116px">
+          <Box bgColor="teal.600" width={{ base: "100%", xl: "422px", '2xl': "609px" }} height="116px">
             <Box mx="12" my="8">
               <Link href="https://chakra-ui.com" isExternal>
                 <Flex flexDirection="row">
