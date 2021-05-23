@@ -1,7 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import {
-  Text, Img, Box, Icon, Flex, Table, Tbody, Tr, Td, Link
+  Text, Img, Box, Icon, Flex, Link
 } from "@chakra-ui/react";
 import { FcCalendar, FcCollaboration, FcDocument, FcViewDetails } from "react-icons/fc"
 import useWindowDimensions from "../public/WindowDimensions";

@@ -21,10 +21,10 @@ const wait = (timeout) => {
 function SlideText(props) {
   return (
     <Box className="slidetext">
-      <Text mt={{ base: "20vw", xl: "16vw" }} mb='2vw' color="white" fontSize={{ base: 12, xl: 38 }}>
+      <Text mt={{ base: "20vw", xl: "18vw" }} mb='2vw' color="white" fontSize={{ base: 12, lg: 24, xl: 36 }}>
         {props.slideText}
       </Text>
-      <Text mb='1vw' color="white" fontSize={{ base: 14 - 8, lg: 24 - 8, xl: 40 - 8 }}>
+      <Text mb='1vw' color="white" fontSize={{ base: 10, lg: 20, xl: 30 }}>
         {props.slideVimi}
       </Text>
       <Box className="linePreloader" />
