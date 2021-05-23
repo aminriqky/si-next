@@ -21,10 +21,10 @@ const wait = (timeout) => {
 function SlideText(props) {
   return (
     <Box className="slidetext">
-      <Text mt={{ base: "18vw", xl: "16vw" }} mb='2vw' color="white" fontSize={{ base: 16, xl: 42 }}>
+      <Text mt={{ base: "20vw", xl: "16vw" }} mb='2vw' color="white" fontSize={{ base: 12, xl: 38 }}>
         {props.slideText}
       </Text>
-      <Text mb='1vw' color="white" fontSize={{ base: 16 - 8, lg: 26 - 8, xl: 42 - 8 }}>
+      <Text mb='1vw' color="white" fontSize={{ base: 14 - 8, lg: 24 - 8, xl: 40 - 8 }}>
         {props.slideVimi}
       </Text>
       <Box className="linePreloader" />
@@ -44,11 +44,11 @@ function AgendaCell(props) {
   return (
     <Td>
       <Flex flexDirection="row">
-        <Box minW="60px" height="60px" m="2" textAlign="center" border="2px">
+        <Box minW="60px" height="60px" mr={{ base: 1 }} m={{ xl: 2 }} textAlign="center" border="2px">
           <Text mt="10px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
           <Text fontSize="xs">{props.hariBulan}</Text>
         </Box>
-        <Box alignSelf="center" m="2">
+        <Box alignSelf="center" m={{ base: 0 }}>
           <Link fontWeight="bold" href="http://jurnal.radenfatah.ac.id/index.php/jusifo">
             {props.kegiatan}
           </Link>
@@ -140,57 +140,59 @@ export default function Home() {
         </ModalContent>
       </Modal>
       <Flex flexDirection={responsive} zIndex="2">
-        <Table size="md">
-          <Thead>
-            <Tr>
-              <Th colSpan="2" textAlign="center" bgColor="black" color="white">
-                AGENDA
+        <Box overflowX="auto">
+          <Table size="md">
+            <Thead>
+              <Tr>
+                <Th colSpan="2" textAlign="center" bgColor="black" color="white">
+                  AGENDA
               </Th>
-            </Tr>
-          </Thead>
-          <Tbody>
-            {
-              daftarAgenda !== null &&
-              <>
-                <Tr>
-                  <AgendaCell key={daftarAgenda[0].id}
-                    hari={days[dayjs(daftarAgenda[0].waktu).format('d')]}
-                    hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
-                    kegiatan={dots(daftarAgenda[0].detail_kegiatan)}
-                    tanggal={dots(daftarAgenda[0].tempat)}
-                  />
-                  <AgendaCell key={daftarAgenda[1].id}
-                    hari={days[dayjs(daftarAgenda[1].waktu).format('d')]}
-                    hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
-                    kegiatan={dots(daftarAgenda[1].detail_kegiatan)}
-                    tanggal={dots(daftarAgenda[1].tempat)}
-                  />
-                </Tr>
-                <Tr>
-                  <AgendaCell key={daftarAgenda[2].id}
-                    hari={days[dayjs(daftarAgenda[2].waktu).format('d')]}
-                    hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
-                    kegiatan={dots(daftarAgenda[2].detail_kegiatan)}
-                    tanggal={dots(daftarAgenda[2].tempat)}
-                  />
-                  <AgendaCell key={daftarAgenda[3].id}
-                    hari={days[dayjs(daftarAgenda[3].waktu).format('d')]}
-                    hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
-                    kegiatan={dots(daftarAgenda[3].detail_kegiatan)}
-                    tanggal={dots(daftarAgenda[3].tempat)}
-                  />
-                </Tr>
-              </>
-            }
-          </Tbody>
-        </Table>
+              </Tr>
+            </Thead>
+            <Tbody>
+              {
+                daftarAgenda !== null &&
+                <>
+                  <Tr>
+                    <AgendaCell key={daftarAgenda[0].id}
+                      hari={days[dayjs(daftarAgenda[0].waktu).format('d')]}
+                      hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
+                      kegiatan={dots(daftarAgenda[0].detail_kegiatan)}
+                      tanggal={dots(daftarAgenda[0].tempat)}
+                    />
+                    <AgendaCell key={daftarAgenda[1].id}
+                      hari={days[dayjs(daftarAgenda[1].waktu).format('d')]}
+                      hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
+                      kegiatan={dots(daftarAgenda[1].detail_kegiatan)}
+                      tanggal={dots(daftarAgenda[1].tempat)}
+                    />
+                  </Tr>
+                  <Tr>
+                    <AgendaCell key={daftarAgenda[2].id}
+                      hari={days[dayjs(daftarAgenda[2].waktu).format('d')]}
+                      hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
+                      kegiatan={dots(daftarAgenda[2].detail_kegiatan)}
+                      tanggal={dots(daftarAgenda[2].tempat)}
+                    />
+                    <AgendaCell key={daftarAgenda[3].id}
+                      hari={days[dayjs(daftarAgenda[3].waktu).format('d')]}
+                      hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
+                      kegiatan={dots(daftarAgenda[3].detail_kegiatan)}
+                      tanggal={dots(daftarAgenda[3].tempat)}
+                    />
+                  </Tr>
+                </>
+              }
+            </Tbody>
+          </Table>
+        </Box>
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <Img src="yt.png" sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} />
           </Box>
         </AspectRatio>
         <Flex flexDirection="column" color="white">
-          <Box bgColor="teal.700" width={{ base: "100%", xl: "380px", '2xl': "570px" }} height="142px">
+          <Box bgColor="teal.700" width={{ base: "100%", xl: "422px", '2xl': "600px" }} height="142px">
             <Box m="12">
               <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" isExternal>
                 <Flex flexDirection="row">
@@ -202,7 +204,7 @@ export default function Home() {
               <Text fontSize="xs">p-ISSN 2460-092X</Text>
             </Box>
           </Box>
-          <Box bgColor="teal.600" width={{ base: "100%", xl: "380px", '2xl': "570px" }} height="116px">
+          <Box bgColor="teal.600" width={{ base: "100%", xl: "422px", '2xl': "600px" }} height="116px">
             <Box mx="12" my="8">
               <Link href="https://chakra-ui.com" isExternal>
                 <Flex flexDirection="row">

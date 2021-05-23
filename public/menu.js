@@ -60,7 +60,7 @@ export default function Menu(props) {
               <IconButton variant="ghost" colorScheme="teal" aria-label="Opsi" size="lg" icon={<HamburgerIcon />} onClick={onOpen} />
             }
           </Box>
-          <Box mr="24vw" mt="1.5vw" onClick={home}>
+          <Box mr={{ xl: "14vw", "2xl": "24vw" }} mt="1.5vw" onClick={home}>
             <Img src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
           </Box>
           {
