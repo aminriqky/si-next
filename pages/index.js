@@ -1,21 +1,16 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import {
-  Link, Text, SlideFade, Flex, Box, Img, Button,
-  Table, Thead, Tr, Th, Tbody, Td
+  Link, Text, Flex, Box, Img, AspectRatio, useBreakpointValue,
+  Table, Thead, Tr, Th, Tbody, Td, useDisclosure,
+  Modal, ModalOverlay, ModalContent, SlideFade
 } from "@chakra-ui/react";
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { createBreakpoints } from "@chakra-ui/theme-tools";
 import Menu from '../public/menu';
-
-const breakpoints = createBreakpoints({
-  sm: "30em",
-  md: "48em",
-  lg: "62em",
-  xl: "80em",
-  "2xl": "96em",
-})
+import ExNav from '../public/exnav'
+import axios from "axios";
+import dayjs from 'dayjs';
 
 const wait = (timeout) => {
   return new Promise(resolve => {
@@ -26,61 +21,50 @@ const wait = (timeout) => {
 function SlideText(props) {
   return (
     <Box className="slidetext">
-      <Text mt={props.fromTop} mb='2vw' color="white" fontSize={props.textSlide}>
+      <Text mt={{ base: "18vw", xl: "16vw" }} mb='2vw' color="white" fontSize={{ base: 16, xl: 42 }}>
         {props.slideText}
       </Text>
-      <Text mb='1vw' color="white" fontSize={props.textSlide - 8}>
+      <Text mb='1vw' color="white" fontSize={{ base: 16 - 8, lg: 26 - 8, xl: 42 - 8 }}>
         {props.slideVimi}
       </Text>
       <Box className="linePreloader" />
-    </Box>);
+    </Box>
+  );
 }
 
 function SlideShow(props) {
   return (
     <SlideFade in={props.slideShow} offsetY="20px">
       <Img className="banner" src={props.slideImg} alt="Visi & Misi" width={props.width} />
-    </SlideFade>);
-}
-
-function Agenda(props) {
-  return (
-    <Table>
-      <Thead>
-        <Tr>
-          <Th textAlign="center" bgColor="black" color="white">
-            AGENDA
-          </Th>
-        </Tr>
-      </Thead>
-      <Tbody>
-        {props.children}
-      </Tbody>
-    </Table>
+    </SlideFade>
   );
 }
 
 function AgendaCell(props) {
   return (
-    <Td display="inline-block" mx="50px">
-      <Button colorScheme="white" color="black" width="60" height="auto">
-        <Flex flexDirection="row">
-          <Box p="2.5" m="2.5" textAlign="center" border="2px">
-            <Text as="b" fontSize="lg">{props.hari}</Text>
-            <Text fontSize="xs">{props.hariBulan}</Text>
-          </Box>
-          <Box alignSelf="center" m="2">
-            <Text fontSize="md" as="b">{props.kegiatan}</Text>
-            <Text fontSize="sm">{props.tanggal}</Text>
-          </Box>
-        </Flex>
-      </Button>
+    <Td>
+      <Flex flexDirection="row">
+        <Box minW="60px" height="60px" m="2" textAlign="center" border="2px">
+          <Text mt="10px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
+          <Text fontSize="xs">{props.hariBulan}</Text>
+        </Box>
+        <Box alignSelf="center" m="2">
+          <Link fontWeight="bold" href="http://jurnal.radenfatah.ac.id/index.php/jusifo">
+            {props.kegiatan}
+          </Link>
+          <Text fontSize="sm">{props.tanggal}</Text>
+        </Box>
+      </Flex>
     </Td>
   )
 }
 
 export default function Home() {
   const { width } = useWindowDimensions();
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const responsive = useBreakpointValue({ base: "column", xl: "row" })
+  const [daftarAgenda, setDaftarAgenda] = useState(null);
+  const days = ["MIN", "SEN", "SEL", "RAB", "KAM", "JUM", "SAB"];
 
   const [slideShow, setSlideShow] = useState(false);
   const [slideText, setSlideText] = useState("");
@@ -89,6 +73,13 @@ export default function Home() {
   const [slideVimi, setSlideVimi] = useState("Visi");
 
   useEffect(() => {
+    if (daftarAgenda === null) {
+      axios.get(`https://webprodi.sashi.id/api/agenda/baru`)
+        .then(res => {
+          const agenda = res.data;
+          setDaftarAgenda(agenda);
+        })
+    }
     if (slideShow === false) {
       wait(1000).then(() => setSlideShow(true) & setSlideNum(slideNum + 1));
       if (slideNum === 1) {
@@ -103,44 +94,14 @@ export default function Home() {
       }
       wait(7500).then(() => setSlideShow(false));
     }
-  });
+  })
 
-  function responsive() {
-    let tab = null;
-    if (width < 1280) {
-      tab = "column"
+  function dots(str) {
+    if (str !== null & str.length > 20) {
+      return str.slice(0, 20) + "...";
     } else {
-      tab = "row"
+      return str
     }
-    return tab
-  }
-
-  function fromTop() {
-    let top = null;
-    if (width > 1150) {
-      top = '16vw'
-    }
-    else if (width <= 1150 & width >= 800) {
-      top = '20vw'
-    }
-    else {
-      top = '21vw'
-    }
-    return top
-  }
-
-  function textSlide() {
-    let size = null;
-    if (width > 1150) {
-      size = 42
-    }
-    else if (width <= 1150 & width >= 800) {
-      size = 26
-    }
-    else {
-      size = 16
-    }
-    return size
   }
 
   return (
@@ -148,38 +109,116 @@ export default function Home() {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu slideText={<SlideText fromTop={fromTop()} slideText={slideText.toUpperCase()} textSlide={textSlide()} slideVimi={slideVimi} />}
+      <Menu
+        slideText={<SlideText slideText={slideText.toUpperCase()} slideVimi={slideVimi} />}
         slideShow={<SlideShow width={width} slideShow={slideShow} slideImg={slideImg} />}
-        fromTop={fromTop()} textSlide={textSlide()}>
-        <Box mt="40vw" zIndex={999} position="absolute" bg="white" w="100%" h="14vw">
-          <Flex flexDirection={responsive}>
-            <Agenda>
-              <AgendaCell hari="RAB" hariBulan="31 MAR" kegiatan="Ujian Seminar Hasil" tanggal="31 Maret 2021" />
-              <AgendaCell hari="RAB" hariBulan="31 MAR" kegiatan="Ujian Seminar Hasil" tanggal="31 Maret 2021" />
-              <AgendaCell hari="RAB" hariBulan="31 MAR" kegiatan="Ujian Seminar Hasil" tanggal="31 Maret 2021" />
-              <AgendaCell hari="RAB" hariBulan="31 MAR" kegiatan="Ujian Seminar Hasil" tanggal="31 Maret 2021" />
-            </Agenda>
-            <Box width={{ base: "100%", md: "620px" }} className="image">
-              <Img src="/yt.png" alt="Logo UIN RF Putih" />
+        pageHeight="49.4vw"
+      />
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 380, xl: 540 }}>
+          {
+            width < 1280 &&
+            <iframe
+              title="Profil SI"
+              width="450"
+              height="380"
+              src="https://www.youtube.com/embed/Y3MALDulv10?rel=0"
+              allowFullScreen
+            />
+          }
+          {
+            width > 1280 &&
+            <iframe
+              title="Profil SI"
+              width="720"
+              height="540"
+              src="https://www.youtube.com/embed/Y3MALDulv10?rel=0"
+              allowFullScreen
+            />
+          }
+        </ModalContent>
+      </Modal>
+      <Flex flexDirection={responsive} zIndex="2">
+        <Table size="md">
+          <Thead>
+            <Tr>
+              <Th colSpan="2" textAlign="center" bgColor="black" color="white">
+                AGENDA
+              </Th>
+            </Tr>
+          </Thead>
+          <Tbody>
+            {
+              daftarAgenda !== null &&
+              <>
+                <Tr>
+                  <AgendaCell key={daftarAgenda[0].id}
+                    hari={days[dayjs(daftarAgenda[0].waktu).format('d')]}
+                    hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
+                    kegiatan={dots(daftarAgenda[0].detail_kegiatan)}
+                    tanggal={dots(daftarAgenda[0].tempat)}
+                  />
+                  <AgendaCell key={daftarAgenda[1].id}
+                    hari={days[dayjs(daftarAgenda[1].waktu).format('d')]}
+                    hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
+                    kegiatan={dots(daftarAgenda[1].detail_kegiatan)}
+                    tanggal={dots(daftarAgenda[1].tempat)}
+                  />
+                </Tr>
+                <Tr>
+                  <AgendaCell key={daftarAgenda[2].id}
+                    hari={days[dayjs(daftarAgenda[2].waktu).format('d')]}
+                    hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
+                    kegiatan={dots(daftarAgenda[2].detail_kegiatan)}
+                    tanggal={dots(daftarAgenda[2].tempat)}
+                  />
+                  <AgendaCell key={daftarAgenda[3].id}
+                    hari={days[dayjs(daftarAgenda[3].waktu).format('d')]}
+                    hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
+                    kegiatan={dots(daftarAgenda[3].detail_kegiatan)}
+                    tanggal={dots(daftarAgenda[3].tempat)}
+                  />
+                </Tr>
+              </>
+            }
+          </Tbody>
+        </Table>
+        <AspectRatio minW="315">
+          <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
+            <Img src="yt.png" sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} />
+          </Box>
+        </AspectRatio>
+        <Flex flexDirection="column" color="white">
+          <Box bgColor="teal.700" width={{ base: "100%", xl: "380px", '2xl': "570px" }} height="142px">
+            <Box m="12">
+              <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" isExternal>
+                <Flex flexDirection="row">
+                  <ExternalLinkIcon mr="2" mb="2.5" />
+                  <Text fontWeight="bold">JUSIFO</Text>
+                </Flex>
+              </Link>
+              <Text fontSize="xs">e-ISSN 2623-1662</Text>
+              <Text fontSize="xs">p-ISSN 2460-092X</Text>
             </Box>
-            <Flex flexDirection="column">
-              <Box bgColor="teal.700" width={{ base: "100%", md: "380px" }} py="12" >
-                <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" ml="12" isExternal>
-                  <ExternalLinkIcon mr="2" mb="1" /><b>JUSIFO</b>
-                </Link>
-                <Text fontSize="xs" ml="12">e-ISSN 2623-1662</Text>
-                <Text fontSize="xs" ml="12">p-ISSN 2460-092X</Text>
-              </Box>
-              <Box bgColor="teal.600" width={{ base: "100%", md: "380px" }} py="9" >
-                <Link href="https://chakra-ui.com" ml="12">
-                  <ExternalLinkIcon mr="2" mb="1" /><b>Katalog Statistik</b>
-                </Link>
-                <Text fontSize="xs" ml="12">Tren informasi data prodi</Text>
-              </Box>
-            </Flex>
-          </Flex>
-        </Box>
-      </Menu>
+          </Box>
+          <Box bgColor="teal.600" width={{ base: "100%", xl: "380px", '2xl': "570px" }} height="116px">
+            <Box mx="12" my="8">
+              <Link href="https://chakra-ui.com" isExternal>
+                <Flex flexDirection="row">
+                  <ExternalLinkIcon mr="2" mb="2.5" />
+                  <Text fontWeight="bold">Katalog Statistik</Text>
+                </Flex>
+              </Link>
+              <Text fontSize="xs">Tren informasi data prodi</Text>
+            </Box>
+          </Box>
+        </Flex>
+      </Flex>
+      <Flex>
+
+      </Flex>
+      <ExNav />
     </>
   );
 }

@@ -1,5 +1,4 @@
 import React from "react";
-import Head from "next/head";
 import { useRouter } from 'next/router'
 import {
   Button, Text, useDisclosure, Drawer, DrawerBody, DrawerHeader, Img, Flex, Link,
@@ -51,11 +50,8 @@ export default function Menu(props) {
 
   return (
     <>
-      <Head>
-        <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
-      </Head>
       {props.slideText}
-      <Box bg="gray.700" w="100%" h="56vw" color="white">
+      <Box bg="gray.700" w="100%" h={props.pageHeight} color="white">
         {props.slideShow}
         <Flex pt="2.5vw" zIndex="100" flexDirection="row">
           <Box mx="4vw" mt="2.25vw">
@@ -64,8 +60,8 @@ export default function Menu(props) {
               <IconButton variant="ghost" colorScheme="teal" aria-label="Opsi" size="lg" icon={<HamburgerIcon />} onClick={onOpen} />
             }
           </Box>
-          <Box mr="28vw" mt="1.5vw">
-            <Img src="/white-logo.png" alt="Logo UIN RF Putih" maxW="300" />
+          <Box mr="24vw" mt="1.5vw" onClick={home}>
+            <Img src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
           </Box>
           {
             width >= 1280 &&
@@ -75,6 +71,7 @@ export default function Menu(props) {
               <MenuTitle title="Dokumen" handleClick={dokumen} />
               <MenuTitle title="Galeri" />
               <MenuTitle title="Fasilitas" />
+              <MenuTitle title="Kemahasiswaan" />
             </>
           }
           <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
