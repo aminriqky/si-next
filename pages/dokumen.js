@@ -23,7 +23,7 @@ export default function Dokumen() {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu slideShow={<Img sx={{ filter: "blur(200px)" }} className="banner" src="misi.png" alt="BG Gradient" width={width} />}>
+      <Menu slideShow={<Img sx={{ filter: "blur(500px)" }} className="banner" src="/misi.png" alt="BG Gradient" width={width} />}>
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="50px">
           <Text fontSize="24" p="4%">
             Dokumen

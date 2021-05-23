@@ -169,7 +169,7 @@ export default function ExNav() {
         <Text color="black" textAlign="center" fontWeight="thin">
           Copyright ©
           <Link href="/">
-            {"Sistem Informasi "}
+            {" Sistem Informasi "}
           </Link>
           <Link href="http://saintek.radenfatah.ac.id/" isExternal>
             {"SAINTEK UIN Raden Fatah. "}

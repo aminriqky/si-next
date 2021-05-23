@@ -16,7 +16,10 @@ export default function Akademik() {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu pageHeight={{ base: "200vw", xl: "66vw" }} slideShow={<Img sx={{ filter: "blur(200px)" }} className="banner" src="misi.png" alt="BG Gradient" height={height} />}>
+      <Menu
+        pageHeight={{ base: "200vw", xl: "66vw" }}
+        slideShow={<Img sx={{ filter: "blur(500px)" }} className="banner" src="/misi.png" alt="BG Gradient" height={height} />}
+      >
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="50px" p="4%">
           <Text fontSize="28" pb="1%" fontWeight="semibold">
             Layanan Akademik
