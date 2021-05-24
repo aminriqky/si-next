@@ -95,11 +95,11 @@ function KehadiranCell(props) {
           boxSize="75px"
           src={props.gambar}
           alt="Avatar"
-          mr="50px"
+          mr={{ base: "25px", xl: "50px" }}
         />
-        <Flex dykey={props.key} flexDirection="row" flex="1" mt="15px">
+        <Flex dykey={props.key} flexDirection="row" flex="1" mt={{ base: 0, xl: "15px" }}>
           <Box>
-            <Text fontSize="md" color="orange.800">
+            <Text fontSize={{ base: "sm", xl: "md" }} color="orange.800">
               <Link fontWeight="semibold">
                 <NavLink as={props.dylink} href="/pengumuman/[pengumuman]">
                   {props.judul}
@@ -107,22 +107,22 @@ function KehadiranCell(props) {
               </Link>
             </Text>
             <Text fontSize="sm" pb="5px">
-              {props.tanggal}
+              {props.deskripsi}
             </Text>
           </Box>
         </Flex>
         {
           props.hadir === 1 &&
-          <Box ml="50px" borderRadius="full" border="solid teal 2px" height="30px" mt="25px">
-            <Text px="10" color="teal" fontWeight="medium">
+          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid teal 2px" height="30px" mt="25px">
+            <Text px={{ base: 6, xl: 10 }} color="teal" fontWeight="medium">
               HADIR
             </Text>
           </Box>
         }
         {
           props.hadir !== 1 &&
-          <Box ml="50px" borderRadius="full" border="solid crimson 2px" height="30px" mt="25px">
-            <Text px="6" color="crimson" fontWeight="medium">
+          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid crimson 2px" height="30px" mt="25px">
+            <Text px={{ base: 2, xl: 6 }} color="crimson" fontWeight="medium">
               TIDAK ADA
             </Text>
           </Box>
@@ -447,7 +447,7 @@ export default function Home() {
                 dykey={daftarKehadiran[0].id}
                 gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[0].avatar}`}
                 judul={daftarKehadiran[0].name}
-                tanggal={daftarKehadiran[0].jabatan}
+                deskripsi={daftarKehadiran[0].jabatan}
                 hadir={daftarKehadiran[0].hadir}
               />
             </>
