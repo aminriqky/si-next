@@ -47,12 +47,12 @@ function SlideShow(props) {
 function AgendaCell(props) {
   return (
     <Flex dykey={props.dykey} flexDirection="row" flex="1">
-      <Box minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px">
+      <Box alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px">
         <Text mt="5px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
         <Text fontSize="xs">{props.hariBulan}</Text>
       </Box>
       <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
-        <Text fontSize="md">
+        <Text fontSize={{ base: "sm", xl: "md" }}>
           <Link fontWeight="semibold">
             <NavLink as={props.dylink} href="/agenda/[agenda]">
               {props.kegiatan}
@@ -282,14 +282,14 @@ export default function Home() {
                 <AgendaCell dykey={daftarAgenda[0].id}
                   hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
-                  kegiatan={dots(20, daftarAgenda[0].detail_kegiatan)}
+                  kegiatan={dots(28, daftarAgenda[0].detail_kegiatan)}
                   tanggal={dots(20, daftarAgenda[0].tempat)}
                   dylink={`/agenda/${daftarAgenda[0].id}`}
                 />
                 <AgendaCell dykey={daftarAgenda[1].id}
                   hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
-                  kegiatan={dots(20, daftarAgenda[1].detail_kegiatan)}
+                  kegiatan={dots(28, daftarAgenda[1].detail_kegiatan)}
                   tanggal={dots(20, daftarAgenda[1].tempat)}
                   dylink={`/agenda/${daftarAgenda[1].id}`}
                 />
@@ -299,14 +299,14 @@ export default function Home() {
                 <AgendaCell dykey={daftarAgenda[2].id}
                   hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
-                  kegiatan={dots(20, daftarAgenda[2].detail_kegiatan)}
+                  kegiatan={dots(28, daftarAgenda[2].detail_kegiatan)}
                   tanggal={dots(20, daftarAgenda[2].tempat)}
                   dylink={`/agenda/${daftarAgenda[2].id}`}
                 />
                 <AgendaCell dykey={daftarAgenda[3].id}
                   hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
-                  kegiatan={dots(20, daftarAgenda[3].detail_kegiatan)}
+                  kegiatan={dots(28, daftarAgenda[3].detail_kegiatan)}
                   tanggal={dots(20, daftarAgenda[3].tempat)}
                   dylink={`/agenda/${daftarAgenda[3].id}`}
                 />
