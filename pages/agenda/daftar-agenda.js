@@ -25,7 +25,7 @@ function AgendaCell(props) {
             </NavLink>
           </Link>
         </Text>
-        <Text fontSize="sm">{props.tanggal}</Text>
+        <Text fontSize="sm">{props.tempat}</Text>
       </Box>
     </Flex>
   )
@@ -43,7 +43,7 @@ export default function DaftarAgenda() {
           setDaftarAgenda(agenda);
         })
     }
-  }, [])
+  }, [daftarAgenda])
 
   return (
     <>
@@ -52,7 +52,7 @@ export default function DaftarAgenda() {
       </Head>
       <Menu
         pageHeight={{ base: "200vw", xl: "66vw" }}
-        slideShow={<Img sx={{ filter: "blur(500px)" }} className="banner" src="/misi.png" alt="BG Gradient" height={height} />}
+        slideShow={<Img sx={{ filter: "blur(500px)" }} pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" alt="BG Gradient" height={height} />}
       >
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           <Text fontSize="28" pb="1%" fontWeight="semibold">
@@ -66,7 +66,7 @@ export default function DaftarAgenda() {
                     hari={dayjs(item.waktu).locale('id').format('ddd').toUpperCase()}
                     hariBulan={dayjs(item.waktu).format('DD/MM')}
                     kegiatan={item.detail_kegiatan}
-                    tanggal={item.tempat}
+                    tempat={item.tempat}
                     dylink={`/agenda/${item.id}`}
                   />
                 </>

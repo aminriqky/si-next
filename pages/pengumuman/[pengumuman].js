@@ -1,31 +1,56 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
-  Text, Img, Box, Icon, Flex, Divider
+  Text, Img, Box, Flex, Button
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import { FcClock, FcOvertime } from "react-icons/fc"
 import useWindowDimensions from "../../public/WindowDimensions";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import axios from "axios";
 import dayjs from 'dayjs';
 
+function PengumumanCell(props) {
+  return (
+    <>
+      <Flex key={props.dykey} flexDirection="row" flex="1">
+        <Box minW="60px" height="60px" m={{ base: "3vw", xl: "1.4vw" }} textAlign="center" border="1px">
+          <Text mt="5px" alignSelf="center" fontWeight="semibold" fontSize="lg">{props.hari}</Text>
+          <Text fontSize="xs">{props.hariBulan}</Text>
+        </Box>
+        <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+          <Text fontSize={{ base: "sm", xl: "md" }} fontWeight="semibold">
+            {props.judul}
+          </Text>
+          <Text fontSize="sm">{props.tanggal}</Text>
+        </Box>
+      </Flex>
+      <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" pl="2%">
+        <Text color="teal" pt="2.5px">
+          Lampiran File :
+        </Text>
+        &ensp;
+        <Button colorScheme="teal" size="sm">Unduh</Button>
+      </Flex>
+    </>
+  )
+}
+
 export default function Agenda() {
   const { height } = useWindowDimensions();
   const router = useRouter();
-  const [daftarAgenda, setDaftarAgenda] = useState(null);
-  const { agenda } = router.query;
+  const [daftarPengumuman, setDaftarPengumuman] = useState(null);
+  const { pengumuman } = router.query;
 
   useEffect(() => {
-    if (daftarAgenda === null) {
-      axios.get(`https://webprodi.sashi.id/api/agenda/baru`)
+    if (daftarPengumuman === null) {
+      axios.get(`https://webprodi.sashi.id/api/pengumuman/all`)
         .then(res => {
-          const agenda = res.data;
-          setDaftarAgenda(agenda);
+          const pengumuman = res.data;
+          setDaftarPengumuman(pengumuman);
         })
     }
-  }, [])
+  }, [daftarPengumuman])
 
   return (
     <>
@@ -34,55 +59,25 @@ export default function Agenda() {
       </Head>
       <Menu
         pageHeight={{ base: "200vw", xl: "66vw" }}
-        slideShow={<Img sx={{ filter: "blur(500px)" }} className="banner" src="/misi.png" alt="BG Gradient" height={height} />}
+        slideShow={<Img sx={{ filter: "blur(500px)" }} pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" alt="BG Gradient" height={height} />}
       >
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           {
-            daftarAgenda !== null && daftarAgenda.map((item) => {
-              if (item.id == agenda) {
+            daftarPengumuman !== null && daftarPengumuman.map((item) => {
+              if (item.id == pengumuman) {
                 return (
-                  <Box key={item.id}>
-                    <Text fontSize="28" pb="1%" fontWeight="semibold">
-                      {item.detail_kegiatan}
-                    </Text>
-                    <Text pb="2%" color="gray">
-                      Tag:
-                    </Text>
-                    <Flex flexDirection="column" bg="gray.300" p="2%">
-                      <Flex flexDirection="row">
-                        <Text color="black" fontWeight="semibold" pb="2%">
-                          Jadwal Agenda Kegiatan :
-                      </Text>
-                      </Flex>
-                      <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" p="2%">
-                        <Text color="black" fontWeight="medium">
-                          Tanggal:
-                        </Text>
-                        &ensp;
-                        <Icon as={FcOvertime} w="25px" h="auto" />
-                        &ensp;
-                        <Text color="black">
-                          {dayjs(daftarAgenda[0].waktu).format('DD/MM/YYYY')}
-                        </Text>
-                        &ensp;
-                        <Icon as={FcClock} w="25px" h="auto" />
-                        &ensp;
-                        <Text color="black">
-                          {dayjs(daftarAgenda[0].waktu).format('HH:mm')} WIB
-                        </Text>
-                      </Flex>
-                      <Divider />
-                      <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" p="2%">
-                        <Text color="black" fontWeight="medium">
-                          Tempat:
-                        </Text>
-                        &ensp;
-                        <Text>
-                          {item.tempat}
-                        </Text>
-                      </Flex>
-                    </Flex>
-                  </Box>
+                  <>
+                    <PengumumanCell dykey={item.id}
+                      hari={dayjs(item.updated_at).locale('id').format('ddd').toUpperCase()}
+                      hariBulan={dayjs(item.updated_at).format('DD/MM')}
+                      judul={item.judul}
+                      tanggal={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                      detail={item.detail}
+                    />
+                    <Box>
+
+                    </Box>
+                  </>
                 )
               }
             })

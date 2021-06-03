@@ -25,7 +25,7 @@ export default function Agenda() {
           setDaftarAgenda(agenda);
         })
     }
-  }, [])
+  }, [daftarAgenda])
 
   return (
     <>
@@ -34,7 +34,7 @@ export default function Agenda() {
       </Head>
       <Menu
         pageHeight={{ base: "200vw", xl: "66vw" }}
-        slideShow={<Img sx={{ filter: "blur(500px)" }} className="banner" src="/misi.png" alt="BG Gradient" height={height} />}
+        slideShow={<Img sx={{ filter: "blur(500px)" }} pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" alt="BG Gradient" height={height} />}
       >
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           {
@@ -61,13 +61,13 @@ export default function Agenda() {
                         &ensp;
                         <Icon as={FcOvertime} w="25px" h="auto" />
                         &ensp;
-                        <Text color="black">
+                        <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
                           {dayjs(daftarAgenda[0].waktu).format('DD/MM/YYYY')}
                         </Text>
                         &ensp;
                         <Icon as={FcClock} w="25px" h="auto" />
                         &ensp;
-                        <Text color="black">
+                        <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
                           {dayjs(daftarAgenda[0].waktu).format('HH:mm')} WIB
                         </Text>
                       </Flex>
@@ -77,7 +77,7 @@ export default function Agenda() {
                           Tempat:
                         </Text>
                         &ensp;
-                        <Text>
+                        <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
                           {item.tempat}
                         </Text>
                       </Flex>

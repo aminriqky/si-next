@@ -3,14 +3,15 @@ import Head from "next/head";
 import { useRouter } from 'next/router'
 import {
   Text, Flex, Box, Img, AspectRatio, useBreakpointValue,
-  Table, Thead, Tr, Th, useDisclosure, SlideFade, Icon,
-  Link, Modal, ModalOverlay, ModalContent, Divider
+  Button, useDisclosure, SlideFade, Icon, Divider,
+  Link, Modal, ModalOverlay, ModalContent, Progress,
+  Skeleton
 } from "@chakra-ui/react";
 import NavLink from "next/link";
 import { FcTemplate, FcGraduationCap, FcApprove } from "react-icons/fc";
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { MdNavigateNext } from "react-icons/md"
+import { MdDeveloperBoard } from "react-icons/md"
 import Menu from '../public/menu';
 import ExNav from '../public/exnav'
 import axios from "axios";
@@ -22,36 +23,14 @@ const wait = (timeout) => {
   });
 }
 
-function SlideText(props) {
-  return (
-    <Box className="slidetext">
-      <Text mt={{ base: "20vw", xl: "18vw" }} mb='2vw' color="white" fontSize={{ base: 12, lg: 24, xl: 36 }}>
-        {props.slideText}
-      </Text>
-      <Text mb='1vw' color="white" fontSize={{ base: 10, lg: 20, xl: 30 }}>
-        {props.slideVimi}
-      </Text>
-      <Box className="linePreloader" />
-    </Box>
-  );
-}
-
-function SlideShow(props) {
-  return (
-    <SlideFade in={props.slideShow} offsetY="20px">
-      <Img className="banner" src={props.slideImg} alt="Visi & Misi" width={props.width} />
-    </SlideFade>
-  );
-}
-
 function AgendaCell(props) {
   return (
-    <Flex dykey={props.dykey} flexDirection="row" flex="1">
+    <Flex ml={{ base: "12%", xl: 0 }} dykey={props.dykey} flexDirection="row" flex="1">
       <Box alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px">
         <Text mt="5px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
         <Text fontSize="xs">{props.hariBulan}</Text>
       </Box>
-      <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+      <Box alignSelf="center" minW="120px" m={{ base: "3vw", xl: "1.41vw" }}>
         <Text fontSize={{ base: "sm", xl: "md" }}>
           <Link fontWeight="semibold">
             <NavLink as={props.dylink} href="/agenda/[agenda]">
@@ -62,6 +41,18 @@ function AgendaCell(props) {
         <Text fontSize="sm">
           {props.tanggal}
         </Text>
+      </Box>
+    </Flex>
+  )
+}
+
+function AgendaLoad() {
+  return (
+    <Flex ml={{ base: "12%", xl: 0 }} flexDirection="row" flex="1">
+      <Skeleton alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px" />
+      <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+        <Skeleton height="20px" width="150px" my="2" />
+        <Skeleton height="20px" width="150px" my="2" />
       </Box>
     </Flex>
   )
@@ -165,12 +156,8 @@ export default function Home() {
   const [daftarPengumuman, setDaftarPengumuman] = useState(null);
   const [daftarArtikel, setDaftarArtikel] = useState(null);
   const [daftarKehadiran, setDaftarKehadiran] = useState(null);
-
-  const [slideShow, setSlideShow] = useState(false);
-  const [slideText, setSlideText] = useState("");
-  const [slideNum, setSlideNum] = useState(1);
-  const [slideImg, setSlideImg] = useState(null);
-  const [slideVimi, setSlideVimi] = useState("Visi");
+  const [slideNum, setSlideNum] = useState(null);
+  const [slideCount, setSlideCount] = useState(null);
 
   useEffect(() => {
     if (daftarAgenda === null) {
@@ -201,21 +188,23 @@ export default function Home() {
           setDaftarKehadiran(kehadiran);
         })
     }
-    if (slideShow === false) {
-      wait(1000).then(() => setSlideShow(true) & setSlideNum(slideNum + 1));
-      if (slideNum === 1) {
-        setSlideText("Mewujudkan program studi sistem informasi yang diakui di kawasan Asia Tenggara dan  berkarakter Islami pada tahun 2027");
-        setSlideImg("visi.png")
-        setSlideVimi("Visi")
-      } else if (slideNum === 2) {
-        setSlideText("Melaksanakan kegiatan-kegiatan akademik yang berkarakter islami");
-        setSlideNum(0);
-        setSlideImg("misi.png")
-        setSlideVimi("Misi")
-      }
-      wait(7500).then(() => setSlideShow(false));
+    if (slideNum === null) {
+      setSlideNum(1);
     }
-  })
+    if (slideCount < 100) {
+      wait(75).then(() => setSlideCount(slideCount + 1));
+    } else if (slideCount === 100) {
+      setSlideCount(0);
+      switch (slideNum) {
+        case 1:
+          setSlideNum(2);
+          break;
+        case 2:
+          setSlideNum(1);
+          break;
+      }
+    }
+  }, [slideCount, daftarKehadiran, daftarArtikel, daftarPengumuman, daftarAgenda])
 
   function dots(num, str) {
     if (str !== null & str.length > num) {
@@ -235,11 +224,40 @@ export default function Home() {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu
-        slideText={<SlideText slideText={slideText.toUpperCase()} slideVimi={slideVimi} />}
-        slideShow={<SlideShow width={width} slideShow={slideShow} slideImg={slideImg} />}
-        pageHeight="49.4vw"
-      />
+      <Menu pageHeight="49.4vw" slide={
+        <>
+          {
+            slideNum === 1 &&
+            <SlideFade in={true} offsetY="-100px">
+              <Img pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/visi.png" width={width} />
+              <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
+                <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
+                  MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN BERKARAKTER ISLAMI PADA TAHUN 2027
+                </Text>
+                <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
+                  Visi
+                </Text>
+                <Progress mt="2vw" value={slideCount} size="xs" max={100} min={0} colorScheme="teal" width="300px" isAnimated hasStripe />
+              </Box>
+            </SlideFade>
+          }
+          {
+            slideNum === 2 &&
+            <SlideFade in={true} offsetY="-100px">
+              <Img pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" width={width} />
+              <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
+                <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
+                  MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT
+                </Text>
+                <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
+                  Misi
+                </Text>
+                <Progress mt="2vw" value={slideCount} size="xs" max={100} min={0} colorScheme="teal" width="300px" isAnimated hasStripe />
+              </Box>
+            </SlideFade>
+          }
+        </>
+      } />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
@@ -266,55 +284,66 @@ export default function Home() {
         </ModalContent>
       </Modal>
       <Flex flexDirection={responsive}>
-        <Table size="md">
-          <Thead>
-            <Tr>
-              <Th onClick={agenda} colSpan="2" textAlign="center" bgColor="black" color="white">
-                AGENDA
-                <Icon float="right" as={MdNavigateNext} w="15px" h="auto" />
-              </Th>
-            </Tr>
-          </Thead>
-          {
-            daftarAgenda !== null &&
-            <>
-              <Flex flexDirection="row">
-                <AgendaCell dykey={daftarAgenda[0].id}
-                  hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
-                  hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
-                  kegiatan={dots(28, daftarAgenda[0].detail_kegiatan)}
-                  tanggal={dots(20, daftarAgenda[0].tempat)}
-                  dylink={`/agenda/${daftarAgenda[0].id}`}
-                />
-                <AgendaCell dykey={daftarAgenda[1].id}
-                  hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
-                  hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
-                  kegiatan={dots(28, daftarAgenda[1].detail_kegiatan)}
-                  tanggal={dots(20, daftarAgenda[1].tempat)}
-                  dylink={`/agenda/${daftarAgenda[1].id}`}
-                />
-              </Flex>
-              <Divider />
-              <Flex flexDirection="row">
-                <AgendaCell dykey={daftarAgenda[2].id}
-                  hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
-                  hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
-                  kegiatan={dots(28, daftarAgenda[2].detail_kegiatan)}
-                  tanggal={dots(20, daftarAgenda[2].tempat)}
-                  dylink={`/agenda/${daftarAgenda[2].id}`}
-                />
-                <AgendaCell dykey={daftarAgenda[3].id}
-                  hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
-                  hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
-                  kegiatan={dots(28, daftarAgenda[3].detail_kegiatan)}
-                  tanggal={dots(20, daftarAgenda[3].tempat)}
-                  dylink={`/agenda/${daftarAgenda[3].id}`}
-                />
-              </Flex>
-              <Divider />
-            </>
-          }
-        </Table>
+        <Flex flexDir="column">
+          <Button width="100%" onClick={(e) => { e.preventDefault(); router.push("/agenda/daftar-agenda"); }} size="md"
+            borderRadius="0" _hover={{ background: "blackAlpha.800" }} bg="blackAlpha.900" color="white"
+          >
+            <Icon as={MdDeveloperBoard} boxSize={5} mr="10px" />
+            <Text>AGENDA</Text>
+          </Button>
+          <Flex flexDir={responsive} my={{ base: "15px", xl: 0 }}>
+            {
+              daftarAgenda !== null &&
+              <>
+                <Flex flexDirection="column">
+                  <AgendaCell dykey={daftarAgenda[0].id}
+                    hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
+                    hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
+                    kegiatan={dots(28, daftarAgenda[0].detail_kegiatan)}
+                    tanggal={dots(20, daftarAgenda[0].tempat)}
+                    dylink={`/agenda/${daftarAgenda[0].id}`}
+                  />
+                  <AgendaCell dykey={daftarAgenda[1].id}
+                    hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
+                    hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
+                    kegiatan={dots(28, daftarAgenda[1].detail_kegiatan)}
+                    tanggal={dots(20, daftarAgenda[1].tempat)}
+                    dylink={`/agenda/${daftarAgenda[1].id}`}
+                  />
+                </Flex>
+                <Flex flexDirection="column">
+                  <AgendaCell dykey={daftarAgenda[2].id}
+                    hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
+                    hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
+                    kegiatan={dots(28, daftarAgenda[2].detail_kegiatan)}
+                    tanggal={dots(20, daftarAgenda[2].tempat)}
+                    dylink={`/agenda/${daftarAgenda[2].id}`}
+                  />
+                  <AgendaCell dykey={daftarAgenda[3].id}
+                    hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
+                    hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
+                    kegiatan={dots(28, daftarAgenda[3].detail_kegiatan)}
+                    tanggal={dots(20, daftarAgenda[3].tempat)}
+                    dylink={`/agenda/${daftarAgenda[3].id}`}
+                  />
+                </Flex>
+              </>
+            }
+            {
+              daftarAgenda === null &&
+              <>
+                <Flex flexDirection="column">
+                  <AgendaLoad />
+                  <AgendaLoad />
+                </Flex>
+                <Flex flexDirection="column">
+                  <AgendaLoad />
+                  <AgendaLoad />
+                </Flex>
+              </>
+            }
+          </Flex>
+        </Flex>
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <Img src="yt.png" sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} />
@@ -372,30 +401,35 @@ export default function Home() {
                 dykey={daftarPengumuman[0].id}
                 judul={daftarPengumuman[0].judul}
                 tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${daftarPengumuman[0].id}`}
               />
               <Divider />
               <PengumumanCell
                 dykey={daftarPengumuman[1].id}
                 judul={daftarPengumuman[1].judul}
                 tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${daftarPengumuman[1].id}`}
               />
               <Divider />
               <PengumumanCell
                 dykey={daftarPengumuman[2].id}
                 judul={daftarPengumuman[2].judul}
                 tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${daftarPengumuman[2].id}`}
               />
               <Divider />
               <PengumumanCell
                 dykey={daftarPengumuman[3].id}
                 judul={daftarPengumuman[3].judul}
                 tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${daftarPengumuman[3].id}`}
               />
               <Divider />
               <PengumumanCell
                 dykey={daftarPengumuman[4].id}
                 judul={daftarPengumuman[4].judul}
                 tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${daftarPengumuman[4].id}`}
               />
             </>
           }

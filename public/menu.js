@@ -50,9 +50,8 @@ export default function Menu(props) {
 
   return (
     <>
-      {props.slideText}
       <Box bg="gray.700" w="100%" h={props.pageHeight} color="white">
-        {props.slideShow}
+        {props.slide}
         <Flex pt="2.5vw" zIndex="100" flexDirection="row">
           <Box mx="4vw" mt="2.25vw">
             {
@@ -60,7 +59,7 @@ export default function Menu(props) {
               <IconButton variant="ghost" colorScheme="teal" aria-label="Opsi" size="lg" icon={<HamburgerIcon />} onClick={onOpen} />
             }
           </Box>
-          <Box mr={{ xl: "14vw", "2xl": "24vw" }} mt="1.5vw" onClick={home}>
+          <Box mr={{ xl: "14vw", "2xl": "24vw" }} mt="1.5vw" onClick={home} zIndex={9999}>
             <Img src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
           </Box>
           {
@@ -90,6 +89,7 @@ export default function Menu(props) {
             </DrawerOverlay>
           </Drawer>
         </Flex>
+        {props.slideShow}
         {props.children}
       </Box>
     </>

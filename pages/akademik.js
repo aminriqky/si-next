@@ -18,7 +18,7 @@ export default function Akademik() {
       </Head>
       <Menu
         pageHeight={{ base: "200vw", xl: "66vw" }}
-        slideShow={<Img sx={{ filter: "blur(500px)" }} className="banner" src="/misi.png" alt="BG Gradient" height={height} />}
+        slideShow={<Img sx={{ filter: "blur(500px)" }} pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" alt="BG Gradient" height={height} />}
       >
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="50px" p="4%">
           <Text fontSize="28" pb="1%" fontWeight="semibold">

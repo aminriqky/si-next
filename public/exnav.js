@@ -165,7 +165,7 @@ export default function ExNav() {
         </Box>
       </Container>
       <Divider />
-      <Box py="5" fontSize={{ base: "xs", xl: "md" }}>
+      <Box bg="white" py="5" fontSize={{ base: "xs", xl: "md" }}>
         <Text color="black" textAlign="center" fontWeight="thin">
           Copyright ©
           <Link href="/">
