@@ -25,7 +25,7 @@ export default function Agenda() {
           setDaftarAgenda(agenda);
         })
     }
-  }, [daftarAgenda])
+  }, [])
 
   return (
     <>

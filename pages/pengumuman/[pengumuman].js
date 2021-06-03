@@ -50,7 +50,7 @@ export default function Agenda() {
           setDaftarPengumuman(pengumuman);
         })
     }
-  }, [daftarPengumuman])
+  }, [])
 
   return (
     <>

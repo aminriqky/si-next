@@ -3,25 +3,19 @@ import Head from "next/head";
 import { useRouter } from 'next/router'
 import {
   Text, Flex, Box, Img, AspectRatio, useBreakpointValue,
-  Button, useDisclosure, SlideFade, Icon, Divider,
-  Link, Modal, ModalOverlay, ModalContent, Progress,
-  Skeleton
+  Button, useDisclosure, Icon, Divider, Link, Modal,
+  ModalOverlay, ModalContent, Skeleton
 } from "@chakra-ui/react";
 import NavLink from "next/link";
 import { FcTemplate, FcGraduationCap, FcApprove } from "react-icons/fc";
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { MdDeveloperBoard } from "react-icons/md"
+import { MdDeveloperBoard } from "react-icons/md";
+import Slide from "../public/slide";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav'
 import axios from "axios";
 import dayjs from 'dayjs';
-
-const wait = (timeout) => {
-  return new Promise(resolve => {
-    setTimeout(resolve, timeout);
-  });
-}
 
 function AgendaCell(props) {
   return (
@@ -146,7 +140,6 @@ function ArtikelCell(props) {
   );
 }
 
-
 export default function Home() {
   const { width } = useWindowDimensions();
   const router = useRouter();
@@ -156,8 +149,6 @@ export default function Home() {
   const [daftarPengumuman, setDaftarPengumuman] = useState(null);
   const [daftarArtikel, setDaftarArtikel] = useState(null);
   const [daftarKehadiran, setDaftarKehadiran] = useState(null);
-  const [slideNum, setSlideNum] = useState(null);
-  const [slideCount, setSlideCount] = useState(null);
 
   useEffect(() => {
     if (daftarAgenda === null) {
@@ -188,23 +179,7 @@ export default function Home() {
           setDaftarKehadiran(kehadiran);
         })
     }
-    if (slideNum === null) {
-      setSlideNum(1);
-    }
-    if (slideCount < 100) {
-      wait(75).then(() => setSlideCount(slideCount + 1));
-    } else if (slideCount === 100) {
-      setSlideCount(0);
-      switch (slideNum) {
-        case 1:
-          setSlideNum(2);
-          break;
-        case 2:
-          setSlideNum(1);
-          break;
-      }
-    }
-  }, [slideCount, daftarKehadiran, daftarArtikel, daftarPengumuman, daftarAgenda])
+  }, [])
 
   function dots(num, str) {
     if (str !== null & str.length > num) {
@@ -224,40 +199,7 @@ export default function Home() {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu pageHeight="49.4vw" slide={
-        <>
-          {
-            slideNum === 1 &&
-            <SlideFade in={true} offsetY="-100px">
-              <Img pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/visi.png" width={width} />
-              <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
-                <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
-                  MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN BERKARAKTER ISLAMI PADA TAHUN 2027
-                </Text>
-                <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
-                  Visi
-                </Text>
-                <Progress mt="2vw" value={slideCount} size="xs" max={100} min={0} colorScheme="teal" width="300px" isAnimated hasStripe />
-              </Box>
-            </SlideFade>
-          }
-          {
-            slideNum === 2 &&
-            <SlideFade in={true} offsetY="-100px">
-              <Img pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" width={width} />
-              <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
-                <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
-                  MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT
-                </Text>
-                <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
-                  Misi
-                </Text>
-                <Progress mt="2vw" value={slideCount} size="xs" max={100} min={0} colorScheme="teal" width="300px" isAnimated hasStripe />
-              </Box>
-            </SlideFade>
-          }
-        </>
-      } />
+      <Menu pageHeight="49.4vw" slide={<Slide />} />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
@@ -285,9 +227,7 @@ export default function Home() {
       </Modal>
       <Flex flexDirection={responsive}>
         <Flex flexDir="column">
-          <Button width="100%" onClick={(e) => { e.preventDefault(); router.push("/agenda/daftar-agenda"); }} size="md"
-            borderRadius="0" _hover={{ background: "blackAlpha.800" }} bg="blackAlpha.900" color="white"
-          >
+          <Button w="100%" onClick={agenda} size="md" borderRadius="0" _hover={{ bg: "blackAlpha.800" }} bg="blackAlpha.900" color="white">
             <Icon as={MdDeveloperBoard} boxSize={5} mr="10px" />
             <Text>AGENDA</Text>
           </Button>

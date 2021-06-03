@@ -43,7 +43,7 @@ export default function DaftarAgenda() {
           setDaftarAgenda(agenda);
         })
     }
-  }, [daftarAgenda])
+  }, [])
 
   return (
     <>
