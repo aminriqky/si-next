@@ -45,8 +45,8 @@ function AgendaLoad() {
     <Flex ml={{ base: "12%", xl: 0 }} flexDirection="row" flex="1">
       <Skeleton alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px" />
       <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
-        <Skeleton height="20px" width="150px" my="2" />
-        <Skeleton height="20px" width="150px" my="2" />
+        <Skeleton height="20px" width={{ base: "185px", xl: "139px", "2xl": "150px" }} my="2" />
+        <Skeleton height="20px" width={{ base: "185px", xl: "139px", "2xl": "150px" }} my="2" />
       </Box>
     </Flex>
   )
@@ -328,51 +328,71 @@ export default function Home() {
             <div dangerouslySetInnerHTML={{ __html: dots(200, daftarArtikel[0].detail) }} />
           </ArtikelCell>
         }
+        {
+          daftarArtikel === null &&
+          <Skeleton my="25" height={{ base: "225px", xl: "365px" }} flexDir="column" width={{ base: "100%", xl: "200px" }} mr="50px" />
+        }
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="40px" h="auto" />
           &thinsp;
           PENGUMUMAN
-        </Text>
-          {
-            daftarPengumuman !== null &&
-            <>
-              <PengumumanCell
-                dykey={daftarPengumuman[0].id}
-                judul={daftarPengumuman[0].judul}
-                tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                dylink={`/pengumuman/${daftarPengumuman[0].id}`}
-              />
-              <Divider />
-              <PengumumanCell
-                dykey={daftarPengumuman[1].id}
-                judul={daftarPengumuman[1].judul}
-                tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                dylink={`/pengumuman/${daftarPengumuman[1].id}`}
-              />
-              <Divider />
-              <PengumumanCell
-                dykey={daftarPengumuman[2].id}
-                judul={daftarPengumuman[2].judul}
-                tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                dylink={`/pengumuman/${daftarPengumuman[2].id}`}
-              />
-              <Divider />
-              <PengumumanCell
-                dykey={daftarPengumuman[3].id}
-                judul={daftarPengumuman[3].judul}
-                tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                dylink={`/pengumuman/${daftarPengumuman[3].id}`}
-              />
-              <Divider />
-              <PengumumanCell
-                dykey={daftarPengumuman[4].id}
-                judul={daftarPengumuman[4].judul}
-                tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                dylink={`/pengumuman/${daftarPengumuman[4].id}`}
-              />
-            </>
-          }
+          </Text>
+          <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
+            {
+              daftarPengumuman !== null &&
+              <>
+                <PengumumanCell
+                  dykey={daftarPengumuman[0].id}
+                  judul={daftarPengumuman[0].judul}
+                  tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[0].id}`}
+                />
+                <Divider />
+                <PengumumanCell
+                  dykey={daftarPengumuman[1].id}
+                  judul={daftarPengumuman[1].judul}
+                  tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[1].id}`}
+                />
+                <Divider />
+                <PengumumanCell
+                  dykey={daftarPengumuman[2].id}
+                  judul={daftarPengumuman[2].judul}
+                  tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[2].id}`}
+                />
+                <Divider />
+                <PengumumanCell
+                  dykey={daftarPengumuman[3].id}
+                  judul={daftarPengumuman[3].judul}
+                  tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[3].id}`}
+                />
+                <Divider />
+                <PengumumanCell
+                  dykey={daftarPengumuman[4].id}
+                  judul={daftarPengumuman[4].judul}
+                  tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[4].id}`}
+                />
+              </>
+            }
+            {
+              daftarPengumuman === null &&
+              <>
+                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+                <Divider />
+                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+                <Divider />
+                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+                <Divider />
+                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+                <Divider />
+                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+              </>
+            }
+          </Flex>
         </Flex>
         <Flex my={{ base: 25, xl: 75 }} px="10" flexDir="column" width={{ base: "100%", xl: "300px" }} border="solid lightgray 1px">
           <Text color="gray" fontWeight="bold" pt="8" mb="4">
@@ -424,6 +444,28 @@ export default function Home() {
                 deskripsi={daftarKehadiran[0].jabatan}
                 hadir={daftarKehadiran[0].hadir}
               />
+              <Divider my="10px" />
+              <KehadiranCell
+                dykey={daftarKehadiran[1].id}
+                gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[1].avatar}`}
+                judul={daftarKehadiran[1].name}
+                deskripsi={daftarKehadiran[1].jabatan}
+                hadir={daftarKehadiran[1].hadir}
+              />
+            </>
+          }
+          {
+            daftarKehadiran === null &&
+            <>
+              <Flex flexDir="row">
+                <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
+                <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
+              </Flex>
+              <Divider my="10px" />
+              <Flex flexDir="row">
+                <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
+                <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
+              </Flex>
             </>
           }
         </Flex>
