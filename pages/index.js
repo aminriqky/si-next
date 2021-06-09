@@ -7,7 +7,7 @@ import {
   ModalOverlay, ModalContent, Skeleton
 } from "@chakra-ui/react";
 import NavLink from "next/link";
-import { FcTemplate, FcGraduationCap, FcApprove } from "react-icons/fc";
+import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { MdDeveloperBoard } from "react-icons/md";
@@ -468,6 +468,23 @@ export default function Home() {
               </Flex>
             </>
           }
+        </Flex>
+        <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
+          <Text fontSize="24" py="2%" fontWeight="medium">
+            <Icon as={FcGlobe} w="40px" h="auto" />
+          &thinsp;
+          LOKASI
+          </Text>
+          &emsp;
+            <iframe
+            width="100%"
+            height="180px"
+            frameborder="0"
+            scrolling="no"
+            marginheight="0"
+            marginwidth="0"
+            src="https://maps.google.com/maps?q=Fakultas+Sains+dan+Teknologi+Kampus+B+UIN+Raden+Fatah+Palembang&amp;ie=UTF8&amp;&amp;output=embed"
+          />
         </Flex>
       </Flex>
       <Divider />
