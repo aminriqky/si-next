@@ -427,7 +427,7 @@ export default function Home() {
       <Divider />
       <Divider />
       <Flex bg="gray.50" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
-        <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
+        <Flex flexDir="column" my="25" mr={{ base: 0, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcApprove} w="40px" h="auto" />
           &thinsp;
@@ -469,7 +469,7 @@ export default function Home() {
             </>
           }
         </Flex>
-        <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
+        <Flex flexDir="column" my="25">
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcGlobe} w="40px" h="auto" />
           &thinsp;
@@ -479,10 +479,10 @@ export default function Home() {
             <iframe
             width="100%"
             height="180px"
-            frameborder="0"
+            frameBorder="0"
             scrolling="no"
-            marginheight="0"
-            marginwidth="0"
+            marginHeight="0"
+            marginWidth="0"
             src="https://maps.google.com/maps?q=Fakultas+Sains+dan+Teknologi+Kampus+B+UIN+Raden+Fatah+Palembang&amp;ie=UTF8&amp;&amp;output=embed"
           />
         </Flex>
