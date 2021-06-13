@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import {
-  Text, Box, Img, SlideFade, Progress
+  Text, Box, SlideFade, Progress, AspectRatio
 } from "@chakra-ui/react";
-import useWindowDimensions from "./WindowDimensions";
+import Image from 'next/image';
 
 const wait = (timeout) => {
   return new Promise(resolve => {
@@ -11,7 +11,6 @@ const wait = (timeout) => {
 }
 
 export default function Slide() {
-  const { width } = useWindowDimensions();
   const [slideNum, setSlideNum] = useState(null);
   const [slideCount, setSlideCount] = useState(null);
 
@@ -39,7 +38,9 @@ export default function Slide() {
       {
         slideNum === 1 &&
         <SlideFade in={true} offsetY="-100px">
-          <Img pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/visi.png" width={width} />
+          <AspectRatio pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" width="100%">
+            <Image src="/visi.png" layout="fill" objectFit="contain" objectPosition="left top" />
+          </AspectRatio>
           <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
             <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
               MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN BERKARAKTER ISLAMI PADA TAHUN 2027
@@ -54,7 +55,9 @@ export default function Slide() {
       {
         slideNum === 2 &&
         <SlideFade in={true} offsetY="-100px">
-          <Img pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" width={width} />
+          <AspectRatio pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" width="100%">
+            <Image src="/misi.png" layout="fill" objectFit="contain" objectPosition="left top" />
+          </AspectRatio>
           <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
             <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
               MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT

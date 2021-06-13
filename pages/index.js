@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Head from "next/head";
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import {
   Text, Flex, Box, Img, AspectRatio, useBreakpointValue,
   Button, useDisclosure, Icon, Divider, Link, Modal,
@@ -13,9 +13,10 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { MdDeveloperBoard } from "react-icons/md";
 import Slide from "../public/slide";
 import Menu from '../public/menu';
-import ExNav from '../public/exnav'
+import ExNav from '../public/exnav';
 import axios from "axios";
 import dayjs from 'dayjs';
+import Image from 'next/image';
 
 function AgendaCell(props) {
   return (
@@ -98,7 +99,7 @@ function KehadiranCell(props) {
         </Flex>
         {
           props.hadir === 1 &&
-          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid teal 2px" height="30px" mt="25px">
+          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid teal 2px" height="30px" mt="25px" pointerEvents="none">
             <Text px={{ base: 6, xl: 10 }} color="teal" fontWeight="medium">
               HADIR
             </Text>
@@ -106,7 +107,7 @@ function KehadiranCell(props) {
         }
         {
           props.hadir !== 1 &&
-          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid crimson 2px" height="30px" mt="25px">
+          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid crimson 2px" height="30px" mt="25px" pointerEvents="none">
             <Text px={{ base: 2, xl: 6 }} color="crimson" fontWeight="medium">
               TIDAK ADA
             </Text>
@@ -286,7 +287,9 @@ export default function Home() {
         </Flex>
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
-            <Img src="yt.png" sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} />
+            <AspectRatio sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} width="100%" height="100%">
+              <Image src="/yt.png" layout="fill" objectFit="contain" />
+            </AspectRatio>
           </Box>
         </AspectRatio>
         <Flex flexDirection="column" color="white">
@@ -335,8 +338,8 @@ export default function Home() {
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="40px" h="auto" />
-          &thinsp;
-          PENGUMUMAN
+            &thinsp;
+            PENGUMUMAN
           </Text>
           <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
             {
@@ -430,8 +433,8 @@ export default function Home() {
         <Flex flexDir="column" my="25" mr={{ base: 0, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcApprove} w="40px" h="auto" />
-          &thinsp;
-          KEHADIRAN
+            &thinsp;
+            KEHADIRAN
           </Text>
           &emsp;
           {
@@ -472,11 +475,11 @@ export default function Home() {
         <Flex flexDir="column" my="25">
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcGlobe} w="40px" h="auto" />
-          &thinsp;
-          LOKASI
+            &thinsp;
+            LOKASI
           </Text>
           &emsp;
-            <iframe
+          <iframe
             width="100%"
             height="180px"
             frameBorder="0"
