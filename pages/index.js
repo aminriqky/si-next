@@ -16,7 +16,7 @@ import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import axios from "axios";
 import dayjs from 'dayjs';
-import Image from 'next/image';
+import Image from 'next/image'
 
 function AgendaCell(props) {
   return (
