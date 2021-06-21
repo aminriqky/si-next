@@ -288,7 +288,7 @@ export default function Home() {
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <AspectRatio sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} width="100%" height="100%">
-              <Image src="/yt.png" layout="fill" objectFit="contain" />
+              <Image src="/yt.png" layout="fill" objectFit="fill" />
             </AspectRatio>
           </Box>
         </AspectRatio>
