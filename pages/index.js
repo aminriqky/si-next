@@ -1,3 +1,4 @@
+import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import {
@@ -143,37 +144,18 @@ function ArtikelCell(props) {
   );
 }
 
-async function Maps() {
-  return (
-    <iframe
-      width="100%"
-      height="180px"
-      loading="lazy"
-      frameBorder="0"
-      scrolling="no"
-      marginHeight="0"
-      marginWidth="0"
-      src="https://maps.google.com/maps?q=Fakultas+Sains+dan+Teknologi+Kampus+B+UIN+Raden+Fatah+Palembang&amp;ie=UTF8&amp;&amp;output=embed"
-    />
-  );
-}
-
-async function Pray() {
-  return (
-    <iframe
-      style={{ height: "299px", width: "200px" }}
-      loading="lazy"
-      scrolling="no"
-      src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
-    />
-  );
-}
-
 export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran }) {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const responsive = useBreakpointValue({ base: "column", xl: "row" })
+  const [daftarIframe1, setDaftarIframe1] = useState(false);
+  const [daftarIframe2, setDaftarIframe2] = useState(false);
+
+  useEffect(() => {
+    setDaftarIframe1(true);
+    setDaftarIframe2(true);
+  }, []);
 
   function dots(num, str) {
     if (str !== null & str.length > num) {
@@ -424,7 +406,15 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       <Divider />
       <Flex bg="gray.50" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
         <Flex flexDir="column" my="25" mr={{ base: 0, xl: 50 }}>
-          <Pray />
+          {
+            daftarIframe2 &&
+            <iframe
+              style={{ height: "299px", width: "200px" }}
+              loading="lazy"
+              scrolling="no"
+              src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
+            />
+          }
         </Flex>
         <Flex flexDir="column" my="25" mr={{ base: 0, xl: 100 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
@@ -475,7 +465,19 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             LOKASI
           </Text>
           &emsp;
-          <Maps />
+          {
+            daftarIframe1 &&
+            <iframe
+              width="100%"
+              height="180px"
+              loading="lazy"
+              frameBorder="0"
+              scrolling="no"
+              marginHeight="0"
+              marginWidth="0"
+              src="https://maps.google.com/maps?q=Fakultas+Sains+dan+Teknologi+Kampus+B+UIN+Raden+Fatah+Palembang&amp;ie=UTF8&amp;&amp;output=embed"
+            />
+          }
         </Flex>
       </Flex>
       <Divider />
