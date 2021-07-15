@@ -2,11 +2,10 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import {
-  Text, Flex, Box, Img, AspectRatio, useBreakpointValue,
+  Text, Flex, Box, AspectRatio, useBreakpointValue,
   Button, useDisclosure, Icon, Divider, Link, Modal,
   ModalOverlay, ModalContent, Skeleton
 } from "@chakra-ui/react";
-import NavLink from "next/link";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
@@ -22,130 +21,60 @@ import { artikel } from './api/artikel';
 import { kehadiran } from './api/kehadiran';
 
 const Slide = dynamic(() => import('../public/slide'))
-
-function AgendaCell(props) {
-  return (
-    <Flex ml={{ base: "12%", xl: 0 }} dykey={props.dykey} flexDirection="row" flex="1">
-      <Box alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px">
-        <Text mt="5px" alignSelf="center" fontWeight="bold" fontSize="lg">{props.hari}</Text>
-        <Text fontSize="xs">{props.hariBulan}</Text>
-      </Box>
-      <Box alignSelf="center" minW="120px" m={{ base: "3vw", xl: "1.41vw" }}>
-        <Text fontSize={{ base: "sm", xl: "md" }}>
-          <Link fontWeight="semibold">
-            <NavLink as={props.dylink} href="/agenda/[agenda]">
-              {props.kegiatan}
-            </NavLink>
-          </Link>
-        </Text>
-        <Text fontSize="sm">
-          {props.tanggal}
-        </Text>
-      </Box>
-    </Flex>
-  )
-}
-
-function AgendaLoad() {
-  return (
-    <Flex ml={{ base: "12%", xl: 0 }} flexDirection="row" flex="1">
-      <Skeleton alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px" />
-      <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
-        <Skeleton height="20px" width={{ base: "185px", xl: "139px", "2xl": "150px" }} my="2" />
-        <Skeleton height="20px" width={{ base: "185px", xl: "139px", "2xl": "150px" }} my="2" />
-      </Box>
-    </Flex>
-  )
-}
-
-function PengumumanCell(props) {
-  return (
-    <Flex dykey={props.key} flexDirection="row" flex="1">
-      <Box>
-        <Text fontSize="md" color="orange.800">
-          <Link fontWeight="semibold">
-            <NavLink as={props.dylink} href="/pengumuman/[pengumuman]">
-              {props.judul}
-            </NavLink>
-          </Link>
-        </Text>
-        <Text fontSize="sm" pb="5px">
-          {props.tanggal}
-        </Text>
-      </Box>
-    </Flex>
-  );
-}
-
-function KehadiranCell(props) {
-  return (
-    <>
-      <Flex flexDir="row">
-        <Img
-          borderRadius="full"
-          boxSize="75px"
-          src={props.gambar}
-          width="auto"
-          alt="Avatar"
-          mr={{ base: "25px", xl: "50px" }}
-        />
-        <Flex dykey={props.key} flexDirection="row" flex="1" mt={{ base: 0, xl: "15px" }}>
-          <Box>
-            <Text fontSize={{ base: "sm", xl: "md" }} color="orange.800">
-              <Link fontWeight="semibold">
-                <NavLink as={props.dylink} href="/pengumuman/[pengumuman]">
-                  {props.judul}
-                </NavLink>
-              </Link>
-            </Text>
-            <Text fontSize="sm" pb="5px">
-              {props.deskripsi}
-            </Text>
-          </Box>
-        </Flex>
-        {
-          props.hadir === 1 &&
-          <Box ml={{ base: "25px", xl: "115px" }} borderRadius="full" border="solid teal 2px" height="30px" mt="25px" pointerEvents="none">
-            <Text px={{ base: 6, xl: 10 }} color="teal" fontWeight="medium">
-              HADIR
-            </Text>
-          </Box>
-        }
-        {
-          props.hadir !== 1 &&
-          <Box ml={{ base: "25px", xl: "115px" }} borderRadius="full" border="solid crimson 2px" height="30px" mt="25px" pointerEvents="none">
-            <Text px={{ base: 2, xl: 6 }} color="crimson" fontWeight="medium">
-              TIDAK ADA
-            </Text>
-          </Box>
-        }
+const AgendaCell = dynamic(
+  () => import('../public/dynamic/AgendaCell'),
+  {
+    loading: () =>
+      <Flex ml={{ base: "12%", xl: 0 }} flexDirection="row" flex="1">
+        <Skeleton alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px" />
+        <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+          <Skeleton height="20px" width={{ base: "185px", xl: "139px", "2xl": "150px" }} my="2" />
+          <Skeleton height="20px" width={{ base: "185px", xl: "139px", "2xl": "150px" }} my="2" />
+        </Box>
       </Flex>
-    </>
-  );
-}
-
-function ArtikelCell(props) {
-  return (
-    <Flex my="25" px="6" key={props.dykey} flexDir="column" width={{ base: "100%", xl: "200px" }} bg="blue.600" mr="50px">
-      <Text color="white" fontWeight="bold" pt="6" mb="6">
-        {props.tema}
-      </Text>
-      <Text fontSize="sm" color="white">
-        <Link fontWeight="semibold">
-          <NavLink as={props.dylink} href="/artikel/[artikel]">
-            {props.judul}
-          </NavLink>
-        </Link>
-      </Text>
-      <Text fontSize="xs" color="gray.300" pt="4px" pb="2">
-        {props.tanggal}
-      </Text>
-      <Text fontSize="xs" pb="6" color="white">
-        {props.children}
-      </Text>
-    </Flex>
-  );
-}
+  }
+)
+const ArtikelCell = dynamic(
+  () => import('../public/dynamic/ArtikelCell'),
+  {
+    loading: () =>
+      <Skeleton my="25" height={{ base: "225px", xl: "365px" }} flexDir="column" width={{ base: "100%", xl: "200px" }} mr="50px" />
+  }
+)
+const KehadiranCell = dynamic(
+  () => import('../public/dynamic/KehadiranCell'),
+  {
+    loading: () =>
+      <>
+        <Flex flexDir="row">
+          <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
+          <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
+        </Flex>
+        <Divider my="10px" />
+        <Flex flexDir="row">
+          <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
+          <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
+        </Flex>
+      </>
+  }
+)
+const PengumumanCell = dynamic(
+  () => import('../public/dynamic/PengumumanCell'),
+  {
+    loading: () =>
+      <>
+        <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+        <Divider />
+        <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+        <Divider />
+        <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+        <Divider />
+        <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+        <Divider />
+        <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
+      </>
+  }
+)
 
 export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran }) {
   const { width } = useWindowDimensions();
@@ -211,56 +140,38 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             <Text>AGENDA</Text>
           </Button>
           <Flex flexDir={responsive} my={{ base: "15px", xl: 0 }}>
-            {
-              daftarAgenda !== null &&
-              <>
-                <Flex flexDirection="column">
-                  <AgendaCell dykey={daftarAgenda[0].id}
-                    hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
-                    hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
-                    kegiatan={dots(28, daftarAgenda[0].detail_kegiatan)}
-                    tanggal={dots(20, daftarAgenda[0].tempat)}
-                    dylink={`/agenda/${daftarAgenda[0].id}`}
-                  />
-                  <AgendaCell dykey={daftarAgenda[1].id}
-                    hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
-                    hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
-                    kegiatan={dots(28, daftarAgenda[1].detail_kegiatan)}
-                    tanggal={dots(20, daftarAgenda[1].tempat)}
-                    dylink={`/agenda/${daftarAgenda[1].id}`}
-                  />
-                </Flex>
-                <Flex flexDirection="column">
-                  <AgendaCell dykey={daftarAgenda[2].id}
-                    hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
-                    hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
-                    kegiatan={dots(28, daftarAgenda[2].detail_kegiatan)}
-                    tanggal={dots(20, daftarAgenda[2].tempat)}
-                    dylink={`/agenda/${daftarAgenda[2].id}`}
-                  />
-                  <AgendaCell dykey={daftarAgenda[3].id}
-                    hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
-                    hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
-                    kegiatan={dots(28, daftarAgenda[3].detail_kegiatan)}
-                    tanggal={dots(20, daftarAgenda[3].tempat)}
-                    dylink={`/agenda/${daftarAgenda[3].id}`}
-                  />
-                </Flex>
-              </>
-            }
-            {
-              daftarAgenda === null &&
-              <>
-                <Flex flexDirection="column">
-                  <AgendaLoad />
-                  <AgendaLoad />
-                </Flex>
-                <Flex flexDirection="column">
-                  <AgendaLoad />
-                  <AgendaLoad />
-                </Flex>
-              </>
-            }
+            <Flex flexDirection="column">
+              <AgendaCell dykey={daftarAgenda[0].id}
+                hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
+                hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
+                kegiatan={dots(28, daftarAgenda[0].detail_kegiatan)}
+                tanggal={dots(20, daftarAgenda[0].tempat)}
+                dylink={`/agenda/${daftarAgenda[0].id}`}
+              />
+              <AgendaCell dykey={daftarAgenda[1].id}
+                hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
+                hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
+                kegiatan={dots(28, daftarAgenda[1].detail_kegiatan)}
+                tanggal={dots(20, daftarAgenda[1].tempat)}
+                dylink={`/agenda/${daftarAgenda[1].id}`}
+              />
+            </Flex>
+            <Flex flexDirection="column">
+              <AgendaCell dykey={daftarAgenda[2].id}
+                hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
+                hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
+                kegiatan={dots(28, daftarAgenda[2].detail_kegiatan)}
+                tanggal={dots(20, daftarAgenda[2].tempat)}
+                dylink={`/agenda/${daftarAgenda[2].id}`}
+              />
+              <AgendaCell dykey={daftarAgenda[3].id}
+                hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
+                hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
+                kegiatan={dots(28, daftarAgenda[3].detail_kegiatan)}
+                tanggal={dots(20, daftarAgenda[3].tempat)}
+                dylink={`/agenda/${daftarAgenda[3].id}`}
+              />
+            </Flex>
           </Flex>
         </Flex>
         <AspectRatio minW="315">
@@ -298,21 +209,14 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       </Flex>
       <Divider />
       <Flex flexDirection={responsive} my="25" mx={{ base: 25, xl: 125 }}>
-        {
-          daftarArtikel !== null &&
-          <ArtikelCell
-            dykey={daftarArtikel[0].id}
-            tema="ARTIKEL"
-            judul={dots(47, daftarArtikel[0].judul)}
-            tanggal={dayjs(daftarArtikel[0].tanggal).locale('id').format('DD MMMM YYYY')}
-          >
-            <div dangerouslySetInnerHTML={{ __html: dots(200, daftarArtikel[0].detail) }} />
-          </ArtikelCell>
-        }
-        {
-          daftarArtikel === null &&
-          <Skeleton my="25" height={{ base: "225px", xl: "365px" }} flexDir="column" width={{ base: "100%", xl: "200px" }} mr="50px" />
-        }
+        <ArtikelCell
+          dykey={daftarArtikel[0].id}
+          tema="ARTIKEL"
+          judul={dots(47, daftarArtikel[0].judul)}
+          tanggal={dayjs(daftarArtikel[0].tanggal).locale('id').format('DD MMMM YYYY')}
+        >
+          <div dangerouslySetInnerHTML={{ __html: dots(260, daftarArtikel[0].detail) }} />
+        </ArtikelCell>
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="40px" h="auto" />
@@ -320,59 +224,40 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             PENGUMUMAN
           </Text>
           <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
-            {
-              daftarPengumuman !== null &&
-              <>
-                <PengumumanCell
-                  dykey={daftarPengumuman[0].id}
-                  judul={daftarPengumuman[0].judul}
-                  tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${daftarPengumuman[0].id}`}
-                />
-                <Divider />
-                <PengumumanCell
-                  dykey={daftarPengumuman[1].id}
-                  judul={daftarPengumuman[1].judul}
-                  tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${daftarPengumuman[1].id}`}
-                />
-                <Divider />
-                <PengumumanCell
-                  dykey={daftarPengumuman[2].id}
-                  judul={daftarPengumuman[2].judul}
-                  tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${daftarPengumuman[2].id}`}
-                />
-                <Divider />
-                <PengumumanCell
-                  dykey={daftarPengumuman[3].id}
-                  judul={daftarPengumuman[3].judul}
-                  tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${daftarPengumuman[3].id}`}
-                />
-                <Divider />
-                <PengumumanCell
-                  dykey={daftarPengumuman[4].id}
-                  judul={daftarPengumuman[4].judul}
-                  tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${daftarPengumuman[4].id}`}
-                />
-              </>
-            }
-            {
-              daftarPengumuman === null &&
-              <>
-                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
-                <Divider />
-                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
-                <Divider />
-                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
-                <Divider />
-                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
-                <Divider />
-                <Skeleton display="flex" my="5px" height="50px" width={{ xl: "450px", "2xl": "600px" }} />
-              </>
-            }
+            <PengumumanCell
+              dykey={daftarPengumuman[0].id}
+              judul={daftarPengumuman[0].judul}
+              tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              dylink={`/pengumuman/${daftarPengumuman[0].id}`}
+            />
+            <Divider />
+            <PengumumanCell
+              dykey={daftarPengumuman[1].id}
+              judul={daftarPengumuman[1].judul}
+              tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              dylink={`/pengumuman/${daftarPengumuman[1].id}`}
+            />
+            <Divider />
+            <PengumumanCell
+              dykey={daftarPengumuman[2].id}
+              judul={daftarPengumuman[2].judul}
+              tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              dylink={`/pengumuman/${daftarPengumuman[2].id}`}
+            />
+            <Divider />
+            <PengumumanCell
+              dykey={daftarPengumuman[3].id}
+              judul={daftarPengumuman[3].judul}
+              tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              dylink={`/pengumuman/${daftarPengumuman[3].id}`}
+            />
+            <Divider />
+            <PengumumanCell
+              dykey={daftarPengumuman[4].id}
+              judul={daftarPengumuman[4].judul}
+              tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              dylink={`/pengumuman/${daftarPengumuman[4].id}`}
+            />
           </Flex>
         </Flex>
         <Flex my={{ base: 25, xl: 75 }} px="10" flexDir="column" width={{ base: "100%", xl: "300px" }} border="solid lightgray 1px">
@@ -408,11 +293,11 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       <Divider />
       <Divider />
       <Flex bg="gray.50" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
-        <Flex flexDir="column" my="25" mr={{ base: 0, xl: 50 }}>
+        <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="25" mr={{ base: 0, xl: 50 }}>
           {
             daftarIframe2 &&
             <iframe
-              style={{ height: "299px", width: "200px" }}
+              style={{ height: "299px" }}
               loading="lazy"
               scrolling="no"
               src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
@@ -426,40 +311,21 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             KEHADIRAN
           </Text>
           &emsp;
-          {
-            daftarKehadiran !== null &&
-            <>
-              <KehadiranCell
-                dykey={daftarKehadiran[0].id}
-                gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[0].avatar}`}
-                judul={daftarKehadiran[0].name}
-                deskripsi={daftarKehadiran[0].jabatan}
-                hadir={daftarKehadiran[0].hadir}
-              />
-              <Divider my="10px" />
-              <KehadiranCell
-                dykey={daftarKehadiran[1].id}
-                gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[1].avatar}`}
-                judul={daftarKehadiran[1].name}
-                deskripsi={daftarKehadiran[1].jabatan}
-                hadir={daftarKehadiran[1].hadir}
-              />
-            </>
-          }
-          {
-            daftarKehadiran === null &&
-            <>
-              <Flex flexDir="row">
-                <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
-                <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
-              </Flex>
-              <Divider my="10px" />
-              <Flex flexDir="row">
-                <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
-                <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
-              </Flex>
-            </>
-          }
+          <KehadiranCell
+            dykey={daftarKehadiran[0].id}
+            gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[0].avatar}`}
+            judul={daftarKehadiran[0].name}
+            deskripsi={daftarKehadiran[0].jabatan}
+            hadir={daftarKehadiran[0].hadir}
+          />
+          <Divider my="10px" />
+          <KehadiranCell
+            dykey={daftarKehadiran[1].id}
+            gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[1].avatar}`}
+            judul={daftarKehadiran[1].name}
+            deskripsi={daftarKehadiran[1].jabatan}
+            hadir={daftarKehadiran[1].hadir}
+          />
         </Flex>
         <Flex flexDir="column" my="25">
           <Text fontSize="24" py="2%" fontWeight="medium">
