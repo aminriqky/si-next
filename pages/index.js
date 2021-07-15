@@ -297,7 +297,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           {
             daftarIframe2 &&
             <iframe
-              style={{ height: "299px" }}
+              style={{ height: "295px" }}
               loading="lazy"
               scrolling="no"
               src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
