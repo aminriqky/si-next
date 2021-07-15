@@ -400,6 +400,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         <Flex flexDir="column" my="25" mr={{ base: 0, xl: 50 }}>
           <iframe
             style={{ height: "299px", width: "200px" }}
+            loading="lazy"
             scrolling="no"
             src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
           />
@@ -456,6 +457,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           <iframe
             width="100%"
             height="180px"
+            loading="lazy"
             frameBorder="0"
             scrolling="no"
             marginHeight="0"
