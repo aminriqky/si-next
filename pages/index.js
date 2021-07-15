@@ -11,15 +11,20 @@ import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc"
 import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { MdDeveloperBoard } from "react-icons/md";
-import Slide from "../public/slide";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import dayjs from 'dayjs';
 import Image from 'next/image';
+import dynamic from 'next/dynamic'
 import { agenda } from './api/agenda';
 import { pengumuman } from './api/pengumuman';
 import { artikel } from './api/artikel';
 import { kehadiran } from './api/kehadiran';
+
+const Slide = dynamic(
+  () => import('../public/slide'),
+  { loading: () => <Skeleton /> }
+)
 
 function AgendaCell(props) {
   return (
