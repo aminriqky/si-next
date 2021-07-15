@@ -59,7 +59,7 @@ export default function Menu(props) {
             }
           </Box>
           <Box mr={{ xl: "14vw", "2xl": "24vw" }} mt="1.5vw" onClick={home}>
-            <Img src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
+            <Img width="100%" src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
           </Box>
           {
             width >= 1280 &&

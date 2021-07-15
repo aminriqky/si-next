@@ -21,10 +21,7 @@ import { pengumuman } from './api/pengumuman';
 import { artikel } from './api/artikel';
 import { kehadiran } from './api/kehadiran';
 
-const Slide = dynamic(
-  () => import('../public/slide'),
-  { loading: () => <Skeleton /> }
-)
+const Slide = dynamic(() => import('../public/slide'))
 
 function AgendaCell(props) {
   return (
@@ -88,6 +85,7 @@ function KehadiranCell(props) {
           borderRadius="full"
           boxSize="75px"
           src={props.gambar}
+          width="auto"
           alt="Avatar"
           mr={{ base: "25px", xl: "50px" }}
         />
@@ -107,7 +105,7 @@ function KehadiranCell(props) {
         </Flex>
         {
           props.hadir === 1 &&
-          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid teal 2px" height="30px" mt="25px" pointerEvents="none">
+          <Box ml={{ base: "25px", xl: "115px" }} borderRadius="full" border="solid teal 2px" height="30px" mt="25px" pointerEvents="none">
             <Text px={{ base: 6, xl: 10 }} color="teal" fontWeight="medium">
               HADIR
             </Text>
@@ -115,7 +113,7 @@ function KehadiranCell(props) {
         }
         {
           props.hadir !== 1 &&
-          <Box ml={{ base: "25px", xl: "100px" }} borderRadius="full" border="solid crimson 2px" height="30px" mt="25px" pointerEvents="none">
+          <Box ml={{ base: "25px", xl: "115px" }} borderRadius="full" border="solid crimson 2px" height="30px" mt="25px" pointerEvents="none">
             <Text px={{ base: 2, xl: 6 }} color="crimson" fontWeight="medium">
               TIDAK ADA
             </Text>
@@ -142,7 +140,7 @@ function ArtikelCell(props) {
       <Text fontSize="xs" color="gray.300" pt="4px" pb="2">
         {props.tanggal}
       </Text>
-      <Text fontSize="xs" color="white">
+      <Text fontSize="xs" pb="6" color="white">
         {props.children}
       </Text>
     </Flex>
