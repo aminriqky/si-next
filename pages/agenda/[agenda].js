@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
   Text, Img, Box, Icon, Flex, Divider
@@ -8,24 +7,13 @@ import { FcClock, FcOvertime } from "react-icons/fc"
 import useWindowDimensions from "../../public/WindowDimensions";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
-import axios from "axios";
 import dayjs from 'dayjs';
+import { agenda } from '../api/agenda'
 
-export default function Agenda() {
+export default function Agenda({ daftarAgenda }) {
   const { height } = useWindowDimensions();
   const router = useRouter();
-  const [daftarAgenda, setDaftarAgenda] = useState(null);
   const { agenda } = router.query;
-
-  useEffect(() => {
-    if (daftarAgenda === null) {
-      axios.get(`https://webprodi.sashi.id/api/agenda/baru`)
-        .then(res => {
-          const agenda = res.data;
-          setDaftarAgenda(agenda);
-        })
-    }
-  }, [])
 
   return (
     <>
@@ -52,7 +40,7 @@ export default function Agenda() {
                       <Flex flexDirection="row">
                         <Text color="black" fontWeight="semibold" pb="2%">
                           Jadwal Agenda Kegiatan :
-                      </Text>
+                        </Text>
                       </Flex>
                       <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" p="2%">
                         <Text color="black" fontWeight="medium">
@@ -92,4 +80,12 @@ export default function Agenda() {
       </Menu>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const daftarAgenda = await agenda()
+
+  return {
+    props: { daftarAgenda }
+  };
 }

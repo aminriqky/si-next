@@ -1,4 +1,3 @@
-import React from "react";
 import Head from "next/head";
 import {
   Text, Img, Box, Icon, Flex, Link
@@ -53,7 +52,7 @@ export default function Akademik() {
               <Text alignSelf="center" fontSize={{ base: 16, xl: 22 }} fontWeight="medium" color="orange.600">
                 <Link href="akademik/pengabdian">
                   Pengabdian
-              </Link>
+                </Link>
               </Text>
             </Flex>
             <Flex flexDirection="row" flex="1">
@@ -61,7 +60,7 @@ export default function Akademik() {
               <Text alignSelf="center" fontSize={{ base: 16, xl: 22 }} fontWeight="medium" color="orange.600">
                 <Link href="akademik/HaKI">
                   HaKI
-              </Link>
+                </Link>
               </Text>
             </Flex>
           </Flex>

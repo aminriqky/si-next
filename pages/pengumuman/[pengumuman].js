@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
   Text, Img, Box, Flex, Button
@@ -7,8 +6,8 @@ import { useRouter } from "next/router";
 import useWindowDimensions from "../../public/WindowDimensions";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
-import axios from "axios";
 import dayjs from 'dayjs';
+import { pengumuman } from "../api/pengumuman";
 
 function PengumumanCell(props) {
   return (
@@ -36,21 +35,10 @@ function PengumumanCell(props) {
   )
 }
 
-export default function Agenda() {
+export default function Pengumuman({ daftarPengumuman }) {
   const { height } = useWindowDimensions();
   const router = useRouter();
-  const [daftarPengumuman, setDaftarPengumuman] = useState(null);
   const { pengumuman } = router.query;
-
-  useEffect(() => {
-    if (daftarPengumuman === null) {
-      axios.get(`https://webprodi.sashi.id/api/pengumuman/all`)
-        .then(res => {
-          const pengumuman = res.data;
-          setDaftarPengumuman(pengumuman);
-        })
-    }
-  }, [])
 
   return (
     <>
@@ -87,4 +75,12 @@ export default function Agenda() {
       </Menu>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const daftarPengumuman = await pengumuman()
+
+  return {
+    props: { daftarPengumuman }
+  };
 }

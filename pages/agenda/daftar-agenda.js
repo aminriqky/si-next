@@ -1,4 +1,3 @@
-import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import {
   Text, Img, Box, Flex, Link
@@ -7,8 +6,8 @@ import NavLink from "next/link";
 import useWindowDimensions from "../../public/WindowDimensions";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
-import axios from "axios";
 import dayjs from 'dayjs';
+import { agenda } from '../api/agenda';
 
 function AgendaCell(props) {
   return (
@@ -31,19 +30,8 @@ function AgendaCell(props) {
   )
 }
 
-export default function DaftarAgenda() {
+export default function DaftarAgenda({ daftarAgenda }) {
   const { height } = useWindowDimensions();
-  const [daftarAgenda, setDaftarAgenda] = useState(null);
-
-  useEffect(() => {
-    if (daftarAgenda === null) {
-      axios.get(`https://webprodi.sashi.id/api/agenda/all`)
-        .then(res => {
-          const agenda = res.data;
-          setDaftarAgenda(agenda);
-        })
-    }
-  }, [])
 
   return (
     <>
@@ -78,4 +66,12 @@ export default function DaftarAgenda() {
       </Menu>
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const daftarAgenda = await agenda()
+
+  return {
+    props: { daftarAgenda }
+  };
 }

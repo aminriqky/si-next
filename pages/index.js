@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import {
@@ -14,9 +13,12 @@ import { MdDeveloperBoard } from "react-icons/md";
 import Slide from "../public/slide";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
-import axios from "axios";
 import dayjs from 'dayjs';
-import Image from 'next/image'
+import Image from 'next/image';
+import { agenda } from './api/agenda';
+import { pengumuman } from './api/pengumuman';
+import { artikel } from './api/artikel';
+import { kehadiran } from './api/kehadiran';
 
 function AgendaCell(props) {
   return (
@@ -131,56 +133,21 @@ function ArtikelCell(props) {
           </NavLink>
         </Link>
       </Text>
+      <Text fontSize="xs" color="gray.300" pt="4px" pb="2">
+        {props.tanggal}
+      </Text>
       <Text fontSize="xs" color="white">
         {props.children}
-      </Text>
-      <Text fontSize="xs" color="gray.300" pt="4px" pb="6">
-        {props.tanggal}
       </Text>
     </Flex>
   );
 }
 
-export default function Home() {
+export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran }) {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure()
   const responsive = useBreakpointValue({ base: "column", xl: "row" })
-  const [daftarAgenda, setDaftarAgenda] = useState(null);
-  const [daftarPengumuman, setDaftarPengumuman] = useState(null);
-  const [daftarArtikel, setDaftarArtikel] = useState(null);
-  const [daftarKehadiran, setDaftarKehadiran] = useState(null);
-
-  useEffect(() => {
-    if (daftarAgenda === null) {
-      axios.get(`https://webprodi.sashi.id/api/agenda/baru`)
-        .then(res => {
-          const agenda = res.data;
-          setDaftarAgenda(agenda);
-        })
-    }
-    if (daftarPengumuman === null) {
-      axios.get(`https://webprodi.sashi.id/api/pengumuman/all`)
-        .then(res => {
-          const pengumuman = res.data;
-          setDaftarPengumuman(pengumuman);
-        })
-    }
-    if (daftarArtikel === null) {
-      axios.get(`https://webprodi.sashi.id/api/article/all`)
-        .then(res => {
-          const artikel = res.data;
-          setDaftarArtikel(artikel);
-        })
-    }
-    if (daftarKehadiran === null) {
-      axios.get(`https://webprodi.sashi.id/api/user/all`)
-        .then(res => {
-          const kehadiran = res.data;
-          setDaftarKehadiran(kehadiran);
-        })
-    }
-  }, [])
 
   function dots(num, str) {
     if (str !== null & str.length > num) {
@@ -430,7 +397,14 @@ export default function Home() {
       <Divider />
       <Divider />
       <Flex bg="gray.50" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
-        <Flex flexDir="column" my="25" mr={{ base: 0, xl: 75 }}>
+        <Flex flexDir="column" my="25" mr={{ base: 0, xl: 50 }}>
+          <iframe
+            style={{ height: "299px", width: "200px" }}
+            scrolling="no"
+            src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
+          />
+        </Flex>
+        <Flex flexDir="column" my="25" mr={{ base: 0, xl: 100 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcApprove} w="40px" h="auto" />
             &thinsp;
@@ -494,4 +468,15 @@ export default function Home() {
       <ExNav />
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const daftarAgenda = await agenda()
+  const daftarPengumuman = await pengumuman()
+  const daftarArtikel = await artikel()
+  const daftarKehadiran = await kehadiran()
+
+  return {
+    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran }
+  };
 }

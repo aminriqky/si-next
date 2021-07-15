@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Container, Text, Link, Box, Divider, useBreakpointValue, Flex
 } from "@chakra-ui/react";
@@ -16,25 +15,25 @@ export default function ExNav() {
           <Divider mb={2} />
           <Link href="/sejarah" color="orange.600">
             Sejarah
-            </Link>
+          </Link>
           <Link href="/visi-misi-tujuan" color="orange.600">
             Visi Misi & Tujuan
-            </Link>
+          </Link>
           <Link color="orange.600" href="/struktur">
             Struktur
-            </Link>
+          </Link>
           <Link color="orange.600" href="/category/staff">
             Staff & Tenaga Pendidik
-            </Link>
+          </Link>
           <Link href="/direktori-kerjasama" color="orange.600">
             Direktori Kerjasama
-            </Link>
+          </Link>
           <Link color="orange.600" href="/direktori-prestasi">
             Direktori Prestasi
-            </Link>
+          </Link>
           <Link color="orange.600" href="/katalog-statistik">
             Katalog Statistik
-            </Link>
+          </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
@@ -43,7 +42,7 @@ export default function ExNav() {
           <Divider mb={2} />
           <Link href="/akademik" color="orange.600">
             Administrasi
-            </Link>
+          </Link>
           <Link color="orange.600">Penasihat Akademik</Link>
           <Link color="orange.600">Buku Saku Mahasiswa</Link>
           <Link color="orange.600">KTI Universitas</Link>
@@ -59,38 +58,38 @@ export default function ExNav() {
             isExternal
           >
             E-Learning
-            </Link>
+          </Link>
           <Link href="mailto:si@radenfatah.ac.id" color="orange.600" isExternal>
             E-Mail
-            </Link>
+          </Link>
           <Link
             color="orange.600"
             href="http://e-skripsi.radenfatah.ac.id/"
             isExternal
           >
             E-Skripsi
-            </Link>
+          </Link>
           <Link
             href="http://e-lkp.radenfatah.ac.id/"
             color="orange.600"
             isExternal
           >
             E-LKP
-            </Link>
+          </Link>
           <Link
             href="http://jurnal.radenfatah.ac.id/"
             color="orange.600"
             isExternal
           >
             E-Jurnal
-            </Link>
+          </Link>
           <Link
             href="http://e-office.radenfatah.ac.id/index.php"
             color="orange.600"
             isExternal
           >
             E-Office
-            </Link>
+          </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
@@ -114,21 +113,21 @@ export default function ExNav() {
             isExternal
           >
             Perpustakaan
-            </Link>
+          </Link>
           <Link
             color="orange.600"
             href="http://repository.radenfatah.ac.id/"
             isExternal
           >
             Digital Repository
-            </Link>
+          </Link>
           <Link
             href="http://pustipd.radenfatah.ac.id/"
             color="orange.600"
             isExternal
           >
             PUSTPID
-            </Link>
+          </Link>
           <Link color="orange.600">Pendaftaran Tugas Akhir</Link>
           <Link
             href="http://alumni.radenfatah.ac.id/"
@@ -136,7 +135,7 @@ export default function ExNav() {
             isExternal
           >
             Alumni
-            </Link>
+          </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
@@ -145,23 +144,23 @@ export default function ExNav() {
           <Divider mb={2} />
           <Link href="https://kemenag.go.id/" color="orange.600" isExternal>
             Kemenag-RI
-            </Link>
+          </Link>
           <Link
             href="https://forlap.kemdikbud.go.id/"
             color="orange.600"
             isExternal
           >
             PD-DIKTI
-            </Link>
+          </Link>
           <Link color="orange.600" href="https://www.banpt.or.id/" isExternal>
             BAN-PT
-            </Link>
+          </Link>
           <Link href="http://pendis.kemenag.go.id/" color="orange.600" isExternal>
             Pendis Kemenag RI
-            </Link>
+          </Link>
           <Link href="http://diktis.kemenag.go.id/" color="orange.600" isExternal>
             Diktis Kemenag RI
-            </Link>
+          </Link>
         </Box>
       </Container>
       <Divider />

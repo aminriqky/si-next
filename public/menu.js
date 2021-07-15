@@ -1,4 +1,3 @@
-import React from "react";
 import { useRouter } from 'next/router'
 import {
   Button, Text, useDisclosure, Drawer, DrawerBody, DrawerHeader, Img, Flex, Link,
