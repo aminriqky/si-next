@@ -65,7 +65,7 @@ export default function DaftarAgenda({ daftarAgenda }) {
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const daftarAgenda = await agenda()
 
   return {

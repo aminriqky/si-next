@@ -355,7 +355,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
   );
 }
 
-export async function getServerSideProps() {
+export async function getStaticProps() {
   const daftarAgenda = await agenda()
   const daftarPengumuman = await pengumuman()
   const daftarArtikel = await artikel()
