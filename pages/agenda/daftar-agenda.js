@@ -69,6 +69,7 @@ export async function getStaticProps() {
   const daftarAgenda = await agenda()
 
   return {
-    props: { daftarAgenda }
+    props: { daftarAgenda },
+    revalidate: 30
   };
 }

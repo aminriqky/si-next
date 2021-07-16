@@ -362,6 +362,7 @@ export async function getStaticProps() {
   const daftarKehadiran = await kehadiran()
 
   return {
-    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran }
+    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran },
+    revalidate: 30
   };
 }
