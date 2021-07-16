@@ -1,17 +1,17 @@
 import Head from "next/head";
 import {
-  Text, Img, Box, Icon, Flex, Divider
+  Text, Box, Icon, Flex, Divider
 } from "@chakra-ui/react";
+import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { FcClock, FcOvertime } from "react-icons/fc"
-import useWindowDimensions from "../../public/WindowDimensions";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { agenda } from '../api/agenda'
+const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 export default function Agenda({ daftarAgenda }) {
-  const { height } = useWindowDimensions();
   const router = useRouter();
   const { agenda } = router.query;
 
@@ -20,10 +20,7 @@ export default function Agenda({ daftarAgenda }) {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu
-        pageHeight={{ base: "200vw", xl: "66vw" }}
-        slideShow={<Img sx={{ filter: "blur(500px)" }} pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" alt="BG Gradient" height={height} />}
-      >
+      <Menu pageHeight={{ base: "200vw", xl: "66vw" }} slideShow={<BgImg />}>
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           {
             daftarAgenda !== null && daftarAgenda.map((item) => {

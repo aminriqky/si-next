@@ -18,10 +18,13 @@ function DrawerTitle(props) {
 function MenuTitle(props) {
   return (
     <Box mr="3vw" mt="3vw" zIndex="1">
-      <Link onClick={props.handleClick} _hover={{ textDecoration: "none" }} color="white" >
-        <Text _hover={{ color: "teal.400" }} fontSize={13} as="b">
-          {props.title.toUpperCase()}
-        </Text>
+      <Link onClick={props.handleClick}
+        color="white"
+        _hover={{ color: "teal.400" }}
+        fontSize={13}
+        fontWeight="bold"
+      >
+        {props.title.toUpperCase()}
       </Link>
     </Box>
   );

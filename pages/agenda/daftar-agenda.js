@@ -1,13 +1,14 @@
 import Head from "next/head";
 import {
-  Text, Img, Box, Flex, Link
+  Text, Box, Flex, Link
 } from "@chakra-ui/react";
 import NavLink from "next/link";
-import useWindowDimensions from "../../public/WindowDimensions";
+import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { agenda } from '../api/agenda';
+const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function AgendaCell(props) {
   return (
@@ -31,17 +32,13 @@ function AgendaCell(props) {
 }
 
 export default function DaftarAgenda({ daftarAgenda }) {
-  const { height } = useWindowDimensions();
 
   return (
     <>
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu
-        pageHeight={{ base: "200vw", xl: "66vw" }}
-        slideShow={<Img sx={{ filter: "blur(500px)" }} pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" src="/misi.png" alt="BG Gradient" height={height} />}
-      >
+      <Menu pageHeight={{ base: "200vw", xl: "66vw" }} slideShow={<BgImg />}>
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           <Text fontSize="28" pb="1%" fontWeight="semibold">
             Daftar Agenda

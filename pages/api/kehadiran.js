@@ -5,6 +5,5 @@ export async function kehadiran() {
 }
 
 export default async function handler(req, res) {
-    const jsonData = await kehadiran()
-    res.status(200).json(jsonData)
+    res.status(200).send('Status OK')
 }

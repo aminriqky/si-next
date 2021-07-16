@@ -1,9 +1,11 @@
 import {
   Text, Flex, Box, Link
 } from "@chakra-ui/react";
-import NavLink from "next/link";
+import { useRouter } from 'next/router';
 
 export default function AgendaCell(props) {
+  const router = useRouter();
+
   return (
     <Flex ml={{ base: "12%", xl: 0 }} dykey={props.dykey} flexDirection="row" flex="1">
       <Box alignSelf="center" minW="60px" height="60px" m={{ base: "3vw", xl: "1.41vw" }} textAlign="center" border="2px">
@@ -12,10 +14,11 @@ export default function AgendaCell(props) {
       </Box>
       <Box alignSelf="center" minW="120px" m={{ base: "3vw", xl: "1.41vw" }}>
         <Text fontSize={{ base: "sm", xl: "md" }}>
-          <Link fontWeight="semibold">
-            <NavLink as={props.dylink} href="/agenda/[agenda]">
-              {props.kegiatan}
-            </NavLink>
+          <Link fontWeight="semibold" onClick={(e) => {
+            e.preventDefault()
+            router.push(`${props.dylink}`)
+          }}>
+            {props.kegiatan}
           </Link>
         </Text>
         <Text fontSize="sm">

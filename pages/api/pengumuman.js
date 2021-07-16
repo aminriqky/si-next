@@ -5,6 +5,5 @@ export async function pengumuman() {
 }
 
 export default async function handler(req, res) {
-    const jsonData = await pengumuman()
-    res.status(200).json(jsonData)
+    res.status(200).send('Status OK')
 }
