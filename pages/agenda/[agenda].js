@@ -20,20 +20,17 @@ export default function Agenda({ daftarAgenda }) {
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
-      <Menu pageHeight={{ base: "200vw", xl: "66vw" }} slideShow={<BgImg />}>
+      <Menu slideShow={<BgImg />}>
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           {
             daftarAgenda !== null && daftarAgenda.map((item) => {
               if (item.id == agenda) {
                 return (
                   <Box key={item.id}>
-                    <Text fontSize="28" pb="1%" fontWeight="semibold">
-                      {item.detail_kegiatan}
+                    <Text fontSize="28" pb="3%" fontWeight="semibold">
+                      {item.judul}
                     </Text>
-                    <Text pb="2%" color="gray">
-                      Tag:
-                    </Text>
-                    <Flex flexDirection="column" bg="gray.300" p="2%">
+                    <Flex flexDirection="column" bg="gray.300" p="2%" mb="2%">
                       <Flex flexDirection="row">
                         <Text color="black" fontWeight="semibold" pb="2%">
                           Jadwal Agenda Kegiatan :
@@ -47,13 +44,13 @@ export default function Agenda({ daftarAgenda }) {
                         <Icon as={FcOvertime} w="25px" h="auto" />
                         &ensp;
                         <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
-                          {dayjs(daftarAgenda[0].waktu).format('DD/MM/YYYY')}
+                          {dayjs(item.waktu).format('DD/MM/YYYY')}
                         </Text>
                         &ensp;
                         <Icon as={FcClock} w="25px" h="auto" />
                         &ensp;
                         <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
-                          {dayjs(daftarAgenda[0].waktu).format('HH:mm')} WIB
+                          {dayjs(item.waktu).format('HH:mm')} WIB
                         </Text>
                       </Flex>
                       <Divider />
@@ -67,6 +64,7 @@ export default function Agenda({ daftarAgenda }) {
                         </Text>
                       </Flex>
                     </Flex>
+                    <div dangerouslySetInnerHTML={{ __html: item.detail_kegiatan }} />
                   </Box>
                 )
               }

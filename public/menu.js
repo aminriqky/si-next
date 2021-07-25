@@ -1,8 +1,10 @@
 import { useRouter } from 'next/router'
 import {
-  Button, Text, useDisclosure, Drawer, DrawerBody, DrawerHeader, Img, Flex, Link,
-  DrawerOverlay, DrawerContent, DrawerCloseButton, IconButton, Box
+  Button, useDisclosure, Drawer, DrawerBody, DrawerHeader, Img, Flex, Link,
+  DrawerOverlay, DrawerContent, DrawerCloseButton, IconButton, Box, Menu,
+  MenuButton, Portal, MenuList, MenuItem, Icon
 } from "@chakra-ui/react";
+import { FcCalendar, FcCollaboration, FcDocument, FcViewDetails } from "react-icons/fc";
 import useWindowDimensions from "./WindowDimensions";
 import { HamburgerIcon } from '@chakra-ui/icons';
 
@@ -30,7 +32,7 @@ function MenuTitle(props) {
   );
 }
 
-export default function Menu(props) {
+export default function MenuUtama(props) {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -67,12 +69,36 @@ export default function Menu(props) {
           {
             width >= 1280 &&
             <>
-              <MenuTitle title="Beranda" handleClick={home} />
-              <MenuTitle title="Akademik" handleClick={akademik} />
-              <MenuTitle title="Dokumen" handleClick={dokumen} />
-              <MenuTitle title="Galeri" />
-              <MenuTitle title="Fasilitas" />
-              <MenuTitle title="Kemahasiswaan" />
+              <Menu>
+                <MenuTitle title="Beranda" handleClick={home} />
+                <MenuButton zIndex="100">
+                  <MenuTitle title="Akademik" handleClick={dokumen} />
+                </MenuButton>
+                <Portal>
+                  <MenuList>
+                    <MenuItem>
+                      <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
+                      Kurikulum
+                    </MenuItem>
+                    <MenuItem>
+                      <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
+                      Pengabdian
+                    </MenuItem>
+                    <MenuItem>
+                      <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
+                      Kalender Akademik
+                    </MenuItem>
+                    <MenuItem>
+                      <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
+                      HaKI
+                    </MenuItem>
+                  </MenuList>
+                </Portal>
+                <MenuTitle title="Dokumen" handleClick={dokumen} />
+                <MenuTitle title="Galeri" />
+                <MenuTitle title="Fasilitas" />
+                <MenuTitle title="Kemahasiswaan" />
+              </Menu>
             </>
           }
           <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>

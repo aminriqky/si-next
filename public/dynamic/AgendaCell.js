@@ -18,7 +18,7 @@ export default function AgendaCell(props) {
             e.preventDefault()
             router.push(`${props.dylink}`)
           }}>
-            {props.kegiatan}
+            {props.judul}
           </Link>
         </Text>
         <Text fontSize="sm">
