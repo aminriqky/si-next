@@ -25,13 +25,16 @@ function PengumumanCell(props) {
           <Text fontSize="sm">{props.tanggal}</Text>
         </Box>
       </Flex>
-      <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" pl="2%">
+      <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" pl="2%" mb={{ base: "3vw", xl: "1.41vw" }}>
         <Text color="teal" pt="2.5px">
           Lampiran File :
         </Text>
         &ensp;
         <Button colorScheme="teal" size="sm">Unduh</Button>
       </Flex>
+      <Box pl="2%">
+        <div dangerouslySetInnerHTML={{ __html: props.detail }} />
+      </Box>
     </>
   )
 }
@@ -51,18 +54,13 @@ export default function Pengumuman({ daftarPengumuman }) {
             daftarPengumuman !== null && daftarPengumuman.map((item) => {
               if (item.id == pengumuman) {
                 return (
-                  <>
-                    <PengumumanCell dykey={item.id}
-                      hari={dayjs(item.updated_at).locale('id').format('ddd').toUpperCase()}
-                      hariBulan={dayjs(item.updated_at).format('DD/MM')}
-                      judul={item.judul}
-                      tanggal={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                      detail={item.detail}
-                    />
-                    <Box>
-
-                    </Box>
-                  </>
+                  <PengumumanCell dykey={item.id}
+                    hari={dayjs(item.updated_at).locale('id').format('ddd').toUpperCase()}
+                    hariBulan={dayjs(item.updated_at).format('DD/MM')}
+                    judul={item.judul}
+                    tanggal={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                    detail={item.detail}
+                  />
                 )
               }
             })

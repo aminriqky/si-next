@@ -63,7 +63,7 @@ export default function MenuUtama(props) {
               <IconButton variant="ghost" colorScheme="teal" aria-label="Opsi" size="lg" icon={<HamburgerIcon />} onClick={onOpen} />
             }
           </Box>
-          <Box mr={{ xl: "14vw", "2xl": "24vw" }} mt="1.5vw" onClick={home}>
+          <Box mr={{ xl: "14vw", "2xl": "18vw" }} mt="1.5vw" onClick={home}>
             <Img width="100%" src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
           </Box>
           {
@@ -71,6 +71,7 @@ export default function MenuUtama(props) {
             <>
               <Menu>
                 <MenuTitle title="Beranda" handleClick={home} />
+                <MenuTitle title="Profil" />
                 <MenuButton zIndex="100">
                   <MenuTitle title="Akademik" handleClick={dokumen} />
                 </MenuButton>
@@ -94,7 +95,7 @@ export default function MenuUtama(props) {
                     </MenuItem>
                   </MenuList>
                 </Portal>
-                <MenuTitle title="Dokumen" handleClick={dokumen} />
+                <MenuTitle title="Dokumen" />
                 <MenuTitle title="Galeri" />
                 <MenuTitle title="Fasilitas" />
                 <MenuTitle title="Kemahasiswaan" />

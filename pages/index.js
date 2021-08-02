@@ -19,8 +19,10 @@ import { agenda } from './api/agenda';
 import { pengumuman } from './api/pengumuman';
 import { artikel } from './api/artikel';
 import { kehadiran } from './api/kehadiran';
+import { berita } from './api/berita';
 
-const Slide = dynamic(() => import('../public/slide'))
+const Slide = dynamic(() => import('../public/slide'));
+const Berita = dynamic(() => import('../public/berita'));
 const AgendaCell = dynamic(
   () => import('../public/dynamic/AgendaCell'),
   {
@@ -76,7 +78,7 @@ const PengumumanCell = dynamic(
   }
 )
 
-export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran }) {
+export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita }) {
   const { width } = useWindowDimensions();
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure()
@@ -208,6 +210,24 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         </Flex>
       </Flex>
       <Divider />
+      <Berita
+        gambar1={`https://webprodi.sashi.id/storage/${daftarBerita[0].thumbnail}`}
+        judul1={dots(65, daftarBerita[0].judul)}
+        detail1={dots(675, daftarBerita[0].detail)}
+        gambar2={`https://webprodi.sashi.id/storage/${daftarBerita[1].thumbnail}`}
+        judul2={dots(65, daftarBerita[1].judul)}
+        detail2={dots(675, daftarBerita[1].detail)}
+        gambar3={`https://webprodi.sashi.id/storage/${daftarBerita[2].thumbnail}`}
+        judul3={dots(65, daftarBerita[2].judul)}
+        detail3={dots(675, daftarBerita[2].detail)}
+        gambar4={`https://webprodi.sashi.id/storage/${daftarBerita[3].thumbnail}`}
+        judul4={dots(65, daftarBerita[3].judul)}
+        detail4={dots(675, daftarBerita[3].detail)}
+        gambar5={`https://webprodi.sashi.id/storage/${daftarBerita[4].thumbnail}`}
+        judul5={dots(65, daftarBerita[4].judul)}
+        detail5={dots(675, daftarBerita[4].detail)}
+      />
+      <Divider />
       <Flex flexDirection={responsive} my="25" mx={{ base: 25, xl: 125 }}>
         <ArtikelCell
           dykey={daftarArtikel[0].id}
@@ -222,7 +242,12 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="40px" h="auto" />
             &thinsp;
-            PENGUMUMAN
+            <Link fontWeight="semibold" onClick={(e) => {
+              e.preventDefault()
+              router.push("/pengumuman/daftar-pengumuman")
+            }}>
+              PENGUMUMAN
+            </Link>
           </Text>
           <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
             <PengumumanCell
@@ -309,7 +334,12 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcApprove} w="40px" h="auto" />
             &thinsp;
-            KEHADIRAN
+            <Link fontWeight="semibold" onClick={(e) => {
+              e.preventDefault()
+              router.push("/kehadiran/daftar-kehadiran")
+            }}>
+              KEHADIRAN
+            </Link>
           </Text>
           &emsp;
           <KehadiranCell
@@ -318,6 +348,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             judul={daftarKehadiran[0].name}
             deskripsi={daftarKehadiran[0].jabatan}
             hadir={daftarKehadiran[0].hadir}
+            dylink={`/kehadiran/${daftarKehadiran[0].id}`}
           />
           <Divider my="10px" />
           <KehadiranCell
@@ -326,6 +357,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             judul={daftarKehadiran[1].name}
             deskripsi={daftarKehadiran[1].jabatan}
             hadir={daftarKehadiran[1].hadir}
+            dylink={`/kehadiran/${daftarKehadiran[1].id}`}
           />
         </Flex>
         <Flex flexDir="column" my="25">
@@ -361,9 +393,10 @@ export async function getStaticProps() {
   const daftarPengumuman = await pengumuman()
   const daftarArtikel = await artikel()
   const daftarKehadiran = await kehadiran()
+  const daftarBerita = await berita()
 
   return {
-    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran },
+    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita },
     revalidate: 30
   };
 }

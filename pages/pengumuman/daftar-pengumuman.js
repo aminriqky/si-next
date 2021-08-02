@@ -7,10 +7,10 @@ import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
-import { artikel } from '../api/artikel';
+import { pengumuman } from '../api/pengumuman';
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
-function ArtikelCell(props) {
+function PengumumanCell(props) {
   const router = useRouter();
 
   return (
@@ -28,13 +28,13 @@ function ArtikelCell(props) {
             {props.judul}
           </Link>
         </Text>
-        <Text fontSize="sm">{props.penulis}</Text>
+        <Text fontSize="sm">{props.waktu}</Text>
       </Box>
     </Flex>
   )
 }
 
-export default function DaftarArtikel({ daftarArtikel }) {
+export default function DaftarPengumuman({ daftarPengumuman }) {
   return (
     <>
       <Head>
@@ -43,18 +43,18 @@ export default function DaftarArtikel({ daftarArtikel }) {
       <Menu slideShow={<BgImg />}>
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           <Text fontSize="28" pb="2%" fontWeight="semibold">
-            Daftar Artikel
+            Daftar Pengumuman
           </Text>
           {
-            daftarArtikel !== null && daftarArtikel.map((item) => {
+            daftarPengumuman !== null && daftarPengumuman.map((item) => {
               return (
-                <ArtikelCell
+                <PengumumanCell
                   dykey={item.id}
                   hari={dayjs(item.waktu).locale('id').format('ddd').toUpperCase()}
                   hariBulan={dayjs(item.waktu).format('DD/MM')}
                   judul={item.judul}
-                  penulis={item.penulis}
-                  dylink={`/artikel/${item.id}`}
+                  waktu={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${item.id}`}
                 />
               )
             })
@@ -67,10 +67,10 @@ export default function DaftarArtikel({ daftarArtikel }) {
 }
 
 export async function getStaticProps() {
-  const daftarArtikel = await artikel()
+  const daftarPengumuman = await pengumuman()
 
   return {
-    props: { daftarArtikel },
+    props: { daftarPengumuman },
     revalidate: 30
   };
 }
