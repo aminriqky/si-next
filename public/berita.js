@@ -3,6 +3,7 @@ import {
   Text, Box, SlideFade, Img, Flex, Icon, Link, Button
 } from "@chakra-ui/react";
 import { FcNews } from "react-icons/fc";
+import { useRouter } from 'next/router';
 
 const wait = (timeout) => {
   return new Promise(resolve => {
@@ -11,6 +12,8 @@ const wait = (timeout) => {
 }
 
 function SlideShow(props) {
+  const router = useRouter();
+
   return (
     <SlideFade in={true} offsetX="150px">
       <Box mt={{ base: "5vw", xl: 0 }} ml="8vw" mr="10vw" letterSpacing={{ base: "1px", xl: "2px" }}>
@@ -19,7 +22,12 @@ function SlideShow(props) {
             height="100%" mr={{ xl: "35px" }} layout="fill" objectFit="fill" />
           <Flex flexDir="column">
             <Text fontWeight="semibold" color="black" my="15px" fontSize={{ base: "md", lg: "xl" }}>
-              {props.judul}
+              <Link fontWeight="semibold" onClick={(e) => {
+                e.preventDefault()
+                router.push(`${props.dylink}`)
+              }}>
+                {props.judul}
+              </Link>
             </Text>
             <Text color="gray.600" fontSize={{ base: "xs", lg: "md" }}>
               <div dangerouslySetInnerHTML={{ __html: props.detail }} />
@@ -31,7 +39,6 @@ function SlideShow(props) {
   );
 }
 
-
 function SlideButton(props) {
   return (
     <Button _focus={{ outline: "none" }} onClick={props.handleClick}
@@ -41,10 +48,10 @@ function SlideButton(props) {
   );
 }
 
-
 export default function Berita(props) {
   const [slideNum, setSlideNum] = useState(null);
   const [slideCount, setSlideCount] = useState(0);
+  const router = useRouter();
 
   useEffect(() => {
     if (slideNum === null) {
@@ -93,23 +100,23 @@ export default function Berita(props) {
         </Text>
         {
           slideNum === 1 &&
-          <SlideShow gambar={props.gambar1} judul={props.judul1} detail={props.detail1} />
+          <SlideShow gambar={props.gambar1} judul={props.judul1} detail={props.detail1} dylink={props.dylink1} />
         }
         {
           slideNum === 2 &&
-          <SlideShow gambar={props.gambar2} judul={props.judul2} detail={props.detail2} />
+          <SlideShow gambar={props.gambar2} judul={props.judul2} detail={props.detail2} dylink={props.dylink2} />
         }
         {
           slideNum === 3 &&
-          <SlideShow gambar={props.gambar3} judul={props.judul3} detail={props.detail3} />
+          <SlideShow gambar={props.gambar3} judul={props.judul3} detail={props.detail3} dylink={props.dylink3} />
         }
         {
           slideNum === 4 &&
-          <SlideShow gambar={props.gambar4} judul={props.judul4} detail={props.detail4} />
+          <SlideShow gambar={props.gambar4} judul={props.judul4} detail={props.detail4} dylink={props.dylink4} />
         }
         {
           slideNum === 5 &&
-          <SlideShow gambar={props.gambar5} judul={props.judul5} detail={props.detail5} />
+          <SlideShow gambar={props.gambar5} judul={props.judul5} detail={props.detail5} dylink={props.dylink5} />
         }
       </Flex>
       <Flex flexDir="row" position="absolute" alignSelf={{ base: "center" }} mt={{ base: 675, xl: 435 }}>

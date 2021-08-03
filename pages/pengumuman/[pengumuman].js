@@ -1,6 +1,7 @@
+import { useState } from "react";
 import Head from "next/head";
 import {
-  Text, Box, Flex, Button
+  Text, Box, Flex, Button, Link
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -11,6 +12,14 @@ import { pengumuman } from "../api/pengumuman";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function PengumumanCell(props) {
+  const [saveFile, setSaveFile] = useState(null);
+
+  async function handleClick() {
+    const unduh = await fetch(`https://webprodi.sashi.id/api/filepengumuman/${props.link}`);
+    const jsonData = await unduh.json()
+    setSaveFile(`https://webprodi.sashi.id/storage/${jsonData[0].download_link}`);
+  }
+
   return (
     <>
       <Flex key={props.dykey} flexDirection="row" flex="1">
@@ -30,7 +39,11 @@ function PengumumanCell(props) {
           Lampiran File :
         </Text>
         &ensp;
-        <Button colorScheme="teal" size="sm">Unduh</Button>
+        <Link _hover={{ textTransform: "none" }} href={saveFile} download>
+          <Button onClick={(e) => { e.preventDefault; handleClick() }} colorScheme="teal" size="sm">
+            Unduh
+          </Button>
+        </Link>
       </Flex>
       <Box pl="2%">
         <div dangerouslySetInnerHTML={{ __html: props.detail }} />
@@ -60,6 +73,7 @@ export default function Pengumuman({ daftarPengumuman }) {
                     judul={item.judul}
                     tanggal={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
                     detail={item.detail}
+                    link={item.id}
                   />
                 )
               }

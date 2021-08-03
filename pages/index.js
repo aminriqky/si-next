@@ -214,18 +214,23 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         gambar1={`https://webprodi.sashi.id/storage/${daftarBerita[0].thumbnail}`}
         judul1={dots(65, daftarBerita[0].judul)}
         detail1={dots(675, daftarBerita[0].detail)}
+        dylink1={`/berita/${daftarBerita[0].id}`}
         gambar2={`https://webprodi.sashi.id/storage/${daftarBerita[1].thumbnail}`}
         judul2={dots(65, daftarBerita[1].judul)}
         detail2={dots(675, daftarBerita[1].detail)}
+        dylink2={`/berita/${daftarBerita[1].id}`}
         gambar3={`https://webprodi.sashi.id/storage/${daftarBerita[2].thumbnail}`}
         judul3={dots(65, daftarBerita[2].judul)}
         detail3={dots(675, daftarBerita[2].detail)}
+        dylink3={`/berita/${daftarBerita[2].id}`}
         gambar4={`https://webprodi.sashi.id/storage/${daftarBerita[3].thumbnail}`}
         judul4={dots(65, daftarBerita[3].judul)}
         detail4={dots(675, daftarBerita[3].detail)}
+        dylink4={`/berita/${daftarBerita[3].id}`}
         gambar5={`https://webprodi.sashi.id/storage/${daftarBerita[4].thumbnail}`}
         judul5={dots(65, daftarBerita[4].judul)}
         detail5={dots(675, daftarBerita[4].detail)}
+        dylink5={`/berita/${daftarBerita[4].id}`}
       />
       <Divider />
       <Flex flexDirection={responsive} my="25" mx={{ base: 25, xl: 125 }}>
