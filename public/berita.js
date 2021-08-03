@@ -88,7 +88,7 @@ export default function Berita(props) {
   return (
     <Flex bg="gray.200" height={{ base: "750px", xl: "550px" }} overflow="hidden" flexDir="column">
       <Flex mt="50px" flexDir="column">
-        <Text ml="8vw" mr="10vw" fontSize="24" mb="1.5%" fontWeight="medium">
+        <Text ml="8vw" mr="10vw" fontSize="24" mb={{ "2xl": "1.5%" }} fontWeight="medium">
           <Icon as={FcNews} w="40px" h="auto" />
           &thinsp;
           <Link fontWeight="semibold" onClick={(e) => {
@@ -119,7 +119,7 @@ export default function Berita(props) {
           <SlideShow gambar={props.gambar5} judul={props.judul5} detail={props.detail5} dylink={props.dylink5} />
         }
       </Flex>
-      <Flex flexDir="row" position="absolute" alignSelf={{ base: "center" }} mt={{ base: 675, xl: 435 }}>
+      <Flex flexDir="row" position="absolute" alignSelf={{ base: "center" }} mt={{ base: 675, xl: 475 }}>
         <SlideButton handleClick={() => slideClick(1)} />
         <SlideButton handleClick={() => slideClick(2)} />
         <SlideButton handleClick={() => slideClick(3)} />

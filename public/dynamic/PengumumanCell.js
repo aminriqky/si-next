@@ -7,7 +7,7 @@ export default function PengumumanCell(props) {
   const router = useRouter();
 
   return (
-    <Flex dykey={props.key} flexDirection="row" flex="1">
+    <Flex key={props.dykey} flexDirection="row" flex="1">
       <Box>
         <Text fontSize="md" color="orange.800">
           <Link fontWeight="semibold" onClick={(e) => {

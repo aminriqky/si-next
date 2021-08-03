@@ -1,9 +1,9 @@
 import {
-  Container, Text, Link, Box, Divider, useBreakpointValue, Flex
+  Container, Text, Link, Box, Divider, useBreakpointValue
 } from "@chakra-ui/react";
 
 export default function ExNav() {
-  const responsive = useBreakpointValue({ base: "column", xl: "row" })
+  const responsive = useBreakpointValue({ base: "column", xl: "row" });
 
   return (
     <>
