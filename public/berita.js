@@ -16,7 +16,7 @@ function SlideShow(props) {
 
   return (
     <SlideFade in={true} offsetX="150px">
-      <Box mt={{ base: "5vw", xl: 0 }} ml="8vw" mr="10vw" letterSpacing={{ base: "1px", xl: "2px" }}>
+      <Box mt={{ base: "5vw", xl: 0 }} ml="10vw" mr="10vw" letterSpacing={{ base: "1px", xl: "2px" }}>
         <Flex flexDir={{ base: "column", xl: "row" }} alignItems="center">
           <Img src={props.gambar} borderRadius={15} width={{ base: "100%", xl: "450px" }}
             height="100%" mr={{ xl: "35px" }} layout="fill" objectFit="fill" />
@@ -88,7 +88,7 @@ export default function Berita(props) {
   return (
     <Flex bg="gray.200" height={{ base: "750px", xl: "550px" }} overflow="hidden" flexDir="column">
       <Flex mt="50px" flexDir="column">
-        <Text ml="8vw" mr="10vw" fontSize="24" mb={{ "2xl": "1.5%" }} fontWeight="medium">
+        <Text ml="10vw" mr="10vw" fontSize="24" mb={{ "2xl": "1.5%" }} fontWeight="medium">
           <Icon as={FcNews} w="40px" h="auto" />
           &thinsp;
           <Link fontWeight="semibold" onClick={(e) => {

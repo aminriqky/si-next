@@ -183,8 +183,8 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             </AspectRatio>
           </Box>
         </AspectRatio>
-        <Flex flexDirection="column" color="white">
-          <Box bgColor="teal.700" width={{ base: "100%", xl: "422px", '2xl': "609px" }} height="142px">
+        <Flex flex="1" flexDirection="column" color="white">
+          <Box bgColor="teal.700" height="55%">
             <Box m="12">
               <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" isExternal>
                 <Flex flexDirection="row">
@@ -196,7 +196,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
               <Text fontSize="xs">p-ISSN 2460-092X</Text>
             </Box>
           </Box>
-          <Box bgColor="teal.600" width={{ base: "100%", xl: "422px", '2xl': "609px" }} height="116px">
+          <Box bgColor="teal.600" height="45%">
             <Box mx="12" my="8">
               <Link href="https://chakra-ui.com" isExternal>
                 <Flex flexDirection="row">
@@ -233,7 +233,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         dylink5={`/berita/${daftarBerita[4].id}`}
       />
       <Divider />
-      <Flex flexDirection={responsive} my="25" mx={{ base: 25, xl: 125 }}>
+      <Flex flexDirection={responsive} my="25" justifyContent="center" mx={{ base: 25, xl: 125 }}>
         <ArtikelCell
           dykey={daftarArtikel[0].id}
           tema="ARTIKEL"
@@ -323,7 +323,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       </Flex>
       <Divider />
       <Divider />
-      <Flex bg="gray.50" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
+      <Flex bg="gray.50" justifyContent="center" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
         <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="25" mr={{ base: 0, xl: 50 }}>
           {
             daftarIframe2 &&

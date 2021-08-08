@@ -42,9 +42,29 @@ export default function MenuUtama(props) {
     router.push('/')
   }
 
-  const akademik = (e) => {
+  const profil = (e) => {
     e.preventDefault()
-    router.push('/akademik')
+    router.push('/profil')
+  }
+
+  const kurikulum = (e) => {
+    e.preventDefault()
+    router.push('/akademik/kurikulum')
+  }
+
+  const pengabdian = (e) => {
+    e.preventDefault()
+    router.push('/akademik/pengabdian')
+  }
+
+  const kalender = (e) => {
+    e.preventDefault()
+    router.push('/akademik/kalender')
+  }
+
+  const haki = (e) => {
+    e.preventDefault()
+    router.push('/akademik/haki')
   }
 
   const dokumen = (e) => {
@@ -60,7 +80,13 @@ export default function MenuUtama(props) {
           <Box mx="4vw" mt="2.25vw">
             {
               width < 1280 &&
-              <IconButton variant="ghost" colorScheme="teal" aria-label="Opsi" size="lg" icon={<HamburgerIcon />} onClick={onOpen} />
+              <IconButton variant="ghost"
+                colorScheme="teal"
+                aria-label="Opsi"
+                size="lg"
+                icon={<HamburgerIcon />}
+                onClick={onOpen}
+              />
             }
           </Box>
           <Link mr={{ xl: "14vw", "2xl": "18vw" }} mt="1.5vw" onClick={home}>
@@ -68,39 +94,37 @@ export default function MenuUtama(props) {
           </Link>
           {
             width >= 1280 &&
-            <>
-              <Menu>
-                <MenuTitle title="Beranda" handleClick={home} />
-                <MenuTitle title="Profil" />
-                <MenuButton zIndex="100">
-                  <MenuTitle title="Akademik" handleClick={dokumen} />
-                </MenuButton>
-                <Portal>
-                  <MenuList>
-                    <MenuItem>
-                      <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
-                      Kurikulum
-                    </MenuItem>
-                    <MenuItem>
-                      <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
-                      Pengabdian
-                    </MenuItem>
-                    <MenuItem>
-                      <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
-                      Kalender Akademik
-                    </MenuItem>
-                    <MenuItem>
-                      <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
-                      HaKI
-                    </MenuItem>
-                  </MenuList>
-                </Portal>
-                <MenuTitle title="Dokumen" />
-                <MenuTitle title="Galeri" />
-                <MenuTitle title="Fasilitas" />
-                <MenuTitle title="Kemahasiswaan" />
-              </Menu>
-            </>
+            <Menu>
+              <MenuTitle title="Beranda" handleClick={home} />
+              <MenuTitle title="Profil" handleClick={profil} />
+              <MenuButton zIndex="100">
+                <MenuTitle title="Akademik" />
+              </MenuButton>
+              <Portal>
+                <MenuList>
+                  <MenuItem onClick={kurikulum}>
+                    <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
+                    Kurikulum
+                  </MenuItem>
+                  <MenuItem onClick={pengabdian}>
+                    <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
+                    Pengabdian
+                  </MenuItem>
+                  <MenuItem onClick={kalender}>
+                    <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
+                    Kalender Akademik
+                  </MenuItem>
+                  <MenuItem onClick={haki}>
+                    <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
+                    HaKI
+                  </MenuItem>
+                </MenuList>
+              </Portal>
+              <MenuTitle title="Dokumen" handleClick={dokumen} />
+              <MenuTitle title="Galeri" />
+              <MenuTitle title="Fasilitas" />
+              <MenuTitle title="Kemahasiswaan" />
+            </Menu>
           }
           <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
             <DrawerOverlay>
@@ -109,10 +133,12 @@ export default function MenuUtama(props) {
                 <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
                 <DrawerBody>
                   <DrawerTitle title="Beranda" handleClick={home} />
-                  <DrawerTitle title="Akademik" handleClick={akademik} />
+                  <DrawerTitle title="Profil" handleClick={profil} />
+                  <DrawerTitle title="Akademik" />
                   <DrawerTitle title="Dokumen" handleClick={dokumen} />
                   <DrawerTitle title="Galeri" />
                   <DrawerTitle title="Fasilitas" />
+                  <DrawerTitle title="Kemahasiswaan" />
                 </DrawerBody>
               </DrawerContent>
             </DrawerOverlay>
