@@ -1,7 +1,8 @@
 import {
-  Text, Flex, Box, Img, Link
+  Text, Flex, Box, Link, AspectRatio
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 
 export default function KehadiranCell(props) {
   const router = useRouter();
@@ -9,14 +10,9 @@ export default function KehadiranCell(props) {
   return (
     <>
       <Flex flexDir="row">
-        <Img
-          borderRadius="full"
-          boxSize="75px"
-          src={props.gambar}
-          width="auto"
-          alt="Avatar"
-          mr={{ base: "25px", xl: "50px" }}
-        />
+        <AspectRatio overflow="hidden" borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }}>
+          <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" alt="Avatar" />
+        </AspectRatio>
         <Flex dykey={props.key} flexDirection="row" flex="1" mt={{ base: 0, xl: "15px" }} mr={{ base: "25px", xl: "115px" }}>
           <Box>
             <Text fontSize={{ base: "sm", xl: "md" }} color="orange.800">

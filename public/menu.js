@@ -89,42 +89,44 @@ export default function MenuUtama(props) {
               />
             }
           </Box>
-          <Link mr={{ xl: "14vw", "2xl": "18vw" }} mt="1.5vw" onClick={home}>
+          <Link mt="1.5vw" onClick={home}>
             <Img width="100%" src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
           </Link>
           {
             width >= 1280 &&
-            <Menu>
-              <MenuTitle title="Beranda" handleClick={home} />
-              <MenuTitle title="Profil" handleClick={profil} />
-              <MenuButton zIndex="100">
-                <MenuTitle title="Akademik" />
-              </MenuButton>
-              <Portal>
-                <MenuList>
-                  <MenuItem onClick={kurikulum}>
-                    <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
-                    Kurikulum
-                  </MenuItem>
-                  <MenuItem onClick={pengabdian}>
-                    <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
-                    Pengabdian
-                  </MenuItem>
-                  <MenuItem onClick={kalender}>
-                    <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
-                    Kalender Akademik
-                  </MenuItem>
-                  <MenuItem onClick={haki}>
-                    <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
-                    HaKI
-                  </MenuItem>
-                </MenuList>
-              </Portal>
-              <MenuTitle title="Dokumen" handleClick={dokumen} />
-              <MenuTitle title="Galeri" />
-              <MenuTitle title="Fasilitas" />
-              <MenuTitle title="Kemahasiswaan" />
-            </Menu>
+            <Flex ml="auto" mr="5vw">
+              <Menu>
+                <MenuTitle title="Beranda" handleClick={home} />
+                <MenuTitle title="Profil" handleClick={profil} />
+                <MenuButton zIndex="100">
+                  <MenuTitle title="Akademik" />
+                </MenuButton>
+                <Portal>
+                  <MenuList>
+                    <MenuItem onClick={kurikulum}>
+                      <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
+                      Kurikulum
+                    </MenuItem>
+                    <MenuItem onClick={pengabdian}>
+                      <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
+                      Pengabdian
+                    </MenuItem>
+                    <MenuItem onClick={kalender}>
+                      <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
+                      Kalender Akademik
+                    </MenuItem>
+                    <MenuItem onClick={haki}>
+                      <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
+                      HaKI
+                    </MenuItem>
+                  </MenuList>
+                </Portal>
+                <MenuTitle title="Dokumen" handleClick={dokumen} />
+                <MenuTitle title="Galeri" />
+                <MenuTitle title="Fasilitas" />
+                <MenuTitle title="Kemahasiswaan" />
+              </Menu>
+            </Flex>
           }
           <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
             <DrawerOverlay>

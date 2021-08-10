@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
 import Head from "next/head";
 import {
-  Text, Box, Flex, Button, Link
+  Text, Box, Flex, Link, Button
 } from "@chakra-ui/react";
-import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
+import { useRouter } from "next/router";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
-import { pengumuman } from "../api/pengumuman";
+import { download } from '../api/download';
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
-function PengumumanCell(props) {
+function DokumenCell(props) {
   const [saveFile, setSaveFile] = useState(null);
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function PengumumanCell(props) {
   }, [])
 
   async function linkUnduh() {
-    const unduh = await fetch(`https://webprodi.sashi.id/api/filepengumuman/${props.link}`);
+    const unduh = await fetch(`https://webprodi.sashi.id/api/downloadfile/${props.link}`);
     const jsonData = await unduh.json()
     setSaveFile(`https://webprodi.sashi.id/storage/${jsonData[0].download_link}`);
   }
@@ -52,15 +52,17 @@ function PengumumanCell(props) {
         </Link>
       </Flex>
       <Box pl="2%">
-        <div dangerouslySetInnerHTML={{ __html: props.detail }} />
+        <Text textColor="black">
+          {props.detail}
+        </Text>
       </Box>
     </>
   )
 }
 
-export default function Pengumuman({ daftarPengumuman }) {
+export default function Dokumen({ daftarDokumen }) {
   const router = useRouter();
-  const { pengumuman } = router.query;
+  const { dokumen } = router.query;
 
   return (
     <>
@@ -70,15 +72,15 @@ export default function Pengumuman({ daftarPengumuman }) {
       <Menu slideShow={<BgImg />}>
         <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
           {
-            daftarPengumuman !== null && daftarPengumuman.map((item) => {
-              if (item.id == pengumuman) {
+            daftarDokumen !== null && daftarDokumen.map((item) => {
+              if (item.id == dokumen) {
                 return (
-                  <PengumumanCell dykey={item.id}
+                  <DokumenCell dykey={item.id}
                     hari={dayjs(item.updated_at).locale('id').format('ddd').toUpperCase()}
                     hariBulan={dayjs(item.updated_at).format('DD/MM')}
-                    judul={item.judul}
+                    judul={item.nama_berkas}
                     tanggal={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                    detail={item.detail}
+                    detail={item.keterangan}
                     link={item.id}
                   />
                 )
@@ -93,9 +95,9 @@ export default function Pengumuman({ daftarPengumuman }) {
 }
 
 export async function getServerSideProps() {
-  const daftarPengumuman = await pengumuman()
+  const daftarDokumen = await download()
 
   return {
-    props: { daftarPengumuman }
+    props: { daftarDokumen }
   };
 }
