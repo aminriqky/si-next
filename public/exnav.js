@@ -1,13 +1,12 @@
 import {
-  Container, Text, Link, Box, Divider, useBreakpointValue
+  Container, Text, Link, Box, Divider
 } from "@chakra-ui/react";
 
 export default function ExNav() {
-  const responsive = useBreakpointValue({ base: "column", xl: "row" });
 
   return (
     <>
-      <Container py="10" bg="white" display="flex" flexDirection={responsive} maxWidth="100%" justifyContent="center">
+      <Container py="10" bg="white" display="flex" flexDirection={{ base: "column", xl: "row" }} maxWidth="100%" justifyContent="center">
         <Box m="10" display="flex" flexDirection="column" alignItems="flex-start">
           <Text fontWeight="bold" color="blackAlpha.600">
             TENTANG KAMI
