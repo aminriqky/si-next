@@ -70,7 +70,7 @@ export default function Dokumen({ daftarDokumen }) {
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
       <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
+        <Box bg="white" zIndex="999" textColor="black" mx="8%" my="6%" p="4%">
           {
             daftarDokumen !== null && daftarDokumen.map((item) => {
               if (item.id == dokumen) {

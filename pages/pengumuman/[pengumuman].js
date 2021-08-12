@@ -68,7 +68,7 @@ export default function Pengumuman({ daftarPengumuman }) {
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
       <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
+        <Box bg="white" zIndex="999" textColor="black" mx="8%" my="6%" p="4%">
           {
             daftarPengumuman !== null && daftarPengumuman.map((item) => {
               if (item.id == pengumuman) {

@@ -19,7 +19,7 @@ export default function DaftarDokumen({ daftarDokumen }) {
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
       <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" mx="8%" my="100px" p="4%">
+        <Box bg="white" zIndex="999" mx="8%" my="6%" p="4%">
           <Text textColor="black" fontSize="2xl" fontWeight="semibold">
             Dokumen
           </Text>

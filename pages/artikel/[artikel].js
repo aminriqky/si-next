@@ -21,7 +21,7 @@ export default function Artikel({ daftarArtikel }) {
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
       </Head>
       <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" textColor="black" mx="8%" my="100px" p="4%">
+        <Box bg="white" zIndex="999" textColor="black" mx="8%" my="6%" p="4%">
           {
             daftarArtikel !== null && daftarArtikel.map((item) => {
               if (item.id == artikel) {

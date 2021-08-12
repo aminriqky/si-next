@@ -3,7 +3,6 @@ import {
 } from "@chakra-ui/react";
 
 export default function ExNav() {
-
   return (
     <>
       <Container py="10" bg="white" display="flex" flexDirection={{ base: "column", xl: "row" }} maxWidth="100%" justifyContent="center">
