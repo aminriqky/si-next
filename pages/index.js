@@ -2,9 +2,8 @@ import { useState, useEffect } from "react";
 import Head from "next/head";
 import { useRouter } from 'next/router';
 import {
-  Text, Flex, Box, AspectRatio, useBreakpointValue,
-  Button, useDisclosure, Icon, Divider, Link, Modal,
-  ModalOverlay, ModalContent, Skeleton
+  Text, Flex, Box, AspectRatio, Button, useDisclosure, Icon,
+  Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton
 } from "@chakra-ui/react";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
 import useWindowDimensions from "../public/WindowDimensions";
@@ -81,8 +80,7 @@ const PengumumanCell = dynamic(
 export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita }) {
   const { width } = useWindowDimensions();
   const router = useRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure()
-  const responsive = useBreakpointValue({ base: "column", xl: "row" })
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
   const [daftarIframe2, setDaftarIframe2] = useState(false);
 
@@ -135,26 +133,26 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           }
         </ModalContent>
       </Modal>
-      <Flex flexDirection={responsive}>
+      <Flex flexDir={{ base: "column", xl: "row" }}>
         <Flex flexDir="column">
           <Button w="100%" onClick={agenda} size="md" borderRadius="0" _hover={{ bg: "blackAlpha.800" }} bg="blackAlpha.900" color="white">
             <Icon as={MdDeveloperBoard} boxSize={5} mr="10px" />
             <Text>AGENDA</Text>
           </Button>
-          <Flex flexDir={responsive} my={{ base: "15px", xl: 0 }}>
+          <Flex flexDir={{ base: "column", xl: "row" }} my={{ base: "15px", xl: 0 }}>
             <Flex flexDirection="column">
               <AgendaCell dykey={daftarAgenda[0].id}
                 hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[0].judul)}
-                tanggal={dots(18, daftarAgenda[0].tempat)}
+                tempat={dots(18, daftarAgenda[0].tempat)}
                 dylink={`/agenda/${daftarAgenda[0].id}`}
               />
               <AgendaCell dykey={daftarAgenda[1].id}
                 hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[1].judul)}
-                tanggal={dots(18, daftarAgenda[1].tempat)}
+                tempat={dots(18, daftarAgenda[1].tempat)}
                 dylink={`/agenda/${daftarAgenda[1].id}`}
               />
             </Flex>
@@ -163,14 +161,14 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
                 hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[2].judul)}
-                tanggal={dots(18, daftarAgenda[2].tempat)}
+                tempat={dots(18, daftarAgenda[2].tempat)}
                 dylink={`/agenda/${daftarAgenda[2].id}`}
               />
               <AgendaCell dykey={daftarAgenda[3].id}
                 hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[3].judul)}
-                tanggal={dots(18, daftarAgenda[3].tempat)}
+                tempat={dots(18, daftarAgenda[3].tempat)}
                 dylink={`/agenda/${daftarAgenda[3].id}`}
               />
             </Flex>
@@ -233,7 +231,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         dylink5={`/berita/${daftarBerita[4].id}`}
       />
       <Divider />
-      <Flex flexDirection={responsive} my="25" justifyContent="center" mx={{ base: 25, xl: 125 }}>
+      <Flex flexDirection={{ base: "column", xl: "row" }} my="25" justifyContent="center" mx={{ base: 25, xl: 125 }}>
         <ArtikelCell
           dykey={daftarArtikel[0].id}
           tema="ARTIKEL"
@@ -323,7 +321,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       </Flex>
       <Divider />
       <Divider />
-      <Flex bg="gray.50" justifyContent="center" flexDirection={responsive} py="25" px={{ base: 25, xl: 125 }}>
+      <Flex bg="gray.50" justifyContent="center" flexDirection={{ base: "column", xl: "row" }} py="25" px={{ base: 25, xl: 125 }}>
         <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="25" mr={{ base: 0, xl: 50 }}>
           {
             daftarIframe2 &&

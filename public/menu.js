@@ -72,6 +72,11 @@ export default function MenuUtama(props) {
     router.push('/dokumen')
   }
 
+  const galeri = (e) => {
+    e.preventDefault()
+    router.push('/galeri')
+  }
+
   return (
     <>
       <Box bg="gray.700" w="100%" h={props.pageHeight} color="white">
@@ -122,7 +127,7 @@ export default function MenuUtama(props) {
                   </MenuList>
                 </Portal>
                 <MenuTitle title="Dokumen" handleClick={dokumen} />
-                <MenuTitle title="Galeri" />
+                <MenuTitle title="Galeri" handleClick={galeri} />
                 <MenuTitle title="Fasilitas" />
                 <MenuTitle title="Kemahasiswaan" />
               </Menu>

@@ -22,7 +22,7 @@ export default function AgendaCell(props) {
           </Link>
         </Text>
         <Text fontSize="sm">
-          {props.tanggal}
+          {props.tempat}
         </Text>
       </Box>
     </Flex>
