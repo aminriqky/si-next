@@ -14,6 +14,7 @@ export default function BgImg() {
       src="/misi.png"
       alt="BG Gradient"
       height={height}
+      maxW="100%"
     />
   )
 }

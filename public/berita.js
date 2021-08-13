@@ -18,8 +18,8 @@ function SlideShow(props) {
     <SlideFade in={true} offsetX="150px">
       <Box mt={{ base: "5vw", xl: 0 }} ml="10vw" mr="10vw" letterSpacing={{ base: "1px", xl: "2px" }}>
         <Flex flexDir={{ base: "column", xl: "row" }} alignItems="center">
-          <Img src={props.gambar} borderRadius={15} width={{ base: "100%", lg: "450px" }}
-            height="100%" mr={{ xl: "35px" }} layout="fill" objectFit="fill" />
+          <Img src={props.gambar} maxW={{ base: "100%", lg: "450px" }}
+            height="100%" mr={{ xl: "35px" }} borderRadius={15} />
           <Flex flexDir="column">
             <Text fontWeight="semibold" color="black" my="15px" fontSize={{ base: "md", lg: "xl" }}>
               <Link fontWeight="semibold" onClick={(e) => {

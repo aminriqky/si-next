@@ -27,7 +27,7 @@ export default function Agenda({ daftarAgenda }) {
               if (item.id == agenda) {
                 return (
                   <Box key={item.id}>
-                    <Text fontSize="28" pb="3%" fontWeight="semibold">
+                    <Text fontSize={{ base: "20", xl: "28" }} pb="3%" fontWeight="semibold">
                       {item.judul}
                     </Text>
                     <Flex flexDirection="column" bg="gray.300" p="2%" mb="2%">

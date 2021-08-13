@@ -1,7 +1,7 @@
 import Head from "next/head";
 import { useRouter } from 'next/router'
 import {
-  Text, Box, Flex, Link, Icon
+  Text, Box, Flex
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import ExNav from '../public/exnav'
