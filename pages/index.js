@@ -106,6 +106,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
     <>
       <Head>
         <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
+        <meta name="theme-color" content="#2D3748" />
       </Head>
       <Menu pageHeight="49.4vw" slide={<Slide />} />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
