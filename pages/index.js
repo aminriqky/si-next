@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Head from "next/head";
 import { useRouter } from 'next/router';
 import {
   Text, Flex, Box, AspectRatio, Button, useDisclosure, Icon,
@@ -104,10 +103,6 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
 
   return (
     <>
-      <Head>
-        <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
-        <meta name="theme-color" content="#2D3748" />
-      </Head>
       <Menu pageHeight="49.4vw" slide={<Slide />} />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />

@@ -1,4 +1,3 @@
-import Head from "next/head";
 import { useRouter } from 'next/router'
 import {
   Text, Box, Flex
@@ -13,19 +12,14 @@ export default function DaftarGaleri({ daftarDokumen }) {
   const router = useRouter();
 
   return (
-    <>
-      <Head>
-        <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
-      </Head>
-      <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
-          <Text textColor="black" fontSize="2xl" fontWeight="semibold">
-            Galeri
-          </Text>
-        </Box>
-        <ExNav />
-      </Menu>
-    </>
+    <Menu slideShow={<BgImg />}>
+      <Box bg="white" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+        <Text textColor="black" fontSize="2xl" fontWeight="semibold">
+          Galeri
+        </Text>
+      </Box>
+      <ExNav />
+    </Menu>
   );
 }
 

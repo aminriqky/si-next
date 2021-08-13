@@ -1,4 +1,3 @@
-import Head from "next/head";
 import {
   Text, Box, Flex, Link
 } from "@chakra-ui/react";
@@ -36,33 +35,28 @@ function PengumumanCell(props) {
 
 export default function DaftarPengumuman({ daftarPengumuman }) {
   return (
-    <>
-      <Head>
-        <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
-      </Head>
-      <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
-          <Text fontSize="28" pb="2%" fontWeight="semibold">
-            Daftar Pengumuman
-          </Text>
-          {
-            daftarPengumuman !== null && daftarPengumuman.map((item) => {
-              return (
-                <PengumumanCell
-                  dykey={item.id}
-                  hari={dayjs(item.waktu).locale('id').format('ddd').toUpperCase()}
-                  hariBulan={dayjs(item.waktu).format('DD/MM')}
-                  judul={item.judul}
-                  waktu={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${item.id}`}
-                />
-              )
-            })
-          }
-        </Box>
-        <ExNav />
-      </Menu>
-    </>
+    <Menu slideShow={<BgImg />}>
+      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+        <Text fontSize="28" pb="2%" fontWeight="semibold">
+          Daftar Pengumuman
+        </Text>
+        {
+          daftarPengumuman !== null && daftarPengumuman.map((item) => {
+            return (
+              <PengumumanCell
+                dykey={item.id}
+                hari={dayjs(item.waktu).locale('id').format('ddd').toUpperCase()}
+                hariBulan={dayjs(item.waktu).format('DD/MM')}
+                judul={item.judul}
+                waktu={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${item.id}`}
+              />
+            )
+          })
+        }
+      </Box>
+      <ExNav />
+    </Menu>
   );
 }
 

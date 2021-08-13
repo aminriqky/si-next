@@ -1,4 +1,3 @@
-import Head from "next/head";
 import {
   Text, Box, Flex, Img, Grid
 } from "@chakra-ui/react";
@@ -65,34 +64,29 @@ export default function Kehadiran({ daftarKehadiran }) {
   const { kehadiran } = router.query;
 
   return (
-    <>
-      <Head>
-        <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
-      </Head>
-      <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
-          {
-            daftarKehadiran !== null && daftarKehadiran.map((item) => {
-              if (item.id == kehadiran) {
-                return (
-                  <KehadiranCell dykey={item.id}
-                    gambar={`https://webprodi.sashi.id/storage/${item.avatar}`}
-                    name={item.name}
-                    email={item.email}
-                    nip={item.nip}
-                    nidn={item.nidn}
-                    jabatan={item.jabatan}
-                    bidang={item.bidang}
-                    hadir={item.hadir}
-                  />
-                )
-              }
-            })
-          }
-        </Box>
-        <ExNav />
-      </Menu>
-    </>
+    <Menu slideShow={<BgImg />}>
+      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+        {
+          daftarKehadiran !== null && daftarKehadiran.map((item) => {
+            if (item.id == kehadiran) {
+              return (
+                <KehadiranCell dykey={item.id}
+                  gambar={`https://webprodi.sashi.id/storage/${item.avatar}`}
+                  name={item.name}
+                  email={item.email}
+                  nip={item.nip}
+                  nidn={item.nidn}
+                  jabatan={item.jabatan}
+                  bidang={item.bidang}
+                  hadir={item.hadir}
+                />
+              )
+            }
+          })
+        }
+      </Box>
+      <ExNav />
+    </Menu>
   );
 }
 

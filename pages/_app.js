@@ -1,3 +1,5 @@
+import React from 'react';
+import Head from 'next/head';
 import Router from 'next/router';
 import { ChakraProvider } from "@chakra-ui/react";
 import NProgress from 'nprogress';
@@ -10,11 +12,18 @@ Router.events.on('routeChangeError', () => NProgress.done());
 
 function MyApp({ Component, pageProps }) {
   return (
-    <ChakraProvider>
-      <Component {...pageProps}>
+    <React.Fragment>
+      <Head>
+        <title>
+          Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang
+        </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      </Component>
-    </ChakraProvider>
+        <meta name="theme-color" content="#2D3748" />
+      </Head>
+      <ChakraProvider>
+        <Component {...pageProps} />
+      </ChakraProvider>
+    </React.Fragment>
   );
 }
 export default MyApp;

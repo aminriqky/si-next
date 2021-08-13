@@ -1,4 +1,3 @@
-import Head from "next/head";
 import {
   Text, Box
 } from "@chakra-ui/react";
@@ -10,19 +9,14 @@ const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 export default function Kurikulum({ daftarProfil }) {
   return (
-    <>
-      <Head>
-        <title>Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang</title>
-      </Head>
-      <Menu slideShow={<BgImg />}>
-        <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
-          <Text fontSize={{ base: "xs", lg: "md" }}>
-            <div dangerouslySetInnerHTML={{ __html: daftarProfil[1].text }} />
-          </Text>
-        </Box>
-        <ExNav />
-      </Menu>
-    </>
+    <Menu slideShow={<BgImg />}>
+      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+        <Text fontSize={{ base: "xs", lg: "md" }}>
+          <div dangerouslySetInnerHTML={{ __html: daftarProfil[1].text }} />
+        </Text>
+      </Box>
+      <ExNav />
+    </Menu>
   );
 }
 
