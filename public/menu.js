@@ -82,7 +82,7 @@ export default function MenuUtama(props) {
       <Box bg="gray.700" w="100%" h={props.pageHeight} color="white">
         {props.slide}
         <Flex pt="2.5vw" zIndex="100" flexDirection="row">
-          <Box ml="8vw" mr={{ base: "4vw", xl: 0 }} mt="3vw">
+          <Box ml="8vw" mr={{ base: "4vw", xl: 0 }} mt="2.5vw">
             {
               width < 1280 &&
               <IconButton
