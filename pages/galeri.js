@@ -1,7 +1,8 @@
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import {
-  Text, Box, Flex
+  Text, Box, AspectRatio
 } from "@chakra-ui/react";
+import Image from 'next/image';
 import dynamic from "next/dynamic";
 import ExNav from '../public/exnav'
 import Menu from '../public/menu';

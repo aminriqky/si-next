@@ -38,7 +38,7 @@ export default function Slide() {
       {
         slideNum === 1 &&
         <SlideFade in={true} offsetY="-100px">
-          <AspectRatio pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" width="100%">
+          <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" position="absolute" width="100%">
             <Image src="/visi.png" layout="fill" objectFit="contain" objectPosition="left top" />
           </AspectRatio>
           <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
@@ -55,11 +55,11 @@ export default function Slide() {
       {
         slideNum === 2 &&
         <SlideFade in={true} offsetY="-100px">
-          <AspectRatio pointerEvents="none" opacity="0.5" filter="blur(0.75px) grayscale(25%)" position="absolute" width="100%">
+          <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" position="absolute" width="100%">
             <Image src="/misi.png" layout="fill" objectFit="contain" objectPosition="left top" />
           </AspectRatio>
           <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
-            <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
+            <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: 11, lg: "2xl", xl: "4xl" }}>
               MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT
             </Text>
             <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>

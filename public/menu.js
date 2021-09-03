@@ -82,13 +82,13 @@ export default function MenuUtama(props) {
       <Box bg="gray.700" w="100%" h={props.pageHeight} color="white">
         {props.slide}
         <Flex pt="2.5vw" zIndex="100" flexDirection="row">
-          <Box mx="4vw" mt="2.25vw">
+          <Box ml="8vw" mr={{ base: "4vw", xl: 0 }} mt="3vw">
             {
               width < 1280 &&
-              <IconButton variant="ghost"
-                colorScheme="teal"
+              <IconButton
+                colorScheme="whiteAlpha"
                 aria-label="Opsi"
-                size="lg"
+                size="md"
                 icon={<HamburgerIcon />}
                 onClick={onOpen}
               />
@@ -107,7 +107,7 @@ export default function MenuUtama(props) {
                   <MenuTitle title="Akademik" />
                 </MenuButton>
                 <Portal>
-                  <MenuList>
+                  <MenuList ml="-20px">
                     <MenuItem onClick={kurikulum}>
                       <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
                       Kurikulum

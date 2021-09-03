@@ -322,7 +322,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           {
             daftarIframe2 &&
             <iframe
-              style={{ height: "295px" }}
+              style={{ height: "285px" }}
               loading="lazy"
               scrolling="no"
               src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
@@ -370,13 +370,13 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             daftarIframe1 &&
             <iframe
               width="100%"
-              height="180px"
+              height="220px"
               loading="lazy"
               frameBorder="0"
               scrolling="no"
               marginHeight="0"
               marginWidth="0"
-              src="https://maps.google.com/maps?q=Fakultas+Sains+dan+Teknologi+Kampus+B+UIN+Raden+Fatah+Palembang&amp;ie=UTF8&amp;&amp;output=embed"
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31874.457135338303!2d104.75533903955079!3d-3.011849799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d2209209ceb%3A0x434396ad1d19af8a!2sFakultas%20Sains%20dan%20Teknologi%20Kampus%20B%20UIN%20Raden%20Fatah%20Palembang!5e0!3m2!1sid!2sid!4v1630623924194!5m2!1sid!2sid"
             />
           }
         </Flex>
