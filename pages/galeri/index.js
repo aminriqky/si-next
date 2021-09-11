@@ -4,16 +4,21 @@ import {
 } from "@chakra-ui/react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
-import ExNav from '../public/exnav'
-import Menu from '../public/menu';
-import { tahun } from './api/tahun';
-const BgImg = dynamic(() => import('../public/dynamic/BgImg'));
+import ExNav from '../../public/exnav'
+import Menu from '../../public/menu';
+import { tahun } from '../api/tahun';
+const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
-function Galeri(props) {
+function GaleriCell(props) {
+  const router = useRouter();
+
   return (
-    <LinkBox>
+    <LinkBox key={props.id}>
       <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" h="200px">
-        <LinkOverlay color="teal.800">
+        <LinkOverlay color="teal.800" onClick={(e) => {
+          e.preventDefault()
+          router.push(`/galeri/${props.tahun}`)
+        }}>
           <Text letterSpacing="widest" fontWeight="semibold" zIndex={9999} fontSize="xl" pos="absolute">
             {props.judul}
           </Text>
@@ -29,7 +34,6 @@ function Galeri(props) {
 }
 
 export default function DaftarGaleri({ daftarTahun }) {
-  const router = useRouter();
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
 
   return (
@@ -44,7 +48,7 @@ export default function DaftarGaleri({ daftarTahun }) {
               {
                 daftarTahun !== null && daftarTahun.map((item) => {
                   return (
-                    <Galeri judul={item.tahun} />
+                    <GaleriCell id={item.id} tahun={item.tahun} judul={item.tahun} />
                   )
                 })
               }
@@ -54,7 +58,7 @@ export default function DaftarGaleri({ daftarTahun }) {
               {
                 daftarTahun !== null && daftarTahun.map((item) => {
                   return (
-                    <Galeri judul={item.tahun} />
+                    <GaleriCell id={item.id} tahun={item.tahun} judul={item.tahun} />
                   )
                 })
               }
