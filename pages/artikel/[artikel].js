@@ -1,5 +1,5 @@
 import {
-  Text, Box, Icon, Flex, Img
+  Text, Box, Icon, Flex, Image
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
@@ -51,9 +51,8 @@ export default function Artikel({ daftarArtikel }) {
                   </Flex>
                   {
                     item.thumbnail != null &&
-                    <Img src={`https://webprodi.sashi.id/storage/${item.thumbnail}`}
-                      layout="fill"
-                      objectFit="fill"
+                    <Image src={`https://webprodi.sashi.id/storage/${item.thumbnail}`}
+                      layout="fill" objectFit="fill"
                     />
                   }
                   <Box mt="10px">

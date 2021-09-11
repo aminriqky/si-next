@@ -6,21 +6,25 @@ import { useRouter } from 'next/router';
 export default function ArtikelCell(props) {
   const router = useRouter();
 
+  const artikel = (e) => {
+    e.preventDefault()
+    router.push("/artikel")
+  }
+
+  const judul = (e) => {
+    e.preventDefault()
+    router.push(`${props.dylink}`)
+  }
+
   return (
     <Flex my="25" px="6" key={props.dykey} flexDir="column" width={{ base: "100%", xl: "200px" }} bg="blue.600" mr="50px">
-      <Text color="white" fontWeight="bold" pt="6" mb="6">
-        <Link fontWeight="semibold" onClick={(e) => {
-          e.preventDefault()
-          router.push("/artikel/daftar-artikel")
-        }}>
+      <Text color="white" fontWeight="semibold" pt="6" mb="6">
+        <Link onClick={artikel}>
           {props.tema}
         </Link>
       </Text>
-      <Text fontSize="sm" color="white">
-        <Link fontWeight="semibold" onClick={(e) => {
-          e.preventDefault()
-          router.push(`${props.dylink}`)
-        }}>
+      <Text fontSize="sm" fontWeight="semibold" color="white">
+        <Link onClick={judul}>
           {props.judul}
         </Link>
       </Text>

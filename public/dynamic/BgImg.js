@@ -1,11 +1,9 @@
-import useWindowDimensions from "../WindowDimensions";
-import { Img } from "@chakra-ui/react";
+import { Image } from "@chakra-ui/react";
 
 export default function BgImg() {
-  const { height } = useWindowDimensions();
 
   return (
-    <Img
+    <Image
       sx={{ filter: "blur(500px)" }}
       pointerEvents="none"
       opacity="0.5"
@@ -13,7 +11,7 @@ export default function BgImg() {
       position="absolute"
       src="/misi.png"
       alt="BG Gradient"
-      height={height}
+      height="75%"
       maxW="100%"
     />
   )

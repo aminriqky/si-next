@@ -3,11 +3,11 @@ import {
   Text, Box, Flex, Link, Icon
 } from "@chakra-ui/react";
 import dynamic from "next/dynamic";
-import ExNav from '../public/exnav'
-import Menu from '../public/menu';
-import { download } from './api/download';
+import ExNav from '../../public/exnav'
+import Menu from '../../public/menu';
+import { download } from '../api/download';
 import { FaBookmark, FaFileAlt, FaExternalLinkAlt } from "react-icons/fa";
-const BgImg = dynamic(() => import('../public/dynamic/BgImg'));
+const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 export default function DaftarDokumen({ daftarDokumen }) {
   const router = useRouter();

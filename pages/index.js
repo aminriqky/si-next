@@ -2,10 +2,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import {
   Text, Flex, Box, AspectRatio, Button, useDisclosure, Icon,
-  Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton
+  Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton,
+  useMediaQuery
 } from "@chakra-ui/react";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
-import useWindowDimensions from "../public/WindowDimensions";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { MdDeveloperBoard } from "react-icons/md";
 import Menu from '../public/menu';
@@ -77,7 +77,7 @@ const PengumumanCell = dynamic(
 )
 
 export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita }) {
-  const { width } = useWindowDimensions();
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
@@ -98,7 +98,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
 
   const agenda = (e) => {
     e.preventDefault()
-    router.push('/agenda/daftar-agenda');
+    router.push('/agenda');
   }
 
   return (
@@ -108,24 +108,22 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         <ModalOverlay />
         <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
           {
-            width < 1280 &&
-            <iframe
-              title="Profil SI"
-              width="410"
-              height="310"
-              src="https://www.youtube.com/embed/pVEJ-TZeRPk?rel=0"
-              allowFullScreen
-            />
-          }
-          {
-            width > 1280 &&
-            <iframe
-              title="Profil SI"
-              width="720"
-              height="540"
-              src="https://www.youtube.com/embed/pVEJ-TZeRPk?rel=0"
-              allowFullScreen
-            />
+            isLargerThan1280 ?
+              <iframe
+                title="Profil SI"
+                width="720"
+                height="540"
+                src="https://www.youtube.com/embed/pVEJ-TZeRPk?rel=0"
+                allowFullScreen
+              />
+              :
+              <iframe
+                title="Profil SI"
+                width="410"
+                height="310"
+                src="https://www.youtube.com/embed/pVEJ-TZeRPk?rel=0"
+                allowFullScreen
+              />
           }
         </ModalContent>
       </Modal>
@@ -335,7 +333,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             &thinsp;
             <Link fontWeight="semibold" onClick={(e) => {
               e.preventDefault()
-              router.push("/kehadiran/daftar-kehadiran")
+              router.push("/kehadiran")
             }}>
               KEHADIRAN
             </Link>

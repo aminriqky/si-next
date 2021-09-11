@@ -10,6 +10,28 @@ const wait = (timeout) => {
   });
 }
 
+function SlideShow(props) {
+  return (
+    <SlideFade in={true} offsetY="-100px">
+      <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" position="absolute" width="100%">
+        <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" />
+      </AspectRatio>
+      <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }}
+        fontWeight="semibold" zIndex="2" pointerEvents="none">
+        <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
+          {props.children}
+        </Text>
+        <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
+          {props.vimi}
+        </Text>
+        <Progress mt="2vw" value={props.slideCount} size="xs" max={100}
+          min={0} colorScheme="teal" width="300px" isAnimated hasStripe
+        />
+      </Box>
+    </SlideFade>
+  );
+}
+
 export default function Slide() {
   const [slideNum, setSlideNum] = useState(null);
   const [slideCount, setSlideCount] = useState(null);
@@ -34,41 +56,23 @@ export default function Slide() {
   }, [slideCount])
 
   return (
-    <>
+    <React.Fragment>
       {
         slideNum === 1 &&
-        <SlideFade in={true} offsetY="-100px">
-          <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" position="absolute" width="100%">
-            <Image src="/visi.png" layout="fill" objectFit="contain" objectPosition="left top" />
-          </AspectRatio>
-          <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
-            <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
-              MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN BERKARAKTER ISLAMI PADA TAHUN 2027
-            </Text>
-            <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
-              Visi
-            </Text>
-            <Progress mt="2vw" value={slideCount} size="xs" max={100} min={0} colorScheme="teal" width="300px" isAnimated hasStripe />
-          </Box>
-        </SlideFade>
+        <SlideShow gambar="/visi.png" vimi="Visi" slideCount={slideCount} >
+          MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI
+          YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN
+          BERKARAKTER ISLAMI PADA TAHUN 2027
+        </SlideShow>
       }
       {
         slideNum === 2 &&
-        <SlideFade in={true} offsetY="-100px">
-          <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" position="absolute" width="100%">
-            <Image src="/misi.png" layout="fill" objectFit="contain" objectPosition="left top" />
-          </AspectRatio>
-          <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }} fontWeight="semibold" zIndex="2" pointerEvents="none">
-            <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: 11, lg: "2xl", xl: "4xl" }}>
-              MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT
-            </Text>
-            <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
-              Misi
-            </Text>
-            <Progress mt="2vw" value={slideCount} size="xs" max={100} min={0} colorScheme="teal" width="300px" isAnimated hasStripe />
-          </Box>
-        </SlideFade>
+        <SlideShow gambar="/misi.png" vimi="Misi" slideCount={slideCount} >
+          MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI
+          YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG
+          DAPAT MENSEJAHTERAKAN MASYARAKAT
+        </SlideShow>
       }
-    </>
+    </React.Fragment>
   );
 }
