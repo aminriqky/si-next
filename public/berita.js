@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Text, Box, SlideFade, Image, Flex, Icon, Link, Button
+  Text, Box, SlideFade, Img, Flex, Icon, Link, Button
 } from "@chakra-ui/react";
 import { FcNews } from "react-icons/fc";
 import { useRouter } from 'next/router';
@@ -18,7 +18,7 @@ function SlideShow(props) {
     <SlideFade in={true} offsetX="150px">
       <Box mt={{ base: "5vw", xl: 0 }} ml="10vw" mr="10vw" letterSpacing={{ base: "1px", xl: "2px" }}>
         <Flex flexDir={{ base: "column", xl: "row" }} alignItems="center">
-          <Image src={props.gambar} maxW={{ base: "100%", lg: "450px" }}
+          <Img src={props.gambar} maxW={{ base: "100%", lg: "450px" }}
             height="100%" mr={{ xl: "35px" }} borderRadius={15} />
           <Flex flexDir="column">
             <Text fontWeight="semibold" color="black" my="15px" fontSize={{ base: "md", lg: "xl" }}>

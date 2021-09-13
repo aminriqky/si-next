@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function agenda() {
-    const response = await fetch(`https://webprodi.sashi.id/api/agenda/all`)
+    const response = await fetch(`${server}/api/agenda/all`)
     const jsonData = await response.json()
     return jsonData
 }

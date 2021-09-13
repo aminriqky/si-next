@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function pengumuman() {
-    const response = await fetch(`https://webprodi.sashi.id/api/pengumuman/all`)
+    const response = await fetch(`${server}/api/pengumuman/all`)
     const jsonData = await response.json()
     return jsonData
 }

@@ -1,8 +1,7 @@
 import { useRouter } from 'next/router';
 import {
-  Text, Box, AspectRatio, LinkOverlay, LinkBox, Grid, useMediaQuery
+  Text, Box, AspectRatio, LinkOverlay, LinkBox, Grid, useMediaQuery, Img
 } from "@chakra-ui/react";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
@@ -25,7 +24,7 @@ function GaleriCell(props) {
           <AspectRatio h="100%" w="100%"
             sx={{ filter: "blur(0.75px) grayscale(25%) opacity(50%)" }}
             _hover={{ filter: "blur(0.75px) grayscale(25%) opacity(75%)" }}>
-            <Image src="/yt.png" layout="fill" objectFit="fill" />
+            <Img src="/yt.png" layout="fill" objectFit="fill" />
           </AspectRatio>
         </LinkOverlay>
       </AspectRatio>
@@ -34,7 +33,7 @@ function GaleriCell(props) {
 }
 
 export default function DaftarGaleri({ daftarTahun }) {
-  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
     <Menu slideShow={<BgImg />}>

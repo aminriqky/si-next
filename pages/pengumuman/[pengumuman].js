@@ -8,6 +8,7 @@ import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { pengumuman } from "../api/pengumuman";
+import { server } from "../../config";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function PengumumanCell(props) {
@@ -20,9 +21,9 @@ function PengumumanCell(props) {
   }, [])
 
   async function linkUnduh() {
-    const unduh = await fetch(`https://webprodi.sashi.id/api/filepengumuman/${props.link}`);
+    const unduh = await fetch(`${server}/api/filepengumuman/${props.link}`);
     const jsonData = await unduh.json()
-    setSaveFile(`https://webprodi.sashi.id/storage/${jsonData[0].download_link}`);
+    setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
   }
 
   return (

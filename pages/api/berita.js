@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function berita() {
-    const response = await fetch(`https://webprodi.sashi.id/api/berita/all`)
+    const response = await fetch(`${server}/api/berita/all`)
     const jsonData = await response.json()
     return jsonData
 }

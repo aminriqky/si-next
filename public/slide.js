@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
-  Text, Box, SlideFade, Progress, AspectRatio
+  Text, Box, SlideFade, Progress, AspectRatio, useControllableState
 } from "@chakra-ui/react";
 import Image from 'next/image';
 
@@ -34,7 +34,7 @@ function SlideShow(props) {
 
 export default function Slide() {
   const [slideNum, setSlideNum] = useState(null);
-  const [slideCount, setSlideCount] = useState(null);
+  const [slideCount, setSlideCount] = useControllableState({ defaultValue: 0 });
 
   useEffect(() => {
     if (slideNum === null) {

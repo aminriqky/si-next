@@ -6,6 +6,7 @@ import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { kehadiran } from "../api/kehadiran";
+import { server } from "../../config";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function KehadiranCell(props) {
@@ -71,7 +72,7 @@ export default function Kehadiran({ daftarKehadiran }) {
             if (item.id == kehadiran) {
               return (
                 <KehadiranCell dykey={item.id}
-                  gambar={`https://webprodi.sashi.id/storage/${item.avatar}`}
+                  gambar={`${server}/storage/${item.avatar}`}
                   name={item.name}
                   email={item.email}
                   nip={item.nip}

@@ -1,48 +1,44 @@
 import {
-  Text, Flex, Box, Link, AspectRatio
+  Text, Flex, Box, Link, Img
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
-import Image from 'next/image';
 
 export default function KehadiranCell(props) {
   const router = useRouter();
 
   return (
-    <Flex flexDir="row">
-      <AspectRatio overflow="hidden" borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }}>
-        <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" alt="Avatar" />
-      </AspectRatio>
-      <Flex key={props.dykey} flexDirection="row" flex="1" mt={{ base: 0, xl: "15px" }} mr={{ base: "25px", xl: "115px" }}>
-        <Box>
-          <Text fontSize={{ base: "sm", xl: "md" }} color="orange.800">
-            <Link fontWeight="semibold" onClick={(e) => {
+    <Flex key={props.key} my={6} mx={{ base: "2px", xl: 2 }} bg="#F9FAFB" w="135px">
+      <Box w="xs" bg="white" shadow="lg" rounded="lg" overflow="hidden" mx="auto">
+        <Img w="full" h={32} fit="cover" src={props.gambar} alt="avatar" />
+        <Box py={3} textAlign="center">
+          <Link mx={3} display="block" fontSize="xs" color="gray.800" fontWeight="bold" isTruncated
+            onClick={(e) => {
               e.preventDefault()
               router.push(`${props.dylink}`)
             }}>
-              {props.judul}
-            </Link>
-          </Text>
-          <Text fontSize="sm" pb="5px">
+            {props.judul}
+          </Link>
+          <Text mx={3} fontSize="xs" color="teal.700" isTruncated>
             {props.deskripsi}
           </Text>
         </Box>
-      </Flex>
-      {
-        props.hadir === 1 &&
-        <Box borderRadius="full" border="solid teal 2px" height="30px" mt="25px" pointerEvents="none">
-          <Text px={{ base: 6, xl: 10 }} color="teal" fontWeight="medium">
-            HADIR
-          </Text>
-        </Box>
-      }
-      {
-        props.hadir !== 1 &&
-        <Box borderRadius="full" border="solid crimson 2px" height="30px" mt="25px" pointerEvents="none">
-          <Text px={{ base: 2, xl: 6 }} color="crimson" fontWeight="medium">
-            TIDAK ADA
-          </Text>
-        </Box>
-      }
+        {
+          props.hadir === 1 &&
+          <Box bg="teal.600">
+            <Text mx={12} py={1} fontSize="smaller" color="white">
+              Hadir
+            </Text>
+          </Box>
+        }
+        {
+          props.hadir === 0 &&
+          <Box bg="red.600">
+            <Text mx={9} py={1} fontSize="smaller" color="white">
+              Tidak Ada
+            </Text>
+          </Box>
+        }
+      </Box>
     </Flex>
   );
 }

@@ -8,6 +8,7 @@ import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { download } from '../api/download';
+import { server } from "../../config";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function DokumenCell(props) {
@@ -20,9 +21,9 @@ function DokumenCell(props) {
   }, [])
 
   async function linkUnduh() {
-    const unduh = await fetch(`https://webprodi.sashi.id/api/downloadfile/${props.link}`);
+    const unduh = await fetch(`${server}/api/downloadfile/${props.link}`);
     const jsonData = await unduh.json()
-    setSaveFile(`https://webprodi.sashi.id/storage/${jsonData[0].download_link}`);
+    setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
   }
 
   return (

@@ -1,23 +1,24 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from 'next/router';
 import {
   Text, Flex, Box, AspectRatio, Button, useDisclosure, Icon,
   Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton,
-  useMediaQuery
+  useMediaQuery, Img
 } from "@chakra-ui/react";
+import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { MdDeveloperBoard } from "react-icons/md";
+import { MdDeveloperBoard, MdEmail } from "react-icons/md";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import dayjs from 'dayjs';
-import Image from 'next/image';
 import dynamic from 'next/dynamic'
 import { agenda } from './api/agenda';
 import { pengumuman } from './api/pengumuman';
 import { artikel } from './api/artikel';
 import { kehadiran } from './api/kehadiran';
 import { berita } from './api/berita';
+import { server } from "../config";
 
 const Slide = dynamic(() => import('../public/slide'));
 const Berita = dynamic(() => import('../public/berita'));
@@ -82,6 +83,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
   const [daftarIframe2, setDaftarIframe2] = useState(false);
+  const tag = JSON.parse(daftarBerita[0].tag);
 
   useEffect(() => {
     setDaftarIframe1(true);
@@ -102,7 +104,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
   }
 
   return (
-    <>
+    <React.Fragment>
       <Menu pageHeight="49.4vw" slide={<Slide />} />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
@@ -171,13 +173,13 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <AspectRatio sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} width="100%" height="100%">
-              <Image src="/yt.png" layout="fill" objectFit="fill" />
+              <Img src="/yt.png" layout="fill" objectFit="fill" />
             </AspectRatio>
           </Box>
         </AspectRatio>
         <Flex flex="1" flexDirection="column" color="white">
           <Box bgColor="teal.700" height="55%">
-            <Box m="12">
+            <Box m="10">
               <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" isExternal>
                 <Flex flexDirection="row">
                   <ExternalLinkIcon mr="2" mb="2.5" />
@@ -189,43 +191,52 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             </Box>
           </Box>
           <Box bgColor="teal.600" height="45%">
-            <Box mx="12" my="8">
-              <Link href="https://chakra-ui.com" isExternal>
-                <Flex flexDirection="row">
-                  <ExternalLinkIcon mr="2" mb="2.5" />
-                  <Text fontWeight="bold">Katalog Statistik</Text>
-                </Flex>
+            <Box mx="10" my="6">
+              <Text fontWeight="bold">Kontak & Sosial Media</Text>
+              <Link mr={3} href="https://chakra-ui.com" isExternal>
+                <Icon as={SiFacebook} w="20px" h="auto" />
               </Link>
-              <Text fontSize="xs">Tren informasi data prodi</Text>
+              <Link mr={3} href="https://chakra-ui.com" isExternal>
+                <Icon as={SiInstagram} w="20px" h="auto" />
+              </Link>
+              <Link mr={3} href="https://chakra-ui.com" isExternal>
+                <Icon as={SiWhatsapp} w="20px" h="auto" />
+              </Link>
+              <Link mr={3} href="https://chakra-ui.com" isExternal>
+                <Icon as={MdEmail} w="20px" h="auto" />
+              </Link>
             </Box>
           </Box>
         </Flex>
       </Flex>
       <Divider />
       <Berita
-        gambar1={`https://webprodi.sashi.id/storage/${daftarBerita[0].thumbnail}`}
+        gambar1={`${server}/storage/${daftarBerita[0].thumbnail}`}
         judul1={dots(65, daftarBerita[0].judul)}
         detail1={dots(670, daftarBerita[0].detail)}
         dylink1={`/berita/${daftarBerita[0].id}`}
-        gambar2={`https://webprodi.sashi.id/storage/${daftarBerita[1].thumbnail}`}
+        gambar2={`${server}/storage/${daftarBerita[1].thumbnail}`}
         judul2={dots(65, daftarBerita[1].judul)}
         detail2={dots(670, daftarBerita[1].detail)}
         dylink2={`/berita/${daftarBerita[1].id}`}
-        gambar3={`https://webprodi.sashi.id/storage/${daftarBerita[2].thumbnail}`}
+        gambar3={`${server}/storage/${daftarBerita[2].thumbnail}`}
         judul3={dots(65, daftarBerita[2].judul)}
         detail3={dots(670, daftarBerita[2].detail)}
         dylink3={`/berita/${daftarBerita[2].id}`}
-        gambar4={`https://webprodi.sashi.id/storage/${daftarBerita[3].thumbnail}`}
+        gambar4={`${server}/storage/${daftarBerita[3].thumbnail}`}
         judul4={dots(65, daftarBerita[3].judul)}
         detail4={dots(670, daftarBerita[3].detail)}
         dylink4={`/berita/${daftarBerita[3].id}`}
-        gambar5={`https://webprodi.sashi.id/storage/${daftarBerita[4].thumbnail}`}
+        gambar5={`${server}/storage/${daftarBerita[4].thumbnail}`}
         judul5={dots(65, daftarBerita[4].judul)}
         detail5={dots(670, daftarBerita[4].detail)}
         dylink5={`/berita/${daftarBerita[4].id}`}
       />
+      {
+        console.log(tag.prestasi)
+      }
       <Divider />
-      <Flex flexDirection={{ base: "column", xl: "row" }} my="25" justifyContent="center" mx={{ base: 25, xl: 125 }}>
+      <Flex flexDir={{ base: "column", xl: "row" }} my="25" justifyContent="center" mx={{ base: 25, xl: 125 }}>
         <ArtikelCell
           dykey={daftarArtikel[0].id}
           tema="ARTIKEL"
@@ -316,18 +327,18 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       <Divider />
       <Divider />
       <Flex bg="gray.50" justifyContent="center" flexDirection={{ base: "column", xl: "row" }} py="25" px={{ base: 25, xl: 125 }}>
-        <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="25" mr={{ base: 0, xl: 50 }}>
+        <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="4" mr={{ base: 0, xl: 50 }}>
           {
             daftarIframe2 &&
             <iframe
-              style={{ height: "285px" }}
+              style={{ height: "290px" }}
               loading="lazy"
               scrolling="no"
               src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
             />
           }
         </Flex>
-        <Flex flexDir="column" my="25" mr={{ base: 0, xl: 100 }}>
+        <Flex flexDir="column">
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcApprove} w="40px" h="auto" />
             &thinsp;
@@ -338,27 +349,43 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
               KEHADIRAN
             </Link>
           </Text>
-          &emsp;
-          <KehadiranCell
-            dykey={daftarKehadiran[0].id}
-            gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[0].avatar}`}
-            judul={daftarKehadiran[0].name}
-            deskripsi={daftarKehadiran[0].jabatan}
-            hadir={daftarKehadiran[0].hadir}
-            dylink={`/kehadiran/${daftarKehadiran[0].id}`}
-          />
-          <Divider my="10px" />
-          <KehadiranCell
-            dykey={daftarKehadiran[1].id}
-            gambar={`https://webprodi.sashi.id/storage/${daftarKehadiran[1].avatar}`}
-            judul={daftarKehadiran[1].name}
-            deskripsi={daftarKehadiran[1].jabatan}
-            hadir={daftarKehadiran[1].hadir}
-            dylink={`/kehadiran/${daftarKehadiran[1].id}`}
-          />
+          <Flex flexDir="row" flexWrap="wrap" justifyContent="center">
+            <KehadiranCell
+              key={daftarKehadiran[0].id}
+              gambar={`${server}/storage/${daftarKehadiran[0].avatar}`}
+              judul={daftarKehadiran[0].name}
+              deskripsi={daftarKehadiran[0].jabatan}
+              hadir={daftarKehadiran[0].hadir}
+              dylink={`/kehadiran/${daftarKehadiran[0].id}`}
+            />
+            <KehadiranCell
+              key={daftarKehadiran[1].id}
+              gambar={`${server}/storage/${daftarKehadiran[1].avatar}`}
+              judul={daftarKehadiran[1].name}
+              deskripsi={daftarKehadiran[1].jabatan}
+              hadir={daftarKehadiran[1].hadir}
+              dylink={`/kehadiran/${daftarKehadiran[1].id}`}
+            />
+            <KehadiranCell
+              key={daftarKehadiran[2].id}
+              gambar={`${server}/storage/${daftarKehadiran[2].avatar}`}
+              judul={daftarKehadiran[2].name}
+              deskripsi={daftarKehadiran[2].jabatan}
+              hadir={daftarKehadiran[2].hadir}
+              dylink={`/kehadiran/${daftarKehadiran[2].id}`}
+            />
+            <KehadiranCell
+              key={daftarKehadiran[3].id}
+              gambar={`${server}/storage/${daftarKehadiran[3].avatar}`}
+              judul={daftarKehadiran[3].name}
+              deskripsi={daftarKehadiran[3].jabatan}
+              hadir={daftarKehadiran[3].hadir}
+              dylink={`/kehadiran/${daftarKehadiran[3].id}`}
+            />
+          </Flex>
         </Flex>
-        <Flex flexDir="column" my="25">
-          <Text fontSize="24" py="2%" fontWeight="medium">
+        <Flex flexDir="column" ml={{ base: 0, xl: 50 }}>
+          <Text fontSize="24" py="4%" fontWeight="medium">
             <Icon as={FcGlobe} w="40px" h="auto" />
             &thinsp;
             LOKASI
@@ -367,7 +394,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           {
             daftarIframe1 &&
             <iframe
-              width="100%"
+              width="95%"
               height="220px"
               loading="lazy"
               frameBorder="0"
@@ -381,7 +408,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       </Flex>
       <Divider />
       <ExNav />
-    </>
+    </React.Fragment>
   );
 }
 

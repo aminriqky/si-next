@@ -8,6 +8,7 @@ import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { berita } from '../api/berita';
+import { server } from "../../config";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 export default function Berita({ daftarBerita }) {
@@ -51,7 +52,7 @@ export default function Berita({ daftarBerita }) {
                   </Flex>
                   {
                     item.thumbnail != null &&
-                    <Image src={`https://webprodi.sashi.id/storage/${item.thumbnail}`}
+                    <Image src={`${server}/storage/${item.thumbnail}`}
                       layout="fill" objectFit="fill"
                     />
                   }

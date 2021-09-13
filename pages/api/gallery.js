@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function gallery() {
-    const response = await fetch(`https://webprodi.sashi.id/api/gallery/all`)
+    const response = await fetch(`${server}/api/gallery/all`)
     const jsonData = await response.json()
     return jsonData
 }

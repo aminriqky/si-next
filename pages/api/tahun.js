@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function tahun() {
-    const response = await fetch(`https://webprodi.sashi.id/api/year/all`)
+    const response = await fetch(`${server}/api/year/all`)
     const jsonData = await response.json()
     return jsonData
 }

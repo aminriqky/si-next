@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function download() {
-    const response = await fetch(`https://webprodi.sashi.id/api/download/all`)
+    const response = await fetch(`${server}/api/download/all`)
     const jsonData = await response.json()
     return jsonData
 }

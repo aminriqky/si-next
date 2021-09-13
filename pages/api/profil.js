@@ -1,5 +1,7 @@
+import { server } from "../../config"
+
 export async function profil() {
-    const response = await fetch(`https://webprodi.sashi.id/api/profile/all`)
+    const response = await fetch(`${server}/api/profile/all`)
     const jsonData = await response.json()
     return jsonData
 }

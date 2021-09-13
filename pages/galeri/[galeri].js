@@ -1,32 +1,46 @@
+import { Fragment } from "react";
 import {
-  Text, Box, AspectRatio, LinkOverlay, LinkBox, Grid, useMediaQuery
+  Text, Box, AspectRatio, LinkOverlay, LinkBox, Grid, useMediaQuery,
+  Modal, ModalOverlay, ModalContent, useDisclosure, Img
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { gallery } from '../api/gallery';
+import { server } from "../../config";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function GaleriCell(props) {
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   return (
-    <LinkBox>
-      <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" maxH="200px">
-        <LinkOverlay color="teal.800">
+    <Fragment>
+      <LinkBox onClick={onOpen}>
+        <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" maxH="200px">
+          <LinkOverlay color="teal.800">
+            <AspectRatio h="100%" w="100%">
+              <Img src={`${server}/storage/${props.gambar}`} layout="fill" objectFit="fill" />
+            </AspectRatio>
+          </LinkOverlay>
+        </AspectRatio>
+      </LinkBox>
+      <Modal isOpen={isOpen} onClose={onClose} isCentered>
+        <ModalOverlay />
+        <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
           <AspectRatio h="100%" w="100%">
-            <Image src={`https://webprodi.sashi.id/storage/${props.gambar}`} layout="fill" objectFit="fill" />
+            <Img src={`${server}/storage/${props.gambar}`} layout="fill" objectFit="fill" />
           </AspectRatio>
-        </LinkOverlay>
-      </AspectRatio>
-    </LinkBox>
+        </ModalContent>
+      </Modal>
+    </Fragment>
   );
 }
 
 export default function Galeri({ daftarGaleri }) {
   const router = useRouter();
   const { galeri } = router.query;
-  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
     <Menu slideShow={<BgImg />}>

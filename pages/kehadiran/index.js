@@ -5,25 +5,9 @@ import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { kehadiran } from "../api/kehadiran";
+import { server } from "../../config";
+import KehadiranCell from "../../public/dynamic/KehadiranCell";
 const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
-
-const KehadiranCell = dynamic(
-  () => import('../../public/dynamic/KehadiranCell'),
-  {
-    loading: () =>
-      <>
-        <Flex flexDir="row">
-          <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
-          <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
-        </Flex>
-        <Divider my="10px" />
-        <Flex flexDir="row">
-          <Skeleton borderRadius="full" boxSize="75px" mr={{ base: "25px", xl: "50px" }} />
-          <Skeleton height="50px" width={{ base: "250px", xl: "450px" }} mt="15px" />
-        </Flex>
-      </>
-  }
-)
 
 export default function DaftarKehadiran({ daftarKehadiran }) {
   return (
@@ -32,23 +16,25 @@ export default function DaftarKehadiran({ daftarKehadiran }) {
         <Text fontSize="28" pb="2%" fontWeight="semibold">
           Daftar Kehadiran
         </Text>
-        {
-          daftarKehadiran !== null && daftarKehadiran.map((item) => {
-            return (
-              <>
-                <KehadiranCell
-                  dykey={item.id}
-                  gambar={`https://webprodi.sashi.id/storage/${item.avatar}`}
-                  judul={item.name}
-                  deskripsi={item.jabatan}
-                  hadir={item.hadir}
-                  dylink={`/kehadiran/${item.id}`}
-                />
-                &emsp;
-              </>
-            )
-          })
-        }
+        <Flex flexDir="row" flexWrap="wrap">
+          {
+            daftarKehadiran !== null && daftarKehadiran.map((item) => {
+              return (
+                <>
+                  <KehadiranCell
+                    key={item.id}
+                    gambar={`${server}/storage/${item.avatar}`}
+                    judul={item.name}
+                    deskripsi={item.jabatan}
+                    hadir={item.hadir}
+                    dylink={`/kehadiran/${item.id}`}
+                  />
+                  &emsp;
+                </>
+              )
+            })
+          }
+        </Flex>
       </Box>
       <ExNav />
     </Menu>
