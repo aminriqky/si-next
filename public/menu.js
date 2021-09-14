@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router'
 import {
-  Button, useDisclosure, Drawer, DrawerBody, DrawerHeader, Image, Flex, Link,
+  Button, useDisclosure, Drawer, DrawerBody, DrawerHeader, Img, Flex, Link,
   DrawerOverlay, DrawerContent, DrawerCloseButton, IconButton, Box, Menu,
   MenuButton, Portal, MenuList, MenuItem, Icon, useMediaQuery
 } from "@chakra-ui/react";
@@ -100,7 +100,7 @@ export default function MenuUtama(props) {
           }
         </Box>
         <Link mt="1.5vw" zIndex={999} onClick={home}>
-          <Image width="100%" src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
+          <Img width="100%" src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
         </Link>
         {
           isLargerThan1280 &&

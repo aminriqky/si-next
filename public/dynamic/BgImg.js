@@ -1,9 +1,9 @@
-import { Image } from "@chakra-ui/react";
+import { Img } from "@chakra-ui/react";
 
 export default function BgImg() {
 
   return (
-    <Image
+    <Img
       sx={{ filter: "blur(500px)" }}
       pointerEvents="none"
       opacity="0.5"

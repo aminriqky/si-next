@@ -1,5 +1,5 @@
 import {
-  Text, Box, Flex, Image, Grid
+  Text, Box, Flex, Img, Grid
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import dynamic from "next/dynamic";
@@ -12,7 +12,7 @@ const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 function KehadiranCell(props) {
   return (
     <Flex key={props.dykey} flexWrap="wrap">
-      <Image
+      <Img
         boxSize={{ base: "fit-content", xl: "300px" }}
         src={props.gambar}
         width="auto"
