@@ -45,7 +45,7 @@ function PengumumanCell(props) {
           Lampiran File :
         </Text>
         &ensp;
-        <Link _hover={{ textTransform: "none" }} href={saveFile} download>
+        <Link _hover={{ textTransform: "none" }} href={saveFile} download isExternal>
           <Button colorScheme="teal" size="sm">
             Unduh
           </Button>
