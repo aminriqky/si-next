@@ -192,19 +192,19 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           <Box bgColor="teal.600" height="45%">
             <Box mx="10" my="6">
               <Text fontWeight="bold">Kontak & Sosial Media</Text>
-              <Link mr={3} href="https://web.facebook.com/groups/si.radenfatah" isExternal>
+              <Link aria-label="Facebook Prodi SI" mr={3} href="https://web.facebook.com/groups/si.radenfatah" isExternal>
                 <Icon as={SiFacebook} w="20px" h="auto" />
               </Link>
-              <Link mr={3} href="https://www.instagram.com/sisteminformasi.radenfatah/" isExternal>
+              <Link aria-label="Instagram Prodi SI" mr={3} href="https://www.instagram.com/sisteminformasi.radenfatah/" isExternal>
                 <Icon as={SiInstagram} w="20px" h="auto" />
               </Link>
-              <Link mr={3} href="tel:+6282176991834">
+              <Link aria-label="Telepon Prodi SI" mr={3} href="tel:+6282176991834">
                 <Icon as={SiWhatsapp} w="20px" h="auto" />
               </Link>
-              <Link mr={3} href="mailto:si@radenfatah.ac.id">
+              <Link aria-label="E-Mail Prodi SI" mr={3} href="mailto:si@radenfatah.ac.id">
                 <Icon as={MdEmail} w="20px" h="auto" />
               </Link>
-              <Link mr={3} href="https://www.youtube.com/c/SistemInformasiRadenFatah" isExternal>
+              <Link aria-label="Youtube Prodi SI" mr={3} href="https://www.youtube.com/c/SistemInformasiRadenFatah" isExternal>
                 <Icon as={SiYoutube} w="20px" h="auto" />
               </Link>
             </Box>
