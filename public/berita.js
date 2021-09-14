@@ -41,7 +41,7 @@ function SlideShow(props) {
 
 function SlideButton(props) {
   return (
-    <Button name="Tombol Slide" _focus={{ outline: "none" }} onClick={props.handleClick}
+    <Button aria-label="Tombol Slide" _focus={{ outline: "none" }} onClick={props.handleClick}
       _hover={{ bg: "gray.400" }} _pressed={{ bg: "gray.400" }} w="2" h="2"
       mx="2" mt="10" borderRadius="full" bg="gray.300"
     />
