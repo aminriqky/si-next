@@ -12,31 +12,31 @@ export default function ExNav() {
             TENTANG KAMI
           </Text>
           <Divider mb={2} />
-          <Box color="orange.600">
+          <Link color="orange.600">
             <NextLink href="/profil">
               Sejarah
             </NextLink>
-          </Box>
-          <Box color="orange.600">
+          </Link>
+          <Link color="orange.600">
             <NextLink href="/profil">
               Visi Misi & Tujuan
             </NextLink>
-          </Box>
-          <Box color="orange.600">
+          </Link>
+          <Link color="orange.600">
             <NextLink href="/kehadiran">
               Staff & Tenaga Pendidik
             </NextLink>
-          </Box>
-          <Box color="orange.600">
+          </Link>
+          <Link color="orange.600">
             <NextLink href="/kemahasiswaan">
               Direktori Prestasi
             </NextLink>
-          </Box>
-          <Box color="orange.600">
+          </Link>
+          <Link color="orange.600">
             <NextLink href="/galeri">
               Galeri
             </NextLink>
-          </Box>
+          </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
