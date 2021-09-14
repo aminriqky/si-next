@@ -24,8 +24,8 @@ function SlideShow(props) {
         <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
           {props.vimi}
         </Text>
-        <Progress role="progressbar" mt="2vw" value={props.slideCount} size="xs" max={100}
-          min={0} colorScheme="teal" width="300px" isAnimated hasStripe
+        <Progress role="progressbar" mt="2vw" value={props.slideCount} size="xs" max={100} min={0}
+          aria-label="progressbar" colorScheme="teal" width="300px" isAnimated hasStripe
         />
       </Box>
     </SlideFade>
