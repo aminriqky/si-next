@@ -1,6 +1,7 @@
 import {
   Container, Text, Link, Box, Divider
 } from "@chakra-ui/react";
+import NextLink from "next/link";
 
 export default function ExNav() {
   return (
@@ -11,21 +12,31 @@ export default function ExNav() {
             TENTANG KAMI
           </Text>
           <Divider mb={2} />
-          <Link href="/profil" color="orange.600">
-            Sejarah
-          </Link>
-          <Link href="/profil" color="orange.600">
-            Visi Misi & Tujuan
-          </Link>
-          <Link color="orange.600" href="/kehadiran">
-            Staff & Tenaga Pendidik
-          </Link>
-          <Link color="orange.600" href="/kemahasiswaan">
-            Direktori Prestasi
-          </Link>
-          <Link color="orange.600" href="/galeri">
-            Galeri
-          </Link>
+          <Box color="orange.600">
+            <NextLink href="/profil">
+              Sejarah
+            </NextLink>
+          </Box>
+          <Box color="orange.600">
+            <NextLink href="/profil">
+              Visi Misi & Tujuan
+            </NextLink>
+          </Box>
+          <Box color="orange.600">
+            <NextLink href="/kehadiran">
+              Staff & Tenaga Pendidik
+            </NextLink>
+          </Box>
+          <Box color="orange.600">
+            <NextLink href="/kemahasiswaan">
+              Direktori Prestasi
+            </NextLink>
+          </Box>
+          <Box color="orange.600">
+            <NextLink href="/galeri">
+              Galeri
+            </NextLink>
+          </Box>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
