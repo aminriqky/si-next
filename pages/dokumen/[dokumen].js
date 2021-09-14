@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text, Box, Flex, Link, Button
 } from "@chakra-ui/react";
@@ -27,7 +27,7 @@ function DokumenCell(props) {
   }
 
   return (
-    <>
+    <React.Fragment>
       <Flex key={props.dykey} flexDirection="row" flex="1">
         <Box minW="60px" height="60px" m={{ base: "3vw", xl: "1.4vw" }} textAlign="center" border="1px">
           <Text mt="5px" alignSelf="center" fontWeight="semibold" fontSize="lg">{props.hari}</Text>
@@ -51,12 +51,10 @@ function DokumenCell(props) {
           </Button>
         </Link>
       </Flex>
-      <Box pl="2%">
-        <Text textColor="black">
-          {props.detail}
-        </Text>
-      </Box>
-    </>
+      <Text pl="2%" textColor="black" fontSize={{ base: "xs", lg: "md" }}>
+        {props.detail}
+      </Text>
+    </React.Fragment>
   )
 }
 

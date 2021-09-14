@@ -59,7 +59,9 @@ export default function Agenda({ daftarAgenda }) {
                       </Text>
                     </Flex>
                   </Flex>
-                  <div dangerouslySetInnerHTML={{ __html: item.detail_kegiatan }} />
+                  <Text fontSize={{ base: "xs", lg: "md" }}>
+                    <div dangerouslySetInnerHTML={{ __html: item.detail_kegiatan }} />
+                  </Text>
                 </Box>
               )
             }

@@ -26,4 +26,5 @@ function MyApp({ Component, pageProps }) {
     </React.Fragment>
   );
 }
+
 export default MyApp;

@@ -56,9 +56,9 @@ export default function Berita({ daftarBerita }) {
                       layout="fill" objectFit="fill"
                     />
                   }
-                  <Box mt="10px">
+                  <Text mt="10px" fontSize={{ base: "xs", lg: "md" }}>
                     <div dangerouslySetInnerHTML={{ __html: item.detail }} />
-                  </Box>
+                  </Text>
                 </Box>
               )
             }

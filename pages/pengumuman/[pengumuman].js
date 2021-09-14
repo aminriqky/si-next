@@ -51,9 +51,9 @@ function PengumumanCell(props) {
           </Button>
         </Link>
       </Flex>
-      <Box pl="2%">
+      <Text pl="2%" fontSize={{ base: "xs", lg: "md" }}>
         <div dangerouslySetInnerHTML={{ __html: props.detail }} />
-      </Box>
+      </Text>
     </>
   )
 }

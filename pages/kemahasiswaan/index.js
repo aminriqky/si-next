@@ -23,7 +23,7 @@ function MahasiswaCell(props) {
           {props.children}
         </Text>
         &thinsp;
-        <Text color="black" fontWeight="light">
+        <Text color="black" fontWeight="light" fontSize={{ base: "xs", lg: "md" }}>
           <div dangerouslySetInnerHTML={{ __html: props.detail }} />
         </Text>
       </Flex>
