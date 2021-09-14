@@ -165,7 +165,7 @@ export default function ExNav() {
         </Box>
       </Container>
       <Divider />
-      <Box bg="white" py="5" fontSize={{ base: "xs", xl: "md" }}>
+      <Box bg="white" py="5" fontSize={{ base: 11, xl: "md" }}>
         <Text color="black" textAlign="center" fontWeight="thin">
           Copyright ©
           <NextLink href="/">
@@ -176,7 +176,7 @@ export default function ExNav() {
           </Link>
           All Rights Reserved.
         </Text>
-        <Text fontSize={{ base: "xs", lg: "md" }} color="black" textAlign="center" fontWeight="thin">
+        <Text color="black" textAlign="center" fontWeight="thin">
           <Link href="https://radenfatah.ac.id/" isExternal>
             Universitas Islam Negeri Raden Fatah Palembang
           </Link>
