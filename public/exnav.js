@@ -11,39 +11,29 @@ export default function ExNav() {
             TENTANG KAMI
           </Text>
           <Divider mb={2} />
-          <Link href="/sejarah" color="orange.600">
+          <Link href="/profil" color="orange.600">
             Sejarah
           </Link>
-          <Link href="/visi-misi-tujuan" color="orange.600">
+          <Link href="/profil" color="orange.600">
             Visi Misi & Tujuan
           </Link>
-          <Link color="orange.600" href="/struktur">
-            Struktur
-          </Link>
-          <Link color="orange.600" href="/category/staff">
+          <Link color="orange.600" href="/kehadiran">
             Staff & Tenaga Pendidik
           </Link>
-          <Link href="/direktori-kerjasama" color="orange.600">
-            Direktori Kerjasama
-          </Link>
-          <Link color="orange.600" href="/direktori-prestasi">
+          <Link color="orange.600" href="/kemahasiswaan">
             Direktori Prestasi
-          </Link>
-          <Link color="orange.600" href="/katalog-statistik">
-            Katalog Statistik
           </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
-            PANDUAN
+            UNIVERSITAS
           </Text>
           <Divider mb={2} />
-          <Link href="/akademik" color="orange.600">
-            Administrasi
-          </Link>
-          <Link color="orange.600">Penasihat Akademik</Link>
-          <Link color="orange.600">Buku Saku Mahasiswa</Link>
-          <Link color="orange.600">KTI Universitas</Link>
+          <Link href="https://radenfatah.ac.id/" color="orange.600" isExternal>UIN Raden Fatah</Link>
+          <Link href="http://kepegawaian.radenfatah.ac.id/" color="orange.600" isExternal>Kepegawaian</Link>
+          <Link href="http://spi.radenfatah.ac.id/" color="orange.600" isExternal>Satuan Pengawas Internal</Link>
+          <Link href="http://lpm.radenfatah.ac.id/" color="orange.600" isExternal>Lembaga Penjaminan Mutu</Link>
+          <Link href="http://pustipd.radenfatah.ac.id/" color="orange.600" isExternal>PUSTPID</Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
@@ -57,15 +47,8 @@ export default function ExNav() {
           >
             E-Learning
           </Link>
-          <Link href="mailto:si@radenfatah.ac.id" color="orange.600" isExternal>
+          <Link href="mailto:si@radenfatah.ac.id" color="orange.600">
             E-Mail
-          </Link>
-          <Link
-            color="orange.600"
-            href="http://e-skripsi.radenfatah.ac.id/"
-            isExternal
-          >
-            E-Skripsi
           </Link>
           <Link
             href="http://e-lkp.radenfatah.ac.id/"
@@ -94,11 +77,11 @@ export default function ExNav() {
             AKADEMIK
           </Text>
           <Divider mb={2} />
-          <Link color="orange.600">Kurikulum</Link>
-          <Link color="orange.600">Akreditasi</Link>
-          <Link color="orange.600">Pedoman Edukasi</Link>
-          <Link color="orange.600">Pendaftaran KKN</Link>
-          <Link color="orange.600">Pendaftaran Tugas Akhir</Link>
+          <Link href="http://beasiswa.radenfatah.ac.id/" color="orange.600" isExternal>Beasiswa</Link>
+          <Link href="https://lpm.radenfatah.ac.id/" color="orange.600" isExternal>Akreditasi</Link>
+          <Link href="https://silayak.radenfatah.ac.id/" color="orange.600" isExternal>Pedoman Edukasi</Link>
+          <Link href="https://lp2m.radenfatah.ac.id/" color="orange.600" isExternal>Pendaftaran KKN</Link>
+          <Link href="http://e-skripsi.radenfatah.ac.id/" color="orange.600" isExternal>Pendaftaran Tugas Akhir</Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
@@ -126,7 +109,6 @@ export default function ExNav() {
           >
             PUSTPID
           </Link>
-          <Link color="orange.600">Pendaftaran Tugas Akhir</Link>
           <Link
             href="http://alumni.radenfatah.ac.id/"
             color="orange.600"
