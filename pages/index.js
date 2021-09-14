@@ -330,6 +330,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           {
             daftarIframe2 &&
             <iframe
+              title="Jadwal Sholat"
               style={{ height: "290px" }}
               loading="lazy"
               scrolling="no"
@@ -393,6 +394,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           {
             daftarIframe1 &&
             <iframe
+              title="Lokasi Prodi SI"
               width="95%"
               height="220px"
               loading="lazy"
