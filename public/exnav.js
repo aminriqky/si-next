@@ -23,6 +23,9 @@ export default function ExNav() {
           <Link color="orange.600" href="/kemahasiswaan">
             Direktori Prestasi
           </Link>
+          <Link color="orange.600" href="/galeri">
+            Galeri
+          </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">

@@ -5,7 +5,7 @@ import {
   Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton,
   useMediaQuery, Img
 } from "@chakra-ui/react";
-import { SiFacebook, SiInstagram, SiWhatsapp } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiWhatsapp, SiYoutube } from "react-icons/si";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
 import { MdDeveloperBoard, MdEmail } from "react-icons/md";
@@ -203,6 +203,9 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
               </Link>
               <Link mr={3} href="mailto:si@radenfatah.ac.id">
                 <Icon as={MdEmail} w="20px" h="auto" />
+              </Link>
+              <Link mr={3} href="https://www.youtube.com/c/SistemInformasiRadenFatah" isExternal>
+                <Icon as={SiYoutube} w="20px" h="auto" />
               </Link>
             </Box>
           </Box>
