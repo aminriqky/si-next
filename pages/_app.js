@@ -19,6 +19,10 @@ function MyApp({ Component, pageProps }) {
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="theme-color" content="#2D3748" />
+        <meta
+          name="description"
+          content="Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang"
+        />
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />

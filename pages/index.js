@@ -172,7 +172,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <AspectRatio sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} width="100%" height="100%">
-              <Img src="/yt.png" layout="fill" objectFit="fill" />
+              <Img src="/yt.png" layout="fill" objectFit="fill" alt="yt-uinrf" />
             </AspectRatio>
           </Box>
         </AspectRatio>

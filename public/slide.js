@@ -14,7 +14,7 @@ function SlideShow(props) {
   return (
     <SlideFade in={true} offsetY="-100px">
       <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" pos="absolute" w="100%">
-        <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" />
+        <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" alt="Gambar Visi & Misi" />
       </AspectRatio>
       <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }}
         fontWeight="semibold" zIndex="2" pointerEvents="none">
@@ -24,7 +24,7 @@ function SlideShow(props) {
         <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
           {props.vimi}
         </Text>
-        <Progress mt="2vw" value={props.slideCount} size="xs" max={100}
+        <Progress role="progressbar" mt="2vw" value={props.slideCount} size="xs" max={100}
           min={0} colorScheme="teal" width="300px" isAnimated hasStripe
         />
       </Box>
