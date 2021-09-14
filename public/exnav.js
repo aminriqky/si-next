@@ -165,7 +165,7 @@ export default function ExNav() {
           </Link>
           All Rights Reserved.
         </Text>
-        <Text color="black" textAlign="center" fontWeight="thin">
+        <Text fontSize={{ base: "xs", lg: "md" }} color="black" textAlign="center" fontWeight="thin">
           <Link href="https://radenfatah.ac.id/" isExternal>
             Universitas Islam Negeri Raden Fatah Palembang
           </Link>
