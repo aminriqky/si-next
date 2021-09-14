@@ -116,6 +116,13 @@ export default function ExNav() {
           >
             Alumni
           </Link>
+          <Link
+            href="http://labterpadusaintek.radenfatah.ac.id/"
+            color="orange.600"
+            isExternal
+          >
+            Lab Terpadu Saintek
+          </Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
