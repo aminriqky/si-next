@@ -5,10 +5,10 @@ import {
   Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton,
   useMediaQuery, Img
 } from "@chakra-ui/react";
-import { SiFacebook, SiInstagram, SiWhatsapp, SiYoutube } from "react-icons/si";
+import { SiFacebook, SiInstagram, SiYoutube } from "react-icons/si";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
-import { MdDeveloperBoard, MdEmail } from "react-icons/md";
+import { MdDeveloperBoard, MdEmail, MdPhone } from "react-icons/md";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import dayjs from 'dayjs';
@@ -198,8 +198,8 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
               <Link aria-label="Instagram Prodi SI" mr={3} href="https://www.instagram.com/sisteminformasi.radenfatah/" isExternal>
                 <Icon as={SiInstagram} w="20px" h="auto" />
               </Link>
-              <Link aria-label="Telepon Prodi SI" mr={3} href="tel:+6282176991834">
-                <Icon as={SiWhatsapp} w="20px" h="auto" />
+              <Link aria-label="Telepon Prodi SI" mr={3} href="tel:0711-356209">
+                <Icon as={MdPhone} w="20px" h="auto" />
               </Link>
               <Link aria-label="E-Mail Prodi SI" mr={3} href="mailto:si@radenfatah.ac.id">
                 <Icon as={MdEmail} w="20px" h="auto" />
