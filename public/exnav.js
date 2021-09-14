@@ -33,7 +33,7 @@ export default function ExNav() {
           <Link href="http://kepegawaian.radenfatah.ac.id/" color="orange.600" isExternal>Kepegawaian</Link>
           <Link href="http://spi.radenfatah.ac.id/" color="orange.600" isExternal>Satuan Pengawas Internal</Link>
           <Link href="http://lpm.radenfatah.ac.id/" color="orange.600" isExternal>Lembaga Penjaminan Mutu</Link>
-          <Link href="http://pustipd.radenfatah.ac.id/" color="orange.600" isExternal>PUSTPID</Link>
+          <Link href="http://wbs.radenfatah.ac.id/" color="orange.600" isExternal>WhistleBlowing System</Link>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
