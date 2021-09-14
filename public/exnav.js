@@ -12,31 +12,31 @@ export default function ExNav() {
             TENTANG KAMI
           </Text>
           <Divider mb={2} />
-          <Link color="orange.600">
+          <Box _hover={{ textDecor: "underline" }} color="orange.600">
             <NextLink href="/profil">
               Sejarah
             </NextLink>
-          </Link>
-          <Link color="orange.600">
+          </Box>
+          <Box _hover={{ textDecor: "underline" }} color="orange.600">
             <NextLink href="/profil">
               Visi Misi & Tujuan
             </NextLink>
-          </Link>
-          <Link color="orange.600">
+          </Box>
+          <Box _hover={{ textDecor: "underline" }} color="orange.600">
             <NextLink href="/kehadiran">
               Staff & Tenaga Pendidik
             </NextLink>
-          </Link>
-          <Link color="orange.600">
+          </Box>
+          <Box _hover={{ textDecor: "underline" }} color="orange.600">
             <NextLink href="/kemahasiswaan">
               Direktori Prestasi
             </NextLink>
-          </Link>
-          <Link color="orange.600">
+          </Box>
+          <Box _hover={{ textDecor: "underline" }} color="orange.600">
             <NextLink href="/galeri">
               Galeri
             </NextLink>
-          </Link>
+          </Box>
         </Box>
         <Box m="10" display="flex" flexDirection="column">
           <Text fontWeight="bold" color="blackAlpha.600">
