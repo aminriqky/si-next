@@ -168,9 +168,9 @@ export default function ExNav() {
       <Box bg="white" py="5" fontSize={{ base: "xs", xl: "md" }}>
         <Text color="black" textAlign="center" fontWeight="thin">
           Copyright ©
-          <Link href="/">
+          <NextLink href="/">
             {" Sistem Informasi "}
-          </Link>
+          </NextLink>
           <Link href="http://saintek.radenfatah.ac.id/" isExternal>
             {"SAINTEK UIN Raden Fatah. "}
           </Link>
