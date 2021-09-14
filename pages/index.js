@@ -83,7 +83,6 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
   const [daftarIframe2, setDaftarIframe2] = useState(false);
-  const tag = JSON.parse(daftarBerita[0].tag);
 
   useEffect(() => {
     setDaftarIframe1(true);
@@ -232,9 +231,6 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         detail5={dots(670, daftarBerita[4].detail)}
         dylink5={`/berita/${daftarBerita[4].id}`}
       />
-      {
-        console.log(tag.prestasi)
-      }
       <Divider />
       <Flex flexDir={{ base: "column", xl: "row" }} my="25" justifyContent="center" mx={{ base: 25, xl: 125 }}>
         <ArtikelCell
@@ -252,7 +248,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             &thinsp;
             <Link fontWeight="semibold" onClick={(e) => {
               e.preventDefault()
-              router.push("/pengumuman/daftar-pengumuman")
+              router.push("/pengumuman")
             }}>
               PENGUMUMAN
             </Link>

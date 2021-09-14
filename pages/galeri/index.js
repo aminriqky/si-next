@@ -18,7 +18,7 @@ function GaleriCell(props) {
           e.preventDefault()
           router.push(`/galeri/${props.tahun}`)
         }}>
-          <Text letterSpacing="widest" fontWeight="semibold" zIndex={9999} fontSize="xl" pos="absolute">
+          <Text letterSpacing="widest" fontWeight="semibold" zIndex={999} fontSize="xl" pos="absolute">
             {props.judul}
           </Text>
           <AspectRatio h="100%" w="100%"
