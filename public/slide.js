@@ -13,7 +13,7 @@ const wait = (timeout) => {
 function SlideShow(props) {
   return (
     <SlideFade in={true} offsetY="-100px">
-      <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" position="absolute" width="100%">
+      <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" pos="absolute" w="100%">
         <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" />
       </AspectRatio>
       <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }}
