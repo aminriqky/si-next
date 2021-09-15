@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import {
   Text, Flex, Box, AspectRatio, Button, useDisclosure, Icon,
   Divider, Link, Modal, ModalOverlay, ModalContent, Skeleton,
-  useMediaQuery, Img
+  useMediaQuery, Img, VisuallyHidden
 } from "@chakra-ui/react";
 import { SiFacebook, SiInstagram, SiYoutube } from "react-icons/si";
 import { FcTemplate, FcGraduationCap, FcApprove, FcGlobe } from "react-icons/fc";
@@ -409,6 +409,8 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
       </Flex>
       <Divider />
       <ExNav />
+      <VisuallyHidden>Created By github.com/aminriqky</VisuallyHidden>
+      <VisuallyHidden>Made with Next.js & Chakra UI</VisuallyHidden>
     </React.Fragment>
   );
 }
