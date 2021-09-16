@@ -4,12 +4,10 @@ import {
   Modal, ModalOverlay, ModalContent, useDisclosure, Img
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { gallery } from '../api/gallery';
 import { server } from "../../config";
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function GaleriCell(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -43,8 +41,8 @@ export default function Galeri({ daftarGaleri }) {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
           Foto Tahun {galeri}
         </Text>

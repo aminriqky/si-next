@@ -2,11 +2,9 @@ import { useRouter } from 'next/router';
 import {
   Text, Box, AspectRatio, LinkOverlay, LinkBox, Grid, useMediaQuery, Img
 } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { tahun } from '../api/tahun';
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function GaleriCell(props) {
   const router = useRouter();
@@ -36,8 +34,8 @@ export default function DaftarGaleri({ daftarTahun }) {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
           Galeri
         </Text>

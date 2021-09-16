@@ -28,7 +28,7 @@ function MenuTitle(props) {
 }
 
 export default function MenuUtama(props) {
-  const [isSmallerThan1280] = useMediaQuery("(max-width: 1280px)")
+  const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)")
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -84,7 +84,7 @@ export default function MenuUtama(props) {
   }
 
   return (
-    <Box bg="gray.700" w="100%" h={props.pageHeight} color="white">
+    <Box bg="gray.700" w="100%" h={props.pageHeight}>
       {props.slide}
       <Flex pt="2.5vw" zIndex="100" flexDirection="row">
         <Box ml="8vw" mr={{ base: "4vw", xl: 0 }} mt="2.5vw">
@@ -179,7 +179,6 @@ export default function MenuUtama(props) {
           </DrawerOverlay>
         </Drawer>
       </Flex>
-      {props.slideShow}
       {props.children}
     </Box>
   );

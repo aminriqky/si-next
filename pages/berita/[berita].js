@@ -1,7 +1,6 @@
 import {
   Text, Box, Icon, Flex, Img
 } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { FcClock, FcOvertime } from "react-icons/fc"
 import ExNav from '../../public/exnav'
@@ -9,15 +8,14 @@ import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { berita } from '../api/berita';
 import { server } from "../../config";
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 export default function Berita({ daftarBerita }) {
   const router = useRouter();
   const { berita } = router.query;
 
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         {
           daftarBerita !== null && daftarBerita.map((item) => {
             if (item.id == berita) {

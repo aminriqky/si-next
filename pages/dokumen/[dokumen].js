@@ -2,14 +2,12 @@ import React, { useState, useEffect } from "react";
 import {
   Text, Box, Flex, Link, Button
 } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { download } from '../api/download';
 import { server } from "../../config";
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function DokumenCell(props) {
   const [saveFile, setSaveFile] = useState(null);
@@ -63,8 +61,8 @@ export default function Dokumen({ daftarDokumen }) {
   const { dokumen } = router.query;
 
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         {
           daftarDokumen !== null && daftarDokumen.map((item) => {
             if (item.id == dokumen) {

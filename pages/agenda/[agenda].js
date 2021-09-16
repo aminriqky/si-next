@@ -1,22 +1,20 @@
 import {
   Text, Box, Icon, Flex, Divider
 } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import { useRouter } from "next/router";
 import { FcClock, FcOvertime } from "react-icons/fc"
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
-import { agenda } from '../api/agenda'
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
+import { agenda } from '../api/agenda';
 
 export default function Agenda({ daftarAgenda }) {
   const router = useRouter();
   const { agenda } = router.query;
 
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         {
           daftarAgenda !== null && daftarAgenda.map((item) => {
             if (item.id == agenda) {

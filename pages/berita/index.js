@@ -2,12 +2,10 @@ import {
   Text, Box, Flex, Link
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
-import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { berita } from "../api/berita";
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function BeritaCell(props) {
   const router = useRouter();
@@ -35,8 +33,8 @@ function BeritaCell(props) {
 
 export default function DaftarBerita({ daftarBerita }) {
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         <Text fontSize="28" pb="2%" fontWeight="semibold">
           Daftar Berita
         </Text>

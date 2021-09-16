@@ -3,13 +3,11 @@ import { useRouter } from 'next/router';
 import {
   Text, Box, Img, Flex, Link
 } from "@chakra-ui/react";
-import dynamic from "next/dynamic";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { organisasi } from '../api/organisasi';
 import { berita } from '../api/berita';
 import { server } from "../../config";
-const BgImg = dynamic(() => import('../../public/dynamic/BgImg'));
 
 function MahasiswaCell(props) {
   return (
@@ -43,8 +41,8 @@ export default function DaftarKemahasiswaan({ daftarOrganisasi, daftarBerita }) 
   }
 
   return (
-    <Menu slideShow={<BgImg />}>
-      <Box bg="white" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+    <Menu>
+      <Box bg="white" opacity="0.9" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
           Organisasi Mahasiswa
         </Text>

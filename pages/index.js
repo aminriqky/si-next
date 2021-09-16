@@ -12,7 +12,7 @@ import { MdDeveloperBoard, MdEmail, MdPhone } from "react-icons/md";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import dayjs from 'dayjs';
-import dynamic from 'next/dynamic'
+import dynamic from 'next/dynamic';
 import { agenda } from './api/agenda';
 import { pengumuman } from './api/pengumuman';
 import { artikel } from './api/artikel';
@@ -79,6 +79,8 @@ const PengumumanCell = dynamic(
 
 export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita }) {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
+  const [isLargerThan1300] = useMediaQuery("(min-width: 1300px)")
+  const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)")
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
@@ -324,9 +326,8 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
         </Flex>
       </Flex>
       <Divider />
-      <Divider />
       <Flex bg="gray.50" justifyContent="center" flexDirection={{ base: "column", xl: "row" }} py="25" px={{ base: 25, xl: 125 }}>
-        <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="4" mr={{ base: 0, xl: 50 }}>
+        <Flex flexDir="column" w={{ base: "100%", xl: "200px" }} my="4" mr={{ base: 0, xl: 13 }}>
           {
             daftarIframe2 &&
             <iframe
@@ -338,7 +339,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             />
           }
         </Flex>
-        <Flex flexDir="column">
+        <Flex flexDir="column" mx={{ base: 0, xl: 25, "2xl": '48px' }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcApprove} w="40px" h="auto" />
             &thinsp;
@@ -374,17 +375,31 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
               hadir={daftarKehadiran[2].hadir}
               dylink={`/kehadiran/${daftarKehadiran[2].id}`}
             />
-            <KehadiranCell
-              key={daftarKehadiran[3].id}
-              gambar={`${server}/storage/${daftarKehadiran[3].avatar}`}
-              judul={daftarKehadiran[3].name}
-              deskripsi={daftarKehadiran[3].jabatan}
-              hadir={daftarKehadiran[3].hadir}
-              dylink={`/kehadiran/${daftarKehadiran[3].id}`}
-            />
+            {
+              isLargerThan1300 &&
+              <KehadiranCell
+                key={daftarKehadiran[3].id}
+                gambar={`${server}/storage/${daftarKehadiran[3].avatar}`}
+                judul={daftarKehadiran[3].name}
+                deskripsi={daftarKehadiran[3].jabatan}
+                hadir={daftarKehadiran[3].hadir}
+                dylink={`/kehadiran/${daftarKehadiran[3].id}`}
+              />
+            }
+            {
+              isSmallerThan1280 &&
+              <KehadiranCell
+                key={daftarKehadiran[3].id}
+                gambar={`${server}/storage/${daftarKehadiran[3].avatar}`}
+                judul={daftarKehadiran[3].name}
+                deskripsi={daftarKehadiran[3].jabatan}
+                hadir={daftarKehadiran[3].hadir}
+                dylink={`/kehadiran/${daftarKehadiran[3].id}`}
+              />
+            }
           </Flex>
         </Flex>
-        <Flex flexDir="column" ml={{ base: 0, xl: 50 }}>
+        <Flex flexDir="column" ml={{ base: 0, xl: 13 }}>
           <Text fontSize="24" py="4%" fontWeight="medium">
             <Icon as={FcGlobe} w="40px" h="auto" />
             &thinsp;
