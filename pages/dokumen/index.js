@@ -31,7 +31,7 @@ export default function DaftarDokumen({ daftarDokumen }) {
               }}>
                 <Flex _hover={{ bg: "teal.50" }} py="5px" color="teal.500" borderX="1px" borderBottom="1px">
                   <Icon ml="2%" color="teal" as={FaFileAlt} w="17px" h="auto" mr="17px" />
-                  <Text _hover={{ textDecor: "underline" }} key={item.id} textColor="black" my="2.5px" fontWeight="thin">
+                  <Text _hover={{ textDecor: "none" }} key={item.id} textColor="black" my="2.5px" fontWeight="thin">
                     {item.nama_berkas}
                   </Text>
                   <Icon ml="auto" color="teal" as={FaExternalLinkAlt} w="17px" mr="2%" h="auto" />
