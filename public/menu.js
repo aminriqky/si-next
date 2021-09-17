@@ -112,7 +112,7 @@ export default function MenuUtama(props) {
                 <MenuTitle title="Akademik" />
               </MenuButton>
               <Portal>
-                <MenuList ml="-20px">
+                <MenuList zIndex="100" ml="-20px">
                   <MenuItem onClick={kurikulum}>
                     <Icon as={FcViewDetails} w="30px" h="auto" mr="10px" />
                     Kurikulum
