@@ -13,7 +13,7 @@ function GaleriCell(props) {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <Fragment>
+    <Fragment key={props.id}>
       <LinkBox onClick={onOpen}>
         <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" maxH="200px">
           <LinkOverlay color="teal.800">
@@ -53,7 +53,7 @@ export default function Galeri({ daftarGaleri }) {
                 daftarGaleri !== null && daftarGaleri.map((item) => {
                   if (item.tahun == galeri) {
                     return (
-                      <GaleriCell gambar={item.foto} />
+                      <GaleriCell id={item.id} gambar={item.foto} />
                     )
                   }
                 })
@@ -65,7 +65,7 @@ export default function Galeri({ daftarGaleri }) {
                 daftarGaleri !== null && daftarGaleri.map((item) => {
                   if (item.tahun == galeri) {
                     return (
-                      <GaleriCell gambar={item.foto} />
+                      <GaleriCell id={item.id} gambar={item.foto} />
                     )
                   }
                 })
