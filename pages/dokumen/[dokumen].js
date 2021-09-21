@@ -6,6 +6,7 @@ import { useRouter } from "next/router";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
+import id from 'dayjs/locale/id';
 import { download } from '../api/download';
 import { server } from "../../config";
 
@@ -68,10 +69,10 @@ export default function Dokumen({ daftarDokumen }) {
             if (item.id == dokumen) {
               return (
                 <DokumenCell dykey={item.id}
-                  hari={dayjs(item.updated_at).locale('id').format('ddd').toUpperCase()}
+                  hari={dayjs(item.updated_at).locale(id).format('ddd').toUpperCase()}
                   hariBulan={dayjs(item.updated_at).format('DD/MM')}
                   judul={item.nama_berkas}
-                  tanggal={dayjs(item.updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  tanggal={dayjs(item.updated_at).locale(id).format('dddd, DD MMMM YYYY')}
                   detail={item.keterangan}
                   link={item.id}
                 />

@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
+import id from 'dayjs/locale/id';
 import { agenda } from '../api/agenda';
 
 function AgendaCell(props) {
@@ -43,7 +44,7 @@ export default function DaftarAgenda({ daftarAgenda }) {
             return (
               <AgendaCell
                 dykey={item.id}
-                hari={dayjs(item.waktu).locale('id').format('ddd').toUpperCase()}
+                hari={dayjs(item.waktu).locale(id).format('ddd').toUpperCase()}
                 hariBulan={dayjs(item.waktu).format('DD/MM')}
                 judul={item.judul}
                 tempat={item.tempat}

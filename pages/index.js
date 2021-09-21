@@ -12,6 +12,7 @@ import { MdDeveloperBoard, MdEmail, MdPhone } from "react-icons/md";
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import dayjs from 'dayjs';
+import id from 'dayjs/locale/id';
 import dynamic from 'next/dynamic';
 import { agenda } from './api/agenda';
 import { pengumuman } from './api/pengumuman';
@@ -139,14 +140,14 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           <Flex flexDir={{ base: "column", xl: "row" }} my={{ base: "15px", xl: 0 }}>
             <Flex flexDirection="column">
               <AgendaCell dykey={daftarAgenda[0].id}
-                hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
+                hari={dayjs(daftarAgenda[0].waktu).locale(id).format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[0].judul)}
                 tempat={dots(18, daftarAgenda[0].tempat)}
                 dylink={`/agenda/${daftarAgenda[0].id}`}
               />
               <AgendaCell dykey={daftarAgenda[1].id}
-                hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
+                hari={dayjs(daftarAgenda[1].waktu).locale(id).format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[1].judul)}
                 tempat={dots(18, daftarAgenda[1].tempat)}
@@ -155,14 +156,14 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             </Flex>
             <Flex flexDirection="column">
               <AgendaCell dykey={daftarAgenda[2].id}
-                hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
+                hari={dayjs(daftarAgenda[2].waktu).locale(id).format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[2].judul)}
                 tempat={dots(18, daftarAgenda[2].tempat)}
                 dylink={`/agenda/${daftarAgenda[2].id}`}
               />
               <AgendaCell dykey={daftarAgenda[3].id}
-                hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
+                hari={dayjs(daftarAgenda[3].waktu).locale(id).format('ddd').toUpperCase()}
                 hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
                 judul={dots(28, daftarAgenda[3].judul)}
                 tempat={dots(18, daftarAgenda[3].tempat)}
@@ -242,7 +243,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
           dykey={daftarArtikel[0].id}
           tema="ARTIKEL"
           judul={dots(47, daftarArtikel[0].judul)}
-          tanggal={dayjs(daftarArtikel[0].tanggal).locale('id').format('DD MMMM YYYY')}
+          tanggal={dayjs(daftarArtikel[0].tanggal).locale(id).format('DD MMMM YYYY')}
           dylink={`/artikel/${daftarArtikel[0].id}`}
         >
           <div dangerouslySetInnerHTML={{ __html: dots(260, daftarArtikel[0].detail) }} />
@@ -262,35 +263,35 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
             <PengumumanCell
               dykey={daftarPengumuman[0].id}
               judul={daftarPengumuman[0].judul}
-              tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              tanggal={dayjs(daftarPengumuman[0].updated_at).locale(id).format('dddd, DD MMMM YYYY')}
               dylink={`/pengumuman/${daftarPengumuman[0].id}`}
             />
             <Divider />
             <PengumumanCell
               dykey={daftarPengumuman[1].id}
               judul={daftarPengumuman[1].judul}
-              tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              tanggal={dayjs(daftarPengumuman[1].updated_at).locale(id).format('dddd, DD MMMM YYYY')}
               dylink={`/pengumuman/${daftarPengumuman[1].id}`}
             />
             <Divider />
             <PengumumanCell
               dykey={daftarPengumuman[2].id}
               judul={daftarPengumuman[2].judul}
-              tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              tanggal={dayjs(daftarPengumuman[2].updated_at).locale(id).format('dddd, DD MMMM YYYY')}
               dylink={`/pengumuman/${daftarPengumuman[2].id}`}
             />
             <Divider />
             <PengumumanCell
               dykey={daftarPengumuman[3].id}
               judul={daftarPengumuman[3].judul}
-              tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              tanggal={dayjs(daftarPengumuman[3].updated_at).locale(id).format('dddd, DD MMMM YYYY')}
               dylink={`/pengumuman/${daftarPengumuman[3].id}`}
             />
             <Divider />
             <PengumumanCell
               dykey={daftarPengumuman[4].id}
               judul={daftarPengumuman[4].judul}
-              tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+              tanggal={dayjs(daftarPengumuman[4].updated_at).locale(id).format('dddd, DD MMMM YYYY')}
               dylink={`/pengumuman/${daftarPengumuman[4].id}`}
             />
           </Flex>
