@@ -40,20 +40,22 @@ export default function Slide() {
     if (slideNum === null) {
       setSlideNum(1);
     }
-    if (slideCount < 100) {
-      wait(75).then(() => setSlideCount(slideCount + 1));
-    } else if (slideCount === 100) {
-      setSlideCount(0);
-      switch (slideNum) {
-        case 1:
-          setSlideNum(2);
-          break;
-        case 2:
-          setSlideNum(1);
-          break;
+    else {
+      if (slideCount < 100) {
+        wait(75).then(() => setSlideCount(slideCount + 1));
+      } else if (slideCount === 100) {
+        setSlideCount(0);
+        switch (slideNum) {
+          case 1:
+            setSlideNum(2);
+            break;
+          case 2:
+            setSlideNum(1);
+            break;
+        }
       }
     }
-  }, [slideCount])
+  })
 
   return (
     <React.Fragment>
