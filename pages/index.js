@@ -81,7 +81,7 @@ const PengumumanCell = dynamic(
 export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita }) {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
   const [isLargerThan1300] = useMediaQuery("(min-width: 1300px)")
-  const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)")
+  const [isSmallerThan1000] = useMediaQuery("(max-width: 1000px)")
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
@@ -388,7 +388,7 @@ export default function Home({ daftarAgenda, daftarPengumuman, daftarArtikel, da
               />
             }
             {
-              isSmallerThan1280 &&
+              isSmallerThan1000 &&
               <KehadiranCell
                 key={daftarKehadiran[3].id}
                 gambar={`${server}/storage/${daftarKehadiran[3].avatar}`}
