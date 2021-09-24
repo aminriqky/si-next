@@ -19,14 +19,12 @@ const SlideShow = React.memo(props => {
       <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }}
         fontWeight="semibold" zIndex="2" pointerEvents="none">
         <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
-          {props.children}
+          {props.text}
         </Text>
         <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
           {props.vimi}
         </Text>
-        <Progress role="progressbar" mt="2vw" value={props.slideCount} size="xs" max={100} min={0}
-          aria-label="progressbar" colorScheme="teal" width="300px" isAnimated hasStripe
-        />
+        {props.children}
       </Box>
     </SlideFade>
   )
@@ -57,18 +55,24 @@ export default function Slide() {
     <React.Fragment>
       {
         slideNum === 1 &&
-        <SlideShow gambar="/visi.png" vimi="Visi" slideCount={slideCount} >
-          MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI
-          YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN
-          BERKARAKTER ISLAMI PADA TAHUN 2027
+        <SlideShow
+          gambar="/visi.png"
+          vimi="Visi"
+          text="MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN BERKARAKTER ISLAMI PADA TAHUN 2027"
+        >
+          <Progress role="progressbar" mt="2vw" value={slideCount} size="xs" max={100} min={0}
+            aria-label="progressbar" colorScheme="teal" width="300px" isAnimated hasStripe />
         </SlideShow>
       }
       {
         slideNum === 2 &&
-        <SlideShow gambar="/misi.png" vimi="Misi" slideCount={slideCount} >
-          MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI
-          YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG
-          DAPAT MENSEJAHTERAKAN MASYARAKAT
+        <SlideShow
+          gambar="/misi.png"
+          vimi="Misi"
+          text="MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT"
+        >
+          <Progress role="progressbar" mt="2vw" value={slideCount} size="xs" max={100} min={0}
+            aria-label="progressbar" colorScheme="teal" width="300px" isAnimated hasStripe />
         </SlideShow>
       }
     </React.Fragment>
