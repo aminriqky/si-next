@@ -11,7 +11,7 @@ const wait = (timeout) => {
   });
 }
 
-function SlideShow(props) {
+const SlideShow = React.memo(props => {
   const router = useRouter();
 
   return (
@@ -37,7 +37,7 @@ function SlideShow(props) {
       </Box>
     </SlideFade>
   );
-}
+})
 
 function SlideButton(props) {
   return (
