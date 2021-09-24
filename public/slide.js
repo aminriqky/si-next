@@ -37,23 +37,22 @@ export default function Slide() {
   const [slideCount, setSlideCount] = useControllableState({ defaultValue: 0 });
 
   useEffect(() => {
-    if (slideNum === null) {
-      setSlideNum(1);
-    }
-    else {
-      if (slideCount < 100) {
-        wait(75).then(() => setSlideCount(slideCount + 1));
-      } else if (slideCount === 100) {
-        setSlideCount(0);
-        switch (slideNum) {
-          case 1:
+    switch (slideNum) {
+      case null:
+        setSlideNum(1);
+        break;
+      default:
+        if (slideCount < 100) {
+          wait(75).then(() => setSlideCount(slideCount + 1));
+        } else if (slideCount === 100) {
+          setSlideCount(0);
+          if (slideNum === 1) {
             setSlideNum(2);
-            break;
-          case 2:
+          } else if (slideNum === 2) {
             setSlideNum(1);
-            break;
+          }
         }
-      }
+        break;
     }
   })
 
