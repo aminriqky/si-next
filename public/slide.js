@@ -10,7 +10,7 @@ const wait = (timeout) => {
   });
 }
 
-function SlideShow(props) {
+const SlideShow = React.memo(props => {
   return (
     <SlideFade in={true} offsetY="-100px">
       <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" pos="absolute" w="100%">
@@ -29,30 +29,27 @@ function SlideShow(props) {
         />
       </Box>
     </SlideFade>
-  );
-}
+  )
+})
 
 export default function Slide() {
   const [slideNum, setSlideNum] = useState(null);
   const [slideCount, setSlideCount] = useControllableState({ defaultValue: 0 });
 
   useEffect(() => {
-    switch (slideNum) {
-      case null:
-        setSlideNum(1);
-        break;
-      default:
-        if (slideCount < 100) {
-          wait(75).then(() => setSlideCount(slideCount + 1));
-        } else if (slideCount === 100) {
-          setSlideCount(0);
-          if (slideNum === 1) {
-            setSlideNum(2);
-          } else if (slideNum === 2) {
-            setSlideNum(1);
-          }
+    if (slideNum === null) {
+      setSlideNum(1);
+    } else {
+      if (slideCount < 100) {
+        wait(75).then(() => setSlideCount(slideCount + 1));
+      } else if (slideCount === 100) {
+        setSlideCount(0);
+        if (slideNum === 1) {
+          setSlideNum(2);
+        } else if (slideNum === 2) {
+          setSlideNum(1);
         }
-        break;
+      }
     }
   })
 
