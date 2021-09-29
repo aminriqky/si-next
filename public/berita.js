@@ -41,14 +41,13 @@ const SlideShow = React.memo(props => {
 
 const SlideButton = React.memo(props => {
   return (
-    <Button aria-label="Tombol Slide" _focus={{ outline: "none" }} onClick={props.handleClick}
-      _hover={{ bg: "gray.400" }} _pressed={{ bg: "gray.400" }} w="2" h="2"
-      mx="2" mt="10" borderRadius="full" bg="gray.300"
+    <Button aria-label="Tombol Slide" _focus={{ outline: "none" }} onClick={props.handleClick} bg={props.bg}
+      _hover={{ bg: "gray.500" }} _active={{ bg: "gray.600" }} w="2" h="2" mx="2" mt="10" borderRadius="full"
     />
   );
 })
 
-export default function Berita(props) {
+const Berita = React.memo(props => {
   const [slideNum, setSlideNum] = useState(null);
   const [slideCount, setSlideCount] = useState(0);
   const router = useRouter();
@@ -82,7 +81,15 @@ export default function Berita(props) {
   }, [slideCount])
 
   function slideClick(num) {
-    setSlideNum(num);
+    let color = '';
+
+    if (slideNum === num) {
+      color = 'gray.400'
+    } else {
+      color = 'gray.300'
+    }
+
+    return color
   }
 
   return (
@@ -120,12 +127,14 @@ export default function Berita(props) {
         }
       </Flex>
       <Flex flexDir="row" position="absolute" alignSelf={{ base: "center" }} mt={{ base: 675, xl: 475 }}>
-        <SlideButton handleClick={() => slideClick(1)} />
-        <SlideButton handleClick={() => slideClick(2)} />
-        <SlideButton handleClick={() => slideClick(3)} />
-        <SlideButton handleClick={() => slideClick(4)} />
-        <SlideButton handleClick={() => slideClick(5)} />
+        <SlideButton bg={() => slideClick(1)} handleClick={() => setSlideNum(1)} />
+        <SlideButton bg={() => slideClick(2)} handleClick={() => setSlideNum(2)} />
+        <SlideButton bg={() => slideClick(3)} handleClick={() => setSlideNum(3)} />
+        <SlideButton bg={() => slideClick(4)} handleClick={() => setSlideNum(4)} />
+        <SlideButton bg={() => slideClick(5)} handleClick={() => setSlideNum(5)} />
       </Flex>
     </Flex>
   );
-}
+})
+
+export default Berita;
