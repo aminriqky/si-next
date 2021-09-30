@@ -1,6 +1,6 @@
 {
   "name": "si-next",
-  "version": "1.7.0",
+  "version": "1.7.5",
   "private": true,
   "scripts": {
     "dev": "next dev",
