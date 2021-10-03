@@ -7,7 +7,7 @@ export default function KehadiranCell(props) {
   const router = useRouter();
 
   return (
-    <Flex key={props.key} my={6} mr={{ base: "2px", xl: 4 }} bg="#F9FAFB" w="135px">
+    <Flex key={props.key} my={6} ml={2} mr={2} bg="#F9FAFB" w="135px">
       <Box w="xs" bg="white" shadow="lg" rounded="lg" overflow="hidden" mx="auto">
         <Img w="full" h={32} fit="cover" src={props.gambar} alt="avatar" />
         <Box py={3} textAlign="center">

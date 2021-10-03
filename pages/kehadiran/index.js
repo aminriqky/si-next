@@ -1,5 +1,5 @@
 import {
-  Text, Box, Flex, Skeleton, Divider
+  Text, Box, Flex
 } from "@chakra-ui/react";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
@@ -14,21 +14,18 @@ export default function DaftarKehadiran({ daftarKehadiran }) {
         <Text fontSize="28" pb="2%" fontWeight="semibold">
           Daftar Kehadiran
         </Text>
-        <Flex flexDir="row" flexWrap="wrap">
+        <Flex flexDir="row" flexWrap="wrap" justifyContent="center">
           {
             daftarKehadiran !== null && daftarKehadiran.map((item) => {
               return (
-                <>
-                  <KehadiranCell
-                    key={item.id}
-                    gambar={`${server}/storage/${item.avatar}`}
-                    judul={item.name}
-                    deskripsi={item.jabatan}
-                    hadir={item.hadir}
-                    dylink={`/kehadiran/${item.id}`}
-                  />
-                  &emsp;
-                </>
+                <KehadiranCell
+                  key={item.id}
+                  gambar={`${server}/storage/${item.avatar}`}
+                  judul={item.name}
+                  deskripsi={item.jabatan}
+                  hadir={item.hadir}
+                  dylink={`/kehadiran/${item.id}`}
+                />
               )
             })
           }
