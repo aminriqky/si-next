@@ -1,5 +1,5 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text, Box, Flex, Button, Link
 } from "@chakra-ui/react";
@@ -33,13 +33,13 @@ function PengumumanCell(props: PengumumanCellProps) {
   }, [])
 
   async function linkUnduh() {
-    const unduh = await fetch(`${server}/api/downloadfile/${props.link}`);
+    const unduh = await fetch(`${server}/api/filepengumuman/${props.link}`);
     const jsonData = await unduh.json()
     setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
   }
 
   return (
-    <>
+    <React.Fragment>
       <Flex key={props.key} flexDirection="row" flex="1">
         <Box minW="60px" height="60px" m={{ base: "3vw", xl: "1.4vw" }} textAlign="center" border="1px">
           <Text mt="5px" alignSelf="center" fontWeight="semibold" fontSize="lg">{props.hari}</Text>
@@ -66,7 +66,7 @@ function PengumumanCell(props: PengumumanCellProps) {
       <Text pl="2%" fontSize={{ base: "xs", lg: "md" }}>
         <div dangerouslySetInnerHTML={{ __html: props.detail }} />
       </Text>
-    </>
+    </React.Fragment>
   )
 }
 
@@ -83,7 +83,7 @@ const Pengumuman: NextPage<daftarPengumuman> = ({ daftarPengumuman }) => {
       <Box bg="white" opacity="0.9" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
         {
           daftarPengumuman !== null && daftarPengumuman.map((item) => {
-            if (item.id.toString() == pengumuman) {
+            if (item.id.toString() === pengumuman) {
               return (
                 <PengumumanCell
                   key={item.id}
