@@ -1,1 +1,1 @@
-export const server = 'https://webprodi.sashi.id';
+export const server = 'http://si.radenfatah.ac.id';
