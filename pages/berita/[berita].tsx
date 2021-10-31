@@ -5,7 +5,7 @@ import {
 import { useRouter } from "next/router";
 import { FcClock } from "@react-icons/all-files/fc/FcClock";
 import { FcOvertime } from "@react-icons/all-files/fc/FcOvertime";
-import ExNav from '../../public/exnav'
+import ExNav from '../../public/exnav';
 import Menu from '../../public/menu';
 import dayjs from 'dayjs';
 import { berita } from '../api/berita';
@@ -39,13 +39,13 @@ const Berita: NextPage<daftarBerita> = ({ daftarBerita }) => {
                     <Icon as={FcOvertime} w="25px" h="auto" />
                     &ensp;
                     <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
-                      {dayjs(item.updated_at).format('DD/MM/YYYY')}
+                      {dayjs(item.tanggal).format('DD/MM/YYYY')}
                     </Text>
                     &ensp;
                     <Icon as={FcClock} w="25px" h="auto" />
                     &ensp;
                     <Text color="black" fontSize={{ base: "sm", xl: "md" }} pt="2px">
-                      {dayjs(item.updated_at).format('HH:mm')} WIB
+                      {dayjs(item.tanggal).format('HH:mm')} WIB
                     </Text>
                     <Text ml={{ xl: "3%" }} color="black" fontWeight="medium" pt="2px">
                       Penulis:
