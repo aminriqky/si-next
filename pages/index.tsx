@@ -280,7 +280,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
           </Text>
           <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
             {
-              daftarPengumuman[0].id !== undefined &&
+              daftarPengumuman[0] !== undefined &&
               <React.Fragment>
                 <PengumumanCell
                   key={daftarPengumuman[0].id}
@@ -292,7 +292,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
               </React.Fragment>
             }
             {
-              daftarPengumuman[1].id !== undefined &&
+              daftarPengumuman[1] !== undefined &&
               <React.Fragment>
                 <PengumumanCell
                   key={daftarPengumuman[1].id}
@@ -304,7 +304,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
               </React.Fragment>
             }
             {
-              daftarPengumuman[2].id !== undefined &&
+              daftarPengumuman[2] !== undefined &&
               <React.Fragment>
                 <PengumumanCell
                   key={daftarPengumuman[2].id}
@@ -316,7 +316,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
               </React.Fragment>
             }
             {
-              daftarPengumuman[3].id !== undefined &&
+              daftarPengumuman[3] !== undefined &&
               <React.Fragment>
                 <PengumumanCell
                   key={daftarPengumuman[3].id}
@@ -328,7 +328,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
               </React.Fragment>
             }
             {
-              daftarPengumuman[4].id !== undefined &&
+              daftarPengumuman[4] !== undefined &&
                 <PengumumanCell
                   key={daftarPengumuman[4].id}
                   judul={daftarPengumuman[4].judul}
