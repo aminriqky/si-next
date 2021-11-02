@@ -279,40 +279,63 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
             </Link>
           </Text>
           <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
-            <PengumumanCell
-              key={daftarPengumuman[0].id}
-              judul={daftarPengumuman[0].judul}
-              tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-              dylink={`/pengumuman/${daftarPengumuman[0].id}`}
-            />
-            <Divider />
-            <PengumumanCell
-              key={daftarPengumuman[1].id}
-              judul={daftarPengumuman[1].judul}
-              tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-              dylink={`/pengumuman/${daftarPengumuman[1].id}`}
-            />
-            <Divider />
-            <PengumumanCell
-              key={daftarPengumuman[2].id}
-              judul={daftarPengumuman[2].judul}
-              tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-              dylink={`/pengumuman/${daftarPengumuman[2].id}`}
-            />
-            <Divider />
-            <PengumumanCell
-              key={daftarPengumuman[3].id}
-              judul={daftarPengumuman[3].judul}
-              tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-              dylink={`/pengumuman/${daftarPengumuman[3].id}`}
-            />
-            <Divider />
-            <PengumumanCell
-              key={daftarPengumuman[4].id}
-              judul={daftarPengumuman[4].judul}
-              tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-              dylink={`/pengumuman/${daftarPengumuman[4].id}`}
-            />
+            {
+              daftarPengumuman[0].id !== undefined &&
+              <React.Fragment>
+                <PengumumanCell
+                  key={daftarPengumuman[0].id}
+                  judul={daftarPengumuman[0].judul}
+                  tanggal={dayjs(daftarPengumuman[0].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[0].id}`}
+                />
+                <Divider />
+              </React.Fragment>
+            }
+            {
+              daftarPengumuman[1].id !== undefined &&
+              <React.Fragment>
+                <PengumumanCell
+                  key={daftarPengumuman[1].id}
+                  judul={daftarPengumuman[1].judul}
+                  tanggal={dayjs(daftarPengumuman[1].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[1].id}`}
+                />
+                <Divider />
+              </React.Fragment>
+            }
+            {
+              daftarPengumuman[2].id !== undefined &&
+              <React.Fragment>
+                <PengumumanCell
+                  key={daftarPengumuman[2].id}
+                  judul={daftarPengumuman[2].judul}
+                  tanggal={dayjs(daftarPengumuman[2].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[2].id}`}
+                />
+                <Divider />
+              </React.Fragment>
+            }
+            {
+              daftarPengumuman[3].id !== undefined &&
+              <React.Fragment>
+                <PengumumanCell
+                  key={daftarPengumuman[3].id}
+                  judul={daftarPengumuman[3].judul}
+                  tanggal={dayjs(daftarPengumuman[3].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[3].id}`}
+                />
+                <Divider />
+              </React.Fragment>
+            }
+            {
+              daftarPengumuman[4].id !== undefined &&
+                <PengumumanCell
+                  key={daftarPengumuman[4].id}
+                  judul={daftarPengumuman[4].judul}
+                  tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                  dylink={`/pengumuman/${daftarPengumuman[4].id}`}
+                />
+            }
           </Flex>
         </Flex>
         <Flex my={{ base: 25, xl: 75 }} px="10" flexDir="column" width={{ base: "100%", xl: "300px" }} border="solid lightgray 1px">
