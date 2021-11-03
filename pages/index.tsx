@@ -158,36 +158,48 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
           </Button>
           <Flex flexDir={{ base: "column", xl: "row" }} my={{ base: "15px", xl: 0 }}>
             <Flex flexDirection="column">
-              <AgendaCell key={daftarAgenda[0].id}
-                hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
-                hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
-                judul={dots(28, daftarAgenda[0].judul)}
-                tempat={dots(18, daftarAgenda[0].tempat)}
-                dylink={`/agenda/${daftarAgenda[0].id}`}
-              />
-              <AgendaCell key={daftarAgenda[1].id}
-                hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
-                hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
-                judul={dots(28, daftarAgenda[1].judul)}
-                tempat={dots(18, daftarAgenda[1].tempat)}
-                dylink={`/agenda/${daftarAgenda[1].id}`}
-              />
+              {
+                daftarAgenda[0] !== undefined &&
+                <AgendaCell key={daftarAgenda[0].id}
+                  hari={dayjs(daftarAgenda[0].waktu).locale('id').format('ddd').toUpperCase()}
+                  hariBulan={dayjs(daftarAgenda[0].waktu).format('DD/MM')}
+                  judul={dots(28, daftarAgenda[0].judul)}
+                  tempat={dots(18, daftarAgenda[0].tempat)}
+                  dylink={`/agenda/${daftarAgenda[0].id}`}
+                />
+              }
+              {
+                daftarAgenda[1] !== undefined &&
+                <AgendaCell key={daftarAgenda[1].id}
+                  hari={dayjs(daftarAgenda[1].waktu).locale('id').format('ddd').toUpperCase()}
+                  hariBulan={dayjs(daftarAgenda[1].waktu).format('DD/MM')}
+                  judul={dots(28, daftarAgenda[1].judul)}
+                  tempat={dots(18, daftarAgenda[1].tempat)}
+                  dylink={`/agenda/${daftarAgenda[1].id}`}
+                />
+              }
             </Flex>
             <Flex flexDirection="column">
-              <AgendaCell key={daftarAgenda[2].id}
-                hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
-                hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
-                judul={dots(28, daftarAgenda[2].judul)}
-                tempat={dots(18, daftarAgenda[2].tempat)}
-                dylink={`/agenda/${daftarAgenda[2].id}`}
-              />
-              <AgendaCell key={daftarAgenda[3].id}
-                hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
-                hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
-                judul={dots(28, daftarAgenda[3].judul)}
-                tempat={dots(18, daftarAgenda[3].tempat)}
-                dylink={`/agenda/${daftarAgenda[3].id}`}
-              />
+            {
+                daftarAgenda[2] !== undefined &&
+                <AgendaCell key={daftarAgenda[2].id}
+                  hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
+                  hariBulan={dayjs(daftarAgenda[2].waktu).format('DD/MM')}
+                  judul={dots(28, daftarAgenda[2].judul)}
+                  tempat={dots(18, daftarAgenda[2].tempat)}
+                  dylink={`/agenda/${daftarAgenda[2].id}`}
+                />
+              }
+              {
+                daftarAgenda[3] !== undefined &&
+                <AgendaCell key={daftarAgenda[3].id}
+                  hari={dayjs(daftarAgenda[3].waktu).locale('id').format('ddd').toUpperCase()}
+                  hariBulan={dayjs(daftarAgenda[3].waktu).format('DD/MM')}
+                  judul={dots(28, daftarAgenda[3].judul)}
+                  tempat={dots(18, daftarAgenda[3].tempat)}
+                  dylink={`/agenda/${daftarAgenda[3].id}`}
+                />
+              }
             </Flex>
           </Flex>
         </Flex>
