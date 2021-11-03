@@ -35,7 +35,11 @@ function PengumumanCell(props: PengumumanCellProps) {
   async function linkUnduh() {
     const unduh = await fetch(`${server}/api/filepengumuman/${props.link}`);
     const jsonData = await unduh.json()
-    setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
+    if (jsonData.length !== 0) {
+      setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
+    } else {
+      setSaveFile(jsonData);
+    }
   }
 
   return (
@@ -52,17 +56,20 @@ function PengumumanCell(props: PengumumanCellProps) {
           <Text fontSize="sm">{props.tanggal}</Text>
         </Box>
       </Flex>
-      <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" pl="2%" mb={{ base: "3vw", xl: "1.41vw" }}>
-        <Text color="teal" pt="2.5px">
-          Lampiran File :
-        </Text>
-        &ensp;
-        <Link _hover={{ textTransform: "none" }} href={saveFile} download>
-          <Button colorScheme="teal" size="sm">
-            Unduh
-          </Button>
-        </Link>
-      </Flex>
+      {
+        saveFile.length !== 0 &&
+        <Flex flexDirection="row" flex="1" bg="whiteAlpha.900" pl="2%" mb={{ base: "3vw", xl: "1.41vw" }}>
+          <Text color="teal" pt="2.5px">
+            Lampiran File :
+          </Text>
+          &ensp;
+          <Link _hover={{ textTransform: "none" }} href={saveFile} download>
+            <Button colorScheme="teal" size="sm">
+              Unduh
+            </Button>
+          </Link>
+        </Flex>
+      }
       <Text pl="2%" fontSize={{ base: "xs", lg: "md" }}>
         <div dangerouslySetInnerHTML={{ __html: props.detail }} />
       </Text>
