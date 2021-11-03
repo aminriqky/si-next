@@ -492,7 +492,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita },
-    revalidate: 30
+    revalidate: 15
   };
 }
 
