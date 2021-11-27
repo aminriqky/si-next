@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Text, Flex, Link
+  Text, Flex, Link, Box
 } from "@chakra-ui/react";
 import { useRouter } from 'next/router';
 
@@ -40,9 +40,9 @@ const ArtikelCell: React.FC<ArtikelCellProps> = React.memo((props) => {
       <Text fontSize="xs" color="gray.300" pt="4px" pb="2">
         {props.tanggal}
       </Text>
-      <Text fontSize="xs" pb="6" color="white">
+      <Box fontSize="xs" pb="6" color="white">
         {props.children}
-      </Text>
+      </Box>
     </Flex>
   );
 })

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
   Text, Box, SlideFade, Img, Flex, Icon, Link, Button,
 } from "@chakra-ui/react";
+import Interweave from "interweave";
 import { FcNews } from "@react-icons/all-files/fc/FcNews";
 import { useRouter } from 'next/router';
 
@@ -36,9 +37,9 @@ const SlideShow = React.memo<SlideShowProps>((props) => {
                 {props.judul}
               </Link>
             </Text>
-            <Text color="gray.600" fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: props.detail }} />
-            </Text>
+            <Box color="gray.600" fontSize={{ base: "xs", lg: "md" }}>
+              <Interweave content={props.detail}/>
+            </Box>
           </Flex>
         </Flex>
       </Box>

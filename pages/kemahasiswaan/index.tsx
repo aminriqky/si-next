@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import {
   Text, Box, Img, Flex, Link
 } from "@chakra-ui/react";
+import Interweave from 'interweave';
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
 import { organisasi } from '../api/organisasi';
@@ -30,9 +31,9 @@ const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
           {props.children}
         </Text>
         &thinsp;
-        <Text color="black" fontWeight="light" fontSize={{ base: "xs", lg: "md" }}>
-          <div dangerouslySetInnerHTML={{ __html: props.detail }} />
-        </Text>
+        <Box color="black" fontWeight="light" fontSize={{ base: "xs", lg: "md" }}>
+          <Interweave content={props.detail}/>
+        </Box>
       </Flex>
     </Flex>
   );

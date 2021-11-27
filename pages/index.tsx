@@ -17,6 +17,7 @@ import { MdDeveloperBoard } from "@react-icons/all-files/md/MdDeveloperBoard";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdPhone } from "@react-icons/all-files/md/MdPhone";
 import { ExternalLinkIcon } from '@chakra-ui/icons';
+import Interweave from 'interweave';
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
 import dayjs from 'dayjs';
@@ -277,7 +278,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
           tanggal={dayjs(daftarArtikel[0].tanggal).locale('id').format('DD MMMM YYYY')}
           dylink={`/artikel/${daftarArtikel[0].id}`}
         >
-          <div dangerouslySetInnerHTML={{ __html: dots(260, daftarArtikel[0].detail) }} />
+          <Interweave content={daftarArtikel[0].detail} />
         </ArtikelCell>
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">

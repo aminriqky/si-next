@@ -2,6 +2,7 @@ import type { NextPage, GetServerSideProps } from 'next';
 import {
   Text, Box, Icon, Flex, Img
 } from "@chakra-ui/react";
+import Interweave from 'interweave';
 import { useRouter } from "next/router";
 import { FcClock } from "@react-icons/all-files/fc/FcClock";
 import { FcOvertime } from "@react-icons/all-files/fc/FcOvertime";
@@ -61,9 +62,9 @@ const Artikel: NextPage<daftarArtikel> = ({ daftarArtikel }) => {
                       layout="fill" objectFit="fill"
                     />
                   }
-                  <Text mt="10px" fontSize={{ base: "xs", lg: "md" }}>
-                    <div dangerouslySetInnerHTML={{ __html: item.detail }} />
-                  </Text>
+                  <Box mt="10px" fontSize={{ base: "xs", lg: "md" }}>
+                    <Interweave content={item.detail}/>
+                  </Box>
                 </Box>
               )
             }

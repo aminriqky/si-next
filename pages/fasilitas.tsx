@@ -1,7 +1,6 @@
 import type { NextPage, GetStaticProps } from 'next'
-import {
-  Text, Box
-} from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
+import Interweave from 'interweave';
 import ExNav from '../public/exnav'
 import Menu from '../public/menu';
 import { profil } from './api/profil';
@@ -15,9 +14,9 @@ const Fasilitas: NextPage<fasilitas> = ({ daftarProfil }) => {
   return (
     <Menu>
       <Box bg="white" opacity="0.9" zIndex="999" textColor="black" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
-        <Text fontSize={{ base: "xs", lg: "md" }}>
-          <div dangerouslySetInnerHTML={{ __html: daftarProfil[5].text }} />
-        </Text>
+        <Box fontSize={{ base: "xs", lg: "md" }}>
+          <Interweave content={daftarProfil[5].text} />
+        </Box>
       </Box>
       <ExNav />
     </Menu>

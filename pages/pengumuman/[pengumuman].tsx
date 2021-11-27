@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import {
   Text, Box, Flex, Button, Link
 } from "@chakra-ui/react";
+import Interweave from 'interweave';
 import { useRouter } from "next/router";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
@@ -70,9 +71,9 @@ function PengumumanCell(props: PengumumanCellProps) {
           </Link>
         </Flex>
       }
-      <Text pl="2%" fontSize={{ base: "xs", lg: "md" }}>
-        <div dangerouslySetInnerHTML={{ __html: props.detail }} />
-      </Text>
+      <Box pl="2%" fontSize={{ base: "xs", lg: "md" }}>
+        <Interweave content={props.detail}/>
+      </Box>
     </>
   )
 }
