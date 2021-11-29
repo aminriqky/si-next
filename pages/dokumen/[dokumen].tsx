@@ -33,7 +33,7 @@ function DokumenCell(props: DokumenCellProps) {
   }, [])
 
   async function linkUnduh() {
-    const unduh = await fetch(`${server}/api/filepengumuman/${props.link}`);
+    const unduh = await fetch(`${server}/api/downloadfile/${props.link}`);
     const jsonData = await unduh.json()
     if (jsonData.length !== 0) {
       setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
