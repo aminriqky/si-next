@@ -1,5 +1,5 @@
 import type { NextPage, GetServerSideProps } from 'next';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Text, Box, Flex, Button, Link
 } from "@chakra-ui/react";
@@ -44,7 +44,7 @@ function PengumumanCell(props: PengumumanCellProps) {
   }
 
   return (
-    <>
+    <React.Fragment>
       <Flex key={props.key} flexDirection="row" flex="1">
         <Box minW="60px" height="60px" m={{ base: "3vw", xl: "1.4vw" }} textAlign="center" border="1px">
           <Text mt="5px" alignSelf="center" fontWeight="semibold" fontSize="lg">{props.hari}</Text>
@@ -72,9 +72,9 @@ function PengumumanCell(props: PengumumanCellProps) {
         </Flex>
       }
       <Box pl="2%" fontSize={{ base: "xs", lg: "md" }}>
-        <Interweave content={props.detail}/>
+        <Interweave content={props.detail} />
       </Box>
-    </>
+    </React.Fragment>
   )
 }
 
