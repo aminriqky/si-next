@@ -181,7 +181,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
               }
             </Flex>
             <Flex flexDirection="column">
-            {
+              {
                 daftarAgenda[2] !== undefined &&
                 <AgendaCell key={daftarAgenda[2].id}
                   hari={dayjs(daftarAgenda[2].waktu).locale('id').format('ddd').toUpperCase()}
@@ -278,7 +278,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
           tanggal={dayjs(daftarArtikel[0].tanggal).locale('id').format('DD MMMM YYYY')}
           dylink={`/artikel/${daftarArtikel[0].id}`}
         >
-          <Interweave content={daftarArtikel[0].detail} />
+          <Interweave content={dots(260, daftarArtikel[0].detail)} />
         </ArtikelCell>
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
@@ -342,12 +342,12 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
             }
             {
               daftarPengumuman[4] !== undefined &&
-                <PengumumanCell
-                  key={daftarPengumuman[4].id}
-                  judul={daftarPengumuman[4].judul}
-                  tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
-                  dylink={`/pengumuman/${daftarPengumuman[4].id}`}
-                />
+              <PengumumanCell
+                key={daftarPengumuman[4].id}
+                judul={daftarPengumuman[4].judul}
+                tanggal={dayjs(daftarPengumuman[4].updated_at).locale('id').format('dddd, DD MMMM YYYY')}
+                dylink={`/pengumuman/${daftarPengumuman[4].id}`}
+              />
             }
           </Flex>
         </Flex>
