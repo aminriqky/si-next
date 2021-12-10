@@ -173,9 +173,9 @@ export default function ExNav() {
             {" Sistem Informasi "}
           </NextLink>
           <Link href="http://saintek.radenfatah.ac.id/" isExternal>
-            {"SAINTEK UIN Raden Fatah. "}
+            {"SAINTEK UIN Raden Fatah"}
           </Link>
-          All Rights Reserved.
+          {". All Rights Reserved."}
         </Text>
         <Text color="black" textAlign="center" fontWeight="thin">
           <Link href="https://radenfatah.ac.id/" isExternal>

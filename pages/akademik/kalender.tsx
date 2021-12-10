@@ -28,7 +28,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { daftarProfil },
-    revalidate: 30
+    revalidate: 15
   };
 }
 

@@ -13,7 +13,6 @@ import { server } from "../../config";
 import type { organisasi as orgList, berita as beritaList } from '../../public/types';
 
 type MahasiswaCellProps = {
-  key?: number
   logo: string
   color: string
   detail: string
@@ -22,15 +21,11 @@ type MahasiswaCellProps = {
 const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
   return (
     <Flex flexDir={{ base: "column", xl: "row" }} mb="2%">
-      <Img src={`${server}/storage/${props.logo}`}
-        overflow="hidden" borderRadius="5"
-        w="1280px" h="200px" objectFit="contain"
-      />
+      <Img src={`${server}/storage/${props.logo}`} borderRadius="5" maxW="320px" objectFit="contain" />
       <Flex ml={{ base: 0, xl: 32 }} flexDir="column" flexWrap="wrap">
-        <Text color={props.color} fontWeight="semibold">
+        <Text mb="10px" color={props.color} fontWeight="semibold">
           {props.children}
         </Text>
-        &thinsp;
         <Box color="black" fontWeight="light" fontSize={{ base: "xs", lg: "md" }}>
           <Interweave content={props.detail}/>
         </Box>
@@ -105,7 +100,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { daftarOrganisasi, daftarBerita },
-    revalidate: 30
+    revalidate: 15
   };
 }
 

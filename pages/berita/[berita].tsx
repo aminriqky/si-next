@@ -30,7 +30,7 @@ const Berita: NextPage<daftarBerita> = ({ daftarBerita }) => {
             if (item.id.toString() === berita) {
               return (
                 <Box key={item.id}>
-                  <Text fontSize="28" pb="10px" fontWeight="semibold">
+                  <Text fontSize={{ base: 18, xl: 28 }} pb="10px" fontWeight="semibold">
                     {item.judul}
                   </Text>
                   <Flex flexDirection="row" mb="1%" flexWrap="wrap">

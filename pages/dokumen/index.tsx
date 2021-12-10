@@ -60,7 +60,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { daftarDokumen },
-    revalidate: 30
+    revalidate: 15
   };
 }
 

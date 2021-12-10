@@ -1,3 +1,4 @@
+import React from 'react';
 import type { NextPage, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import {
@@ -9,7 +10,6 @@ import { tahun } from '../api/tahun';
 import type { tahun as tahunList } from '../../public/types';
 
 type GaleriCellProps = {
-  key: number
   tahun: number
   judul: string | number
 }
@@ -18,7 +18,7 @@ function GaleriCell(props: GaleriCellProps) {
   const router = useRouter();
 
   return (
-    <LinkBox key={props.key}>
+    <LinkBox>
       <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" h="200px">
         <LinkOverlay color="teal.800" onClick={(e) => {
           e.preventDefault()
@@ -57,7 +57,9 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun }) => {
               {
                 daftarTahun !== null && daftarTahun.map((item) => {
                   return (
-                    <GaleriCell key={item.id} tahun={item.tahun} judul={item.tahun} />
+                    <React.Fragment key={item.id}>
+                      <GaleriCell tahun={item.tahun} judul={item.tahun} />
+                    </React.Fragment>
                   )
                 })
               }
@@ -67,7 +69,9 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun }) => {
               {
                 daftarTahun !== null && daftarTahun.map((item) => {
                   return (
-                    <GaleriCell key={item.id} tahun={item.tahun} judul={item.tahun} />
+                    <React.Fragment key={item.id}>
+                      <GaleriCell tahun={item.tahun} judul={item.tahun} />
+                    </React.Fragment>
                   )
                 })
               }
@@ -84,7 +88,7 @@ export const getStaticProps: GetStaticProps = async () => {
 
   return {
     props: { daftarTahun },
-    revalidate: 30
+    revalidate: 15
   };
 }
 
