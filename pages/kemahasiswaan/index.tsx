@@ -21,7 +21,7 @@ type MahasiswaCellProps = {
 
 const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
   return (
-    <Flex key={props.key} flexDir={{ base: "column", xl: "row" }} mb="2%">
+    <Flex flexDir={{ base: "column", xl: "row" }} mb="2%">
       <Img src={`${server}/storage/${props.logo}`}
         overflow="hidden" borderRadius="5"
         w="1280px" h="200px" objectFit="contain"
