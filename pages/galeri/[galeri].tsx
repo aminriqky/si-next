@@ -1,20 +1,30 @@
-import type { NextPage, GetServerSideProps } from 'next';
+import type { NextPage, GetServerSideProps } from "next";
 import { Fragment } from "react";
 import {
-  Text, Box, AspectRatio, LinkOverlay, LinkBox, Grid, useMediaQuery,
-  Modal, ModalOverlay, ModalContent, useDisclosure, Img
+  Text,
+  Box,
+  AspectRatio,
+  LinkOverlay,
+  LinkBox,
+  Grid,
+  useMediaQuery,
+  Modal,
+  ModalOverlay,
+  ModalContent,
+  useDisclosure,
+  Img,
 } from "@chakra-ui/react";
 import { useRouter } from "next/router";
-import ExNav from '../../public/exnav'
-import Menu from '../../public/menu';
-import { gallery } from '../api/gallery';
+import ExNav from "../../public/exnav";
+import Menu from "../../public/menu";
+import { gallery } from "../api/gallery";
 import { server } from "../../config";
-import type { gallery as galeriList } from '../../public/types';
+import type { gallery as galeriList } from "../../public/types";
 
 type GaleriCellProps = {
-  id: number
-  gambar: string
-}
+  id: number;
+  gambar: string;
+};
 
 function GaleriCell(props: GaleriCellProps) {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -22,19 +32,35 @@ function GaleriCell(props: GaleriCellProps) {
   return (
     <Fragment key={props.id}>
       <LinkBox onClick={onOpen}>
-        <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" maxH="200px">
+        <AspectRatio
+          overflow="hidden"
+          borderRadius="5"
+          maxW="320px"
+          maxH="200px"
+        >
           <LinkOverlay color="teal.800">
             <AspectRatio h="100%" w="100%">
-              <Img src={`${server}/storage/${props.gambar}`} layout="fill" objectFit="fill" />
+              <Img
+                src={`${server}/storage/${props.gambar}`}
+                layout="fill"
+                objectFit="fill"
+              />
             </AspectRatio>
           </LinkOverlay>
         </AspectRatio>
       </LinkBox>
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
-        <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
+        <ModalContent
+          minW={{ base: 315, xl: 720 }}
+          minH={{ base: 310, xl: 540 }}
+        >
           <AspectRatio h="100%" w="100%">
-            <Img src={`${server}/storage/${props.gambar}`} layout="fill" objectFit="fill" />
+            <Img
+              src={`${server}/storage/${props.gambar}`}
+              layout="fill"
+              objectFit="fill"
+            />
           </AspectRatio>
         </ModalContent>
       </Modal>
@@ -43,7 +69,7 @@ function GaleriCell(props: GaleriCellProps) {
 }
 
 interface daftarGaleri {
-  daftarGaleri: Array<galeriList>
+  daftarGaleri: Array<galeriList>;
 }
 
 const Galeri: NextPage<daftarGaleri> = ({ daftarGaleri }) => {
@@ -53,48 +79,49 @@ const Galeri: NextPage<daftarGaleri> = ({ daftarGaleri }) => {
 
   return (
     <Menu>
-      <Box bg="white" opacity="0.9" zIndex="999" mx="8%" my={{ base: "12%", xl: "100px" }} p="4%">
+      <Box
+        bg="white"
+        opacity="0.9"
+        zIndex="999"
+        mx="8%"
+        my={{ base: "12%", xl: "100px" }}
+        p="4%"
+      >
         <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
           Foto Tahun {galeri}
         </Text>
-        {
-          isLargerThan1280 ?
-            <Grid templateColumns="repeat(6, 1fr)" gap={4}>
-              {
-                daftarGaleri !== null && daftarGaleri.map((item) => {
-                  if (item.tahun.toString() === galeri) {
-                    return (
-                      <GaleriCell id={item.id} gambar={item.foto} />
-                    )
-                  }
-                })
-              }
-            </Grid>
-            :
-            <Grid gap={2}>
-              {
-                daftarGaleri !== null && daftarGaleri.map((item) => {
-                  if (item.tahun.toString() === galeri) {
-                    return (
-                      <GaleriCell id={item.id} gambar={item.foto} />
-                    )
-                  }
-                })
-              }
-            </Grid>
-        }
+        {isLargerThan1280 ? (
+          <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+            {daftarGaleri !== null &&
+              daftarGaleri.map((item) => {
+                if (item.tahun.toString() === galeri) {
+                  return <GaleriCell id={item.id} gambar={item.thumnail} />;
+                }
+              })}
+          </Grid>
+        ) : (
+          <Grid gap={2}>
+            {daftarGaleri !== null &&
+              daftarGaleri.map((item) => {
+                if (item.tahun.toString() === galeri) {
+                  return <GaleriCell id={item.id} gambar={item.thumnail} />;
+                }
+              })}
+          </Grid>
+        )}
       </Box>
       <ExNav />
     </Menu>
   );
-}
+};
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const daftarGaleri = await gallery()
+  const daftarGaleri = await gallery();
 
   return {
-    props: { daftarGaleri }
+    props: { daftarGaleri },
   };
-}
+};
 
 export default Galeri;
+
