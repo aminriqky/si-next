@@ -6,12 +6,13 @@ import {
 } from "@chakra-ui/react";
 import ExNav from '../../public/exnav'
 import Menu from '../../public/menu';
-import { tahun } from '../api/tahun';
-import type { tahun as tahunList } from '../../public/types';
+import { berita } from '../api/berita';
+import type { berita as beritaList } from '../../public/types';
 
 type GaleriCellProps = {
-  tahun: number
+  link: number
   judul: string | number
+  gambar: string
 }
 
 function GaleriCell(props: GaleriCellProps) {
@@ -22,7 +23,7 @@ function GaleriCell(props: GaleriCellProps) {
       <AspectRatio overflow="hidden" borderRadius="5" maxW="320px" h="200px">
         <LinkOverlay color="teal.800" onClick={(e) => {
           e.preventDefault()
-          router.push(`/galeri/${props.tahun}`)
+          router.push(`/galeri/${props.link}`)
         }}>
           <Text letterSpacing="widest" fontWeight="semibold" zIndex={999} fontSize="xl" pos="absolute">
             {props.judul}
@@ -30,7 +31,7 @@ function GaleriCell(props: GaleriCellProps) {
           <AspectRatio h="100%" w="100%"
             sx={{ filter: "blur(0.75px) grayscale(25%) opacity(50%)" }}
             _hover={{ filter: "blur(0.75px) grayscale(25%) opacity(75%)" }}>
-            <Img src="/yt.png" layout="fill" objectFit="fill" />
+            <Img src={props.gambar} layout="fill" objectFit="fill" />
           </AspectRatio>
         </LinkOverlay>
       </AspectRatio>
@@ -39,10 +40,10 @@ function GaleriCell(props: GaleriCellProps) {
 }
 
 interface daftarGaleri {
-  daftarTahun: Array<tahunList>
+  daftarBerita: Array<beritaList>
 }
 
-const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun }) => {
+const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarBerita }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
@@ -55,10 +56,10 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun }) => {
           isLargerThan1280 ?
             <Grid templateColumns="repeat(3, 1fr)" gap={8}>
               {
-                daftarTahun !== null && daftarTahun.map((item) => {
+                daftarBerita !== null && daftarBerita.map((item) => {
                   return (
                     <React.Fragment key={item.id}>
-                      <GaleriCell tahun={item.tahun} judul={item.tahun} />
+                      <GaleriCell link={item.id} judul={item.judul} gambar={item.gambar[0]} />
                     </React.Fragment>
                   )
                 })
@@ -67,10 +68,10 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun }) => {
             :
             <Grid gap={5}>
               {
-                daftarTahun !== null && daftarTahun.map((item) => {
+                daftarBerita !== null && daftarBerita.map((item) => {
                   return (
                     <React.Fragment key={item.id}>
-                      <GaleriCell tahun={item.tahun} judul={item.tahun} />
+                      <GaleriCell link={item.id} judul={item.judul} gambar={item.gambar} />
                     </React.Fragment>
                   )
                 })
@@ -84,10 +85,10 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun }) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const daftarTahun = await tahun()
+  const daftarBerita = await berita()
 
   return {
-    props: { daftarTahun },
+    props: { daftarBerita },
     revalidate: 15
   };
 }

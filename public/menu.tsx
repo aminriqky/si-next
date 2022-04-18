@@ -1,40 +1,70 @@
-import React from 'react';
-import { useRouter } from 'next/router'
+import React from "react";
+import { useRouter } from "next/router";
 import {
-  Button, useDisclosure, Drawer, DrawerBody, DrawerHeader, Img, Flex, Link,
-  DrawerOverlay, DrawerContent, DrawerCloseButton, IconButton, Box, Menu,
-  MenuButton, Portal, MenuList, MenuItem, Icon, useMediaQuery
+  Button,
+  useDisclosure,
+  Drawer,
+  DrawerBody,
+  DrawerHeader,
+  Img,
+  Flex,
+  Link,
+  DrawerOverlay,
+  DrawerContent,
+  DrawerCloseButton,
+  IconButton,
+  Box,
+  Menu,
+  MenuButton,
+  Portal,
+  MenuList,
+  MenuItem,
+  Icon,
+  useMediaQuery,
 } from "@chakra-ui/react";
 import { FcCalendar } from "@react-icons/all-files/fc/FcCalendar";
 import { FcCollaboration } from "@react-icons/all-files/fc/FcCollaboration";
 import { FcDocument } from "@react-icons/all-files/fc/FcDocument";
 import { FcViewDetails } from "@react-icons/all-files/fc/FcViewDetails";
-import { HamburgerIcon, ChevronDownIcon } from '@chakra-ui/icons';
+import { FcFinePrint } from "@react-icons/all-files/fc/FcFinePrint";
+import { HamburgerIcon, ChevronDownIcon } from "@chakra-ui/icons";
 
 interface DrawerTitleProps {
-  handleClick: React.MouseEventHandler
-  title: string
+  handleClick: React.MouseEventHandler;
+  title: string;
 }
 
 function DrawerTitle(props: DrawerTitleProps) {
   return (
-    <Button justifyContent="flex-start" color="teal.700" _hover={{ textDecoration: "none" }}
-      _focusWithin={{ borderRadius: 5 }} onClick={props.handleClick} width="100%" mt="1" >
+    <Button
+      justifyContent="flex-start"
+      color="teal.700"
+      _hover={{ textDecoration: "none" }}
+      _focusWithin={{ borderRadius: 5 }}
+      onClick={props.handleClick}
+      width="100%"
+      mt="1"
+    >
       {props.title}
     </Button>
   );
 }
 
 interface MenuTitleProps {
-  handleClick?: React.MouseEventHandler
-  title: string
+  handleClick?: React.MouseEventHandler;
+  title: string;
 }
 
 function MenuTitle(props: MenuTitleProps) {
   return (
     <Box mr="3vw" mt="3vw" zIndex="1">
-      <Link onClick={props.handleClick} _hover={{ color: "teal.400" }}
-        fontSize={13} fontWeight="bold" color="white">
+      <Link
+        onClick={props.handleClick}
+        _hover={{ color: "teal.400" }}
+        fontSize={13}
+        fontWeight="bold"
+        color="white"
+      >
         {props.title.toUpperCase()}
       </Link>
     </Box>
@@ -42,73 +72,77 @@ function MenuTitle(props: MenuTitleProps) {
 }
 
 interface MenuUtamaProps {
-  pageHeight?: string
-  slide?: React.ReactElement
+  pageHeight?: string;
+  slide?: React.ReactElement;
 }
 
 const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
-  const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)")
-  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
+  const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)");
+  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   const router = useRouter();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   const home = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/')
-  }
+    e.preventDefault();
+    router.push("/");
+  };
 
   const profil = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/profil')
-  }
+    e.preventDefault();
+    router.push("/profil");
+  };
 
   const kurikulum = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/akademik/kurikulum')
-  }
+    e.preventDefault();
+    router.push("/akademik/kurikulum");
+  };
 
   const pengabdian = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/akademik/pengabdian')
-  }
+    e.preventDefault();
+    router.push("/akademik/pengabdian");
+  };
 
   const kalender = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/akademik/kalender')
-  }
+    e.preventDefault();
+    router.push("/akademik/kalender");
+  };
 
   const haki = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/akademik/haki')
-  }
+    e.preventDefault();
+    router.push("/akademik/haki");
+  };
+
+  const penelitian = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/akademik/penelitian");
+  };
 
   const dokumen = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/dokumen')
-  }
+    e.preventDefault();
+    router.push("/dokumen");
+  };
 
   const galeri = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/galeri')
-  }
+    e.preventDefault();
+    router.push("/galeri");
+  };
 
   const fasilitas = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/fasilitas')
-  }
+    e.preventDefault();
+    router.push("/fasilitas");
+  };
 
   const kemahasiswaan = (e: React.FormEvent) => {
-    e.preventDefault()
-    router.push('/kemahasiswaan')
-  }
+    e.preventDefault();
+    router.push("/news");
+  };
 
   return (
     <Box bg="gray.700" w="100%" h={props.pageHeight}>
       {props.slide}
       <Flex pt="2.5vw" zIndex="100" flexDirection="row">
         <Box ml="8vw" mr={{ base: "4vw", xl: 0 }} mt="2.5vw">
-          {
-            isSmallerThan1280 &&
+          {isSmallerThan1280 && (
             <IconButton
               colorScheme="whiteAlpha"
               aria-label="Opsi"
@@ -116,13 +150,17 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
               icon={<HamburgerIcon />}
               onClick={onOpen}
             />
-          }
+          )}
         </Box>
         <Link mt="1.5vw" zIndex={999} onClick={home}>
-          <Img width="100%" src="/white-logo.png" alt="Logo UIN RF Putih" maxW="250" />
+          <Img
+            width="100%"
+            src="/white-logo.png"
+            alt="Logo UIN RF Putih"
+            maxW="250"
+          />
         </Link>
-        {
-          isLargerThan1280 &&
+        {isLargerThan1280 && (
           <Flex ml="auto" mr="5vw">
             <Menu>
               <MenuTitle title="Beranda" handleClick={home} />
@@ -138,7 +176,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                   </MenuItem>
                   <MenuItem onClick={pengabdian}>
                     <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
-                    Pengabdian
+                    Pengabdian Kepada Masyarakat
                   </MenuItem>
                   <MenuItem onClick={kalender}>
                     <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
@@ -148,15 +186,19 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                     <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
                     HaKI
                   </MenuItem>
+                  <MenuItem onClick={penelitian}>
+                    <Icon as={FcFinePrint} w="30px" h="auto" mr="10px" />
+                    Penelitian
+                  </MenuItem>
                 </MenuList>
               </Portal>
               <MenuTitle title="Dokumen" handleClick={dokumen} />
               <MenuTitle title="Galeri" handleClick={galeri} />
               <MenuTitle title="Fasilitas" handleClick={fasilitas} />
-              <MenuTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
+              <MenuTitle title="Berita" handleClick={kemahasiswaan} />
             </Menu>
           </Flex>
-        }
+        )}
         <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
           <DrawerOverlay>
             <DrawerContent>
@@ -166,8 +208,14 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                 <DrawerTitle title="Beranda" handleClick={home} />
                 <DrawerTitle title="Profil" handleClick={profil} />
                 <Menu>
-                  <MenuButton textAlign="left" color="teal.700" mt="1"
-                    width="100%" as={Button} rightIcon={<ChevronDownIcon />}>
+                  <MenuButton
+                    textAlign="left"
+                    color="teal.700"
+                    mt="1"
+                    width="100%"
+                    as={Button}
+                    rightIcon={<ChevronDownIcon />}
+                  >
                     Akademik
                   </MenuButton>
                   <MenuList w="122.5%">
@@ -177,7 +225,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                     </MenuItem>
                     <MenuItem onClick={pengabdian}>
                       <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
-                      Pengabdian
+                      Pengabdian Kepada Masyarakat
                     </MenuItem>
                     <MenuItem onClick={kalender}>
                       <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
@@ -192,7 +240,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                 <DrawerTitle title="Dokumen" handleClick={dokumen} />
                 <DrawerTitle title="Galeri" handleClick={galeri} />
                 <DrawerTitle title="Fasilitas" handleClick={fasilitas} />
-                <DrawerTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
+                <DrawerTitle title="Berita" handleClick={kemahasiswaan} />
               </DrawerBody>
             </DrawerContent>
           </DrawerOverlay>
@@ -201,6 +249,6 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
       {props.children}
     </Box>
   );
-}
+};
 
 export default MenuUtama;
