@@ -235,6 +235,10 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                       <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
                       HaKI
                     </MenuItem>
+                    <MenuItem onClick={penelitian}>
+                      <Icon as={FcFinePrint} w="30px" h="auto" mr="10px" />
+                      Penelitian
+                    </MenuItem>
                   </MenuList>
                 </Menu>
                 <DrawerTitle title="Dokumen" handleClick={dokumen} />
