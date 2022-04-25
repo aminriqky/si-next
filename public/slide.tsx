@@ -1,30 +1,59 @@
 import React, { useEffect, useState } from "react";
 import {
-  Text, Box, SlideFade, Progress, AspectRatio, useControllableState
+  Text,
+  Box,
+  SlideFade,
+  Progress,
+  AspectRatio,
+  useControllableState,
 } from "@chakra-ui/react";
-import Image from 'next/image';
+import Image from "next/image";
 
 const wait = (timeout: number) => {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     setTimeout(resolve, timeout);
   });
-}
+};
 
 interface SlideShowProps {
-  gambar: string
-  text: string
-  vimi: string
+  gambar: string;
+  text: string;
+  vimi: string;
 }
 
 const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
   return (
     <SlideFade in={true} offsetY="-100px">
-      <AspectRatio pointerEvents="none" opacity="0.5" filter="grayscale(25%)" pos="absolute" w="100%">
-        <Image src={props.gambar} layout="fill" objectFit="contain" objectPosition="left top" alt="Gambar Visi & Misi" />
+      <AspectRatio
+        pointerEvents="none"
+        opacity="0.5"
+        filter="grayscale(25%)"
+        pos="absolute"
+        h="760px"
+        w="100%"
+      >
+        <Image
+          src={props.gambar}
+          layout="fill"
+          objectFit="contain"
+          alt="Gambar Visi & Misi"
+        />
       </AspectRatio>
-      <Box ml="8vw" mr="10vw" position="absolute" letterSpacing={{ base: "1px", xl: "2px" }}
-        fontWeight="semibold" zIndex="2" pointerEvents="none">
-        <Text mt="18.5vw" mb='2vw' color="white" fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}>
+      <Box
+        ml="8vw"
+        mr="10vw"
+        position="absolute"
+        letterSpacing={{ base: "1px", xl: "2px" }}
+        fontWeight="semibold"
+        zIndex="2"
+        pointerEvents="none"
+      >
+        <Text
+          mt="18.5vw"
+          mb="2vw"
+          color="white"
+          fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}
+        >
           {props.text}
         </Text>
         <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
@@ -33,10 +62,10 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         {props.children}
       </Box>
     </SlideFade>
-  )
-})
+  );
+});
 
-SlideShow.displayName = 'SlideShow';
+SlideShow.displayName = "SlideShow";
 
 export default function Slide() {
   const [slideNum, setSlideNum] = useState(1);
@@ -50,35 +79,79 @@ export default function Slide() {
       if (slideNum === 1) {
         setSlideNum(2);
       } else if (slideNum === 2) {
+        setSlideNum(3);
+      } else if (slideNum === 3) {
         setSlideNum(1);
       }
     }
-  }, [slideNum, slideCount, setSlideCount])
+  }, [slideNum, slideCount, setSlideCount]);
 
   return (
     <React.Fragment>
-      {
-        slideNum === 1 &&
+      {slideNum === 1 && (
         <SlideShow
           gambar="/visi.png"
           vimi="Visi"
           text="MEWUJUDKAN PROGRAM STUDI SISTEM INFORMASI YANG DIAKUI DI KAWASAN ASIA TENGGARA DAN BERKARAKTER ISLAMI PADA TAHUN 2027"
         >
-          <Progress role="progressbar" mt="2vw" value={slideCount} size="xs" max={100} min={0}
-            aria-label="progressbar" colorScheme="teal" width="300px" isAnimated hasStripe />
+          <Progress
+            role="progressbar"
+            mt="2vw"
+            value={slideCount}
+            size="xs"
+            max={100}
+            min={0}
+            aria-label="progressbar"
+            colorScheme="teal"
+            width="300px"
+            isAnimated
+            hasStripe
+          />
         </SlideShow>
-      }
-      {
-        slideNum === 2 &&
+      )}
+      {slideNum === 2 && (
         <SlideShow
           gambar="/misi.png"
           vimi="Misi"
           text="MELAKUKAN PENELITIAN DALAM BIDANG SISTEM INFORMASI YANG DIDASARKAN DENGAN NILAI-NILAI ISLAMI YANG DAPAT MENSEJAHTERAKAN MASYARAKAT"
         >
-          <Progress role="progressbar" mt="2vw" value={slideCount} size="xs" max={100} min={0}
-            aria-label="progressbar" colorScheme="teal" width="300px" isAnimated hasStripe />
+          <Progress
+            role="progressbar"
+            mt="2vw"
+            value={slideCount}
+            size="xs"
+            max={100}
+            min={0}
+            aria-label="progressbar"
+            colorScheme="teal"
+            width="300px"
+            isAnimated
+            hasStripe
+          />
         </SlideShow>
-      }
+      )}
+      {slideNum === 3 && (
+        <SlideShow
+          gambar="/sertifikat.png"
+          vimi="Sertifikat Akreditasi Prodi SI"
+          text="Terakreditasi B"
+        >
+          <Progress
+            role="progressbar"
+            mt="2vw"
+            value={slideCount}
+            size="xs"
+            max={100}
+            min={0}
+            aria-label="progressbar"
+            colorScheme="teal"
+            width="300px"
+            isAnimated
+            hasStripe
+          />
+        </SlideShow>
+      )}
     </React.Fragment>
   );
 }
+
