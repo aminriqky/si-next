@@ -48,7 +48,7 @@ function GaleriCell(props: GaleriCellProps) {
             sx={{ filter: "blur(0.75px) grayscale(25%) opacity(50%)" }}
             _hover={{ filter: "blur(0.75px) grayscale(25%) opacity(75%)" }}
           >
-            <Img src="/yt.png" layout="fill" objectFit="fill" />
+            <Img src="/yt.png" objectFit="fill" />
           </AspectRatio>
         </LinkOverlay>
       </AspectRatio>

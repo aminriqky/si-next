@@ -6,8 +6,8 @@ import {
   Progress,
   AspectRatio,
   useControllableState,
+  Image
 } from "@chakra-ui/react";
-import Image from "next/image";
 
 const wait = (timeout: number) => {
   return new Promise((resolve) => {
@@ -23,7 +23,7 @@ interface SlideShowProps {
 
 const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
   return (
-    <SlideFade in={true} offsetY="-100px">
+    <SlideFade in={true}>
       <AspectRatio
         pointerEvents="none"
         opacity="0.5"
@@ -34,8 +34,9 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
       >
         <Image
           src={props.gambar}
-          layout="fill"
-          objectFit="contain"
+          pos="absolute"
+          maxH={{ base: "27%", md: "54%", xl: "88%", "2xl": "100%" }}
+          w="100%"
           alt="Gambar Visi & Misi"
         />
       </AspectRatio>
