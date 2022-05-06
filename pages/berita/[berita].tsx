@@ -59,9 +59,7 @@ const Berita: NextPage<daftarBerita> = ({ daftarBerita }) => {
                   </Flex>
                   {
                     item.thumbnail !== null &&
-                    <Img src={`${server}/storage/${item.thumbnail}`}
-                      layout="fill" objectFit="fill"
-                    />
+                    <Img src={`${server}/storage/${item.thumbnail}`} objectFit="fill"/>
                   }
                   <Box mt="10px" fontSize={{ base: "xs", lg: "md" }}>
                     <Interweave content={item.detail} />

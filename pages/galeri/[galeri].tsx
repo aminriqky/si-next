@@ -42,7 +42,6 @@ function GaleriCell(props: GaleriCellProps) {
             <AspectRatio h="100%" w="100%">
               <Img
                 src={`${server}/storage/${props.gambar}`}
-                layout="fill"
                 objectFit="fill"
               />
             </AspectRatio>
@@ -58,7 +57,6 @@ function GaleriCell(props: GaleriCellProps) {
           <AspectRatio h="100%" w="100%">
             <Img
               src={`${server}/storage/${props.gambar}`}
-              layout="fill"
               objectFit="fill"
             />
           </AspectRatio>
