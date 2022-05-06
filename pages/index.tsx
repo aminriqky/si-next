@@ -20,6 +20,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import Interweave from 'interweave';
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
+import Slide from '../public/slide';
 import dayjs from 'dayjs';
 import 'dayjs/locale/id';
 import dynamic from 'next/dynamic';
@@ -37,7 +38,6 @@ import type {
   berita as beritaList
 } from '../public/types';
 
-const Slide = dynamic(() => import('../public/slide'));
 const Berita = dynamic(() => import('../public/berita'));
 const AgendaCell = dynamic(() => import('../public/dynamic/AgendaCell'),
   {
@@ -207,7 +207,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
         <AspectRatio minW="315">
           <Box onClick={onOpen} bgImage="url(play.png)" bgSize="100px" bgRepeat="no-repeat" width="10px" bgPosition="center">
             <AspectRatio sx={{ filter: "opacity(50%)" }} _hover={{ filter: "opacity(25%)" }} width="100%" height="100%">
-              <Img src="/yt.png" layout="fill" objectFit="fill" alt="yt-uinrf" />
+              <Img src="/yt.png" objectFit="fill" alt="yt-uinrf" />
             </AspectRatio>
           </Box>
         </AspectRatio>

@@ -9,6 +9,15 @@ export interface agenda {
   updated_at: string;
 }
 
+export interface slide {
+  id: number;
+  judul: string;
+  deskripsi: string;
+  gambar: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface artikel {
   id: number;
   judul: string;

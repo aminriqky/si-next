@@ -82,6 +82,8 @@ export default function Slide() {
       } else if (slideNum === 2) {
         setSlideNum(3);
       } else if (slideNum === 3) {
+        setSlideNum(4);
+      } else if (slideNum === 4) {
         setSlideNum(1);
       }
     }
@@ -152,7 +154,27 @@ export default function Slide() {
           />
         </SlideShow>
       )}
+      {slideNum === 4 && (
+        <SlideShow
+          gambar="/eid.jpeg"
+          vimi="Mohon Maaf Lahir & Batin"
+          text="Selamat Hari Raya Idul Fitri 1443 H"
+        >
+          <Progress
+            role="progressbar"
+            mt="2vw"
+            value={slideCount}
+            size="xs"
+            max={100}
+            min={0}
+            aria-label="progressbar"
+            colorScheme="teal"
+            width="300px"
+            isAnimated
+            hasStripe
+          />
+        </SlideShow>
+      )}
     </React.Fragment>
   );
 }
-
