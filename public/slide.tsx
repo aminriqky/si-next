@@ -6,7 +6,7 @@ import {
   Progress,
   AspectRatio,
   useControllableState,
-  Image
+  Img
 } from "@chakra-ui/react";
 
 const wait = (timeout: number) => {
@@ -32,12 +32,12 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         h="760px"
         w="100%"
       >
-        <Image
+        <Img
           src={props.gambar}
           pos="absolute"
           maxH={{ base: "27%", md: "54%", xl: "88%", "2xl": "100%" }}
           w="100%"
-          alt="Gambar Visi & Misi"
+          alt="Gambar Slide"
         />
       </AspectRatio>
       <Box
