@@ -43,7 +43,7 @@ import type {
 function slideFunc(daftarSlide: slideList[]): any {
   return daftarSlide !== null && daftarSlide.map((item, index) => {
     return (
-      <SlidePage data={index} gambar={`${server}/storage/${item.gambar}`} text={item.deskripsi} vimi={item.judul} />
+      <SlidePage key={index} data={index} gambar={`${server}/storage/${item.gambar}`} text={item.deskripsi} vimi={item.judul} />
     );
   });
 }
@@ -138,9 +138,7 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
 
   return (
     <React.Fragment>
-      <Menu pageHeight="49.4vw" slide={
-        slideFunc(daftarSlide)
-      } />
+      <Menu pageHeight="49.4vw" slide={slideFunc(daftarSlide)} />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
