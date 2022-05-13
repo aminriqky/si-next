@@ -20,7 +20,7 @@ import { ExternalLinkIcon } from '@chakra-ui/icons';
 import Interweave from 'interweave';
 import Menu from '../public/menu';
 import ExNav from '../public/exnav';
-import Slide from '../public/slide';
+import SlidePage from '../public/slide';
 import dayjs from 'dayjs';
 import 'dayjs/locale/id';
 import dynamic from 'next/dynamic';
@@ -29,14 +29,24 @@ import { pengumuman } from './api/pengumuman';
 import { artikel } from './api/artikel';
 import { kehadiran } from './api/kehadiran';
 import { berita } from './api/berita';
+import { slideshow } from './api/slideshow';
 import { server } from "../config";
 import type {
   agenda as agendaList,
   pengumuman as pengumumanList,
   artikel as artikelList,
   kehadiran as kehadiranList,
-  berita as beritaList
+  berita as beritaList,
+  slide as slideList
 } from '../public/types';
+
+function slideFunc(daftarSlide: slideList[]): any {
+  return daftarSlide !== null && daftarSlide.map((item, index) => {
+    return (
+      <SlidePage data={index} gambar={`${server}/storage/${item.gambar}`} text={item.deskripsi} vimi={item.judul} />
+    );
+  });
+}
 
 const Berita = dynamic(() => import('../public/berita'));
 const AgendaCell = dynamic(() => import('../public/dynamic/AgendaCell'),
@@ -96,9 +106,10 @@ interface home {
   daftarArtikel: Array<artikelList>
   daftarKehadiran: Array<kehadiranList>
   daftarBerita: Array<beritaList>
+  daftarSlide: Array<slideList>
 }
 
-const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita }) => {
+const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita, daftarSlide }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)")
   const [isLargerThan1400] = useMediaQuery("(min-width: 1400px)")
   const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)")
@@ -127,7 +138,9 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
 
   return (
     <React.Fragment>
-      <Menu pageHeight="49.4vw" slide={<Slide />} />
+      <Menu pageHeight="49.4vw" slide={
+        slideFunc(daftarSlide)
+      } />
       <Modal isOpen={isOpen} onClose={onClose} isCentered>
         <ModalOverlay />
         <ModalContent minW={{ base: 315, xl: 720 }} minH={{ base: 310, xl: 540 }}>
@@ -282,9 +295,9 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
         </ArtikelCell>
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
-            <Icon as={FcTemplate} w="40px" h="auto" />
+            <Icon as={FcTemplate} w="34px" h="auto" />
             &thinsp;
-            <Link fontWeight="semibold" onClick={(e) => {
+            <Link verticalAlign="top" fontWeight="semibold" onClick={(e) => {
               e.preventDefault()
               router.push("/pengumuman")
             }}>
@@ -357,25 +370,25 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link fontWeight="semibold" href="https://ltmpt.ac.id/" isExternal>
+            <Link verticalAlign="top" fontWeight="semibold" href="https://ltmpt.ac.id/" isExternal>
               LTMPT
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link fontWeight="semibold" href="https://span-ptkin.ac.id/" isExternal>
+            <Link verticalAlign="top" fontWeight="semibold" href="https://span-ptkin.ac.id/" isExternal>
               SPAN-PTKIN
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link fontWeight="semibold" href="https://um-ptkin.ac.id/" isExternal>
+            <Link verticalAlign="top" fontWeight="semibold" href="https://um-ptkin.ac.id/" isExternal>
               UM-PTKIN
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="12">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link fontWeight="semibold" href="http://um-mandiri.radenfatah.ac.id/" isExternal>
+            <Link verticalAlign="top" fontWeight="semibold" href="http://um-mandiri.radenfatah.ac.id/" isExternal>
               UM-MANDIRI
             </Link>
           </Text>
@@ -397,9 +410,9 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
         </Flex>
         <Flex flexDir="column" mx={{ base: 0, xl: 25, "2xl": '48px' }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
-            <Icon as={FcApprove} w="40px" h="auto" />
+            <Icon as={FcApprove} w="34px" h="auto" />
             &thinsp;
-            <Link fontWeight="semibold" onClick={(e) => {
+            <Link verticalAlign="top" fontWeight="semibold" onClick={(e) => {
               e.preventDefault()
               router.push("/kehadiran")
             }}>
@@ -456,11 +469,13 @@ const Home: NextPage<home> = ({ daftarAgenda, daftarPengumuman, daftarArtikel, d
           </Flex>
         </Flex>
         <Flex flexDir="column" ml={{ base: 0, xl: 13 }}>
-          <Text fontSize="24" py="4%" fontWeight="medium">
-            <Icon as={FcGlobe} w="40px" h="auto" />
+          <Flex py="5%" flexDir="row">
+            <Icon as={FcGlobe} w="34px" h="auto" />
             &thinsp;
-            LOKASI
-          </Text>
+            <Text fontSize="24" fontWeight="semibold">
+              LOKASI
+            </Text>
+          </Flex>
           &emsp;
           {
             daftarIframe1 &&
@@ -490,9 +505,10 @@ export const getStaticProps: GetStaticProps = async () => {
   const daftarArtikel = await artikel()
   const daftarKehadiran = await kehadiran()
   const daftarBerita = await berita()
+  const daftarSlide = await slideshow()
 
   return {
-    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita },
+    props: { daftarAgenda, daftarPengumuman, daftarArtikel, daftarKehadiran, daftarBerita, daftarSlide },
     revalidate: 15
   };
 }

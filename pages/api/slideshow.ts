@@ -5,7 +5,7 @@ import type { slide as slideType } from '../../public/types'
 export async function slideshow() {
     const response = await fetch(`${server}/api/slideshow/all`)
     const jsonData: slideType = await response.json()
-    return jsonData
+    return jsonData.reverse()
 }
 
 export default function handler( req: NextApiRequest, res: NextApiResponse) {

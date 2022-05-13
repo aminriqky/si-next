@@ -133,9 +133,9 @@ const Berita = React.memo<BeritaProps>((props) => {
     <Flex bg="gray.200" height={{ base: "750px", xl: "550px" }} overflow="hidden" flexDir="column">
       <Flex mt="50px" flexDir="column">
         <Text ml="10vw" mr="10vw" fontSize="24" mb={{ "2xl": "1.5%" }} fontWeight="medium">
-          <Icon as={FcNews} w="40px" h="auto" />
+          <Icon as={FcNews} w="34px" h="auto" />
           &thinsp;
-          <Link fontWeight="semibold" onClick={(e) => {
+          <Link verticalAlign="top" fontWeight="semibold" onClick={(e) => {
             e.preventDefault()
             router.push("/berita")
           }}>

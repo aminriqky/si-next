@@ -10,6 +10,8 @@ export interface agenda {
 }
 
 export interface slide {
+  reverse: any;
+  length: number;
   id: number;
   judul: string;
   deskripsi: string;

@@ -73,7 +73,7 @@ function MenuTitle(props: MenuTitleProps) {
 
 interface MenuUtamaProps {
   pageHeight?: string;
-  slide?: React.ReactElement;
+  slide?: any;
 }
 
 const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
