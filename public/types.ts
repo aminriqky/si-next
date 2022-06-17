@@ -128,4 +128,3 @@ export type AgendaCellProps = {
   judul: string;
   tempat: string;
 };
-

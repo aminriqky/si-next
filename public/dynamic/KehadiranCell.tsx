@@ -61,4 +61,3 @@ export default function KehadiranCell(props: KehadiranCellProps) {
     </Flex>
   );
 }
-

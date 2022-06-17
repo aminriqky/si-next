@@ -40,10 +40,7 @@ function GaleriCell(props: GaleriCellProps) {
         >
           <LinkOverlay color="teal.800">
             <AspectRatio h="100%" w="100%">
-              <Img
-                src={`${server}/storage/${props.gambar}`}
-                objectFit="fill"
-              />
+              <Img src={`${server}/storage/${props.gambar}`} objectFit="fill" />
             </AspectRatio>
           </LinkOverlay>
         </AspectRatio>
@@ -55,10 +52,7 @@ function GaleriCell(props: GaleriCellProps) {
           minH={{ base: 310, xl: 540 }}
         >
           <AspectRatio h="100%" w="100%">
-            <Img
-              src={`${server}/storage/${props.gambar}`}
-              objectFit="fill"
-            />
+            <Img src={`${server}/storage/${props.gambar}`} objectFit="fill" />
           </AspectRatio>
         </ModalContent>
       </Modal>
@@ -122,4 +116,3 @@ export const getServerSideProps: GetServerSideProps = async () => {
 };
 
 export default Galeri;
-

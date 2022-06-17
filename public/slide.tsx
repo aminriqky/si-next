@@ -6,14 +6,10 @@ import {
   Progress,
   AspectRatio,
   useControllableState,
-  Img
+  Img,
 } from "@chakra-ui/react";
-
-const wait = (timeout: number) => {
-  return new Promise((resolve) => {
-    setTimeout(resolve, timeout);
-  });
-};
+import { slideshow } from "../pages/api/slideshow";
+import { wait } from "../public/func";
 
 interface SlideShowProps {
   gambar: string;
@@ -70,6 +66,7 @@ SlideShow.displayName = "SlideShow";
 
 interface SlideProps extends SlideShowProps {
   data: number;
+  length: number;
 }
 
 export default function SlidePage(props: SlideProps) {
@@ -77,23 +74,22 @@ export default function SlidePage(props: SlideProps) {
   const [slideCount, setSlideCount] = useControllableState({ defaultValue: 0 });
 
   useEffect(() => {
-    if (slideCount < 100) {
-      wait(75).then(() => setSlideCount(slideCount + 1));
-    } else if (slideCount === 100) {
-      setSlideCount(0);
-      setSlideNum(slideNum+1);
+    if (slideNum < 4) {
+      if (slideCount < 100) {
+        wait(75).then(() => setSlideCount(slideCount + 1));
+      } else if (slideCount === 100) {
+        setSlideCount(0);
+        setSlideNum(slideNum + 1);
+      }
+    } else {
+      setSlideNum(0);
     }
   }, [slideNum, slideCount, setSlideCount]);
 
   return (
     <React.Fragment>
-    {
-      slideNum === props.data &&
-        <SlideShow
-          gambar={props.gambar}
-          vimi={props.vimi}
-          text={props.text}
-        >
+      {slideNum === props.data && (
+        <SlideShow gambar={props.gambar} vimi={props.vimi} text={props.text}>
           <Progress
             role="progressbar"
             mt="2vw"
@@ -108,7 +104,7 @@ export default function SlidePage(props: SlideProps) {
             hasStripe
           />
         </SlideShow>
-    }
+      )}
     </React.Fragment>
   );
 }
