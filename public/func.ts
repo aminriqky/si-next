@@ -1,6 +1,6 @@
 export function replace(str: string) {
   let url = str;
-  url = str.replace(/\s+/g, "-");
+  url = str.replace(/\s+/g, "-").toLowerCase();
   return url;
 }
 
