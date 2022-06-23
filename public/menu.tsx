@@ -178,6 +178,10 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                     <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
                     Pengabdian Kepada Masyarakat
                   </MenuItem>
+                  <MenuItem onClick={penelitian}>
+                    <Icon as={FcFinePrint} w="30px" h="auto" mr="10px" />
+                    Penelitian
+                  </MenuItem>
                   <MenuItem onClick={kalender}>
                     <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
                     Kalender Akademik
@@ -185,10 +189,6 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                   <MenuItem onClick={haki}>
                     <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
                     HaKI
-                  </MenuItem>
-                  <MenuItem onClick={penelitian}>
-                    <Icon as={FcFinePrint} w="30px" h="auto" mr="10px" />
-                    Penelitian
                   </MenuItem>
                 </MenuList>
               </Portal>
@@ -227,6 +227,10 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                       <Icon as={FcCollaboration} w="30px" h="auto" mr="10px" />
                       Pengabdian Kepada Masyarakat
                     </MenuItem>
+                    <MenuItem onClick={penelitian}>
+                      <Icon as={FcFinePrint} w="30px" h="auto" mr="10px" />
+                      Penelitian
+                    </MenuItem>
                     <MenuItem onClick={kalender}>
                       <Icon as={FcCalendar} w="30px" h="auto" mr="10px" />
                       Kalender Akademik
@@ -234,10 +238,6 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                     <MenuItem onClick={haki}>
                       <Icon as={FcDocument} w="30px" h="auto" mr="10px" />
                       HaKI
-                    </MenuItem>
-                    <MenuItem onClick={penelitian}>
-                      <Icon as={FcFinePrint} w="30px" h="auto" mr="10px" />
-                      Penelitian
                     </MenuItem>
                   </MenuList>
                 </Menu>
