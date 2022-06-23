@@ -13,7 +13,7 @@ export default function PengumumanCell(props: PengumumanCellProps) {
   const router = useRouter();
 
   return (
-    <Flex key={props.key} flexDirection="row" flex="1">
+    <Flex flexDirection="row" flex="1">
       <Box>
         <Text fontSize="md" color="orange.800">
           <Link

@@ -6,12 +6,7 @@ export default function AgendaCell(props: AgendaCellProps) {
   const router = useRouter();
 
   return (
-    <Flex
-      ml={{ base: "12%", xl: 0 }}
-      key={props.key}
-      flexDirection="row"
-      flex="1"
-    >
+    <Flex ml={{ base: "12%", xl: 0 }} flexDirection="row" flex="1">
       <Box
         alignSelf="center"
         minW="60px"

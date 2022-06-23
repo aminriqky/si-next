@@ -44,7 +44,7 @@ function PengumumanCell(props: PengumumanCellProps) {
 
   return (
     <React.Fragment>
-      <Flex key={props.key} flexDirection="row" flex="1">
+      <Flex flexDirection="row" flex="1">
         <Box
           minW="60px"
           height="60px"

@@ -22,7 +22,7 @@ interface KehadiranCellProps {
 
 function KehadiranCell(props: KehadiranCellProps) {
   return (
-    <Flex key={props.key} flexWrap="wrap">
+    <Flex flexWrap="wrap">
       <Img
         boxSize={{ base: "fit-content", xl: "300px" }}
         src={props.avatar}

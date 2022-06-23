@@ -22,12 +22,7 @@ function PengumumanCell(props: PengumumanCellProps) {
   const router = useRouter();
 
   return (
-    <Flex
-      key={props.key}
-      flexDirection="row"
-      flex="1"
-      borderBottom="solid 1px gray"
-    >
+    <Flex flexDirection="row" flex="1" borderBottom="solid 1px gray">
       <Box
         minW="60px"
         height="60px"

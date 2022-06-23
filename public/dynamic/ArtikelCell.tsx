@@ -27,7 +27,6 @@ const ArtikelCell: React.FC<ArtikelCellProps> = React.memo((props) => {
     <Flex
       my="25"
       px="6"
-      key={props.key}
       flexDir="column"
       width={{ base: "100%", xl: "200px" }}
       bg="blue.600"
