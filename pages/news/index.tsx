@@ -8,6 +8,7 @@ import Menu from "../../public/menu";
 import { organisasi } from "../api/organisasi";
 import { berita } from "../api/berita";
 import { server } from "../../config";
+import { replace } from "../../public/func";
 import type {
   organisasi as orgList,
   berita as beritaList,
@@ -105,7 +106,7 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
                     <Link
                       onClick={(e) => {
                         e.preventDefault();
-                        router.push(`/berita/${item.id}`);
+                        router.push(`/berita/${replace(item.judul)}`);
                       }}
                     >
                       {item.judul}
