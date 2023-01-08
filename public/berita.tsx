@@ -9,7 +9,6 @@ import {
   Link,
   Button,
 } from "@chakra-ui/react";
-import Interweave from "interweave";
 import { FcNews } from "@react-icons/all-files/fc/FcNews";
 import { useRouter } from "next/router";
 import { wait } from "../public/func";
@@ -59,7 +58,7 @@ const SlideShow = React.memo<SlideShowProps>((props) => {
               </Link>
             </Text>
             <Box color="gray.600" fontSize={{ base: "xs", lg: "md" }}>
-              <Interweave content={props.detail} />
+              <div dangerouslySetInnerHTML={{ __html: props.detail }} />
             </Box>
           </Flex>
         </Flex>

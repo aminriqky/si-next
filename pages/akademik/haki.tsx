@@ -1,6 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
 import { Box } from "@chakra-ui/react";
-import Interweave from "interweave";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import { profil } from "../api/profil";
@@ -23,7 +22,7 @@ const Haki: NextPage<daftarProfil> = ({ daftarProfil }) => {
         p="4%"
       >
         <Box fontSize={{ base: "xs", lg: "md" }}>
-          <Interweave content={daftarProfil[4].text} />
+          <div dangerouslySetInnerHTML={{ __html: daftarProfil[4].text }} />
         </Box>
       </Box>
       <ExNav />

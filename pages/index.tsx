@@ -30,7 +30,6 @@ import { MdDeveloperBoard } from "@react-icons/all-files/md/MdDeveloperBoard";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
 import { MdPhone } from "@react-icons/all-files/md/MdPhone";
 import { ExternalLinkIcon } from "@chakra-ui/icons";
-import Interweave from "interweave";
 import Menu from "../public/menu";
 import ExNav from "../public/exnav";
 import SlidePage from "../public/slide";
@@ -446,7 +445,7 @@ const Home: NextPage<home> = ({
             .format("DD MMMM YYYY")}
           dylink={`/artikel/${replace(daftarArtikel[0].judul)}`}
         >
-          <Interweave content={dots(260, daftarArtikel[0].detail)} />
+          <div dangerouslySetInnerHTML={{ __html: dots(260, daftarArtikel[0].detail) }} />
         </ArtikelCell>
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
@@ -594,23 +593,23 @@ const Home: NextPage<home> = ({
       >
         <Flex
           flexDir="column"
-          w={{ base: "100%", xl: "200px" }}
+          w={{ base: "100%", xl: "390px" }}
           my="4"
           mr={{ base: 0, xl: 13 }}
         >
           {daftarIframe2 && (
             <iframe
               title="Jadwal Sholat"
-              style={{ height: "290px" }}
+              style={{ height: "281px" }}
               loading="lazy"
               scrolling="no"
-              src="https://www.islamicfinder.org/prayer-widget/1633070/shafi/11/0/20.0/18.0"
+              src="https://timesprayer.com/widgets.php?frame=2&amp;lang=en&amp;name=palembang&amp;avachang=true&amp;time=0"
             />
           )}
         </Flex>
-        <Flex flexDir="column" mx={{ base: 0, xl: 25, "2xl": "48px" }}>
-          <Text fontSize="24" py="2%" fontWeight="medium">
-            <Icon as={FcApprove} w="34px" h="auto" />
+        <Flex flexDir="column" mx={{ base: 0, xl: 25, "2xl": "64px" }}>
+          <Text fontSize="20" fontWeight="medium">
+            <Icon as={FcApprove} w="30px" h="auto" />
             &thinsp;
             <Link
               verticalAlign="top"
@@ -670,27 +669,27 @@ const Home: NextPage<home> = ({
             )}
           </Flex>
         </Flex>
-        <Flex flexDir="column" ml={{ base: 0, xl: 13 }}>
-          <Flex py="5%" flexDir="row">
-            <Icon as={FcGlobe} w="34px" h="auto" />
-            &thinsp;
-            <Text fontSize="24" fontWeight="semibold">
-              LOKASI
-            </Text>
-          </Flex>
-          &emsp;
-          {daftarIframe1 && (
-            <iframe
-              title="Lokasi Prodi SI"
-              width="95%"
-              height="220px"
-              loading="lazy"
-              frameBorder="0"
-              scrolling="no"
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31874.457135338303!2d104.75533903955079!3d-3.011849799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d2209209ceb%3A0x434396ad1d19af8a!2sFakultas%20Sains%20dan%20Teknologi%20Kampus%20B%20UIN%20Raden%20Fatah%20Palembang!5e0!3m2!1sid!2sid!4v1630623924194!5m2!1sid!2sid"
-            />
-          )}
+      </Flex>
+      <Flex flexDir="column">
+        <Flex flexDir="row" mt={{ base: "6vw", xl: "1.5vw", }} ml={{ base: "3vw", xl: "1.5vw", }}>
+          <Icon as={FcGlobe} w="34px" h="auto" />
+          &thinsp;
+          <Text fontSize="24" fontWeight="semibold">
+            LOKASI
+          </Text>
         </Flex>
+        &emsp;
+        {daftarIframe1 && (
+          <iframe
+            title="Lokasi Prodi SI"
+            width="100%"
+            height="440px"
+            loading="lazy"
+            frameBorder="0"
+            scrolling="no"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31874.457135338303!2d104.75533903955079!3d-3.011849799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d2209209ceb%3A0x434396ad1d19af8a!2sFakultas%20Sains%20dan%20Teknologi%20Kampus%20B%20UIN%20Raden%20Fatah%20Palembang!5e0!3m2!1sid!2sid!4v1630623924194!5m2!1sid!2sid"
+          />
+        )}
       </Flex>
       <Divider />
       <ExNav />

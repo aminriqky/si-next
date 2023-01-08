@@ -3,7 +3,6 @@ import { Box, Icon, Flex, Divider, Text } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { FcClock } from "@react-icons/all-files/fc/FcClock";
 import { FcOvertime } from "@react-icons/all-files/fc/FcOvertime";
-import Interweave from "interweave";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import dayjs from "dayjs";
@@ -98,7 +97,7 @@ const Agenda: NextPage<daftarAgenda> = ({ daftarAgenda }) => {
                     </Flex>
                   </Flex>
                   <Box fontSize={{ base: "xs", lg: "md" }}>
-                    <Interweave content={item.detail_kegiatan} />
+                    <div dangerouslySetInnerHTML={{ __html: item.detail_kegiatan }} />
                   </Box>
                 </Box>
               );

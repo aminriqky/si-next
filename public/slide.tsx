@@ -8,7 +8,6 @@ import {
   useControllableState,
   Img,
 } from "@chakra-ui/react";
-import { slideshow } from "../pages/api/slideshow";
 import { wait } from "../public/func";
 
 interface SlideShowProps {
@@ -22,8 +21,7 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
     <SlideFade in={true}>
       <AspectRatio
         pointerEvents="none"
-        opacity="0.5"
-        filter="grayscale(25%)"
+        opacity="0.7"
         pos="absolute"
         h="760px"
         w="100%"

@@ -57,7 +57,7 @@ interface MenuTitleProps {
 
 function MenuTitle(props: MenuTitleProps) {
   return (
-    <Box mr="3vw" mt="3vw" zIndex="1">
+    <Box mt="1.5vw" mr="3vw" zIndex="1">
       <Link
         onClick={props.handleClick}
         _hover={{ color: "teal.400" }}
@@ -138,21 +138,22 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
   };
 
   return (
-    <Box bg="gray.700" w="100%" h={props.pageHeight}>
+    <Box bg="gray.500" w="100%" h={props.pageHeight}>
       {props.slide}
-      <Flex pt="2.5vw" zIndex="100" flexDirection="row">
-        <Box ml="8vw" mr={{ base: "4vw", xl: 0 }} mt="2.5vw">
+      <Flex py="2.5vw" zIndex="100" bgColor="black" flexDirection="row">
+        <Box ml="8vw" mr={{ base: "4vw", xl: 0 }}>
           {isSmallerThan1280 && (
             <IconButton
               colorScheme="whiteAlpha"
               aria-label="Opsi"
               size="md"
+              mt="1vw"
               icon={<HamburgerIcon />}
               onClick={onOpen}
             />
           )}
         </Box>
-        <Link mt="1.5vw" zIndex={999} onClick={home}>
+        <Link zIndex={999} onClick={home}>
           <Img
             width="100%"
             src="/white-logo.png"
@@ -211,7 +212,6 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                   <MenuButton
                     textAlign="left"
                     color="teal.700"
-                    mt="1"
                     width="100%"
                     as={Button}
                     rightIcon={<ChevronDownIcon />}

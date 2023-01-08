@@ -1,5 +1,8 @@
 import type { NextPage, GetServerSideProps } from "next";
-import { Text, Box, Flex, Img, Grid } from "@chakra-ui/react";
+import {
+  Box, Flex, Img, Grid, Th, TableContainer,
+  Table, Thead, Tr, Tbody, Td, Tfoot
+} from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
@@ -22,7 +25,7 @@ interface KehadiranCellProps {
 
 function KehadiranCell(props: KehadiranCellProps) {
   return (
-    <Flex flexWrap="wrap">
+    <Flex>
       <Img
         boxSize={{ base: "fit-content", xl: "300px" }}
         src={props.avatar}
@@ -35,27 +38,53 @@ function KehadiranCell(props: KehadiranCellProps) {
         mt={{ base: "5%", xl: "15px" }}
         mr={{ base: "25px", xl: "115px" }}
       >
-        <Text fontSize={{ base: "sm", xl: "md" }}>Nama : {props.name}</Text>
-        <Text fontSize={{ base: "sm", xl: "md" }}>E-mail : {props.email}</Text>
-        <Text fontSize={{ base: "sm", xl: "md" }}>NIP : {props.nip}</Text>
-        <Text fontSize={{ base: "sm", xl: "md" }}>NIDN : {props.nidn}</Text>
-        <Text fontSize={{ base: "sm", xl: "md" }}>
-          Jabatan : {props.jabatan}
-        </Text>
-        <Text fontSize={{ base: "sm", xl: "md" }}>Bidang : {props.bidang}</Text>
-        <Flex flexDir="row">
-          <Text fontSize={{ base: "sm", xl: "md" }}>Kehadiran :&thinsp;</Text>
-          {props.hadir === 1 && (
-            <Text color="teal" fontWeight="medium">
-              HADIR
-            </Text>
-          )}
-          {props.hadir !== 1 && (
-            <Text color="crimson" fontWeight="medium">
-              TIDAK ADA
-            </Text>
-          )}
-        </Flex>
+        <TableContainer>
+          <Table variant="simple">
+            <Thead>
+              <Tr>
+                <Th>Nama : </Th>
+                <Th>{props.name}</Th>
+              </Tr>
+            </Thead>
+            <Tbody>
+              <Tr>
+                <Td>E-mail : </Td>
+                <Td>{props.email}</Td>
+              </Tr>
+              <Tr>
+                <Td>NIP : </Td>
+                <Td>{props.nip}</Td>
+              </Tr>
+              <Tr>
+                <Td>NIDN : </Td>
+                <Td>{props.nidn}</Td>
+              </Tr>
+              <Tr>
+                <Td>Jabatan : </Td>
+                <Td>{props.jabatan}</Td>
+              </Tr>
+              <Tr>
+                <Td>Bidang : </Td>
+                <Td>{props.bidang}</Td>
+              </Tr>
+            </Tbody>
+            <Tfoot>
+              <Tr>
+                <Th>Kehadiran : </Th>
+                {props.hadir === 1 && (
+                  <Th color="teal">
+                    HADIR
+                  </Th>
+                )}
+                {props.hadir !== 1 && (
+                  <Th color="crimson">
+                    TIDAK ADA
+                  </Th>
+                )}
+              </Tr>
+            </Tfoot>
+          </Table>
+        </TableContainer>
       </Grid>
     </Flex>
   );

@@ -14,7 +14,7 @@ export default function KehadiranCell(props: KehadiranCellProps) {
   const router = useRouter();
 
   return (
-    <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="135px">
+    <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="155px">
       <Box
         w="xs"
         bg="white"
@@ -23,7 +23,7 @@ export default function KehadiranCell(props: KehadiranCellProps) {
         overflow="hidden"
         mx="auto"
       >
-        <Img w="full" h={32} src={props.gambar} alt="avatar" />
+        <Img w="full" h={36} src={props.gambar} alt="avatar" />
         <Box py={3} textAlign="center">
           <Link
             mx={3}
@@ -45,14 +45,14 @@ export default function KehadiranCell(props: KehadiranCellProps) {
         </Box>
         {props.hadir === 1 && (
           <Box bg="teal.600">
-            <Text mx={12} py={1} fontSize="smaller" color="white">
+            <Text mx={14} py={1} fontSize="smaller" color="white">
               Hadir
             </Text>
           </Box>
         )}
         {props.hadir === 0 && (
           <Box bg="red.600">
-            <Text mx={9} py={1} fontSize="smaller" color="white">
+            <Text mx={11.5} py={1} fontSize="smaller" color="white">
               Tidak Ada
             </Text>
           </Box>
