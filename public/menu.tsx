@@ -138,9 +138,9 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
   };
 
   return (
-    <Box bg="gray.500" w="100%" h={props.pageHeight}>
+    <Box bg="whitesmoke" w="100%" h={props.pageHeight}>
       {props.slide}
-      <Flex py="2.5vw" zIndex="100" bgColor="black" flexDirection="row">
+      <Flex py="1.5vw" zIndex="100" bgColor="blackAlpha.400" flexDirection="row">
         <Box ml="8vw" mr={{ base: "4vw", xl: 0 }}>
           {isSmallerThan1280 && (
             <IconButton
@@ -211,6 +211,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                 <Menu>
                   <MenuButton
                     textAlign="left"
+                    mt="1"
                     color="teal.700"
                     width="100%"
                     as={Button}

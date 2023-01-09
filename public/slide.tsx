@@ -21,7 +21,7 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
     <SlideFade in={true}>
       <AspectRatio
         pointerEvents="none"
-        opacity="0.7"
+        opacity="0.8"
         pos="absolute"
         h="760px"
         w="100%"
@@ -51,7 +51,7 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         >
           {props.text}
         </Text>
-        <Text color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
+        <Text bgColor="rgba(44, 122, 123,0.5)" color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
           {props.vimi}
         </Text>
         {props.children}
