@@ -19,6 +19,7 @@ import {
   Img,
   VisuallyHidden,
 } from "@chakra-ui/react";
+import Card from "../public/card";
 import { SiFacebook } from "@react-icons/all-files/si/SiFacebook";
 import { SiInstagram } from "@react-icons/all-files/si/SiInstagram";
 import { SiYoutube } from "@react-icons/all-files/si/SiYoutube";
@@ -42,6 +43,7 @@ import { artikel } from "./api/artikel";
 import { kehadiran } from "./api/kehadiran";
 import { berita } from "./api/berita";
 import { slideshow } from "./api/slideshow";
+import { profil } from "./api/profil";
 import { replace } from "../public/func";
 import { server } from "../config";
 import type {
@@ -51,7 +53,12 @@ import type {
   kehadiran as kehadiranList,
   berita as beritaList,
   slide as slideList,
+  profil as profilList
 } from "../public/types";
+
+interface profil {
+  daftarProfil: Array<profilList>;
+}
 
 const Berita = dynamic(() => import("../public/berita"));
 const AgendaCell = dynamic(() => import("../public/dynamic/AgendaCell"), {
@@ -173,6 +180,7 @@ interface home {
   daftarKehadiran: Array<kehadiranList>;
   daftarBerita: Array<beritaList>;
   daftarSlide: Array<slideList>;
+  daftarProfil: Array<profilList>;
 }
 
 const Home: NextPage<home> = ({
@@ -182,6 +190,7 @@ const Home: NextPage<home> = ({
   daftarKehadiran,
   daftarBerita,
   daftarSlide,
+  daftarProfil
 }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   const [isLargerThan1400] = useMediaQuery("(min-width: 1400px)");
@@ -407,6 +416,21 @@ const Home: NextPage<home> = ({
         </Flex>
       </Flex>
       <Divider />
+      <Box mx="8%" p="4%">
+        <Box fontSize={{ base: "xs", lg: "md" }}>
+          <div dangerouslySetInnerHTML={{ __html: daftarProfil[7].text }} />
+        </Box>
+      </Box>
+      <Flex flexDir={{ base: "column", xl: "row" }} mx="12%">
+        <Card judul="Calon Mahasiswa" isi="Informasi untuk para calon mahasiswa" />
+        <Card judul="Beasiswa" isi="Informasi beasiswa bagi para mahasiswa" />
+        <Card judul="Prestasi" isi="Informasi tentang prestasi yang dicapai" />
+      </Flex>
+      <Flex flexDir={{ base: "column", xl: "row" }} mx="12%" mb={{ base: "12%", xl: "70px" }}>
+        <Card judul="Profil Lulusan" isi="Informasi untuk para calon mahasiswa" />
+        <Card judul="Alumni" isi="Jejak alumni setelah lulus perkuliahan" />
+        <Card judul="FAQ" isi="Menjelaskan hal-hal yang belum jelas" />
+      </Flex>
       <Berita
         gambar1={`${server}/storage/${daftarBerita[0].thumbnail}`}
         judul1={dots(65, daftarBerita[0].judul)}
@@ -432,9 +456,10 @@ const Home: NextPage<home> = ({
       <Divider />
       <Flex
         flexDir={{ base: "column", xl: "row" }}
-        my="25"
+        py="25"
         justifyContent="center"
-        mx={{ base: 25, xl: 125 }}
+        px={{ base: 25, xl: 125 }}
+        bg="gray.100"
       >
         <ArtikelCell
           key={daftarArtikel[0].id}
@@ -706,6 +731,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const daftarKehadiran = await kehadiran();
   const daftarBerita = await berita();
   const daftarSlide = await slideshow();
+  const daftarProfil = await profil();
 
   return {
     props: {
@@ -715,6 +741,7 @@ export const getStaticProps: GetStaticProps = async () => {
       daftarKehadiran,
       daftarBerita,
       daftarSlide,
+      daftarProfil
     },
     revalidate: 15,
   };

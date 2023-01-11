@@ -104,7 +104,6 @@ const Kehadiran: NextPage<daftarKehadiran> = ({ daftarKehadiran }) => {
         bg="white"
         opacity="0.9"
         zIndex="999"
-        textColor="black"
         mx="8%"
         my={{ base: "12%", xl: "100px" }}
         p="4%"
