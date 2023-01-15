@@ -35,8 +35,8 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         />
       </AspectRatio>
       <Box
-        ml="8vw"
-        mr="10vw"
+        ml="7vw"
+        mr="7vw"
         position="absolute"
         letterSpacing={{ base: "1px", xl: "2px" }}
         fontWeight="semibold"

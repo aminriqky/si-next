@@ -55,7 +55,7 @@ const DaftarAgenda: NextPage<daftarAgenda> = ({ daftarAgenda }) => {
         bg="white"
         opacity="0.9"
         zIndex="999"
-        mx="8%"
+        mx="6%"
         my={{ base: "12%", xl: "100px" }}
         p="4%"
       >

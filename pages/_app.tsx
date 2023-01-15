@@ -25,6 +25,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           name="description"
           content="Website Resmi Program Studi Sistem Informasi Fakultas Sains dan Teknologi UIN Raden Fatah Palembang"
         />
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />
