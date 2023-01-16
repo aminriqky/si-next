@@ -126,7 +126,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
 
   const kemahasiswaan = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/news");
+    router.push("/kemahasiswaan");
   };
 
   return (

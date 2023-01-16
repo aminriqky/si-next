@@ -1,19 +1,20 @@
 import type { NextPage, GetStaticProps } from "next";
 import NextLink from "next/link";
+import React from "react";
 import {
+  Text,
   Box,
+  Img,
   Flex,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
-  Text,
   Divider,
   Button,
   useMediaQuery,
   AspectRatio,
-  Img,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
@@ -31,22 +32,22 @@ import { FcSurvey } from "@react-icons/all-files/fc/FcSurvey";
 import { FcButtingIn } from "@react-icons/all-files/fc/FcButtingIn";
 import { FcQuestions } from "@react-icons/all-files/fc/FcQuestions";
 
-interface penelitian {
+interface profil {
   daftarProfil: Array<profilList>;
 }
 
-const Penelitian: NextPage<penelitian> = ({ daftarProfil }) => {
+const Overview: NextPage<profil> = ({ daftarProfil }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
     <Menu>
       <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
-        <Heading>Penelitian</Heading>
+        <Heading>Overview</Heading>
         <BreadcrumbItem>
           <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/penelitian'>Penelitian</BreadcrumbLink>
+          <BreadcrumbLink href='/kemahasiswaan'>Overview</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Flex bg="blue.600">
@@ -70,15 +71,29 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil }) => {
           orientation={isLargerThan1280 ? ("vertical") : ("horizontal")}
         >
           <Flex flexDir="column">
-            <Text fontSize='sm'>Penelitian</Text>
+            <Text fontSize='sm'>Overview</Text>
             <TabList my="1vw" w="100%">
               <Flex flexWrap="wrap">
-                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Grup Penelitian</Tab>
                 <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                  Hasil Penelitian
+                  Sekilas Sistem Informasi
                 </Tab>
                 <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                  Hasil Pengabdian
+                  Calon Mahasiswa
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  Beasiswa
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  Prestasi
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  Profil Lulusan
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  Alumni
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  FAQ
                 </Tab>
               </Flex>
             </TabList>
@@ -120,21 +135,49 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil }) => {
             <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
               <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                 <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[10].text }} />
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[13].text }} />
                 </Box>
               </Box>
             </TabPanel>
-            <TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
               <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                 <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[11].text }} />
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[14].text }} />
                 </Box>
               </Box>
             </TabPanel>
-            <TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
               <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                 <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[12].text }} />
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[15].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[16].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[17].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[18].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[19].text }} />
                 </Box>
               </Box>
             </TabPanel>
@@ -155,4 +198,4 @@ export const getStaticProps: GetStaticProps = async () => {
   };
 };
 
-export default Penelitian;
+export default Overview;

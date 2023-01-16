@@ -1,4 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
+import NextLink from "next/link";
 import {
   Box,
   Flex,
@@ -83,15 +84,37 @@ const Akademik: NextPage<profil> = ({ daftarProfil }) => {
             </TabList>
             <Divider borderColor="gray.400" />
             <Text mt="8%" fontSize='sm'>Aksi Cepat</Text>
-            <Button w="full" leftIcon={<FcSelfServiceKiosk />} justifyContent="flex-start" rounded="md" mt="0.75vw">
-              Sekilas Prodi Sistem Informasi
-            </Button>
-            <Button w="full" leftIcon={<FcPortraitMode />} justifyContent="flex-start" rounded="md" mt="0.75vw">Calon Mahasiswa</Button>
-            <Button w="full" leftIcon={<FcKindle />} justifyContent="flex-start" rounded="md" mt="0.75vw">Beasiswa</Button>
-            <Button w="full" leftIcon={<FcSalesPerformance />} justifyContent="flex-start" rounded="md" mt="0.75vw">Prestasi</Button>
-            <Button w="full" leftIcon={<FcSurvey />} justifyContent="flex-start" rounded="md" mt="0.75vw">Profil Lulusan</Button>
-            <Button w="full" leftIcon={<FcButtingIn />} justifyContent="flex-start" rounded="md" mt="0.75vw">Alumni</Button>
-            <Button w="full" leftIcon={<FcQuestions />} justifyContent="flex-start" rounded="md" mt="0.75vw">FAQ</Button>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcSelfServiceKiosk />} justifyContent="flex-start" rounded="md" mt="0.75vw">
+                Sekilas Prodi Sistem Informasi
+              </Button>
+            </NextLink>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcPortraitMode />} justifyContent="flex-start" rounded="md" mt="0.75vw">
+                Calon Mahasiswa
+              </Button>
+            </NextLink>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcKindle />} justifyContent="flex-start" rounded="md" mt="0.75vw">
+                Beasiswa
+              </Button>
+            </NextLink>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcSalesPerformance />} justifyContent="flex-start" rounded="md" mt="0.75vw">
+                Prestasi
+              </Button>
+            </NextLink>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcSurvey />} justifyContent="flex-start" rounded="md" mt="0.75vw">
+                Profil Lulusan
+              </Button>
+            </NextLink>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcButtingIn />} justifyContent="flex-start" rounded="md" mt="0.75vw">Alumni</Button>
+            </NextLink>
+            <NextLink href="/overview">
+              <Button w="full" leftIcon={<FcQuestions />} justifyContent="flex-start" rounded="md" mt="0.75vw">FAQ</Button>
+            </NextLink>
           </Flex>
           <TabPanels>
             <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>

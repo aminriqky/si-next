@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import NextLink from "next/link";
 import {
   Box,
   Heading,
@@ -45,7 +45,9 @@ const Card: React.FC<CardProps> = (props) => {
             cursor={'pointer'}
             w="full">
             <Text fontSize={'md'} fontWeight={'semibold'}>
-              Lihat Selengkapnya
+              <NextLink href="/overview">
+                Lihat Selengkapnya
+              </NextLink>
             </Text>
             <BsArrowUpRight />
           </Flex>
