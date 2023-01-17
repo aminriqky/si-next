@@ -123,7 +123,7 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
           orientation={isLargerThan1280 ? ("vertical") : ("horizontal")}
         >
           <Flex flexDir="column">
-            <Text fontSize='sm'>Akademik</Text>
+            <Text fontSize='sm'>Kemahasiswaan</Text>
             <TabList my="1vw" w="100%">
               <Flex flexWrap="wrap">
                 <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">

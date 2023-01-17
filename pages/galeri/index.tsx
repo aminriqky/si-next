@@ -87,6 +87,7 @@ interface daftarGaleri {
 }
 
 const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => {
+  const [tahun, setTahun] = useState(0);
   const [galeri, setGaleri] = useState(0);
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
@@ -122,13 +123,13 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
           orientation={isLargerThan1280 ? ("vertical") : ("horizontal")}
         >
           <Flex flexDir="column">
-            <Text fontSize='sm'>Gaaleri</Text>
+            <Text fontSize='sm'>Galeri</Text>
             <TabList my="1vw" w="100%">
               <Flex flexWrap="wrap">
                 {daftarTahun !== null &&
                   daftarTahun.map((item) => {
                     return (
-                      <Tab autoFocus onFocus={() => {
+                      <Tab onFocus={() => {
                         setGaleri(item.tahun);
                       }} key={item.id} w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
                         {item.tahun}
@@ -173,8 +174,8 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
           </Flex>
           <TabPanels>
             <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-                {isLargerThan1280 ? (
+              {isLargerThan1280 ? (
+                <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                   <Grid templateColumns="repeat(6, 1fr)" gap={4}>
                     {daftarGaleri !== null &&
                       daftarGaleri.map((item) => {
@@ -183,7 +184,9 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
                         }
                       })}
                   </Grid>
-                ) : (
+                </Box>
+              ) : (
+                <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                   <Grid gap={2}>
                     {daftarGaleri !== null &&
                       daftarGaleri.map((item) => {
@@ -192,12 +195,12 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
                         }
                       })}
                   </Grid>
-                )}
-              </Box>
+                </Box>
+              )}
             </TabPanel>
             <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-                {isLargerThan1280 ? (
+              {isLargerThan1280 ? (
+                <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                   <Grid templateColumns="repeat(6, 1fr)" gap={4}>
                     {daftarGaleri !== null &&
                       daftarGaleri.map((item) => {
@@ -206,7 +209,9 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
                         }
                       })}
                   </Grid>
-                ) : (
+                </Box>
+              ) : (
+                <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                   <Grid gap={2}>
                     {daftarGaleri !== null &&
                       daftarGaleri.map((item) => {
@@ -215,8 +220,33 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
                         }
                       })}
                   </Grid>
-                )}
-              </Box>
+                </Box>
+              )}
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              {isLargerThan1280 ? (
+                <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                  <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+                    {daftarGaleri !== null &&
+                      daftarGaleri.map((item) => {
+                        if (item.tahun === galeri) {
+                          return <GaleriCell id={item.id} gambar={item.thumnail} />;
+                        }
+                      })}
+                  </Grid>
+                </Box>
+              ) : (
+                <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                  <Grid gap={2}>
+                    {daftarGaleri !== null &&
+                      daftarGaleri.map((item) => {
+                        if (item.tahun === galeri) {
+                          return <GaleriCell id={item.id} gambar={item.thumnail} />;
+                        }
+                      })}
+                  </Grid>
+                </Box>
+              )}
             </TabPanel>
           </TabPanels>
         </Tabs>

@@ -47,7 +47,7 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
           <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/kemahasiswaan'>Overview</BreadcrumbLink>
+          <BreadcrumbLink href='/overview'>Overview</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Flex bg="blue.600">
