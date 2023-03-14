@@ -1,34 +1,28 @@
 import type { NextPage, GetStaticProps } from "next";
 import NextLink from "next/link";
 import {
-  Text,
   Box,
-  Img,
   Flex,
-  Link,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs,
+  Text,
   Divider,
   Button,
   useMediaQuery,
   AspectRatio,
+  Img,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
   Heading
 } from "@chakra-ui/react";
-import ExNav from "../../public/exnav";
-import Menu from "../../public/menu";
-import { organisasi } from "../api/organisasi";
-import { berita } from "../api/berita";
-import { server } from "../../config";
-import type {
-  organisasi as orgList,
-  berita as beritaList,
-} from "../../public/types";
+import ExNav from "../public/exnav";
+import Menu from "../public/menu";
+import { profil } from "./api/profil";
+import type { profil as profilList } from "../public/types";
 import { FcSelfServiceKiosk } from "@react-icons/all-files/fc/FcSelfServiceKiosk";
 import { FcPortraitMode } from "@react-icons/all-files/fc/FcPortraitMode";
 import { FcKindle } from "@react-icons/all-files/fc/FcKindle";
@@ -37,56 +31,22 @@ import { FcSurvey } from "@react-icons/all-files/fc/FcSurvey";
 import { FcButtingIn } from "@react-icons/all-files/fc/FcButtingIn";
 import { FcQuestions } from "@react-icons/all-files/fc/FcQuestions";
 
-type MahasiswaCellProps = {
-  logo: string;
-  color: string;
-  detail: string;
-};
-
-const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
-  return (
-    <Flex flexDir={{ base: "column", xl: "row" }} mb="2%">
-      <Img
-        src={`${server}/storage/${props.logo}`}
-        borderRadius="5"
-        maxW="320px"
-        objectFit="contain"
-      />
-      <Flex ml={{ base: 0, xl: 32 }} flexDir="column" flexWrap="wrap">
-        <Text mb="10px" color={props.color} fontWeight="semibold">
-          {props.children}
-        </Text>
-        <Box
-          color="black"
-          fontWeight="light"
-          fontSize={{ base: "xs", lg: "md" }}
-        >
-          <div dangerouslySetInnerHTML={{ __html: props.detail }} />
-        </Box>
-      </Flex>
-    </Flex>
-  );
-};
-
-interface daftarKemahasiswaan {
-  daftarOrganisasi: Array<orgList>;
-  daftarBerita: Array<beritaList>;
+interface pengabdian {
+  daftarProfil: Array<profilList>;
 }
 
-const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
-  daftarOrganisasi,
-}) => {
+const Pengabdian: NextPage<pengabdian> = ({ daftarProfil }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
   return (
     <Menu>
       <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
-        <Heading>Kemahasiswaan</Heading>
+        <Heading>Penelitian</Heading>
         <BreadcrumbItem>
           <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
         </BreadcrumbItem>
         <BreadcrumbItem>
-          <BreadcrumbLink href='/kemahasiswaan'>Kemahasiswaan</BreadcrumbLink>
+          <BreadcrumbLink href='/penelitian'>Penelitian</BreadcrumbLink>
         </BreadcrumbItem>
       </Breadcrumb>
       <Flex bg="blue.600">
@@ -110,11 +70,11 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
           orientation={isLargerThan1280 ? ("vertical") : ("horizontal")}
         >
           <Flex flexDir="column">
-            <Text fontSize='sm'>Kemahasiswaan</Text>
+            <Text fontSize='sm'>Penelitian</Text>
             <TabList my="1vw" w="100%">
               <Flex flexWrap="wrap">
                 <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                  Organisasi Mahasiswa
+                  Hasil Pengabdian
                 </Tab>
               </Flex>
             </TabList>
@@ -153,25 +113,10 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
             </NextLink>
           </Flex>
           <TabPanels>
-            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+            <TabPanel>
               <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                 <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
-                    Organisasi Mahasiswa
-                  </Text>
-                  {daftarOrganisasi !== null &&
-                    daftarOrganisasi.map((item) => {
-                      return (
-                        <MahasiswaCell
-                          color="black"
-                          key={item.id}
-                          detail={item.detail}
-                          logo={item.logo}
-                        >
-                          {item.judul}
-                        </MahasiswaCell>
-                      );
-                    })}
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[12].text }} />
                 </Box>
               </Box>
             </TabPanel>
@@ -184,13 +129,12 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
 };
 
 export const getStaticProps: GetStaticProps = async () => {
-  const daftarOrganisasi = await organisasi();
-  const daftarBerita = await berita();
+  const daftarProfil = await profil();
 
   return {
-    props: { daftarOrganisasi, daftarBerita },
+    props: { daftarProfil },
     revalidate: 15,
   };
 };
 
-export default DaftarKemahasiswaan;
+export default Pengabdian;

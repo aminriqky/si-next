@@ -124,6 +124,11 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
     router.push("/penelitian");
   };
 
+  const pengabdian = (e: React.FormEvent) => {
+    e.preventDefault();
+    router.push("/pengabdian");
+  };
+
   const kemahasiswaan = (e: React.FormEvent) => {
     e.preventDefault();
     router.push("/kemahasiswaan");
@@ -163,6 +168,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                 <MenuTitle title="Dokumen" handleClick={dokumen} />
                 <MenuTitle title="Galeri" handleClick={galeri} />
                 <MenuTitle title="Penelitian" handleClick={penelitian} />
+                <MenuTitle title="Pengabdian" handleClick={pengabdian} />
                 <MenuTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
               </Menu>
             </Flex>
@@ -178,7 +184,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                   <DrawerTitle title="Akademik" handleClick={akademik} />
                   <DrawerTitle title="Dokumen" handleClick={dokumen} />
                   <DrawerTitle title="Galeri" handleClick={galeri} />
-                  <DrawerTitle title="Penelitian" handleClick={penelitian} />
+                  <DrawerTitle title="Pengabdian" handleClick={pengabdian} />
                   <DrawerTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
                 </DrawerBody>
               </DrawerContent>

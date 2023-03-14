@@ -75,7 +75,7 @@ const Profil: NextPage<profil> = ({ daftarProfil }) => {
               <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Profil Prodi</Tab>
               <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Sejarah</Tab>
               <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Visi & Misi</Tab>
-              <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Fasilitas</Tab>
+              <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Sarana & Prasarana</Tab>
             </TabList>
             <Divider borderColor="gray.400" />
             <Text mt="8%" fontSize='sm'>Aksi Cepat</Text>

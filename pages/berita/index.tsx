@@ -1,92 +1,92 @@
 import type { NextPage, GetStaticProps } from "next";
-import { Text, Box, Flex, Link } from "@chakra-ui/react";
+import { Text, Box, Flex, Link, Img } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import { replace } from "../../public/func";
-import dayjs from "dayjs";
 import "dayjs/locale/id";
 import { berita } from "../api/berita";
 import type { berita as beritaList } from "../../public/types";
-
-type BeritaCellProps = {
-  key: number;
-  hari: string;
-  hariBulan: string;
-  dylink: string;
-  judul: string;
-  penulis: string;
-};
+import { server } from "../../config";
+import { Fragment } from "react";
 
 interface daftarBerita {
   daftarBerita: Array<beritaList>;
 }
 
-function BeritaCell(props: BeritaCellProps) {
-  const router = useRouter();
+type MahasiswaCellProps = {
+  logo: string;
+  color: string;
+  detail: string;
+};
 
+const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
   return (
-    <Flex flexDirection="row" flex="1" borderBottom="solid 1px gray">
-      <Box
-        minW="60px"
-        height="60px"
-        m={{ base: "3vw", xl: "1.4vw" }}
-        textAlign="center"
-        border="2px"
-      >
-        <Text mt="5px" alignSelf="center" fontWeight="bold" fontSize="lg">
-          {props.hari}
+    <Flex flexDir={{ base: "column", xl: "row" }} mb="2%">
+      <Img
+        src={`${server}/storage/${props.logo}`}
+        borderRadius="5"
+        maxW="320px"
+        objectFit="contain"
+      />
+      <Flex ml={{ base: 0, xl: 16 }} flexDir="column" flexWrap="wrap">
+        <Text mb="10px" color={props.color} fontWeight="semibold">
+          {props.children}
         </Text>
-        <Text fontSize="xs">{props.hariBulan}</Text>
-      </Box>
-      <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
-        <Text fontSize="md">
-          <Link
-            fontWeight="semibold"
-            onClick={(e) => {
-              e.preventDefault();
-              router.push(`${props.dylink}`);
-            }}
-          >
-            {props.judul}
-          </Link>
-        </Text>
-        <Text fontSize="sm">{props.penulis}</Text>
-      </Box>
+        <Box
+          color="black"
+          fontWeight="light"
+          fontSize={{ base: "xs", lg: "md" }}
+        >
+          <div dangerouslySetInnerHTML={{ __html: props.detail }} />
+        </Box>
+      </Flex>
     </Flex>
   );
-}
+};
 
 const DaftarBerita: NextPage<daftarBerita> = ({ daftarBerita }) => {
+  const router = useRouter();
+
+  function dots(num: number, str: string) {
+    if (str !== null && str.length > num) {
+      return str.slice(0, num) + "...";
+    } else {
+      return str;
+    }
+  }
+
   return (
     <Menu>
-      <Box
-        bg="white"
-        opacity="0.9"
-        zIndex="999"
-        mx="6%"
-        my={{ base: "12%", xl: "100px" }}
-        p="4%"
-      >
-        <Text fontSize="28" pb="2%" fontWeight="semibold">
-          Daftar Berita
-        </Text>
-        {daftarBerita !== null &&
-          daftarBerita.map((item) => {
-            return (
-              <BeritaCell
-                key={item.id}
-                hari={dayjs(item.tanggal)
-                  .locale("id")
-                  .format("ddd")
-                  .toUpperCase()}
-                hariBulan={dayjs(item.tanggal).format("DD/MM")}
-                judul={item.judul}
-                penulis={item.penulis}
-                dylink={`/berita/${replace(item.judul)}`}
-              />
-            );
-          })}
+      <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+        <Box fontSize={{ base: "xs", lg: "md" }}>
+          <Text textColor="black" fontSize="2xl" fontWeight="semibold" my="6">
+            Berita Terkini
+          </Text>
+          {daftarBerita !== null &&
+            daftarBerita.map((item) => {
+              return (
+                <Fragment key={item.id}>
+                  {
+                    <MahasiswaCell
+                      color="teal.700"
+                      detail={dots(530, item.detail)}
+                      logo={item.thumbnail}
+                    >
+                      <Link
+                        onClick={(e) => {
+                          e.preventDefault();
+                          router.push(`/berita/${replace(item.judul)}`);
+                        }}
+                      >
+                        {item.judul}
+                      </Link>
+                    </MahasiswaCell>
+                  }
+                </Fragment>
+              );
+            })}
+        </Box>
       </Box>
       <ExNav />
     </Menu>

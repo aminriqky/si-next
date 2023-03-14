@@ -77,9 +77,6 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil }) => {
                 <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
                   Hasil Penelitian
                 </Tab>
-                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                  Hasil Pengabdian
-                </Tab>
               </Flex>
             </TabList>
             <Divider borderColor="gray.400" />
