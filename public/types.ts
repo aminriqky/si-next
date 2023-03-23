@@ -47,6 +47,15 @@ export interface berita {
   updated_at: string;
 }
 
+export interface haki {
+  id: number;
+  name: string;
+  dosen_id: number;
+  file_haki: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface download {
   id: number;
   nama_berkas: string;

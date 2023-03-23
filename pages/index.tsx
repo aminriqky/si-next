@@ -418,7 +418,7 @@ const Home: NextPage<home> = ({
       <Divider />
       <Box mx="8%" p="4%">
         <Box fontSize={{ base: "xs", lg: "md" }}>
-          <div dangerouslySetInnerHTML={{ __html: daftarProfil[7].text }} />
+          <div dangerouslySetInnerHTML={{ __html: daftarProfil[6].text }} />
         </Box>
       </Box>
       <Flex flexDir={{ base: "column", xl: "row" }} mx="12%">

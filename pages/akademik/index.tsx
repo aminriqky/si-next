@@ -1,146 +1,180 @@
 import type { NextPage, GetStaticProps } from "next";
-import NextLink from "next/link";
+import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
   Tab,
-  TabList,
   TabPanel,
-  TabPanels,
-  Tabs,
   Text,
-  Divider,
-  Button,
-  useMediaQuery,
-  AspectRatio,
-  Img,
-  Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Heading
+  Icon,
+  Link,
+  Breadcrumb,
+  Heading,
+  Button
 } from "@chakra-ui/react";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import { profil } from "../api/profil";
+import { haki } from "../api/haki";
+import PageTab from "../../public/pagetab";
 import type { profil as profilList } from "../../public/types";
-import { FcSelfServiceKiosk } from "@react-icons/all-files/fc/FcSelfServiceKiosk";
-import { FcPortraitMode } from "@react-icons/all-files/fc/FcPortraitMode";
-import { FcKindle } from "@react-icons/all-files/fc/FcKindle";
-import { FcSalesPerformance } from "@react-icons/all-files/fc/FcSalesPerformance";
-import { FcSurvey } from "@react-icons/all-files/fc/FcSurvey";
-import { FcButtingIn } from "@react-icons/all-files/fc/FcButtingIn";
-import { FcQuestions } from "@react-icons/all-files/fc/FcQuestions";
+import type { haki as hakiList } from "../../public/types";
+import { FaExternalLinkAlt } from "@react-icons/all-files/fa/FaExternalLinkAlt";
+import { FaFileAlt } from "@react-icons/all-files/fa/FaFileAlt";
+import { replace } from "../../public/func";
+import { FaBookmark } from "@react-icons/all-files/fa/FaBookmark";
+import { server } from "../../config";
+import dayjs from "dayjs";
 
 interface profil {
   daftarProfil: Array<profilList>;
+  daftarHaki: Array<hakiList>;
 }
 
-const Akademik: NextPage<profil> = ({ daftarProfil }) => {
-  const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
+interface DokumenCellProps {
+  key: number;
+  link: number;
+  hari: string;
+  hariBulan: string;
+  judul: string;
+  tanggal: string;
+}
+
+function DokumenCell(props: DokumenCellProps) {
+  const [saveFile, setSaveFile] = useState("");
+
+  useEffect(() => {
+    if (saveFile === "") {
+      linkUnduh();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  async function linkUnduh() {
+    const unduh = await fetch(`${server}/api/hakifile/${props.link}`);
+    const jsonData = await unduh.json();
+    if (jsonData.length !== 0) {
+      setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
+    } else {
+      setSaveFile(jsonData);
+    }
+  }
+
+  return (
+    <React.Fragment>
+      <Flex flexDirection="row" flex="1">
+        <Box
+          minW="60px"
+          height="60px"
+          m={{ base: "3vw", xl: "1.4vw" }}
+          textAlign="center"
+          border="1px"
+        >
+          <Text mt="5px" alignSelf="center" fontWeight="semibold" fontSize="lg">
+            {props.hari}
+          </Text>
+          <Text fontSize="xs">{props.hariBulan}</Text>
+        </Box>
+        <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+          <Text fontSize={{ base: "sm", xl: "md" }} fontWeight="semibold">
+            {props.judul}
+          </Text>
+          <Text fontSize="sm">{props.tanggal}</Text>
+        </Box>
+      </Flex>
+      {saveFile.length !== 0 && (
+        <Flex
+          flexDirection="row"
+          flex="1"
+          bg="whiteAlpha.900"
+          pl="2%"
+          mb={{ base: "3vw", xl: "1.41vw" }}
+        >
+          <Text color="teal" pt="2.5px">
+            Lampiran File :
+          </Text>
+          &ensp;
+          <Link _hover={{ textTransform: "none" }} href={saveFile} download>
+            <Button colorScheme="teal" size="sm">
+              Unduh
+            </Button>
+          </Link>
+        </Flex>
+      )}
+    </React.Fragment>
+  );
+}
+
+const Akademik: NextPage<profil> = ({ daftarProfil, daftarHaki }) => {
+  const router = useRouter();
 
   return (
     <Menu>
-      <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
-        <Heading>Akademik</Heading>
-        <BreadcrumbItem>
-          <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
-        </BreadcrumbItem>
-        <BreadcrumbItem>
-          <BreadcrumbLink href='/akademik'>Akademik</BreadcrumbLink>
-        </BreadcrumbItem>
-      </Breadcrumb>
-      <Flex bg="blue.600">
-        <AspectRatio
-          pointerEvents="none"
-          opacity="0.2"
-          h={{ base: "100px", xl: "200px" }}
-          w="100%"
-        >
-          <Img
-            src="/gambar.jpg"
-            w="100%"
-            alt="Gambar Slide"
-          />
-        </AspectRatio>
-      </Flex>
-      <Flex flexDir="row" my={{ base: "10%", xl: "80px" }} mx="6%">
-        <Tabs
-          variant="soft-rounded"
-          colorScheme="green"
-          orientation={isLargerThan1280 ? ("vertical") : ("horizontal")}
-        >
-          <Flex flexDir="column">
-            <Text fontSize='sm'>Akademik</Text>
-            <TabList my="1vw" w="100%">
-              <Flex flexWrap="wrap">
-                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Kurikulum</Tab>
-                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                  Kalender Akademik
-                </Tab>
-                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                  HaKI
-                </Tab>
-              </Flex>
-            </TabList>
-            <Divider borderColor="gray.400" />
-            <Text mt="8%" fontSize='sm'>Aksi Cepat</Text>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcSelfServiceKiosk />} justifyContent="flex-start" rounded="md" mt="0.75vw">
-                Sekilas Prodi Sistem Informasi
-              </Button>
-            </NextLink>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcPortraitMode />} justifyContent="flex-start" rounded="md" mt="0.75vw">
-                Calon Mahasiswa
-              </Button>
-            </NextLink>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcKindle />} justifyContent="flex-start" rounded="md" mt="0.75vw">
-                Beasiswa
-              </Button>
-            </NextLink>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcSalesPerformance />} justifyContent="flex-start" rounded="md" mt="0.75vw">
-                Prestasi
-              </Button>
-            </NextLink>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcSurvey />} justifyContent="flex-start" rounded="md" mt="0.75vw">
-                Profil Lulusan
-              </Button>
-            </NextLink>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcButtingIn />} justifyContent="flex-start" rounded="md" mt="0.75vw">Alumni</Button>
-            </NextLink>
-            <NextLink href="/overview">
-              <Button w="full" leftIcon={<FcQuestions />} justifyContent="flex-start" rounded="md" mt="0.75vw">FAQ</Button>
-            </NextLink>
-          </Flex>
-          <TabPanels>
-            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-                <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[1].text }} />
-                </Box>
-              </Box>
-            </TabPanel>
-            <TabPanel>
-              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-                <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[3].text }} />
-                </Box>
-              </Box>
-            </TabPanel>
-            <TabPanel>
-              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-                <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[4].text }} />
-                </Box>
-              </Box>
-            </TabPanel>
-          </TabPanels>
-        </Tabs>
-      </Flex>
+      <PageTab judul="Akademik"
+        breadcrumb={
+          <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
+            <Heading>Akademik</Heading>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/akademik'>Akademik</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        }
+        tab={
+          <React.Fragment>
+            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Kurikulum</Tab>
+            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+              Kalender Akademik
+            </Tab>
+            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+              HaKI
+            </Tab>
+          </React.Fragment>
+        }>
+        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+            <Box fontSize={{ base: "xs", lg: "md" }}>
+              <div dangerouslySetInnerHTML={{ __html: daftarProfil[1].text }} />
+            </Box>
+          </Box>
+        </TabPanel>
+        <TabPanel>
+          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+            <Box fontSize={{ base: "xs", lg: "md" }}>
+              <div dangerouslySetInnerHTML={{ __html: daftarProfil[3].text }} />
+            </Box>
+          </Box>
+        </TabPanel>
+        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+            {daftarHaki !== null &&
+              daftarHaki.map((item) => {
+                if (replace(item.name).toString()) {
+                  return (
+                    <DokumenCell
+                      key={item.id}
+                      hari={dayjs(item.updated_at)
+                        .locale("id")
+                        .format("ddd")
+                        .toUpperCase()}
+                      hariBulan={dayjs(item.updated_at).format("DD/MM")}
+                      judul={item.name}
+                      tanggal={dayjs(item.updated_at)
+                        .locale("id")
+                        .format("dddd, DD MMMM YYYY")}
+                      link={item.id}
+                    />
+                  );
+                }
+              })}
+          </Box>
+        </TabPanel>
+      </PageTab>
       <ExNav />
     </Menu>
   );
@@ -148,9 +182,10 @@ const Akademik: NextPage<profil> = ({ daftarProfil }) => {
 
 export const getStaticProps: GetStaticProps = async () => {
   const daftarProfil = await profil();
+  const daftarHaki = await haki();
 
   return {
-    props: { daftarProfil },
+    props: { daftarProfil, daftarHaki },
     revalidate: 15,
   };
 };
