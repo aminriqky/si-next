@@ -23,12 +23,9 @@ import {
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import { organisasi } from "../api/organisasi";
-import { berita } from "../api/berita";
+import { profil } from "../api/profil";
 import { server } from "../../config";
-import type {
-  organisasi as orgList,
-  berita as beritaList,
-} from "../../public/types";
+import type { organisasi as orgList, profil as profilList } from "../../public/types";
 import { FcSelfServiceKiosk } from "@react-icons/all-files/fc/FcSelfServiceKiosk";
 import { FcPortraitMode } from "@react-icons/all-files/fc/FcPortraitMode";
 import { FcKindle } from "@react-icons/all-files/fc/FcKindle";
@@ -70,11 +67,12 @@ const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
 
 interface daftarKemahasiswaan {
   daftarOrganisasi: Array<orgList>;
-  daftarBerita: Array<beritaList>;
+  daftarProfil: Array<profilList>;
 }
 
 const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
   daftarOrganisasi,
+  daftarProfil
 }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
 
@@ -115,6 +113,12 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
               <Flex flexWrap="wrap">
                 <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
                   Organisasi Mahasiswa
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  Prestasi Akademik
+                </Tab>
+                <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                  Prestasi Non-Akademik
                 </Tab>
               </Flex>
             </TabList>
@@ -175,6 +179,20 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
                 </Box>
               </Box>
             </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[21].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[22].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
           </TabPanels>
         </Tabs>
       </Flex>
@@ -185,10 +203,10 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
 
 export const getStaticProps: GetStaticProps = async () => {
   const daftarOrganisasi = await organisasi();
-  const daftarBerita = await berita();
+  const daftarProfil = await profil();
 
   return {
-    props: { daftarOrganisasi, daftarBerita },
+    props: { daftarOrganisasi, daftarProfil },
     revalidate: 15,
   };
 };

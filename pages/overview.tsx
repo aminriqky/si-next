@@ -135,6 +135,13 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
             <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
               <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                 <Box fontSize={{ base: "xs", lg: "md" }}>
+                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[12].text }} />
+                </Box>
+              </Box>
+            </TabPanel>
+            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                <Box fontSize={{ base: "xs", lg: "md" }}>
                   <div dangerouslySetInnerHTML={{ __html: daftarProfil[13].text }} />
                 </Box>
               </Box>
@@ -171,13 +178,6 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
               <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
                 <Box fontSize={{ base: "xs", lg: "md" }}>
                   <div dangerouslySetInnerHTML={{ __html: daftarProfil[18].text }} />
-                </Box>
-              </Box>
-            </TabPanel>
-            <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-              <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-                <Box fontSize={{ base: "xs", lg: "md" }}>
-                  <div dangerouslySetInnerHTML={{ __html: daftarProfil[19].text }} />
                 </Box>
               </Box>
             </TabPanel>

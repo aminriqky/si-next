@@ -44,7 +44,7 @@ const Pengabdian: NextPage<pengabdian> = ({ daftarProfil }) => {
         <TabPanel>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[12].text }} />
+              <div dangerouslySetInnerHTML={{ __html: daftarProfil[11].text }} />
             </Box>
           </Box>
         </TabPanel>
