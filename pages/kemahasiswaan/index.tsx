@@ -5,7 +5,6 @@ import {
   Box,
   Img,
   Flex,
-  Link,
   Tab,
   TabList,
   TabPanel,

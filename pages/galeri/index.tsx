@@ -2,6 +2,7 @@ import React, { Fragment, useState } from "react";
 import type { NextPage, GetStaticProps } from "next";
 import {
   Box,
+  Text,
   AspectRatio,
   LinkOverlay,
   LinkBox,
@@ -31,6 +32,7 @@ import PageTab from "../../public/pagetab";
 type GaleriCellProps = {
   id: number;
   gambar: string;
+  judul: string;
 };
 
 function GaleriCell(props: GaleriCellProps) {
@@ -61,6 +63,15 @@ function GaleriCell(props: GaleriCellProps) {
           <AspectRatio h="100%" w="100%">
             <Img src={`${server}/storage/${props.gambar}`} objectFit="fill" />
           </AspectRatio>
+          <Box pos="absolute" bottom={0} opacity={0.6} w="100%">
+            <Text
+              textAlign="center"
+              bg="black"
+              textColor="white"
+              fontSize="md">
+              {props.judul}
+            </Text>
+          </Box>
         </ModalContent>
       </Modal>
     </Fragment>
@@ -95,7 +106,7 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
             {daftarTahun !== null &&
               daftarTahun.map((item) => {
                 return (
-                  <Tab onFocus={() => {
+                  <Tab autoFocus onFocus={() => {
                     setGaleri(item.tahun);
                   }} key={item.id} w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
                     {item.tahun}
@@ -104,81 +115,36 @@ const DaftarGaleri: NextPage<daftarGaleri> = ({ daftarTahun, daftarGaleri }) => 
               })}
           </React.Fragment>
         }>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          {isLargerThan1280 ? (
-            <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-              <Grid templateColumns="repeat(6, 1fr)" gap={4}>
-                {daftarGaleri !== null &&
-                  daftarGaleri.map((item) => {
-                    if (item.tahun === galeri) {
-                      return <GaleriCell id={item.id} gambar={item.thumnail} />;
-                    }
-                  })}
-              </Grid>
-            </Box>
-          ) : (
-            <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-              <Grid gap={2}>
-                {daftarGaleri !== null &&
-                  daftarGaleri.map((item) => {
-                    if (item.tahun === galeri) {
-                      return <GaleriCell id={item.id} gambar={item.thumnail} />;
-                    }
-                  })}
-              </Grid>
-            </Box>
-          )}
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          {isLargerThan1280 ? (
-            <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-              <Grid templateColumns="repeat(6, 1fr)" gap={4}>
-                {daftarGaleri !== null &&
-                  daftarGaleri.map((item) => {
-                    if (item.tahun === galeri) {
-                      return <GaleriCell id={item.id} gambar={item.thumnail} />;
-                    }
-                  })}
-              </Grid>
-            </Box>
-          ) : (
-            <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-              <Grid gap={2}>
-                {daftarGaleri !== null &&
-                  daftarGaleri.map((item) => {
-                    if (item.tahun === galeri) {
-                      return <GaleriCell id={item.id} gambar={item.thumnail} />;
-                    }
-                  })}
-              </Grid>
-            </Box>
-          )}
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          {isLargerThan1280 ? (
-            <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-              <Grid templateColumns="repeat(6, 1fr)" gap={4}>
-                {daftarGaleri !== null &&
-                  daftarGaleri.map((item) => {
-                    if (item.tahun === galeri) {
-                      return <GaleriCell id={item.id} gambar={item.thumnail} />;
-                    }
-                  })}
-              </Grid>
-            </Box>
-          ) : (
-            <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-              <Grid gap={2}>
-                {daftarGaleri !== null &&
-                  daftarGaleri.map((item) => {
-                    if (item.tahun === galeri) {
-                      return <GaleriCell id={item.id} gambar={item.thumnail} />;
-                    }
-                  })}
-              </Grid>
-            </Box>
-          )}
-        </TabPanel>
+        {daftarTahun !== null &&
+          daftarTahun.map((item) => {
+            return (
+              <TabPanel p={0} mt={{ base: "5%", xl: 0 }} key={item.id}>
+                {isLargerThan1280 ? (
+                  <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                    <Grid templateColumns="repeat(6, 1fr)" gap={4}>
+                      {daftarGaleri !== null &&
+                        daftarGaleri.map((item) => {
+                          if (item.tahun === galeri) {
+                            return <GaleriCell id={item.id} judul={item.judul} gambar={item.thumnail} />;
+                          }
+                        })}
+                    </Grid>
+                  </Box>
+                ) : (
+                  <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+                    <Grid gap={2}>
+                      {daftarGaleri !== null &&
+                        daftarGaleri.map((item) => {
+                          if (item.tahun === galeri) {
+                            return <GaleriCell id={item.id} judul={item.judul} gambar={item.thumnail} />;
+                          }
+                        })}
+                    </Grid>
+                  </Box>
+                )}
+              </TabPanel>
+            );
+          })}
       </PageTab>
       <ExNav />
     </Menu>
