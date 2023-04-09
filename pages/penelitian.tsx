@@ -136,7 +136,7 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil, daftarHaki }) => {
             </Box>
           </Box>
         </TabPanel>
-        <TabPanel>
+        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
               <div dangerouslySetInnerHTML={{ __html: daftarProfil[10].text }} />

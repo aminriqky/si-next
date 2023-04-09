@@ -1,4 +1,4 @@
-import type { NextPage, GetStaticProps } from "next";
+import type { NextPage, GetServerSideProps } from "next";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import {
@@ -724,7 +724,7 @@ const Home: NextPage<home> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getServerSideProps: GetServerSideProps = async () => {
   const daftarAgenda = await agenda();
   const daftarPengumuman = await pengumuman();
   const daftarArtikel = await artikel();
@@ -742,8 +742,7 @@ export const getStaticProps: GetStaticProps = async () => {
       daftarBerita,
       daftarSlide,
       daftarProfil
-    },
-    revalidate: 15,
+    }
   };
 };
 

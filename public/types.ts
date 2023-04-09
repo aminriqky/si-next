@@ -116,6 +116,7 @@ export interface pengumuman {
 }
 
 export interface profil {
+  [x: string]: any;
   id: number;
   text: string;
   created_at: string;

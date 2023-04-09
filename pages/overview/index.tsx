@@ -1,5 +1,5 @@
 import type { NextPage, GetStaticProps } from "next";
-import React from "react";
+import React, { useState } from "react";
 import {
   Box,
   Tab,
@@ -9,17 +9,26 @@ import {
   BreadcrumbLink,
   Heading
 } from "@chakra-ui/react";
-import ExNav from "../public/exnav";
-import Menu from "../public/menu";
-import { profil } from "./api/profil";
-import type { profil as profilList } from "../public/types";
-import PageTab from "../public/pagetab";
+import ExNav from "../../public/exnav";
+import Menu from "../../public/menu";
+import { profil } from "../api/profil";
+import type { profil as profilList } from "../../public/types";
+import PageTab from "../../public/pagetab";
+import router from "next/router";
 
 interface profil {
   daftarProfil: Array<profilList>;
 }
 
 const Overview: NextPage<profil> = ({ daftarProfil }) => {
+  const [nilai, setNilai] = useState("");
+
+  const toggleValue = (e: React.MouseEvent<HTMLButtonElement>, value: string) => {
+    e.preventDefault;
+    setNilai(value);
+    router.push(`/overview?slug=${value}`, undefined, { shallow: true });
+  }
+
   return (
     <Menu>
       <PageTab judul="Overview"
@@ -38,7 +47,14 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
         }
         tab={
           <React.Fragment>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "sekilas")}
+              autoFocus={nilai === "sekilas" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+            >
               Sekilas Sistem Informasi
             </Tab>
             <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
