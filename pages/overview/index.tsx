@@ -26,7 +26,7 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
   const toggleValue = (e: React.MouseEvent<HTMLButtonElement>, value: string) => {
     e.preventDefault;
     setNilai(value);
-    router.push(`/overview?slug=${value}`, undefined, { shallow: true });
+    router.push(`/overview/${value}`);
   }
 
   return (
@@ -48,8 +48,8 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
         tab={
           <React.Fragment>
             <Tab
-              onClick={(e) => toggleValue(e, "sekilas")}
-              autoFocus={nilai === "sekilas" ? true : false}
+              onClick={(e) => toggleValue(e, "sekilas-sistem-informasi")}
+              autoFocus={nilai === "sekilas-sistem-informasi" ? true : false}
               w="full"
               justifyContent="flex-start"
               rounded="md"
@@ -57,22 +57,63 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
             >
               Sekilas Sistem Informasi
             </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "calon-mahasiswa")}
+              autoFocus={nilai === "calon-mahasiswa" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+            >
               Calon Mahasiswa
             </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "beasiswa")}
+              autoFocus={nilai === "beasiswa" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+            >
               Beasiswa
             </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "prestasi")}
+              autoFocus={nilai === "prestasi" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+            >
               Prestasi
             </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "profil-lulusan")}
+              autoFocus={nilai === "profil-lulusan" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+            >
               Profil Lulusan
             </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "alumni")}
+              autoFocus={nilai === "alumni" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw">
               Alumni
             </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+            <Tab
+              onClick={(e) => toggleValue(e, "faq")}
+              autoFocus={nilai === "faq" ? true : false}
+              w="full"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+            >
               FAQ
             </Tab>
           </React.Fragment>
@@ -81,48 +122,6 @@ const Overview: NextPage<profil> = ({ daftarProfil }) => {
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
               <div dangerouslySetInnerHTML={{ __html: daftarProfil[12].text }} />
-            </Box>
-          </Box>
-        </TabPanel>
-        <TabPanel>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[13].text }} />
-            </Box>
-          </Box>
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[14].text }} />
-            </Box>
-          </Box>
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[15].text }} />
-            </Box>
-          </Box>
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[16].text }} />
-            </Box>
-          </Box>
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[17].text }} />
-            </Box>
-          </Box>
-        </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[18].text }} />
             </Box>
           </Box>
         </TabPanel>
