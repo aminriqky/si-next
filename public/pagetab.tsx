@@ -1,4 +1,3 @@
-import NextLink from "next/link";
 import React from "react";
 import {
   Text,
@@ -10,7 +9,8 @@ import {
   Divider,
   useMediaQuery,
   AspectRatio,
-  Img
+  Img,
+  Link
 } from "@chakra-ui/react";
 import "dayjs/locale/id";
 import { FcSelfServiceKiosk } from "@react-icons/all-files/fc/FcSelfServiceKiosk";
@@ -62,41 +62,41 @@ const PageTab: React.FC<TabProps> = (props) => {
             </TabList>
             <Divider borderColor="gray.400" />
             <Text mt="8%" fontSize='sm'>Aksi Cepat</Text>
-            <NextLink href="/overview">
+            <Link href="/overview/sekilas-sistem-informasi">
               <Button w="full" leftIcon={<FcSelfServiceKiosk />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 Sekilas Prodi Sistem Informasi
               </Button>
-            </NextLink>
-            <NextLink href="/overview">
+            </Link>
+            <Link href="/overview/calon-mahasiswa">
               <Button w="full" leftIcon={<FcPortraitMode />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 Calon Mahasiswa
               </Button>
-            </NextLink>
-            <NextLink href="/overview">
+            </Link>
+            <Link href="/overview/beasiswa">
               <Button w="full" leftIcon={<FcKindle />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 Beasiswa
               </Button>
-            </NextLink>
-            <NextLink href="/overview">
+            </Link>
+            <Link href="/overview/prestasi">
               <Button w="full" leftIcon={<FcSalesPerformance />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 Prestasi
               </Button>
-            </NextLink>
-            <NextLink href="/overview">
+            </Link>
+            <Link href="/overview/profil-lulusan">
               <Button w="full" leftIcon={<FcSurvey />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 Profil Lulusan
               </Button>
-            </NextLink>
-            <NextLink href="/overview">
+            </Link>
+            <Link href="/overview/alumni">
               <Button w="full" leftIcon={<FcButtingIn />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 Alumni
               </Button>
-            </NextLink>
-            <NextLink href="/overview">
+            </Link>
+            <Link href="/overview/faq">
               <Button w="full" leftIcon={<FcQuestions />} justifyContent="flex-start" rounded="md" mt="0.75vw">
                 FAQ
               </Button>
-            </NextLink>
+            </Link>
           </Flex>
           <TabPanels>
             {props.children}
