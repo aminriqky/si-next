@@ -1,5 +1,5 @@
 import type { NextPage } from "next";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Tab,
@@ -25,7 +25,6 @@ interface ShallowRoutingProps {
 }
 
 const Overview: NextPage<ShallowRoutingProps> = ({ slug }) => {
-  const initialFocusRef = useRef();
   const router = useRouter();
   const { query } = router;
   const [nilai, setNilai] = useState(query.overview || slug);
@@ -137,49 +136,63 @@ const Overview: NextPage<ShallowRoutingProps> = ({ slug }) => {
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[12].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[12].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>
         <TabPanel>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[13].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[13].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[14].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[14].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[15].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[15].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[16].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[16].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[17].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[17].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil !== undefined ? daftarProfil[18].text : "Loading..." }} />
+              <div dangerouslySetInnerHTML={{
+                __html: daftarProfil !== undefined ? daftarProfil[18].text : "Loading..."
+              }} />
             </Box>
           </Box>
         </TabPanel>

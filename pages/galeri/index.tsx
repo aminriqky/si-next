@@ -27,7 +27,11 @@ import type { tahun as tahunList } from "../../public/types";
 import { server } from "../../config";
 import type { gallery as galeriList } from "../../public/types";
 import { gallery } from "../api/gallery";
-import PageTab from "../../public/pagetab";
+import dynamic from "next/dynamic";
+const PageTab = dynamic(
+  () => import('../../public/pagetab'),
+  { ssr: false }
+)
 
 type GaleriCellProps = {
   id: number;

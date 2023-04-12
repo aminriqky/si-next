@@ -22,7 +22,11 @@ import { download } from "../api/download";
 import { server } from "../../config";
 import type { download as dokumen } from "../../public/types";
 import { replace } from "../../public/func";
-import PageTab from "../../public/pagetab";
+import dynamic from "next/dynamic";
+const PageTab = dynamic(
+  () => import('../../public/pagetab'),
+  { ssr: false }
+)
 
 interface DokumenCellProps {
   key: number;

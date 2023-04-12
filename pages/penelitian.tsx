@@ -19,7 +19,11 @@ import { profil } from "./api/profil";
 import { haki } from "./api/haki";
 import type { profil as profilList } from "../public/types";
 import type { haki as hakiList } from "../public/types";
-import PageTab from "../public/pagetab";
+import dynamic from "next/dynamic";
+const PageTab = dynamic(
+  () => import('../public/pagetab'),
+  { ssr: false }
+)
 import dayjs from "dayjs";
 import { replace } from "../public/func";
 import { server } from "../config";

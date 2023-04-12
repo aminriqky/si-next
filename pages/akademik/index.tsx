@@ -12,7 +12,11 @@ import {
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import { profil } from "../api/profil";
-import PageTab from "../../public/pagetab";
+import dynamic from "next/dynamic";
+const PageTab = dynamic(
+  () => import('../../public/pagetab'),
+  { ssr: false }
+)
 import type { profil as profilList } from "../../public/types";
 import type { haki as hakiList } from "../../public/types";
 
