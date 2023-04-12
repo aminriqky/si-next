@@ -19,7 +19,6 @@ import {
   Img,
   VisuallyHidden,
 } from "@chakra-ui/react";
-import Card from "../public/card";
 import { SiFacebook } from "@react-icons/all-files/si/SiFacebook";
 import { SiInstagram } from "@react-icons/all-files/si/SiInstagram";
 import { SiYoutube } from "@react-icons/all-files/si/SiYoutube";
@@ -421,16 +420,6 @@ const Home: NextPage<home> = ({
           <div dangerouslySetInnerHTML={{ __html: daftarProfil[6].text }} />
         </Box>
       </Box>
-      <Flex flexDir={{ base: "column", xl: "row" }} mx="12%">
-        <Card judul="Calon Mahasiswa" isi="Informasi untuk para calon mahasiswa" />
-        <Card judul="Beasiswa" isi="Informasi beasiswa bagi para mahasiswa" />
-        <Card judul="Prestasi" isi="Informasi tentang prestasi yang dicapai" />
-      </Flex>
-      <Flex flexDir={{ base: "column", xl: "row" }} mx="12%" mb={{ base: "12%", xl: "70px" }}>
-        <Card judul="Profil Lulusan" isi="Informasi untuk para calon mahasiswa" />
-        <Card judul="Alumni" isi="Jejak alumni setelah lulus perkuliahan" />
-        <Card judul="FAQ" isi="Menjelaskan hal-hal yang belum jelas" />
-      </Flex>
       <Berita
         gambar1={`${server}/storage/${daftarBerita[0].thumbnail}`}
         judul1={dots(65, daftarBerita[0].judul)}
