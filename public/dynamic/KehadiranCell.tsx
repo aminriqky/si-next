@@ -23,7 +23,7 @@ export default function KehadiranCell(props: KehadiranCellProps) {
         overflow="hidden"
         mx="auto"
       >
-        <Img w="full" h={36} src={props.gambar} alt="avatar" />
+        <Img w="full" h={40} src={props.gambar} alt="avatar" />
         <Box py={3} textAlign="center">
           <Link
             mx={3}

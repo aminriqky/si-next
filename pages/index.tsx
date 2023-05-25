@@ -182,7 +182,7 @@ interface home {
   daftarBerita: Array<beritaList>;
   daftarSlide: Array<slideList>;
   daftarProfil: Array<profilList>;
-  daftarInfo: Array<infoList>;
+  daftarInfo: infoList;
 }
 
 const Home: NextPage<home> = ({
@@ -369,7 +369,7 @@ const Home: NextPage<home> = ({
                 isExternal
               >
                 <Flex flexDirection="row">
-                  <ExternalLinkIcon mr="2" mb="2.5" />
+                  <ExternalLinkIcon mr="2" mt="0.5" />
                   <Text fontWeight="bold">JUSIFO</Text>
                 </Flex>
               </Link>
@@ -378,41 +378,24 @@ const Home: NextPage<home> = ({
             </Box>
           </Box>
           <Box bgColor="teal.600" height="45%">
-            <Box mx="10" my="6">
-              <Text fontWeight="bold">Kontak & Sosial Media</Text>
+            <Box mx="10" my="8">
               <Link
-                aria-label="Facebook Prodi SI"
-                mr={3}
-                href={daftarInfo[0].Info_1 ?? ""}
+                href="http://e-skripsi.radenfatah.ac.id/"
                 isExternal
               >
-                <Icon as={SiFacebook} w="20px" h="auto" />
+                <Flex flexDirection="row">
+                  <ExternalLinkIcon mr="2" mt="0.5" />
+                  <Text fontWeight="semibold">Sistem Informasi Bina Skripsi</Text>
+                </Flex>
               </Link>
               <Link
-                aria-label="Instagram Prodi SI"
-                mr={3}
-                href={daftarInfo[0].Info_2 ?? ""}
+                href="https://silayak.radenfatah.ac.id/"
                 isExternal
               >
-                <Icon as={SiInstagram} w="20px" h="auto" />
-              </Link>
-              <Link aria-label="Telepon Prodi SI" mr={3} href={daftarInfo[0].Info_3 ?? ""}>
-                <Icon as={MdPhone} w="20px" h="auto" />
-              </Link>
-              <Link
-                aria-label="E-Mail Prodi SI"
-                mr={3}
-                href={`mailto:${daftarInfo[0].Info_4 ?? ""}`}
-              >
-                <Icon as={MdEmail} w="20px" h="auto" />
-              </Link>
-              <Link
-                aria-label="Youtube Prodi SI"
-                mr={3}
-                href={daftarInfo[0].Info_5 ?? ""}
-                isExternal
-              >
-                <Icon as={SiYoutube} w="20px" h="auto" />
+                <Flex flexDirection="row">
+                  <ExternalLinkIcon mr="2" mt="0.5" />
+                  <Text fontWeight="semibold">Sistem Informasi Layanan Akademik Mahasiswa</Text>
+                </Flex>
               </Link>
             </Box>
           </Box>
@@ -455,72 +438,72 @@ const Home: NextPage<home> = ({
         bg="gray.100"
       >
         <Flex
-          my={{ base: 25, xl: 75 }}
+          my={{ base: 25 }}
           px="10"
           flexDir="column"
+          bgColor="blue.600"
           width={{ base: "100%", xl: "300px" }}
-          border="solid lightgray 1px"
         >
-          <Text color="gray" fontWeight="bold" pt="8" mb="4">
+          <Text color="white" fontWeight="bold" pt="8" mb="8">
             Kontak & Sosial Media
           </Text>
-          <Text fontSize="sm" color="gray" pb="2">
-            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+          <Text fontSize="sm" color="white" pb="2">
+            <Icon as={SiFacebook} w="25px" h="auto" mr="20px" />
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href={daftarInfo[0].Info_1 ?? ""}
+              href={daftarInfo.Info_1 ?? ""}
               isExternal
             >
               Facebook
             </Link>
           </Text>
-          <Text fontSize="sm" color="gray" pb="2">
-            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+          <Text fontSize="sm" color="white" pb="2">
+            <Icon as={SiInstagram} w="25px" h="auto" mr="20px" />
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href={daftarInfo[0].Info_2 ?? ""}
+              href={daftarInfo.Info_2 ?? ""}
               isExternal
             >
               Instagram
             </Link>
           </Text>
-          <Text fontSize="sm" color="gray" pb="2">
-            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+          <Text fontSize="sm" color="white" pb="2">
+            <Icon as={MdPhone} w="25px" h="auto" mr="20px" />
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href={daftarInfo[0].Info_3 ?? ""}
+              href={`tel:${daftarInfo.Info_3 ?? ""}`}
               isExternal
             >
               Telepon
             </Link>
           </Text>
-          <Text fontSize="sm" color="gray" pb="12">
-            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+          <Text fontSize="sm" color="white" pb="2">
+            <Icon as={MdEmail} w="25px" h="auto" mr="20px" />
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href={daftarInfo[0].Info_4 ?? ""}
+              href={`mailto:${daftarInfo.Info_4 ?? ""}`}
               isExternal
             >
               E-Mail
             </Link>
           </Text>
-          <Text fontSize="sm" color="gray" pb="12">
-            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+          <Text fontSize="sm" color="white" pb="12">
+            <Icon as={SiYoutube} w="25px" h="auto" mr="20px" />
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href={daftarInfo[0].Info_5 ?? ""}
+              href={daftarInfo.Info_5 ?? ""}
               isExternal
             >
               YouTube
             </Link>
           </Text>
         </Flex>
-        <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
+        <Flex flexDir="column" my="25" mx={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="34px" h="auto" />
             &thinsp;
@@ -601,13 +584,13 @@ const Home: NextPage<home> = ({
           </Flex>
         </Flex>
         <Flex
-          my={{ base: 25, xl: 75 }}
+          my={{ base: 25 }}
           px="10"
           flexDir="column"
           width={{ base: "100%", xl: "300px" }}
           border="solid lightgray 1px"
         >
-          <Text color="gray" fontWeight="bold" pt="8" mb="4">
+          <Text color="gray" fontWeight="bold" pt="8" mb="12">
             INFO PENDAFTARAN
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
