@@ -43,6 +43,7 @@ import { kehadiran } from "./api/kehadiran";
 import { berita } from "./api/berita";
 import { slideshow } from "./api/slideshow";
 import { profil } from "./api/profil";
+import { information } from "./api/information";
 import { replace } from "../public/func";
 import { server } from "../config";
 import type {
@@ -52,7 +53,8 @@ import type {
   kehadiran as kehadiranList,
   berita as beritaList,
   slide as slideList,
-  profil as profilList
+  profil as profilList,
+  info as infoList
 } from "../public/types";
 
 interface profil {
@@ -180,6 +182,7 @@ interface home {
   daftarBerita: Array<beritaList>;
   daftarSlide: Array<slideList>;
   daftarProfil: Array<profilList>;
+  daftarInfo: Array<infoList>;
 }
 
 const Home: NextPage<home> = ({
@@ -189,7 +192,8 @@ const Home: NextPage<home> = ({
   daftarKehadiran,
   daftarBerita,
   daftarSlide,
-  daftarProfil
+  daftarProfil,
+  daftarInfo
 }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   const [isLargerThan1400] = useMediaQuery("(min-width: 1400px)");
@@ -379,7 +383,7 @@ const Home: NextPage<home> = ({
               <Link
                 aria-label="Facebook Prodi SI"
                 mr={3}
-                href="https://web.facebook.com/groups/si.radenfatah"
+                href={daftarInfo[0].Info_1 ?? ""}
                 isExternal
               >
                 <Icon as={SiFacebook} w="20px" h="auto" />
@@ -387,25 +391,25 @@ const Home: NextPage<home> = ({
               <Link
                 aria-label="Instagram Prodi SI"
                 mr={3}
-                href="https://www.instagram.com/sisteminformasi.radenfatah/"
+                href={daftarInfo[0].Info_2 ?? ""}
                 isExternal
               >
                 <Icon as={SiInstagram} w="20px" h="auto" />
               </Link>
-              <Link aria-label="Telepon Prodi SI" mr={3} href="tel:0711-356209">
+              <Link aria-label="Telepon Prodi SI" mr={3} href={daftarInfo[0].Info_3 ?? ""}>
                 <Icon as={MdPhone} w="20px" h="auto" />
               </Link>
               <Link
                 aria-label="E-Mail Prodi SI"
                 mr={3}
-                href="mailto:si@radenfatah.ac.id"
+                href={`mailto:${daftarInfo[0].Info_4 ?? ""}`}
               >
                 <Icon as={MdEmail} w="20px" h="auto" />
               </Link>
               <Link
                 aria-label="Youtube Prodi SI"
                 mr={3}
-                href="https://www.youtube.com/c/SistemInformasiRadenFatah"
+                href={daftarInfo[0].Info_5 ?? ""}
                 isExternal
               >
                 <Icon as={SiYoutube} w="20px" h="auto" />
@@ -450,17 +454,72 @@ const Home: NextPage<home> = ({
         px={{ base: 25, xl: 125 }}
         bg="gray.100"
       >
-        <ArtikelCell
-          key={daftarArtikel[0].id}
-          tema="ARTIKEL"
-          judul={dots(47, daftarArtikel[0].judul)}
-          tanggal={dayjs(daftarArtikel[0].tanggal)
-            .locale("id")
-            .format("DD MMMM YYYY")}
-          dylink={`/artikel/${replace(daftarArtikel[0].judul)}`}
+        <Flex
+          my={{ base: 25, xl: 75 }}
+          px="10"
+          flexDir="column"
+          width={{ base: "100%", xl: "300px" }}
+          border="solid lightgray 1px"
         >
-          <div dangerouslySetInnerHTML={{ __html: dots(260, daftarArtikel[0].detail) }} />
-        </ArtikelCell>
+          <Text color="gray" fontWeight="bold" pt="8" mb="4">
+            Kontak & Sosial Media
+          </Text>
+          <Text fontSize="sm" color="gray" pb="2">
+            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+            <Link
+              verticalAlign="top"
+              fontWeight="semibold"
+              href={daftarInfo[0].Info_1 ?? ""}
+              isExternal
+            >
+              Facebook
+            </Link>
+          </Text>
+          <Text fontSize="sm" color="gray" pb="2">
+            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+            <Link
+              verticalAlign="top"
+              fontWeight="semibold"
+              href={daftarInfo[0].Info_2 ?? ""}
+              isExternal
+            >
+              Instagram
+            </Link>
+          </Text>
+          <Text fontSize="sm" color="gray" pb="2">
+            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+            <Link
+              verticalAlign="top"
+              fontWeight="semibold"
+              href={daftarInfo[0].Info_3 ?? ""}
+              isExternal
+            >
+              Telepon
+            </Link>
+          </Text>
+          <Text fontSize="sm" color="gray" pb="12">
+            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+            <Link
+              verticalAlign="top"
+              fontWeight="semibold"
+              href={daftarInfo[0].Info_4 ?? ""}
+              isExternal
+            >
+              E-Mail
+            </Link>
+          </Text>
+          <Text fontSize="sm" color="gray" pb="12">
+            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+            <Link
+              verticalAlign="top"
+              fontWeight="semibold"
+              href={daftarInfo[0].Info_5 ?? ""}
+              isExternal
+            >
+              YouTube
+            </Link>
+          </Text>
+        </Flex>
         <Flex flexDir="column" my="25" mr={{ base: 25, xl: 75 }}>
           <Text fontSize="24" py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="34px" h="auto" />
@@ -556,10 +615,10 @@ const Home: NextPage<home> = ({
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href="https://ltmpt.ac.id/"
+              href="https://snpmb.bppp.kemdikbud.go.id/"
               isExternal
             >
-              LTMPT
+              SNPMB
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
@@ -567,7 +626,7 @@ const Home: NextPage<home> = ({
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href="https://span-ptkin.ac.id/"
+              href="https://span.ptkin.ac.id/"
               isExternal
             >
               SPAN-PTKIN
@@ -589,7 +648,7 @@ const Home: NextPage<home> = ({
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              href="http://um-mandiri.radenfatah.ac.id/"
+              href="https://um-mandiri.radenfatah.ac.id/"
               isExternal
             >
               UM-MANDIRI
@@ -721,6 +780,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
   const daftarBerita = await berita();
   const daftarSlide = await slideshow();
   const daftarProfil = await profil();
+  const daftarInfo = await information();
 
   return {
     props: {
@@ -730,7 +790,8 @@ export const getServerSideProps: GetServerSideProps = async () => {
       daftarKehadiran,
       daftarBerita,
       daftarSlide,
-      daftarProfil
+      daftarProfil,
+      daftarInfo
     }
   };
 };

@@ -55,10 +55,8 @@ const PageTab: React.FC<TabProps> = (props) => {
         >
           <Flex flexDir="column">
             <Text fontSize='sm'>{props.judul}</Text>
-            <TabList my="1vw" w="100%">
-              <Flex flexWrap="wrap">
-                {props.tab}
-              </Flex>
+            <TabList flexWrap="wrap" my="1vw" w="100%">
+              {props.tab}
             </TabList>
             <Divider borderColor="gray.400" />
             <Text mt="8%" fontSize='sm'>Aksi Cepat</Text>

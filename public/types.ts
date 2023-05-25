@@ -9,6 +9,17 @@ export interface agenda {
   updated_at: string;
 }
 
+export interface info {
+  id: number;
+  Info_1: string;
+  Info_2: string;
+  Info_3: string;
+  Info_4: string;
+  Info_5: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface slide {
   reverse: any;
   length: number;
@@ -50,6 +61,7 @@ export interface berita {
 export interface haki {
   id: number;
   name: string;
+  judul: string;
   dosen_id: number;
   file_haki: string;
   created_at: string;
