@@ -184,7 +184,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                   <DrawerTitle title="Akademik" handleClick={akademik} />
                   <DrawerTitle title="Dokumen" handleClick={dokumen} />
                   <DrawerTitle title="Galeri" handleClick={galeri} />
-                  <DrawerTitle title="Pengabdian" handleClick={penelitian} />
+                  <DrawerTitle title="Penelitian" handleClick={penelitian} />
                   <DrawerTitle title="Pengabdian" handleClick={pengabdian} />
                   <DrawerTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
                 </DrawerBody>
