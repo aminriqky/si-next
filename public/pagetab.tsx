@@ -49,6 +49,8 @@ const PageTab: React.FC<TabProps> = (props) => {
       </Flex>
       <Flex flexDir="row" my={{ base: "10%", xl: "80px" }} mx="6%">
         <Tabs
+          isLazy
+          isFitted
           variant="soft-rounded"
           colorScheme="green"
           orientation={isLargerThan1280 ? ("vertical") : ("horizontal")}
