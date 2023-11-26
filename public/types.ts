@@ -61,6 +61,7 @@ export interface berita {
 export interface haki {
   id: number;
   name: string;
+  tahun: number;
   judul: string;
   dosen_id: number;
   file_haki: string;

@@ -25,7 +25,6 @@ const PageTab = dynamic(
   { ssr: false }
 )
 import dayjs from "dayjs";
-import { replace } from "../public/func";
 import { server } from "../config";
 
 interface penelitian {
@@ -36,10 +35,9 @@ interface penelitian {
 interface DokumenCellProps {
   key: number;
   link: number;
-  hari: string;
-  hariBulan: string;
+  tahun: number;
   judul: string;
-  tanggal: string;
+  nama: string;
 }
 
 function DokumenCell(props: DokumenCellProps) {
@@ -72,16 +70,15 @@ function DokumenCell(props: DokumenCellProps) {
           textAlign="center"
           border="1px"
         >
-          <Text mt="5px" alignSelf="center" fontWeight="semibold" fontSize="lg">
-            {props.hari}
+          <Text mt="15px" alignSelf="center" fontWeight="semibold" fontSize="lg">
+            {props.tahun}
           </Text>
-          <Text fontSize="xs">{props.hariBulan}</Text>
         </Box>
         <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
           <Text fontSize={{ base: "sm", xl: "md" }} fontWeight="semibold">
             {props.judul}
           </Text>
-          <Text fontSize="sm">{props.tanggal}</Text>
+          <Text fontSize="sm">{props.nama}</Text>
         </Box>
       </Flex>
       {saveFile.length !== 0 && (
@@ -149,25 +146,20 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil, daftarHaki }) => {
         </TabPanel>
         <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
           <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+            <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
+              Hak Kekayaan Intelektual
+            </Text>
             {daftarHaki !== null &&
               daftarHaki.map((item) => {
-                if (replace(item.name).toString()) {
-                  return (
-                    <DokumenCell
-                      key={item.id}
-                      hari={dayjs(item.updated_at)
-                        .locale("id")
-                        .format("ddd")
-                        .toUpperCase()}
-                      hariBulan={dayjs(item.updated_at).format("DD/MM")}
-                      judul={item.name}
-                      tanggal={dayjs(item.updated_at)
-                        .locale("id")
-                        .format("dddd, DD MMMM YYYY")}
-                      link={item.id}
-                    />
-                  );
-                }
+                return (
+                  <DokumenCell
+                    key={item.id}
+                    tahun={item.tahun}
+                    judul={item.judul}
+                    nama={item.name}
+                    link={item.id}
+                  />
+                );
               })}
           </Box>
         </TabPanel>

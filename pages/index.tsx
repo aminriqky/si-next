@@ -88,17 +88,6 @@ const AgendaCell = dynamic(() => import("../public/dynamic/AgendaCell"), {
     </Flex>
   ),
 });
-const ArtikelCell = dynamic(() => import("../public/dynamic/ArtikelCell"), {
-  loading: () => (
-    <Skeleton
-      my="25"
-      height={{ base: "225px", xl: "365px" }}
-      flexDir="column"
-      width={{ base: "100%", xl: "200px" }}
-      mr="50px"
-    />
-  ),
-});
 const KehadiranCell = dynamic(() => import("../public/dynamic/KehadiranCell"), {
   loading: () => (
     <React.Fragment>
@@ -642,14 +631,13 @@ const Home: NextPage<home> = ({
       <Divider />
       <Flex
         bg="gray.50"
-        justifyContent="center"
         flexDirection={{ base: "column", xl: "row" }}
         py="25"
-        px={{ base: 25, xl: 125 }}
+        pl={{ base: 25, xl: 125 }}
       >
         <Flex
           flexDir="column"
-          w={{ base: "100%", xl: "390px" }}
+          w={{ base: "95%", xl: "260px" }}
           my="4"
           mr={{ base: 0, xl: 13 }}
         >
@@ -663,7 +651,7 @@ const Home: NextPage<home> = ({
             />
           )}
         </Flex>
-        <Flex flexDir="column" mx={{ base: 0, xl: 25, "2xl": "64px" }}>
+        <Flex flexDir="column" ml={{ base: 0, xl: 25, "2xl": "50px" }}>
           <Text fontSize="20" fontWeight="medium">
             <Icon as={FcApprove} w="30px" h="auto" />
             &thinsp;
@@ -678,7 +666,7 @@ const Home: NextPage<home> = ({
               KEHADIRAN
             </Link>
           </Text>
-          <Flex flexDir="row" flexWrap="wrap" justifyContent="center">
+          <Flex flexDir="row" flexWrap="wrap">
             <KehadiranCell
               id={daftarKehadiran[0].id}
               gambar={`${server}/storage/${daftarKehadiran[0].avatar}`}
@@ -724,6 +712,14 @@ const Home: NextPage<home> = ({
               />
             )}
           </Flex>
+        </Flex>
+        <Flex my="4" ml={{ base: 0, xl: 75 }}>
+          <iframe
+            title="Visitor"
+            loading="lazy"
+            scrolling="no"
+            src="https://widget-98a7be37cd114f49ae18706726c42a30.elfsig.ht"
+          />
         </Flex>
       </Flex>
       <Flex flexDir="column">

@@ -14,7 +14,7 @@ export default function KehadiranCell(props: KehadiranCellProps) {
   const router = useRouter();
 
   return (
-    <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="155px">
+    <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="140px">
       <Box
         w="xs"
         bg="white"
