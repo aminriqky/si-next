@@ -1,14 +1,6 @@
-import React, { useEffect, useState } from "react";
-import {
-  Text,
-  Box,
-  SlideFade,
-  Progress,
-  AspectRatio,
-  useControllableState,
-  Img,
-} from "@chakra-ui/react";
-import { wait } from "../public/func";
+import React, {useEffect, useState} from "react";
+import {AspectRatio, Box, Img, Progress, SlideFade, Text, useControllableState,} from "@chakra-ui/react";
+import {wait} from "./func";
 
 interface SlideShowProps {
   gambar: string;
@@ -29,7 +21,7 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         <Img
           src={props.gambar}
           pos="absolute"
-          maxH={{ base: "27%", md: "54%", xl: "88%", "2xl": "100%" }}
+          maxH={{base: "27%", md: "54%", xl: "88%", "2xl": "100%"}}
           w="100%"
           alt="Gambar Slide"
         />
@@ -38,7 +30,7 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         ml="7vw"
         mr="7vw"
         position="absolute"
-        letterSpacing={{ base: "1px", xl: "2px" }}
+        letterSpacing={{base: "1px", xl: "2px"}}
         fontWeight="semibold"
         zIndex="2"
         pointerEvents="none"
@@ -47,11 +39,11 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
           mt="18.5vw"
           mb="2vw"
           color="white"
-          fontSize={{ base: "xs", lg: "2xl", xl: "4xl" }}
+          fontSize={{base: "xs", lg: "2xl", xl: "4xl"}}
         >
           {props.text}
         </Text>
-        <Text bgColor="rgba(44, 122, 123,0.5)" color="white" fontSize={{ base: "xs", lg: "xl", xl: "2xl" }}>
+        <Text bgColor="rgba(44, 122, 123,0.5)" color="white" fontSize={{base: "xs", lg: "xl", xl: "2xl"}}>
           {props.vimi}
         </Text>
         {props.children}
@@ -69,7 +61,7 @@ interface SlideProps extends SlideShowProps {
 
 export default function SlidePage(props: SlideProps) {
   const [slideNum, setSlideNum] = useState(0);
-  const [slideCount, setSlideCount] = useControllableState({ defaultValue: 0 });
+  const [slideCount, setSlideCount] = useControllableState({defaultValue: 0});
 
   useEffect(() => {
     if (slideNum < 4) {

@@ -31,6 +31,17 @@ export interface slide {
   updated_at: string;
 }
 
+export interface penelitian {
+  id: number;
+  nama_penelitian: string;
+  dosen_id: number;
+  jenis_penelitian: string;
+  file_penelitian: string;
+  created_at: string;
+  updated_at: string;
+  name: string;
+}
+
 export interface artikel {
   id: number;
   judul: string;
@@ -130,6 +141,7 @@ export interface pengumuman {
 
 export interface profil {
   [x: string]: any;
+
   id: number;
   text: string;
   created_at: string;

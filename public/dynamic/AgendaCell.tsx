@@ -1,17 +1,17 @@
-import { Text, Flex, Box, Link } from "@chakra-ui/react";
-import { useRouter } from "next/router";
-import type { AgendaCellProps } from "../../public/types";
+import {Box, Flex, Link, Text} from "@chakra-ui/react";
+import {useRouter} from "next/router";
+import type {AgendaCellProps} from "../types";
 
 export default function AgendaCell(props: AgendaCellProps) {
   const router = useRouter();
 
   return (
-    <Flex ml={{ base: "12%", xl: 0 }} flexDirection="row" flex="1">
+    <Flex ml={{base: "12%", xl: 0}} flexDirection="row" flex="1">
       <Box
         alignSelf="center"
         minW="60px"
         height="60px"
-        m={{ base: "3vw", xl: "1.41vw" }}
+        m={{base: "3vw", xl: "1.41vw"}}
         textAlign="center"
         border="2px"
       >
@@ -20,8 +20,8 @@ export default function AgendaCell(props: AgendaCellProps) {
         </Text>
         <Text fontSize="xs">{props.hariBulan}</Text>
       </Box>
-      <Box alignSelf="center" minW="120px" m={{ base: "3vw", xl: "1.41vw" }}>
-        <Text fontSize={{ base: "sm", xl: "md" }}>
+      <Box alignSelf="center" minW="120px" m={{base: "3vw", xl: "1.41vw"}}>
+        <Text fontSize={{base: "sm", xl: "md"}}>
           <Link
             fontWeight="semibold"
             onClick={(e) => {

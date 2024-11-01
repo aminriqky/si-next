@@ -1,17 +1,8 @@
-import React, { useEffect, useState } from "react";
-import {
-  Text,
-  Box,
-  SlideFade,
-  Img,
-  Flex,
-  Icon,
-  Link,
-  Button,
-} from "@chakra-ui/react";
-import { FcNews } from "@react-icons/all-files/fc/FcNews";
-import { useRouter } from "next/router";
-import { wait } from "../public/func";
+import React, {useEffect, useState} from "react";
+import {Box, Button, Flex, Icon, Img, Link, SlideFade, Text,} from "@chakra-ui/react";
+import {FcNews} from "@react-icons/all-files/fc/FcNews";
+import {useRouter} from "next/router";
+import {wait} from "./func";
 
 interface SlideShowProps {
   gambar: string;
@@ -26,17 +17,17 @@ const SlideShow = React.memo<SlideShowProps>((props) => {
   return (
     <SlideFade in={true} offsetX="150px">
       <Box
-        mt={{ base: "5vw", xl: 0 }}
+        mt={{base: "5vw", xl: 0}}
         ml="10vw"
         mr="10vw"
-        letterSpacing={{ base: "1px", xl: "2px" }}
+        letterSpacing={{base: "1px", xl: "2px"}}
       >
-        <Flex flexDir={{ base: "column", xl: "row" }} alignItems="center">
+        <Flex flexDir={{base: "column", xl: "row"}} alignItems="center">
           <Img
             src={props.gambar}
-            maxW={{ base: "100%", lg: "450px" }}
+            maxW={{base: "100%", lg: "450px"}}
             h="100%"
-            mr={{ xl: "35px" }}
+            mr={{xl: "35px"}}
             borderRadius={15}
             alt="Thumbnail Berita"
           />
@@ -45,7 +36,7 @@ const SlideShow = React.memo<SlideShowProps>((props) => {
               fontWeight="semibold"
               color="black"
               my="15px"
-              fontSize={{ base: "md", lg: "xl" }}
+              fontSize={{base: "md", lg: "xl"}}
             >
               <Link
                 fontWeight="semibold"
@@ -57,8 +48,8 @@ const SlideShow = React.memo<SlideShowProps>((props) => {
                 {props.judul}
               </Link>
             </Text>
-            <Box color="gray.600" fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: props.detail }} />
+            <Box color="gray.600" fontSize={{base: "xs", lg: "md"}}>
+              <div dangerouslySetInnerHTML={{__html: props.detail}}/>
             </Box>
           </Flex>
         </Flex>
@@ -78,11 +69,11 @@ const SlideButton = React.memo<SlideButtonProps>((props) => {
   return (
     <Button
       aria-label="Tombol Slide"
-      _focus={{ outline: "none" }}
+      _focus={{outline: "none"}}
       onClick={props.handleClick}
       bg={props.bg}
-      _hover={{ bg: "gray.500" }}
-      _active={{ bg: "gray.600" }}
+      _hover={{bg: "gray.500"}}
+      _active={{bg: "gray.600"}}
       w="2"
       h="2"
       mx="2"
@@ -148,7 +139,7 @@ const Berita = React.memo<BeritaProps>((props) => {
   }, [slideCount, slideNum, setSlideCount]);
 
   function slideClick(num: number) {
-    let color = "";
+    let color: string;
 
     if (slideNum === num) {
       color = "gray.400";
@@ -162,7 +153,7 @@ const Berita = React.memo<BeritaProps>((props) => {
   return (
     <Flex
       bg="gray.200"
-      height={{ base: "750px", xl: "550px" }}
+      height={{base: "750px", xl: "550px"}}
       overflow="hidden"
       flexDir="column"
     >
@@ -171,10 +162,10 @@ const Berita = React.memo<BeritaProps>((props) => {
           ml="10vw"
           mr="10vw"
           fontSize="24"
-          mb={{ "2xl": "1.5%" }}
+          mb={{"2xl": "1.5%"}}
           fontWeight="medium"
         >
-          <Icon as={FcNews} w="34px" h="auto" />
+          <Icon as={FcNews} w="34px" h="auto"/>
           &thinsp;
           <Link
             verticalAlign="top"
@@ -231,14 +222,14 @@ const Berita = React.memo<BeritaProps>((props) => {
       <Flex
         flexDir="row"
         position="absolute"
-        alignSelf={{ base: "center" }}
-        mt={{ base: 675, xl: 475 }}
+        alignSelf={{base: "center"}}
+        mt={{base: 675, xl: 475}}
       >
-        <SlideButton bg={slideClick(1)} handleClick={() => setSlideNum(1)} />
-        <SlideButton bg={slideClick(2)} handleClick={() => setSlideNum(2)} />
-        <SlideButton bg={slideClick(3)} handleClick={() => setSlideNum(3)} />
-        <SlideButton bg={slideClick(4)} handleClick={() => setSlideNum(4)} />
-        <SlideButton bg={slideClick(5)} handleClick={() => setSlideNum(5)} />
+        <SlideButton bg={slideClick(1)} handleClick={() => setSlideNum(1)}/>
+        <SlideButton bg={slideClick(2)} handleClick={() => setSlideNum(2)}/>
+        <SlideButton bg={slideClick(3)} handleClick={() => setSlideNum(3)}/>
+        <SlideButton bg={slideClick(4)} handleClick={() => setSlideNum(4)}/>
+        <SlideButton bg={slideClick(5)} handleClick={() => setSlideNum(5)}/>
       </Flex>
     </Flex>
   );

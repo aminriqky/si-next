@@ -1,35 +1,37 @@
-import type { NextPage, GetStaticProps } from "next";
-import React, { useEffect, useState } from "react";
+import type {GetStaticProps, NextPage} from "next";
+import React, {useEffect, useState} from "react";
 import {
   Box,
-  Tab,
-  TabPanel,
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
-  Heading,
+  Button,
   Flex,
-  Text,
+  Heading,
   Link,
-  Button
+  Tab,
+  TabPanel,
+  Text
 } from "@chakra-ui/react";
+import DataTable from "../public/datatable";
 import ExNav from "../public/exnav";
 import Menu from "../public/menu";
-import { profil } from "./api/profil";
-import { haki } from "./api/haki";
-import type { profil as profilList } from "../public/types";
-import type { haki as hakiList } from "../public/types";
+import {profil} from "./api/profil";
+import {penelitian} from "./api/penelitian";
+import {haki} from "./api/haki";
+import type {haki as hakiList, penelitian as penelitianList, profil as profilList} from "../public/types";
 import dynamic from "next/dynamic";
+import {server} from "../config";
+
 const PageTab = dynamic(
   () => import('../public/pagetab'),
-  { ssr: false }
+  {ssr: false}
 )
-import dayjs from "dayjs";
-import { server } from "../config";
 
 interface penelitian {
   daftarProfil: Array<profilList>;
   daftarHaki: Array<hakiList>;
+  daftarPenelitian: Array<penelitianList>;
 }
 
 interface DokumenCellProps {
@@ -66,7 +68,7 @@ function DokumenCell(props: DokumenCellProps) {
         <Box
           minW="60px"
           height="60px"
-          m={{ base: "3vw", xl: "1.4vw" }}
+          m={{base: "3vw", xl: "1.4vw"}}
           textAlign="center"
           border="1px"
         >
@@ -74,8 +76,8 @@ function DokumenCell(props: DokumenCellProps) {
             {props.tahun}
           </Text>
         </Box>
-        <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
-          <Text fontSize={{ base: "sm", xl: "md" }} fontWeight="semibold">
+        <Box alignSelf="center" m={{base: "3vw", xl: "1.41vw"}}>
+          <Text fontSize={{base: "sm", xl: "md"}} fontWeight="semibold">
             {props.judul}
           </Text>
           <Text fontSize="sm">{props.nama}</Text>
@@ -87,13 +89,13 @@ function DokumenCell(props: DokumenCellProps) {
           flex="1"
           bg="whiteAlpha.900"
           pl="2%"
-          mb={{ base: "3vw", xl: "1.41vw" }}
+          mb={{base: "3vw", xl: "1.41vw"}}
         >
           <Text color="teal" pt="2.5px">
             Lampiran File :
           </Text>
           &ensp;
-          <Link _hover={{ textTransform: "none" }} href={saveFile} download>
+          <Link _hover={{textTransform: "none"}} href={saveFile} download>
             <Button colorScheme="teal" size="sm">
               Unduh
             </Button>
@@ -104,48 +106,112 @@ function DokumenCell(props: DokumenCellProps) {
   );
 }
 
-const Penelitian: NextPage<penelitian> = ({ daftarProfil, daftarHaki }) => {
+const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenelitian}) => {
+  const reorderKeys = (obj) => {
+    const {name, ...rest} = obj;
+    return {name, ...rest};
+  };
+
+  const reorderedData = daftarPenelitian.map(reorderKeys);
+
+  const kolom = reorderedData.length > 0 ? Object.keys(reorderedData[0]) : [];
+
+  const hiddenColumns = [
+    {
+      name: "id",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "dosen_id",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "created_at",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "updated_at",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "file_penelitian",
+      options: {
+        filter: false,
+        sort: false,
+        customBodyRender: (value) => {
+          const fileData = JSON.parse(value);
+          const {download_link, original_name} = fileData[0];
+
+          return (
+            <Button size="xs" onClick={() => window.open(`${server}/storage/${download_link}`, "_blank")}>
+              {original_name}
+            </Button>
+          );
+        },
+      },
+    }
+  ];
+
+  const kolomTerformat = kolom.map((col) => {
+    const hiddenColumn = hiddenColumns.find((c) => c.name === col);
+    return {
+      name: col,
+      label: col.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // Capitalize and remove underscores
+      options: hiddenColumn ? hiddenColumn.options : {display: true},
+    };
+  });
+
+  const peneliti = reorderedData.map((obj) => Object.values(obj));
+
   return (
     <Menu>
       <PageTab judul="Penelitian"
-        breadcrumb={
-          <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
-            <Heading>Penelitian</Heading>
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
-            </BreadcrumbItem>
-            <BreadcrumbItem>
-              <BreadcrumbLink href='/penelitian'>Penelitian</BreadcrumbLink>
-            </BreadcrumbItem>
-          </Breadcrumb>
-        }
-        tab={
-          <React.Fragment>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Grup Penelitian</Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-              Hasil Penelitian
-            </Tab>
-            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-              HaKI
-            </Tab>
-          </React.Fragment>
-        }>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[9].text }} />
+               breadcrumb={
+                 <Breadcrumb my={{base: "5%", xl: "80px"}} mx="6%" textColor="white" pos="absolute">
+                   <Heading>Penelitian</Heading>
+                   <BreadcrumbItem>
+                     <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
+                   </BreadcrumbItem>
+                   <BreadcrumbItem>
+                     <BreadcrumbLink href='/penelitian'>Penelitian</BreadcrumbLink>
+                   </BreadcrumbItem>
+                 </Breadcrumb>
+               }
+               tab={
+                 <React.Fragment>
+                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Grup Penelitian</Tab>
+                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                     Hasil Penelitian
+                   </Tab>
+                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
+                     HaKI
+                   </Tab>
+                 </React.Fragment>
+               }>
+        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
+          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
+            <Box fontSize={{base: "xs", lg: "md"}}>
+              <div dangerouslySetInnerHTML={{__html: daftarProfil[9].text}}/>
             </Box>
           </Box>
         </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
-            <Box fontSize={{ base: "xs", lg: "md" }}>
-              <div dangerouslySetInnerHTML={{ __html: daftarProfil[10].text }} />
+        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
+          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
+            <Box fontSize={{base: "xs", lg: "md"}}>
+              <DataTable title="Hasil Penelitian" columns={kolomTerformat} data={peneliti}/>
             </Box>
           </Box>
         </TabPanel>
-        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
-          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
+        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
+          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
             <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
               Hak Kekayaan Intelektual
             </Text>
@@ -164,7 +230,7 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil, daftarHaki }) => {
           </Box>
         </TabPanel>
       </PageTab>
-      <ExNav />
+      <ExNav/>
     </Menu>
   );
 };
@@ -172,9 +238,10 @@ const Penelitian: NextPage<penelitian> = ({ daftarProfil, daftarHaki }) => {
 export const getStaticProps: GetStaticProps = async () => {
   const daftarProfil = await profil();
   const daftarHaki = await haki();
+  const daftarPenelitian = await penelitian();
 
   return {
-    props: { daftarProfil, daftarHaki },
+    props: {daftarProfil, daftarHaki, daftarPenelitian},
     revalidate: 15,
   };
 };
