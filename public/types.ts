@@ -42,6 +42,16 @@ export interface penelitian {
   name: string;
 }
 
+export interface pengabdian {
+  id: number;
+  judul: string;
+  penulis: string;
+  tahun: string;
+  dokumentasi: string;
+  created_at: string;
+  updated_at: string;
+}
+
 export interface artikel {
   id: number;
   judul: string;

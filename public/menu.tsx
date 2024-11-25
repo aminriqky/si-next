@@ -1,23 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { useRouter } from "next/router";
+import React, {useEffect, useState} from "react";
+import {useRouter} from "next/router";
 import {
+  Box,
   Button,
-  useDisclosure,
   Drawer,
   DrawerBody,
-  DrawerHeader,
-  Img,
-  Flex,
-  Link,
-  DrawerOverlay,
-  DrawerContent,
   DrawerCloseButton,
+  DrawerContent,
+  DrawerHeader,
+  DrawerOverlay,
+  Flex,
   IconButton,
-  Box,
+  Img,
+  Link,
   Menu,
+  useDisclosure,
   useMediaQuery
 } from "@chakra-ui/react";
-import { HamburgerIcon, ArrowUpIcon } from "@chakra-ui/icons";
+import {ArrowUpIcon, HamburgerIcon} from "@chakra-ui/icons";
 
 interface DrawerTitleProps {
   handleClick: React.MouseEventHandler;
@@ -29,8 +29,8 @@ function DrawerTitle(props: DrawerTitleProps) {
     <Button
       justifyContent="flex-start"
       color="teal.700"
-      _hover={{ textDecoration: "none" }}
-      _focusWithin={{ borderRadius: 5 }}
+      _hover={{textDecoration: "none"}}
+      _focusWithin={{borderRadius: 5}}
       onClick={props.handleClick}
       width="100%"
       mt="1"
@@ -50,7 +50,7 @@ function MenuTitle(props: MenuTitleProps) {
     <Box mt="1vw" mr="3vw" zIndex="1">
       <Link
         onClick={props.handleClick}
-        _hover={{ color: "teal.400" }}
+        _hover={{color: "teal.400"}}
         fontSize={13}
         fontWeight="bold"
         color="white"
@@ -71,7 +71,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
   const [isVisible, setIsVisible] = useState(false);
   const router = useRouter();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+  const {isOpen, onOpen, onClose} = useDisclosure();
 
   useEffect(() => {
     const toggleVisibility = () => {
@@ -109,9 +109,9 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
     router.push("/akademik");
   };
 
-  const dokumen = (e: React.FormEvent) => {
+  const download = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push("/dokumen");
+    router.push("/download");
   };
 
   const galeri = (e: React.FormEvent) => {
@@ -139,14 +139,14 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
       <Box bg="whitesmoke" w="100%" h={props.pageHeight}>
         {props.slide}
         <Flex py="1vw" zIndex="100" bg="blue.700" flexDirection="row">
-          <Box ml="6vw" mr={{ base: "3vw", xl: 0 }}>
+          <Box ml="6vw" mr={{base: "3vw", xl: 0}}>
             {isSmallerThan1280 && (
               <IconButton
                 colorScheme="whiteAlpha"
                 aria-label="Opsi"
                 size="md"
                 mt="0.75vw"
-                icon={<HamburgerIcon />}
+                icon={<HamburgerIcon/>}
                 onClick={onOpen}
               />
             )}
@@ -162,31 +162,31 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
           {isLargerThan1280 && (
             <Flex ml="auto" mr="3vw">
               <Menu>
-                <MenuTitle title="Beranda" handleClick={home} />
-                <MenuTitle title="Profil" handleClick={profil} />
-                <MenuTitle title="Akademik" handleClick={akademik} />
-                <MenuTitle title="Dokumen" handleClick={dokumen} />
-                <MenuTitle title="Galeri" handleClick={galeri} />
-                <MenuTitle title="Penelitian" handleClick={penelitian} />
-                <MenuTitle title="Pengabdian" handleClick={pengabdian} />
-                <MenuTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
+                <MenuTitle title="Beranda" handleClick={home}/>
+                <MenuTitle title="Profil" handleClick={profil}/>
+                <MenuTitle title="Akademik" handleClick={akademik}/>
+                <MenuTitle title="Download" handleClick={download}/>
+                <MenuTitle title="Galeri" handleClick={galeri}/>
+                <MenuTitle title="Penelitian" handleClick={penelitian}/>
+                <MenuTitle title="Pengabdian" handleClick={pengabdian}/>
+                <MenuTitle title="Kemahasiswaan" handleClick={kemahasiswaan}/>
               </Menu>
             </Flex>
           )}
           <Drawer placement={"left"} onClose={onClose} isOpen={isOpen}>
             <DrawerOverlay>
               <DrawerContent>
-                <DrawerCloseButton mt="2" />
+                <DrawerCloseButton mt="2"/>
                 <DrawerHeader borderBottomWidth="1px">Menu</DrawerHeader>
                 <DrawerBody>
-                  <DrawerTitle title="Beranda" handleClick={home} />
-                  <DrawerTitle title="Profil" handleClick={profil} />
-                  <DrawerTitle title="Akademik" handleClick={akademik} />
-                  <DrawerTitle title="Dokumen" handleClick={dokumen} />
-                  <DrawerTitle title="Galeri" handleClick={galeri} />
-                  <DrawerTitle title="Penelitian" handleClick={penelitian} />
-                  <DrawerTitle title="Pengabdian" handleClick={pengabdian} />
-                  <DrawerTitle title="Kemahasiswaan" handleClick={kemahasiswaan} />
+                  <DrawerTitle title="Beranda" handleClick={home}/>
+                  <DrawerTitle title="Profil" handleClick={profil}/>
+                  <DrawerTitle title="Akademik" handleClick={akademik}/>
+                  <DrawerTitle title="Dokumen" handleClick={download}/>
+                  <DrawerTitle title="Galeri" handleClick={galeri}/>
+                  <DrawerTitle title="Penelitian" handleClick={penelitian}/>
+                  <DrawerTitle title="Pengabdian" handleClick={pengabdian}/>
+                  <DrawerTitle title="Kemahasiswaan" handleClick={kemahasiswaan}/>
                 </DrawerBody>
               </DrawerContent>
             </DrawerOverlay>
@@ -203,7 +203,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
           zIndex={3}>
           <Button
             size={'sm'}
-            rightIcon={<ArrowUpIcon />}
+            rightIcon={<ArrowUpIcon/>}
             colorScheme="teal"
             variant='solid'>
             Kembali Ke Atas

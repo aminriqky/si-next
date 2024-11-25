@@ -130,6 +130,30 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
       },
     },
     {
+      name: "name",
+      options: {
+        customHeadLabelRender: () => {
+          return <p>Nama Dosen</p>; // Custom header
+        },
+      },
+    },
+    {
+      name: "nama_penelitian",
+      options: {
+        customHeadLabelRender: () => {
+          return <p>Judul Penelitian</p>; // Custom header
+        },
+      },
+    },
+    {
+      name: "jenis_penelitian",
+      options: {
+        customHeadLabelRender: () => {
+          return <p>Luaran</p>; // Custom header
+        },
+      },
+    },
+    {
       name: "created_at",
       options: {
         display: false,
@@ -146,7 +170,7 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
       options: {
         filter: false,
         sort: false,
-        customBodyRender: (value) => {
+        customBodyRender: (value: string) => {
           const fileData = JSON.parse(value);
           const {download_link, original_name} = fileData[0];
 
@@ -206,6 +230,7 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
         <TabPanel p={0} mt={{base: "5%", xl: 0}}>
           <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
             <Box fontSize={{base: "xs", lg: "md"}}>
+              <div dangerouslySetInnerHTML={{__html: daftarProfil[10].text}}/>
               <DataTable title="Hasil Penelitian" columns={kolomTerformat} data={peneliti}/>
             </Box>
           </Box>

@@ -33,6 +33,7 @@ import {ExternalLinkIcon} from "@chakra-ui/icons";
 import Menu from "../public/menu";
 import ExNav from "../public/exnav";
 import SlidePage from "../public/slide";
+import Stats from "../public/stats";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import dynamic from "next/dynamic";
@@ -681,12 +682,7 @@ const Home: NextPage<home> = ({
           </Flex>
         </Flex>
         <Flex my="4" ml={{base: 0, xl: 75}}>
-          <iframe
-            title="Visitor"
-            loading="lazy"
-            scrolling="no"
-            src="https://widget-98a7be37cd114f49ae18706726c42a30.elfsig.ht"
-          />
+          <Stats/>
         </Flex>
       </Flex>
       <Flex flexDir="column">
