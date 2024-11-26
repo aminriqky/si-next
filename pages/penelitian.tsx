@@ -1,18 +1,6 @@
 import type {GetStaticProps, NextPage} from "next";
-import React, {useEffect, useState} from "react";
-import {
-  Box,
-  Breadcrumb,
-  BreadcrumbItem,
-  BreadcrumbLink,
-  Button,
-  Flex,
-  Heading,
-  Link,
-  Tab,
-  TabPanel,
-  Text
-} from "@chakra-ui/react";
+import React from "react";
+import {Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Heading, Tab, TabPanel} from "@chakra-ui/react";
 import DataTable from "../public/datatable";
 import ExNav from "../public/exnav";
 import Menu from "../public/menu";
@@ -34,89 +22,19 @@ interface penelitian {
   daftarPenelitian: Array<penelitianList>;
 }
 
-interface DokumenCellProps {
-  key: number;
-  link: number;
-  tahun: number;
-  judul: string;
-  nama: string;
-}
-
-function DokumenCell(props: DokumenCellProps) {
-  const [saveFile, setSaveFile] = useState("");
-
-  useEffect(() => {
-    if (saveFile === "") {
-      linkUnduh();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  async function linkUnduh() {
-    const unduh = await fetch(`${server}/api/hakifile/${props.link}`);
-    const jsonData = await unduh.json();
-    if (jsonData.length !== 0) {
-      setSaveFile(`${server}/storage/${jsonData[0].download_link}`);
-    } else {
-      setSaveFile(jsonData);
-    }
-  }
-
-  return (
-    <React.Fragment>
-      <Flex flexDirection="row" flex="1">
-        <Box
-          minW="60px"
-          height="60px"
-          m={{base: "3vw", xl: "1.4vw"}}
-          textAlign="center"
-          border="1px"
-        >
-          <Text mt="15px" alignSelf="center" fontWeight="semibold" fontSize="lg">
-            {props.tahun}
-          </Text>
-        </Box>
-        <Box alignSelf="center" m={{base: "3vw", xl: "1.41vw"}}>
-          <Text fontSize={{base: "sm", xl: "md"}} fontWeight="semibold">
-            {props.judul}
-          </Text>
-          <Text fontSize="sm">{props.nama}</Text>
-        </Box>
-      </Flex>
-      {saveFile.length !== 0 && (
-        <Flex
-          flexDirection="row"
-          flex="1"
-          bg="whiteAlpha.900"
-          pl="2%"
-          mb={{base: "3vw", xl: "1.41vw"}}
-        >
-          <Text color="teal" pt="2.5px">
-            Lampiran File :
-          </Text>
-          &ensp;
-          <Link _hover={{textTransform: "none"}} href={saveFile} download>
-            <Button colorScheme="teal" size="sm">
-              Unduh
-            </Button>
-          </Link>
-        </Flex>
-      )}
-    </React.Fragment>
-  );
-}
-
 const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenelitian}) => {
   const reorderKeys = (obj) => {
     const {name, ...rest} = obj;
     return {name, ...rest};
   };
 
-  const reorderedData = daftarPenelitian.map(reorderKeys);
+  const reorderedData1 = daftarPenelitian.map(reorderKeys);
+  const reorderedData2 = daftarHaki.map(reorderKeys);
 
-  const kolom = reorderedData.length > 0 ? Object.keys(reorderedData[0]) : [];
+  const kolom1 = reorderedData1.length > 0 ? Object.keys(reorderedData1[0]) : [];
+  const kolom2 = reorderedData2.length > 0 ? Object.keys(reorderedData2[0]) : [];
 
-  const hiddenColumns = [
+  const hiddenColumns1 = [
     {
       name: "id",
       options: {
@@ -171,21 +89,83 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
         filter: false,
         sort: false,
         customBodyRender: (value: string) => {
-          const fileData = JSON.parse(value);
-          const {download_link, original_name} = fileData[0];
+          let fileData;
 
-          return (
-            <Button size="xs" onClick={() => window.open(`${server}/storage/${download_link}`, "_blank")}>
-              {original_name}
-            </Button>
-          );
+          try {
+            fileData = JSON.parse(value); // Attempt to parse the JSON
+          } catch {
+            fileData = []; // Fallback to an empty array if parsing fails
+          }
+
+          if (Array.isArray(fileData) && fileData.length > 0) {
+            const {download_link, original_name} = fileData[0];
+
+            return (
+              <Button size="xs" onClick={() => window.open(`${server}/storage/${download_link}`, '_blank')}>
+                {original_name || 'Kosong'}
+              </Button>
+            );
+          }
         },
       },
     }
   ];
 
-  const kolomTerformat = kolom.map((col) => {
-    const hiddenColumn = hiddenColumns.find((c) => c.name === col);
+  const hiddenColumns2 = [
+    {
+      name: "id",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "dosen_id",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "created_at",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "updated_at",
+      options: {
+        display: false,
+      },
+    },
+    {
+      name: "file_haki",
+      options: {
+        filter: false,
+        sort: false,
+        customBodyRender: (value: string) => {
+          let fileData;
+
+          try {
+            fileData = JSON.parse(value); // Attempt to parse the JSON
+          } catch {
+            fileData = []; // Fallback to an empty array if parsing fails
+          }
+
+          if (Array.isArray(fileData) && fileData.length > 0) {
+            const {download_link, original_name} = fileData[0];
+
+            return (
+              <Button size="xs" onClick={() => window.open(`${server}/storage/${download_link}`, '_blank')}>
+                {original_name || 'Kosong'}
+              </Button>
+            );
+          }
+        }
+      }
+    }
+  ];
+
+  const kolomTerformat1 = kolom1.map((col) => {
+    const hiddenColumn = hiddenColumns1.find((c) => c.name === col);
     return {
       name: col,
       label: col.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // Capitalize and remove underscores
@@ -193,7 +173,17 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
     };
   });
 
-  const peneliti = reorderedData.map((obj) => Object.values(obj));
+  const kolomTerformat2 = kolom2.map((col) => {
+    const hiddenColumn = hiddenColumns2.find((c) => c.name === col);
+    return {
+      name: col,
+      label: col.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // Capitalize and remove underscores
+      options: hiddenColumn ? hiddenColumn.options : {display: true},
+    };
+  });
+
+  const peneliti = reorderedData1.map((obj) => Object.values(obj));
+  const haki = reorderedData2.map((obj) => Object.values(obj));
 
   return (
     <Menu>
@@ -231,27 +221,14 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
           <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
             <Box fontSize={{base: "xs", lg: "md"}}>
               <div dangerouslySetInnerHTML={{__html: daftarProfil[10].text}}/>
-              <DataTable title="Hasil Penelitian" columns={kolomTerformat} data={peneliti}/>
+              <DataTable title="Hasil Penelitian" columns={kolomTerformat1} data={peneliti}/>
             </Box>
           </Box>
         </TabPanel>
         <TabPanel p={0} mt={{base: "5%", xl: 0}}>
           <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
-            <Text textColor="black" fontSize="2xl" fontWeight="semibold" mb="6">
-              Hak Kekayaan Intelektual
-            </Text>
-            {daftarHaki !== null &&
-              daftarHaki.map((item) => {
-                return (
-                  <DokumenCell
-                    key={item.id}
-                    tahun={item.tahun}
-                    judul={item.judul}
-                    nama={item.name}
-                    link={item.id}
-                  />
-                );
-              })}
+            <div dangerouslySetInnerHTML={{__html: daftarProfil[4].text}}/>
+            <DataTable title="Hak Kekayaan Intelektual" columns={kolomTerformat2} data={haki}/>
           </Box>
         </TabPanel>
       </PageTab>

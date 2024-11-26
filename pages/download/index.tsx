@@ -46,7 +46,7 @@ const DaftarDownload: NextPage<daftarDownload> = ({daftarDownload}) => {
                      <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
                    </BreadcrumbItem>
                    <BreadcrumbItem>
-                     <BreadcrumbLink href='/pages/download'>Download</BreadcrumbLink>
+                     <BreadcrumbLink href='/download'>Download</BreadcrumbLink>
                    </BreadcrumbItem>
                  </Breadcrumb>
                }

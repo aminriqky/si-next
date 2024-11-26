@@ -8,6 +8,7 @@ import {artikel} from "./api/artikel";
 import type {pengabdian as pengabdianList, profil as profilList} from "../public/types";
 import dynamic from "next/dynamic";
 import DataTable from "../public/datatable";
+import {server} from "../config";
 
 const PageTab = dynamic(
   () => import('../public/pagetab'),
@@ -73,8 +74,7 @@ const Pengabdian: NextPage<pengabdian> = ({daftarProfil, daftarPengabdian}) => {
           return <p>Dokumentasi</p>; // Custom header
         },
         customBodyRender: (value) => {
-          const baseUrl = "https://adminsi.radenfatah.ac.id/storage/"; // Your base URL
-          const imageUrl = `${baseUrl}${value}`; // Full URL
+          const imageUrl = `${server}/storage/${value}`;
           return <img src={imageUrl} alt="Image"/>;
         },
         setCellProps: () => ({
@@ -141,7 +141,7 @@ const Pengabdian: NextPage<pengabdian> = ({daftarProfil, daftarPengabdian}) => {
           <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
             <Box fontSize={{base: "xs", lg: "md"}}>
               <div dangerouslySetInnerHTML={{__html: daftarProfil[11].text}}/>
-              <DataTable title="Hasil Penelitian" columns={kolomTerformat} data={pengabdi}/>
+              <DataTable title="Pengabdian Kepada Masyarakat" columns={kolomTerformat} data={pengabdi}/>
             </Box>
           </Box>
         </TabPanel>
