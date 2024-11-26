@@ -183,7 +183,7 @@ const MenuUtama: React.FC<MenuUtamaProps> = (props) => {
                   <DrawerTitle title="Beranda" handleClick={home}/>
                   <DrawerTitle title="Profil" handleClick={profil}/>
                   <DrawerTitle title="Akademik" handleClick={akademik}/>
-                  <DrawerTitle title="Dokumen" handleClick={download}/>
+                  <DrawerTitle title="Download" handleClick={download}/>
                   <DrawerTitle title="Galeri" handleClick={galeri}/>
                   <DrawerTitle title="Penelitian" handleClick={penelitian}/>
                   <DrawerTitle title="Pengabdian" handleClick={pengabdian}/>
