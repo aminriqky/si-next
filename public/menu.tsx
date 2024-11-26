@@ -26,6 +26,7 @@ interface DrawerTitleProps {
 
 function DrawerTitle(props: DrawerTitleProps) {
   return (
+    // @ts-ignore
     <Button
       justifyContent="flex-start"
       color="teal.700"
