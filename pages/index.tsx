@@ -635,7 +635,7 @@ const Home: NextPage<home> = ({
             </Link>
           </Text>
           <Flex flexDir="row" flexWrap="wrap">
-            {daftarKehadiran !== null &&
+            {daftarKehadiran !== undefined &&
               daftarKehadiran.filter((item) => item.jabatan === "Ketua Program Studi").map((item) => {
                 return (
                   <KehadiranCell
@@ -649,7 +649,7 @@ const Home: NextPage<home> = ({
                   />
                 );
               })}
-            {daftarKehadiran !== null &&
+            {daftarKehadiran !== undefined &&
               daftarKehadiran.filter((item) => item.jabatan === "Sekretaris Program Studi").map((item) => {
                 return (
                   <KehadiranCell
@@ -663,7 +663,7 @@ const Home: NextPage<home> = ({
                   />
                 );
               })}
-            {daftarKehadiran !== null &&
+            {daftarKehadiran !== undefined &&
               daftarKehadiran.filter((item) => item.jabatan === "Kepala Laboratorium").map((item) => {
                 return (
                   <KehadiranCell
@@ -678,7 +678,7 @@ const Home: NextPage<home> = ({
                 );
               })}
             {
-              daftarKehadiran !== null &&
+              daftarKehadiran !== undefined &&
               isLargerThan1400 &&
               daftarKehadiran.sort(() => Math.random() - 0.5).map((item) => {
                 return (
@@ -695,7 +695,7 @@ const Home: NextPage<home> = ({
               })
             }
             {
-              daftarKehadiran !== null &&
+              daftarKehadiran !== undefined &&
               isSmallerThan1280 &&
               daftarKehadiran.sort(() => Math.random() - 0.5).map((item) => {
                   return (
