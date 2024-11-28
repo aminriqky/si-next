@@ -635,7 +635,7 @@ const Home: NextPage<home> = ({
             </Link>
           </Text>
           <Flex flexDir="row" flexWrap="wrap">
-            {daftarKehadiran !== undefined &&
+            {daftarKehadiran !== null &&
               daftarKehadiran.filter((item) => item.jabatan === "Ketua Program Studi").map((item) => {
                 return (
                   <KehadiranCell
@@ -649,7 +649,7 @@ const Home: NextPage<home> = ({
                   />
                 );
               })}
-            {daftarKehadiran !== undefined &&
+            {daftarKehadiran !== null &&
               daftarKehadiran.filter((item) => item.jabatan === "Sekretaris Program Studi").map((item) => {
                 return (
                   <KehadiranCell
@@ -663,7 +663,7 @@ const Home: NextPage<home> = ({
                   />
                 );
               })}
-            {daftarKehadiran !== undefined &&
+            {daftarKehadiran !== null &&
               daftarKehadiran.filter((item) => item.jabatan === "Kepala Laboratorium").map((item) => {
                 return (
                   <KehadiranCell
@@ -677,40 +677,26 @@ const Home: NextPage<home> = ({
                   />
                 );
               })}
-            {
-              daftarKehadiran !== undefined &&
-              isLargerThan1400 &&
-              daftarKehadiran.sort(() => Math.random() - 0.5).map((item) => {
-                return (
-                  <KehadiranCell
-                    key={item[0].id}
-                    id={item[0].id}
-                    gambar={`${server}/storage/${item[0].avatar}`}
-                    judul={item[0].name}
-                    deskripsi={item[0].jabatan}
-                    hadir={item[0].hadir}
-                    dylink={`/kehadiran/${replace(item[0].name)}`}
-                  />
-                )
-              })
-            }
-            {
-              daftarKehadiran !== undefined &&
-              isSmallerThan1280 &&
-              daftarKehadiran.sort(() => Math.random() - 0.5).map((item) => {
-                  return (
-                    <KehadiranCell
-                      key={item[0].id}
-                      id={item[0].id}
-                      gambar={`${server}/storage/${item[0].avatar}`}
-                      judul={item[0].name}
-                      deskripsi={item[0].jabatan}
-                      hadir={item[0].hadir}
-                      dylink={`/kehadiran/${replace(item[0].name)}`}
-                    />
-                  )
-                }
-              )}
+            {isLargerThan1400 && (
+              <KehadiranCell
+                id={daftarKehadiran[10].id}
+                gambar={`${server}/storage/${daftarKehadiran[10].avatar}`}
+                judul={daftarKehadiran[10].name}
+                deskripsi={daftarKehadiran[10].jabatan}
+                hadir={daftarKehadiran[10].hadir}
+                dylink={`/kehadiran/${replace(daftarKehadiran[10].name)}`}
+              />
+            )}
+            {isSmallerThan1280 && (
+              <KehadiranCell
+                id={daftarKehadiran[10].id}
+                gambar={`${server}/storage/${daftarKehadiran[10].avatar}`}
+                judul={daftarKehadiran[10].name}
+                deskripsi={daftarKehadiran[10].jabatan}
+                hadir={daftarKehadiran[10].hadir}
+                dylink={`/kehadiran/${replace(daftarKehadiran[10].name)}`}
+              />
+            )}
           </Flex>
         </Flex>
         <Flex my="4" ml={{base: 0, xl: 75}}>
