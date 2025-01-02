@@ -1,3 +1,4 @@
+import React, {Fragment} from "react";
 import type {GetStaticProps, NextPage} from "next";
 import {Box, Flex, Img, Link, Text} from "@chakra-ui/react";
 import {useRouter} from "next/router";
@@ -8,7 +9,6 @@ import "dayjs/locale/id";
 import {berita} from "../api/berita";
 import type {berita as beritaList} from "../../public/types";
 import {server} from "../../config";
-import {Fragment} from "react";
 
 interface daftarBerita {
   daftarBerita: Array<beritaList>;
@@ -22,26 +22,28 @@ type MahasiswaCellProps = {
 
 const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
   return (
-    <Flex flexDir={{base: "column", xl: "row"}} mb="2%">
-      <Img
-        src={`${server}/storage/${props.logo}`}
-        borderRadius="5"
-        maxW="320px"
-        objectFit="contain"
-      />
-      <Flex ml={{base: 0, xl: 16}} flexDir="column" flexWrap="wrap">
-        <Text mb="10px" color={props.color} fontWeight="semibold">
-          {props.children}
-        </Text>
-        <Box
-          color="black"
-          fontWeight="light"
-          fontSize={{base: "xs", lg: "md"}}
-        >
-          <div dangerouslySetInnerHTML={{__html: props.detail}}/>
-        </Box>
+    <React.Fragment>
+      <Flex flexDir={{base: "column", xl: "row"}} mb="2%">
+        <Img
+          src={`${server}/storage/${props.logo}`}
+          borderRadius="5"
+          maxW="320px"
+          objectFit="contain"
+        />
+        <Flex ml={{base: 0, xl: 16}} flexDir="column" flexWrap="wrap">
+          <Text mb="10px" color={props.color} fontWeight="semibold">
+            {props.children}
+          </Text>
+          <Box
+            color="black"
+            fontWeight="light"
+            fontSize={{base: "xs", lg: "md"}}
+          >
+            <div dangerouslySetInnerHTML={{__html: props.detail}}/>
+          </Box>
+        </Flex>
       </Flex>
-    </Flex>
+    </React.Fragment>
   );
 };
 
