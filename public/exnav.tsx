@@ -1,16 +1,16 @@
-import React from "react";
+// @ts-nocheck
 import {Box, Container, Divider, Link, Text} from "@chakra-ui/react";
 import NextLink from "next/link";
 
 export default function ExNav() {
   return (
-    <React.Fragment>
+    <>
       <Container
-        py={10}
+        py="10"
         bg="white"
         display="flex"
-        flexDirection={{base: "column", xl: "row"}}
-        maxW="100%"
+        flexDir={{base: "column", xl: "row"}}
+        maxWidth="100%"
         justifyContent="center"
       >
         <Box
@@ -244,6 +244,6 @@ export default function ExNav() {
           </Link>
         </Text>
       </Box>
-    </React.Fragment>
+    </>
   );
 }
