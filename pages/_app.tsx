@@ -2,7 +2,7 @@ import type {AppProps} from "next/app";
 import React from "react";
 import Head from "next/head";
 import Router from "next/router";
-import {ChakraProvider} from "@chakra-ui/react";
+import {ChakraProvider, VisuallyHidden} from "@chakra-ui/react";
 import NProgress from "nprogress";
 import "nprogress/nprogress.css";
 import "./index.css";
@@ -29,6 +29,8 @@ function MyApp({Component, pageProps}: AppProps) {
       </Head>
       <ChakraProvider>
         <Component {...pageProps} />
+        <VisuallyHidden>Created By github.com/aminriqky</VisuallyHidden>
+        <VisuallyHidden>Made with Next.js & Chakra UI</VisuallyHidden>
       </ChakraProvider>
     </React.Fragment>
   );

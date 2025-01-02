@@ -1,5 +1,5 @@
-import { Fragment } from "react";
-import { Container, Text, Link, Box, Divider } from "@chakra-ui/react";
+import {Fragment} from "react";
+import {Box, Container, Divider, Link, Text} from "@chakra-ui/react";
 import NextLink from "next/link";
 
 export default function ExNav() {
@@ -9,7 +9,7 @@ export default function ExNav() {
         py="10"
         bg="white"
         display="flex"
-        flexDirection={{ base: "column", xl: "row" }}
+        flexDirection={{base: "column", xl: "row"}}
         maxWidth="100%"
         justifyContent="center"
       >
@@ -22,20 +22,20 @@ export default function ExNav() {
           <Text fontWeight="bold" color="blackAlpha.600">
             TENTANG KAMI
           </Text>
-          <Divider mb={2} />
-          <Box _hover={{ textDecor: "underline" }} color="orange.600">
+          <Divider mb={2}/>
+          <Box _hover={{textDecor: "underline"}} color="orange.600">
             <NextLink href="/profil">Sejarah</NextLink>
           </Box>
-          <Box _hover={{ textDecor: "underline" }} color="orange.600">
+          <Box _hover={{textDecor: "underline"}} color="orange.600">
             <NextLink href="/profil">Visi Misi & Tujuan</NextLink>
           </Box>
-          <Box _hover={{ textDecor: "underline" }} color="orange.600">
+          <Box _hover={{textDecor: "underline"}} color="orange.600">
             <NextLink href="/kehadiran">Staff & Tenaga Pendidik</NextLink>
           </Box>
-          <Box _hover={{ textDecor: "underline" }} color="orange.600">
-            <NextLink href="/kemahasiswaan">Direktori Prestasi</NextLink>
+          <Box _hover={{textDecor: "underline"}} color="orange.600">
+            <NextLink href="/overview/prestasi">Direktori Prestasi</NextLink>
           </Box>
-          <Box _hover={{ textDecor: "underline" }} color="orange.600">
+          <Box _hover={{textDecor: "underline"}} color="orange.600">
             <NextLink href="/galeri">Galeri</NextLink>
           </Box>
         </Box>
@@ -43,7 +43,7 @@ export default function ExNav() {
           <Text fontWeight="bold" color="blackAlpha.600">
             UNIVERSITAS
           </Text>
-          <Divider mb={2} />
+          <Divider mb={2}/>
           <Link href="https://radenfatah.ac.id/" color="orange.600" isExternal>
             UIN Raden Fatah
           </Link>
@@ -80,7 +80,7 @@ export default function ExNav() {
           <Text fontWeight="bold" color="blackAlpha.600">
             LAYANAN
           </Text>
-          <Divider mb={2} />
+          <Divider mb={2}/>
           <Link
             href="https://e-learning.radenfatah.ac.id/"
             color="orange.600"
@@ -117,7 +117,7 @@ export default function ExNav() {
           <Text fontWeight="bold" color="blackAlpha.600">
             AKADEMIK
           </Text>
-          <Divider mb={2} />
+          <Divider mb={2}/>
           <Link
             href="http://beasiswa.radenfatah.ac.id/"
             color="orange.600"
@@ -158,7 +158,7 @@ export default function ExNav() {
           <Text fontWeight="bold" color="blackAlpha.600">
             TAUTAN
           </Text>
-          <Divider mb={2} />
+          <Divider mb={2}/>
           <Link
             href="http://perpustakaan.radenfatah.ac.id/"
             color="orange.600"
@@ -199,7 +199,7 @@ export default function ExNav() {
           <Text fontWeight="bold" color="blackAlpha.600">
             AKSES CEPAT
           </Text>
-          <Divider mb={2} />
+          <Divider mb={2}/>
           <Link href="https://kemenag.go.id/" color="orange.600" isExternal>
             Kemenag-RI
           </Link>
@@ -229,8 +229,8 @@ export default function ExNav() {
           </Link>
         </Box>
       </Container>
-      <Divider />
-      <Box bg="white" py="5" fontSize={{ base: 11, xl: "md" }}>
+      <Divider/>
+      <Box bg="white" py="5" fontSize={{base: 11, xl: "md"}}>
         <Text color="black" textAlign="center" fontWeight="thin">
           Copyright ©<NextLink href="/">{" Sistem Informasi "}</NextLink>
           <Link href="http://saintek.radenfatah.ac.id/" isExternal>

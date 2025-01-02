@@ -13,12 +13,8 @@ interface KehadiranCellProps {
 export default function KehadiranCell(props: KehadiranCellProps) {
   const router = useRouter();
 
-  function f() {
-
-  }
-
   return (
-    <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="140px">
+    <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="125px">
       <Box
         w="xs"
         bg="white"
@@ -40,6 +36,7 @@ export default function KehadiranCell(props: KehadiranCellProps) {
               e.preventDefault();
               router.push(`${props.dylink}`);
             }}
+            href={`${props.dylink}`}
           >
             {props.judul}
           </Link>
@@ -49,14 +46,14 @@ export default function KehadiranCell(props: KehadiranCellProps) {
         </Box>
         {props.hadir === 1 && (
           <Box bg="teal.600">
-            <Text mx={14} py={1} fontSize="smaller" color="white">
+            <Text mx={12} py={1} fontSize="smaller" color="white">
               Hadir
             </Text>
           </Box>
         )}
         {props.hadir === 0 && (
           <Box bg="red.600">
-            <Text mx={11.5} py={1} fontSize="smaller" color="white">
+            <Text mx={10} py={1} fontSize="smaller" color="white">
               Tidak Ada
             </Text>
           </Box>

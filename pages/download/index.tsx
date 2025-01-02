@@ -89,6 +89,7 @@ const DaftarDownload: NextPage<daftarDownload> = ({daftarDownload}) => {
                       e.preventDefault();
                       router.push(`/download/${replace(item.nama_berkas)}`);
                     }}
+                    href={`/download/${replace(item.nama_berkas)}`}
                   >
                     <Flex
                       _hover={{bg: "teal.50"}}

@@ -44,6 +44,7 @@ const SlideShow = React.memo<SlideShowProps>((props) => {
                   e.preventDefault();
                   router.push(`${props.dylink}`);
                 }}
+                href={props.dylink}
               >
                 {props.judul}
               </Link>
@@ -174,6 +175,7 @@ const Berita = React.memo<BeritaProps>((props) => {
               e.preventDefault();
               router.push("/berita");
             }}
+            href={"/berita"}
           >
             BERITA TERKINI
           </Link>

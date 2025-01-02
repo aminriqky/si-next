@@ -1,13 +1,13 @@
-import type { NextPage, GetStaticProps } from "next";
-import { Text, Box, Flex, Link } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import type {GetStaticProps, NextPage} from "next";
+import {Box, Flex, Link, Text} from "@chakra-ui/react";
+import {useRouter} from "next/router";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
-import { pengumuman } from "../api/pengumuman";
-import type { pengumuman as pengumumanList } from "../../public/types";
-import { replace } from "../../public/func";
+import {pengumuman} from "../api/pengumuman";
+import type {pengumuman as pengumumanList} from "../../public/types";
+import {replace} from "../../public/func";
 
 type PengumumanCellProps = {
   key: number;
@@ -26,7 +26,7 @@ function PengumumanCell(props: PengumumanCellProps) {
       <Box
         minW="60px"
         height="60px"
-        m={{ base: "3vw", xl: "1.4vw" }}
+        m={{base: "3vw", xl: "1.4vw"}}
         textAlign="center"
         border="2px"
       >
@@ -35,7 +35,7 @@ function PengumumanCell(props: PengumumanCellProps) {
         </Text>
         <Text fontSize="xs">{props.hariBulan}</Text>
       </Box>
-      <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+      <Box alignSelf="center" m={{base: "3vw", xl: "1.41vw"}}>
         <Text fontSize="md">
           <Link
             fontWeight="semibold"
@@ -43,6 +43,7 @@ function PengumumanCell(props: PengumumanCellProps) {
               e.preventDefault();
               router.push(`${props.dylink}`);
             }}
+            href={`${props.dylink}`}
           >
             {props.judul}
           </Link>
@@ -57,7 +58,7 @@ interface daftarPengumuman {
   daftarPengumuman: Array<pengumumanList>;
 }
 
-const DaftarPengumuman: NextPage<daftarPengumuman> = ({ daftarPengumuman }) => {
+const DaftarPengumuman: NextPage<daftarPengumuman> = ({daftarPengumuman}) => {
   return (
     <Menu>
       <Box
@@ -66,7 +67,7 @@ const DaftarPengumuman: NextPage<daftarPengumuman> = ({ daftarPengumuman }) => {
         zIndex="999"
         textColor="black"
         mx="6%"
-        my={{ base: "12%", xl: "100px" }}
+        my={{base: "12%", xl: "100px"}}
         p="4%"
       >
         <Text fontSize="28" pb="2%" fontWeight="semibold">
@@ -77,21 +78,16 @@ const DaftarPengumuman: NextPage<daftarPengumuman> = ({ daftarPengumuman }) => {
             return (
               <PengumumanCell
                 key={item.id}
-                hari={dayjs(item.updated_at)
-                  .locale("id")
-                  .format("ddd")
-                  .toUpperCase()}
+                hari={dayjs(item.updated_at).locale("id").format("ddd").toUpperCase()}
                 hariBulan={dayjs(item.updated_at).format("DD/MM")}
                 judul={item.judul}
-                waktu={dayjs(item.updated_at)
-                  .locale("id")
-                  .format("dddd, DD MMMM YYYY")}
+                waktu={dayjs(item.updated_at).locale("id").format("dddd, DD MMMM YYYY")}
                 dylink={`/pengumuman/${replace(item.judul)}`}
               />
             );
           })}
       </Box>
-      <ExNav />
+      <ExNav/>
     </Menu>
   );
 };
@@ -100,7 +96,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const daftarPengumuman = await pengumuman();
 
   return {
-    props: { daftarPengumuman },
+    props: {daftarPengumuman},
     revalidate: 15,
   };
 };

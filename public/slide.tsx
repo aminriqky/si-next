@@ -15,7 +15,7 @@ const SlideShow: React.FC<SlideShowProps> = React.memo((props) => {
         pointerEvents="none"
         opacity="0.8"
         pos="absolute"
-        h="760px"
+        h={{base: "760px", "2xl": "49.5vw"}}
         w="100%"
       >
         <Img

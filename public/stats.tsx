@@ -81,6 +81,7 @@ const Stats = () => {
       borderRadius="md"
       p={4}
       maxW="300px"
+      maxH="300px"
       boxShadow="lg"
     >
       <Text fontWeight="bold" mb={2}>

@@ -1,13 +1,12 @@
-import type { NextPage, GetStaticProps } from "next";
-import { Text, Box, Flex, Link } from "@chakra-ui/react";
-import { useRouter } from "next/router";
+import type {GetStaticProps, NextPage} from "next";
+import {Box, Flex, Link, Text} from "@chakra-ui/react";
+import {useRouter} from "next/router";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
-import { agenda } from "../api/agenda";
-import type { agenda as agendaList } from "../../public/types";
-import type { AgendaCellProps } from "../../public/types";
+import {agenda} from "../api/agenda";
+import type {agenda as agendaList, AgendaCellProps} from "../../public/types";
 
 interface daftarAgenda {
   daftarAgenda: Array<agendaList>;
@@ -21,7 +20,7 @@ function AgendaCell(props: AgendaCellProps) {
       <Box
         minW="60px"
         height="60px"
-        m={{ base: "3vw", xl: "1.4vw" }}
+        m={{base: "3vw", xl: "1.4vw"}}
         textAlign="center"
         border="2px"
       >
@@ -30,7 +29,7 @@ function AgendaCell(props: AgendaCellProps) {
         </Text>
         <Text fontSize="xs">{props.hariBulan}</Text>
       </Box>
-      <Box alignSelf="center" m={{ base: "3vw", xl: "1.41vw" }}>
+      <Box alignSelf="center" m={{base: "3vw", xl: "1.41vw"}}>
         <Text fontSize="md">
           <Link
             fontWeight="semibold"
@@ -38,6 +37,7 @@ function AgendaCell(props: AgendaCellProps) {
               e.preventDefault();
               router.push(`${props.dylink}`);
             }}
+            href={props.dylink}
           >
             {props.judul}
           </Link>
@@ -48,7 +48,7 @@ function AgendaCell(props: AgendaCellProps) {
   );
 }
 
-const DaftarAgenda: NextPage<daftarAgenda> = ({ daftarAgenda }) => {
+const DaftarAgenda: NextPage<daftarAgenda> = ({daftarAgenda}) => {
   return (
     <Menu>
       <Box
@@ -56,7 +56,7 @@ const DaftarAgenda: NextPage<daftarAgenda> = ({ daftarAgenda }) => {
         opacity="0.9"
         zIndex="999"
         mx="6%"
-        my={{ base: "12%", xl: "100px" }}
+        my={{base: "12%", xl: "100px"}}
         p="4%"
       >
         <Text fontSize="28" pb="2%" fontWeight="semibold">
@@ -67,10 +67,7 @@ const DaftarAgenda: NextPage<daftarAgenda> = ({ daftarAgenda }) => {
             return (
               <AgendaCell
                 key={item.id}
-                hari={dayjs(item.waktu)
-                  .locale("id")
-                  .format("ddd")
-                  .toUpperCase()}
+                hari={dayjs(item.waktu).locale("id").format("ddd").toUpperCase()}
                 hariBulan={dayjs(item.waktu).format("DD/MM")}
                 judul={item.judul}
                 tempat={item.tempat}
@@ -79,7 +76,7 @@ const DaftarAgenda: NextPage<daftarAgenda> = ({ daftarAgenda }) => {
             );
           })}
       </Box>
-      <ExNav />
+      <ExNav/>
     </Menu>
   );
 };
@@ -88,7 +85,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const daftarAgenda = await agenda();
 
   return {
-    props: { daftarAgenda },
+    props: {daftarAgenda},
     revalidate: 15,
   };
 };

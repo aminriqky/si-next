@@ -1,15 +1,27 @@
 import React from "react";
 import MUIDataTable from "mui-datatables";
+import {makeStyles} from "@material-ui/core/styles";
+
+const useStyles = makeStyles({
+  searchBox: {
+    '& .MuiToolbar-root': {
+      alignItems: 'center', // Ensures the toolbar items are aligned properly
+    },
+    '& .MuiFormControl-root': {
+      position: 'relative', // Adjusts the position of the input box
+      top: '45px', // Fine-tune this value based on your layout
+    },
+  },
+});
 
 function DataTable(props) {
+  const classes = useStyles();
 
   const options = {
-    filter: true,
-    filterType: "dropdown",
-    responsive: "standard",
-    search: true,
     selectableRows: false,
-    sort: true,
+    filterType: "dropdown",
+    responsive: "scroll",
+    customToolbar: () => <div/>,
   };
 
   const columns = props.columns || [];
@@ -20,12 +32,14 @@ function DataTable(props) {
 
   return (
     <React.Fragment>
-      <MUIDataTable
-        title={props.title}
-        data={arrayOfArrays}
-        columns={columns}
-        options={options}
-      />
+      <div className={classes.searchBox}>
+        <MUIDataTable
+          title={props.title}
+          data={arrayOfArrays}
+          columns={columns}
+          options={options}
+        />
+      </div>
     </React.Fragment>
   );
 }

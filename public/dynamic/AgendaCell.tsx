@@ -28,6 +28,7 @@ export default function AgendaCell(props: AgendaCellProps) {
               e.preventDefault();
               router.push(`${props.dylink}`);
             }}
+            href={`${props.dylink}`}
           >
             {props.judul}
           </Link>

@@ -17,7 +17,6 @@ import {
   Text,
   useDisclosure,
   useMediaQuery,
-  VisuallyHidden,
 } from "@chakra-ui/react";
 import {SiFacebook} from "@react-icons/all-files/si/SiFacebook";
 import {SiInstagram} from "@react-icons/all-files/si/SiInstagram";
@@ -59,28 +58,30 @@ import type {
 const Berita = dynamic(() => import("../public/berita"));
 const AgendaCell = dynamic(() => import("../public/dynamic/AgendaCell"), {
   loading: () => (
-    <Flex ml={{base: "12%", xl: 0}} flexDirection="row" flex="1">
-      <Skeleton
-        alignSelf="center"
-        minW="60px"
-        height="60px"
-        m={{base: "3vw", xl: "1.41vw"}}
-        textAlign="center"
-        border="2px"
-      />
-      <Box alignSelf="center" m={{base: "3vw", xl: "1.41vw"}}>
+    <React.Fragment>
+      <Flex ml={{base: "12%", xl: 0}} flexDirection="row" flex="1">
         <Skeleton
-          height="20px"
-          width={{base: "185px", xl: "139px", "2xl": "150px"}}
-          my="2"
+          alignSelf="center"
+          minW="60px"
+          height="60px"
+          m={{base: "3vw", xl: "1.41vw"}}
+          textAlign="center"
+          border="2px"
         />
-        <Skeleton
-          height="20px"
-          width={{base: "185px", xl: "139px", "2xl": "150px"}}
-          my="2"
-        />
-      </Box>
-    </Flex>
+        <Box alignSelf="center" m={{base: "3vw", xl: "1.41vw"}}>
+          <Skeleton
+            height="20px"
+            width={{base: "185px", xl: "139px", "2xl": "150px"}}
+            my="2"
+          />
+          <Skeleton
+            height="20px"
+            width={{base: "185px", xl: "139px", "2xl": "150px"}}
+            my="2"
+          />
+        </Box>
+      </Flex>
+    </React.Fragment>
   ),
 });
 const KehadiranCell = dynamic(() => import("../public/dynamic/KehadiranCell"), {
@@ -200,6 +201,7 @@ const Home: NextPage<home> = ({
     router.push("/agenda");
   };
 
+  // @ts-ignore
   return (
     <React.Fragment>
       <Menu
@@ -481,6 +483,7 @@ const Home: NextPage<home> = ({
                 e.preventDefault();
                 router.push("/pengumuman");
               }}
+              href={"/pengumuman"}
             >
               PENGUMUMAN
             </Link>
@@ -600,8 +603,9 @@ const Home: NextPage<home> = ({
       <Flex
         bg="gray.50"
         flexDirection={{base: "column", xl: "row"}}
+        justifyContent="center"
         py="25"
-        pl={{base: 25, xl: 125}}
+        px={{base: 25, xl: 125}}
       >
         <Flex
           flexDir="column"
@@ -619,7 +623,7 @@ const Home: NextPage<home> = ({
             />
           )}
         </Flex>
-        <Flex flexDir="column" ml={{base: 0, xl: 25, "2xl": "50px"}}>
+        <Flex flexDir="column" ml={{base: 0, xl: 25, "2xl": 50}}>
           <Text fontSize="20" fontWeight="medium">
             <Icon as={FcApprove} w="30px" h="auto"/>
             &thinsp;
@@ -630,6 +634,7 @@ const Home: NextPage<home> = ({
                 e.preventDefault();
                 router.push("/kehadiran");
               }}
+              href={"/kehadiran"}
             >
               KEHADIRAN
             </Link>
@@ -677,7 +682,7 @@ const Home: NextPage<home> = ({
                   />
                 );
               })}
-            {isLargerThan1400 && (
+            {isSmallerThan1280 && (
               <KehadiranCell
                 id={daftarKehadiran[10].id}
                 gambar={`${server}/storage/${daftarKehadiran[10].avatar}`}
@@ -687,7 +692,7 @@ const Home: NextPage<home> = ({
                 dylink={`/kehadiran/${replace(daftarKehadiran[10].name)}`}
               />
             )}
-            {isSmallerThan1280 && (
+            {isLargerThan1400 && (
               <KehadiranCell
                 id={daftarKehadiran[10].id}
                 gambar={`${server}/storage/${daftarKehadiran[10].avatar}`}
@@ -726,8 +731,6 @@ const Home: NextPage<home> = ({
       </Flex>
       <Divider/>
       <ExNav/>
-      <VisuallyHidden>Created By github.com/aminriqky</VisuallyHidden>
-      <VisuallyHidden>Made with Next.js & Chakra UI</VisuallyHidden>
     </React.Fragment>
   );
 };
