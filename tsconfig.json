@@ -10,8 +10,6 @@
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
-    "maxNodeModuleJsDepth": 10,
-    "maxUnionSize": 1000,
     "forceConsistentCasingInFileNames": true,
     "noEmit": true,
     "esModuleInterop": true,
