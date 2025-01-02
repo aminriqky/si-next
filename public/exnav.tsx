@@ -3,7 +3,6 @@ import {Box, Container, Divider, Link, Text} from "@chakra-ui/react";
 import NextLink from "next/link";
 
 export default function ExNav() {
-  // @ts-ignore
   return (
     <React.Fragment>
       <Container
