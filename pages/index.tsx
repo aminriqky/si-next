@@ -201,6 +201,25 @@ const Home: NextPage<home> = ({
     router.push("/agenda");
   };
 
+  function getRandomIdFromObjects(array) {
+    if (array.length === 0) {
+      return null;
+    }
+    const randomIndex = Math.floor(Math.random() * array.length);
+    return array[randomIndex];
+  }
+
+  function filterKehadiran(hadir) {
+    return hadir.filter(
+      (item) =>
+        item.jabatan !== "Sekretaris Program Studi" &&
+        item.jabatan !== "Ketua Program Studi" &&
+        item.jabatan !== "Kepala Laboratorium"
+    );
+  }
+
+  const consistentRandomObject = getRandomIdFromObjects(filterKehadiran(daftarKehadiran));
+
   // @ts-ignore
   return (
     <React.Fragment>
@@ -684,22 +703,22 @@ const Home: NextPage<home> = ({
               })}
             {isSmallerThan1280 && (
               <KehadiranCell
-                id={daftarKehadiran[10].id}
-                gambar={`${server}/storage/${daftarKehadiran[10].avatar}`}
-                judul={daftarKehadiran[10].name}
-                deskripsi={daftarKehadiran[10].jabatan}
-                hadir={daftarKehadiran[10].hadir}
-                dylink={`/kehadiran/${replace(daftarKehadiran[10].name)}`}
+                id={consistentRandomObject.id}
+                gambar={`${server}/storage/${consistentRandomObject.avatar}`}
+                judul={consistentRandomObject.name}
+                deskripsi={consistentRandomObject.jabatan}
+                hadir={consistentRandomObject.hadir}
+                dylink={`/kehadiran/${replace(consistentRandomObject.name)}`}
               />
             )}
             {isLargerThan1400 && (
               <KehadiranCell
-                id={daftarKehadiran[10].id}
-                gambar={`${server}/storage/${daftarKehadiran[10].avatar}`}
-                judul={daftarKehadiran[10].name}
-                deskripsi={daftarKehadiran[10].jabatan}
-                hadir={daftarKehadiran[10].hadir}
-                dylink={`/kehadiran/${replace(daftarKehadiran[10].name)}`}
+                id={consistentRandomObject.id}
+                gambar={`${server}/storage/${consistentRandomObject.avatar}`}
+                judul={consistentRandomObject.name}
+                deskripsi={consistentRandomObject.jabatan}
+                hadir={consistentRandomObject.hadir}
+                dylink={`/kehadiran/${replace(consistentRandomObject.name)}`}
               />
             )}
           </Flex>
