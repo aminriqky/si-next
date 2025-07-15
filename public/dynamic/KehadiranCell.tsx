@@ -1,5 +1,4 @@
-import {Box, Flex, Img, Link, Text} from "@chakra-ui/react";
-import {useRouter} from "next/router";
+import { Box, Flex, Img, Text } from "@chakra-ui/react";
 
 interface KehadiranCellProps {
   id: number;
@@ -11,8 +10,6 @@ interface KehadiranCellProps {
 }
 
 export default function KehadiranCell(props: KehadiranCellProps) {
-  const router = useRouter();
-
   return (
     <Flex key={props.id} my={6} ml={2} mr={2} bg="#F9FAFB" w="125px">
       <Box
@@ -23,23 +20,18 @@ export default function KehadiranCell(props: KehadiranCellProps) {
         overflow="hidden"
         mx="auto"
       >
-        <Img w="full" h={40} src={props.gambar} alt="avatar"/>
+        <Img w="full" h={40} src={props.gambar} alt="avatar" />
         <Box py={3} textAlign="center">
-          <Link
+          <Text
             mx={3}
             display="block"
             fontSize="xs"
             color="gray.800"
             fontWeight="bold"
             isTruncated
-            onClick={(e) => {
-              e.preventDefault();
-              router.push(`${props.dylink}`);
-            }}
-            href={`${props.dylink}`}
           >
             {props.judul}
-          </Link>
+          </Text>
           <Text mx={3} fontSize="xs" color="teal.700" isTruncated>
             {props.deskripsi}
           </Text>
