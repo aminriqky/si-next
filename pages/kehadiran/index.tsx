@@ -23,7 +23,7 @@ const DaftarKehadiran: NextPage<daftarKehadiran> = ({ daftarKehadiran }) => {
         my={{ base: "12%", xl: "100px" }}
         p="4%"
       >
-        <Text fontSize="28" pb="2%" fontWeight="semibold">
+        <Text fontSize="28" fontWeight="semibold">
           Daftar Kehadiran
         </Text>
         <Flex
