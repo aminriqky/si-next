@@ -4,71 +4,63 @@ import fs from "fs/promises";
 import path from "path";
 import type { haki as hakiType } from "../../public/types";
 
-type ResponseData = hakiType | { error: string };
-
-// Path to cache file
+const UPSTREAM = `${server}/api/haki/all`;
+const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "haki.json");
 
-// Ensure cache directory exists
-async function ensureCacheDirectory() {
-  const cacheDir = path.join(process.cwd(), "cache");
-  try {
-    await fs.mkdir(cacheDir, { recursive: true });
-  } catch (error) {
-    console.error("Error creating cache directory:", error);
-  }
+let memCache: { data: any; ts: number } | null = null;
+
+async function ensureCache() {
+  await fs.mkdir(path.dirname(CACHE_FILE), { recursive: true }).catch(() => {});
 }
 
-// Read cached data
-async function getCachedData(): Promise<hakiType | null> {
+async function getCache() {
   try {
-    const data = await fs.readFile(CACHE_FILE, "utf-8");
-    return JSON.parse(data);
-  } catch (error) {
-    console.error("Error reading cache:", error);
+    const raw = await fs.readFile(CACHE_FILE, "utf-8");
+    const data = JSON.parse(raw);
+    memCache = { data, ts: Date.now() };
+    return data;
+  } catch {
     return null;
   }
 }
 
-// Write data to cache
-async function cacheData(data: hakiType) {
+async function saveCache(data: any) {
   try {
+    await ensureCache();
     await fs.writeFile(CACHE_FILE, JSON.stringify(data, null, 2));
-  } catch (error) {
-    console.error("Error writing to cache:", error);
+    memCache = { data, ts: Date.now() };
+  } catch (e) {
+    console.error("Cache save failed:", e);
   }
 }
 
-async function fetchData() {
-  try {
-    const response = await fetch(`${server}/api/haki/all`, {
-      signal: AbortSignal.timeout(5000),
-    });
+async function fetchFresh() {
+  if (!COOKIE) throw new Error("COOKIE not set");
 
-    // Check if response is JSON
-    const contentType = response.headers.get("content-type");
-    if (!contentType || !contentType.includes("application/json")) {
-      const text = await response.text();
-      throw new Error(`Response is not JSON: ${text.slice(0, 100)}`);
-    }
+  const res = await fetch(UPSTREAM, {
+    headers: {
+      Cookie: COOKIE,
+      "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+      Accept: "application/json",
+    },
+  });
 
-    if (!response.ok) {
-      throw new Error(`Fetch failed with status: ${response.status}`);
-    }
+  const text = await res.text();
 
-    return response;
-  } catch (error: any) {
-    console.error("Fetch error:", error);
-  }
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  if (text.includes("<html")) throw new Error("Cloudflare block");
+
+  return text;
 }
 
 export async function haki() {
   try {
-    const response: any = await fetchData();
-    const jsonData: hakiType = await response.json();
+    const response: any = await fetchFresh();
+    const jsonData: hakiType = await JSON.parse(response);
     return jsonData;
   } catch (error: any) {
-    const cachedData = await getCachedData();
+    const cachedData = await getCache();
     if (cachedData) {
       console.log({ error: "Using cached data" });
       return cachedData;
@@ -80,27 +72,26 @@ export async function haki() {
 
 export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse<ResponseData>,
+  res: NextApiResponse<any>
 ) {
-  await ensureCacheDirectory();
+  // Memory cache
+  if (memCache && Date.now() - memCache.ts < 60 * 60 * 1000) {
+    return res.status(200).json("Using memory cached data");
+  }
 
+  // Disk cache
+  const disk = await getCache();
+  if (disk) return res.status(200).json("Using disk cached data");
+
+  // Fresh
   try {
-    const response: any = await fetchData();
-    const jsonData: hakiType = await response.json();
-
-    // Update cache with new data
-    await cacheData(jsonData);
-
-    res.status(200).json({ error: "Status OK" });
-  } catch (error: any) {
-    // Fall back to cached data
-    const cachedData = await getCachedData();
-    if (cachedData) {
-      res.status(200).json({ error: "Using cached data" });
-    } else {
-      res
-        .status(503)
-        .json({ error: "Service unavailable, no cached data available" });
-    }
+    const data = await fetchFresh();
+    await saveCache(data);
+    res.status(200).json("Status OK");
+  } catch (err: any) {
+    console.error("Fetch failed:", err.message);
+    const fallback = await getCache();
+    if (fallback) res.status(503).json(fallback);
+    else res.status(503).json({ error: "Service unavailable" });
   }
 }
