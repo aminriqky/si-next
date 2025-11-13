@@ -54,7 +54,7 @@ async function fetchFresh() {
   return text;
 }
 
-export async function article() {
+export async function artikel() {
   try {
     const response: any = await fetchFresh();
     const jsonData: articleType = await JSON.parse(response);
