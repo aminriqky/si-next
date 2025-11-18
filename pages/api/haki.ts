@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { haki as hakiType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/haki/all`;
+const UPSTREAM = `${server}/api/haki`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "haki.json");
 

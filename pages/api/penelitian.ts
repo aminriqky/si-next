@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { penelitian as penelitianType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/penelitian/all`;
+const UPSTREAM = `${server}/api/penelitian`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "penelitian.json");
 

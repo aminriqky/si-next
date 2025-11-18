@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { gallery as galleryType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/gallery/all`;
+const UPSTREAM = `${server}/api/gallery`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "gallery.json");
 

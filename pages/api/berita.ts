@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { berita as beritaType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/berita/all`;
+const UPSTREAM = `${server}/api/berita`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "berita.json");
 

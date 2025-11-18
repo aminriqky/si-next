@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { organisasi as organisasiType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/org/all`;
+const UPSTREAM = `${server}/api/org`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "organisasi.json");
 

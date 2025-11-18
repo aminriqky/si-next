@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { slide as slideType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/slideshow/all`;
+const UPSTREAM = `${server}/api/slideshow`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "slideshow.json");
 
