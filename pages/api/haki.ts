@@ -76,18 +76,18 @@ export default async function handler(
 ) {
   // Memory cache
   if (memCache && Date.now() - memCache.ts < 60 * 60 * 1000) {
-    return res.status(200).json("Using memory cached data");
+    return res.status(200).json(memCache.data);
   }
 
   // Disk cache
   const disk = await getCache();
-  if (disk) return res.status(200).json("Using disk cached data");
+  if (disk) return res.status(200).json(disk);
 
   // Fresh
   try {
     const data = await fetchFresh();
     await saveCache(data);
-    res.status(200).json("Status OK");
+    res.status(200).json(data);
   } catch (err: any) {
     console.error("Fetch failed:", err.message);
     const fallback = await getCache();
