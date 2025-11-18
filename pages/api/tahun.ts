@@ -4,7 +4,7 @@ import fs from "fs/promises";
 import path from "path";
 import type { tahun as tahunType } from "../../public/types";
 
-const UPSTREAM = `${server}/api/year`;
+const UPSTREAM = `${server}/api/tahun`;
 const COOKIE = process.env.COOKIE || "";
 const CACHE_FILE = path.join(process.cwd(), "cache", "tahun.json");
 
