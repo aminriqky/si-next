@@ -1,6 +1,6 @@
-import type {GetStaticProps, NextPage} from "next";
+import type { GetStaticProps, NextPage } from "next";
 import React from "react";
-import {useRouter} from "next/router";
+import { useRouter } from "next/router";
 import {
   Box,
   Breadcrumb,
@@ -16,47 +16,47 @@ import {
 } from "@chakra-ui/react";
 import ExNav from "../../public/exnav";
 import Menu from "../../public/menu";
-import {download as data} from "../api/download";
-import {FaBookmark} from "@react-icons/all-files/fa/FaBookmark";
-import {FaFileAlt} from "@react-icons/all-files/fa/FaFileAlt";
-import {FaExternalLinkAlt} from "@react-icons/all-files/fa/FaExternalLinkAlt";
-import type {download as download} from "../../public/types";
-import {replace} from "../../public/func";
+import { download as data } from "../api/download";
+import { FaBookmark } from "@react-icons/all-files/fa/FaBookmark";
+import { FaFileAlt } from "@react-icons/all-files/fa/FaFileAlt";
+import { FaExternalLinkAlt } from "@react-icons/all-files/fa/FaExternalLinkAlt";
+import type { download as download } from "../../public/types";
+import { replace } from "../../public/func";
 import dynamic from "next/dynamic";
 
 const PageTab = dynamic(
   () => import('../../public/pagetab'),
-  {ssr: false}
+  { ssr: false }
 )
 
 interface daftarDownload {
   daftarDownload: Array<download>;
 }
 
-const DaftarDownload: NextPage<daftarDownload> = ({daftarDownload}) => {
+const DaftarDownload: NextPage<daftarDownload> = ({ daftarDownload }) => {
   const router = useRouter();
 
   return (
     <Menu>
       <PageTab judul="Download"
-               breadcrumb={
-                 <Breadcrumb my={{base: "5%", xl: "80px"}} mx="6%" textColor="white" pos="absolute">
-                   <Heading>Download</Heading>
-                   <BreadcrumbItem>
-                     <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
-                   </BreadcrumbItem>
-                   <BreadcrumbItem>
-                     <BreadcrumbLink href='/download'>Download</BreadcrumbLink>
-                   </BreadcrumbItem>
-                 </Breadcrumb>
-               }
-               tab={
-                 <React.Fragment>
-                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Download</Tab>
-                 </React.Fragment>
-               }>
-        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
-          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
+        breadcrumb={
+          <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
+            <Heading>Download</Heading>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/download'>Download</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        }
+        tab={
+          <React.Fragment>
+            <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">Download</Tab>
+          </React.Fragment>
+        }>
+        <TabPanel p={0} mt={{ base: "5%", xl: 0 }}>
+          <Box w={{ xl: "68vw" }} bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p="4%">
             <Text textColor="black" fontSize="2xl" fontWeight="semibold">
               Download
             </Text>
@@ -84,7 +84,7 @@ const DaftarDownload: NextPage<daftarDownload> = ({daftarDownload}) => {
                 return (
                   <Link
                     key={item.id}
-                    _hover={{textDecor: "none"}}
+                    _hover={{ textDecor: "none" }}
                     onClick={(e) => {
                       e.preventDefault();
                       router.push(`/download/${replace(item.nama_berkas)}`);
@@ -92,7 +92,7 @@ const DaftarDownload: NextPage<daftarDownload> = ({daftarDownload}) => {
                     href={`/download/${replace(item.nama_berkas)}`}
                   >
                     <Flex
-                      _hover={{bg: "teal.50"}}
+                      _hover={{ bg: "teal.50" }}
                       py="5px"
                       color="teal.500"
                       borderX="1px"
@@ -126,11 +126,44 @@ const DaftarDownload: NextPage<daftarDownload> = ({daftarDownload}) => {
                   </Link>
                 );
               })}
-            <Flex h="5px" bg="teal.500" borderBottomRadius="5px"/>
+            <Flex h="5px" bg="teal.500" borderBottomRadius="5px" />
+            <Flex
+              mt="4%"
+              p="4%"
+              bg="blue.50"
+              border="1px"
+              borderColor="blue.200"
+              borderRadius="md"
+              alignItems="center"
+              _hover={{ bg: "blue.100" }}
+            >
+              <Icon
+                color="blue.500"
+                as={FaExternalLinkAlt}
+                w="20px"
+                h="auto"
+                mr="15px"
+              />
+              <Box>
+                <Text fontWeight="semibold" color="blue.700">
+                  Alternatif Download Center
+                </Text>
+                <Link
+                  href="https://informasi-si.vercel.app/"
+                  isExternal
+                  color="blue.500"
+                  fontSize="sm"
+                  fontWeight="medium"
+                >
+                  informasi-si.vercel.app
+                  <Icon as={FaExternalLinkAlt} mx="6px" w="12px" h="auto" />
+                </Link>
+              </Box>
+            </Flex>
           </Box>
         </TabPanel>
       </PageTab>
-      <ExNav/>
+      <ExNav />
     </Menu>
   );
 };
@@ -139,7 +172,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const daftarDownload = await data();
 
   return {
-    props: {daftarDownload},
+    props: { daftarDownload },
     revalidate: 15,
   };
 };
