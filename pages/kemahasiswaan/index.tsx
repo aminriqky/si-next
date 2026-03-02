@@ -5,6 +5,7 @@ import {
   Breadcrumb,
   BreadcrumbItem,
   BreadcrumbLink,
+  Divider,
   Flex,
   Heading,
   Img,
@@ -35,19 +36,34 @@ type MahasiswaCellProps = {
 const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
   return (
     <React.Fragment>
-      <Flex flexDir={{ base: "column", xl: "row" }} mb="2%">
+      <Flex
+        flexDir={{ base: "column", xl: "row" }}
+        py="6"
+        alignItems={{ xl: "flex-start" }}
+      >
         <Img
           src={`${server}/storage/${props.logo}`}
-          borderRadius="5"
-          maxW="320px"
+          borderRadius="8"
+          maxW="280px"
           objectFit="contain"
+          mb={{ base: "4", xl: 0 }}
         />
-        <Flex ml={{ base: 0, xl: 32 }} flexDir="column" flexWrap="wrap">
-          <Text mb="10px" color={props.color} fontWeight="semibold">
+        <Flex
+          ml={{ base: 0, xl: 10 }}
+          mt={{ base: "3", xl: 0 }}
+          flexDir="column"
+          flex="1"
+        >
+          <Text
+            mb="8px"
+            color={props.color}
+            fontWeight="bold"
+            fontSize={{ base: "lg", lg: "xl" }}
+          >
             {props.children}
           </Text>
           <Box
-            color="black"
+            color="gray.700"
             fontWeight="light"
             fontSize={{ base: "xs", lg: "md" }}
           >
@@ -55,6 +71,7 @@ const MahasiswaCell: React.FC<MahasiswaCellProps> = (props) => {
           </Box>
         </Flex>
       </Flex>
+      <Divider borderColor="gray.300" />
     </React.Fragment>
   );
 };
