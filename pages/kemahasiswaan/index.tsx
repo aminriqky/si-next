@@ -86,7 +86,7 @@ const DaftarKemahasiswaan: NextPage<daftarKemahasiswaan> = ({
                tab={
                  <React.Fragment>
                    <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                     Himpunan Mahasiswa
+                     Himpunan Mahasiswa -1
                    </Tab>
                    <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
                      Organisasi Mahasiswa
