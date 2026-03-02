@@ -1,3 +1,4 @@
+// @ts-nocheck
 import type { GetServerSideProps, NextPage } from "next";
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
@@ -10,12 +11,8 @@ import {
   Icon,
   Img,
   Link,
-  Modal,
-  ModalContent,
-  ModalOverlay,
   Skeleton,
   Text,
-  useDisclosure,
   useMediaQuery,
 } from "@chakra-ui/react";
 import { SiFacebook } from "@react-icons/all-files/si/SiFacebook";
@@ -23,7 +20,6 @@ import { SiInstagram } from "@react-icons/all-files/si/SiInstagram";
 import { SiYoutube } from "@react-icons/all-files/si/SiYoutube";
 import { FcTemplate } from "@react-icons/all-files/fc/FcTemplate";
 import { FcGraduationCap } from "@react-icons/all-files/fc/FcGraduationCap";
-import { FcApprove } from "@react-icons/all-files/fc/FcApprove";
 import { FcGlobe } from "@react-icons/all-files/fc/FcGlobe";
 import { MdDeveloperBoard } from "@react-icons/all-files/md/MdDeveloperBoard";
 import { MdEmail } from "@react-icons/all-files/md/MdEmail";
@@ -32,6 +28,7 @@ import { ExternalLinkIcon } from "@chakra-ui/icons";
 import Menu from "../public/menu";
 import ExNav from "../public/exnav";
 import SlidePage from "../public/slide";
+import Loading from "../public/loading";
 import Stats from "../public/stats";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
@@ -84,37 +81,6 @@ const AgendaCell = dynamic(() => import("../public/dynamic/AgendaCell"), {
     </React.Fragment>
   ),
 });
-const KehadiranCell = dynamic(() => import("../public/dynamic/KehadiranCell"), {
-  loading: () => (
-    <React.Fragment>
-      <Flex flexDir="row">
-        <Skeleton
-          borderRadius="full"
-          boxSize="75px"
-          mr={{ base: "25px", xl: "50px" }}
-        />
-        <Skeleton
-          height="50px"
-          width={{ base: "250px", xl: "450px" }}
-          mt="15px"
-        />
-      </Flex>
-      <Divider my="10px" />
-      <Flex flexDir="row">
-        <Skeleton
-          borderRadius="full"
-          boxSize="75px"
-          mr={{ base: "25px", xl: "50px" }}
-        />
-        <Skeleton
-          height="50px"
-          width={{ base: "250px", xl: "450px" }}
-          mt="15px"
-        />
-      </Flex>
-    </React.Fragment>
-  ),
-});
 const PengumumanCell = dynamic(
   () => import("../public/dynamic/PengumumanCell"),
   {
@@ -124,39 +90,68 @@ const PengumumanCell = dynamic(
           display="flex"
           my="5px"
           height="50px"
-          width={{ xl: "450px", "2xl": "600px" }}
+          width={{ base: "100%", xl: "450px", "2xl": "600px" }}
         />
         <Divider />
         <Skeleton
           display="flex"
           my="5px"
           height="50px"
-          width={{ xl: "450px", "2xl": "600px" }}
+          width={{ base: "100%", xl: "450px", "2xl": "600px" }}
         />
         <Divider />
         <Skeleton
           display="flex"
           my="5px"
           height="50px"
-          width={{ xl: "450px", "2xl": "600px" }}
-        />
-        <Divider />
-        <Skeleton
-          display="flex"
-          my="5px"
-          height="50px"
-          width={{ xl: "450px", "2xl": "600px" }}
-        />
-        <Divider />
-        <Skeleton
-          display="flex"
-          my="5px"
-          height="50px"
-          width={{ xl: "450px", "2xl": "600px" }}
+          width={{ base: "100%", xl: "450px", "2xl": "600px" }}
         />
       </React.Fragment>
     ),
   },
+);
+
+/** Dosen card for the homepage */
+const DosenCard = ({ name, jabatan, avatar }: { name: string; jabatan: string; avatar: string }) => (
+  <Flex
+    align="center"
+    bg="white"
+    rounded="lg"
+    shadow="sm"
+    p={{ base: 3, md: 4 }}
+    _hover={{ shadow: "md", transform: "translateY(-2px)" }}
+    transition="all 0.2s"
+    w="100%"
+  >
+    <Box
+      w={{ base: "50px", md: "60px" }}
+      h={{ base: "50px", md: "60px" }}
+      borderRadius="full"
+      flexShrink={0}
+      bgSize="cover"
+      bgPosition="center"
+      bgImage={`url(${avatar})`}
+      border="2px solid"
+      borderColor="blue.100"
+    />
+    <Box ml={3} minW={0}>
+      <Text
+        fontWeight="semibold"
+        fontSize={{ base: "sm", md: "md" }}
+        noOfLines={1}
+        color="gray.800"
+      >
+        {name}
+      </Text>
+      <Text
+        fontSize={{ base: "xs", md: "sm" }}
+        color="gray.500"
+        noOfLines={1}
+      >
+        {jabatan}
+      </Text>
+    </Box>
+  </Flex>
 );
 
 interface home {
@@ -179,16 +174,11 @@ const Home: NextPage<home> = ({
   daftarInfo,
 }) => {
   const [isLargerThan1280] = useMediaQuery("(min-width: 1280px)");
-  const [isLargerThan1400] = useMediaQuery("(min-width: 1400px)");
-  const [isSmallerThan1280] = useMediaQuery("(max-width: 1279px)");
-  const { isOpen, onOpen, onClose } = useDisclosure();
   const [daftarIframe1, setDaftarIframe1] = useState(false);
-  const [daftarIframe2, setDaftarIframe2] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
     setDaftarIframe1(true);
-    setDaftarIframe2(true);
   }, []);
 
   function dots(num: number, str: string) {
@@ -199,33 +189,31 @@ const Home: NextPage<home> = ({
     }
   }
 
-  const agenda = (e: React.FormEvent) => {
+  const agendaClick = (e: React.FormEvent) => {
     e.preventDefault();
     router.push("/agenda");
   };
 
-  function getRandomIdFromObjects(array) {
-    if (array.length === 0) {
-      return null;
-    }
-    const randomIndex = Math.floor(Math.random() * array.length);
-    return array[randomIndex];
-  }
-
-  function filterKehadiran(hadir) {
-    return hadir.filter(
-      (item) =>
-        item.jabatan !== "Sekretaris Program Studi" &&
-        item.jabatan !== "Ketua Program Studi" &&
-        item.jabatan !== "Kepala Laboratorium",
+  // Guard: if backend data is unavailable, show loading component
+  if (
+    !daftarProfil?.length ||
+    !daftarBerita?.length ||
+    !daftarKehadiran?.length ||
+    !daftarSlide?.length ||
+    !daftarInfo
+  ) {
+    return (
+      <React.Fragment>
+        <Menu pageHeight="49.4vw" slide={null} />
+        <Loading fullScreen text="Memuat halaman..." />
+        <ExNav />
+      </React.Fragment>
     );
   }
 
-  const consistentRandomObject = getRandomIdFromObjects(
-    filterKehadiran(daftarKehadiran),
-  );
+  // Get up to 6 dosen for display
+  const daftarDosen = daftarKehadiran.slice(0, 6);
 
-  // @ts-ignore
   return (
     <React.Fragment>
       <Menu
@@ -246,36 +234,14 @@ const Home: NextPage<home> = ({
           })
         }
       />
-      <Modal isOpen={isOpen} onClose={onClose} isCentered>
-        <ModalOverlay />
-        <ModalContent
-          minW={{ base: 315, xl: 720 }}
-          minH={{ base: 310, xl: 540 }}
-        >
-          {isLargerThan1280 ? (
-            <iframe
-              title="Profil SI"
-              width="720"
-              height="540"
-              src="https://www.youtube.com/embed/BcQ6ZpkJsOQ?si=-UkWziGeuQRJjicZ"
-              allowFullScreen
-            />
-          ) : (
-            <iframe
-              title="Profil SI"
-              width="410"
-              height="310"
-              src="https://www.youtube.com/embed/BcQ6ZpkJsOQ?si=-UkWziGeuQRJjicZ"
-              allowFullScreen
-            />
-          )}
-        </ModalContent>
-      </Modal>
+
+      {/* === AGENDA + VIDEO + LINKS === */}
       <Flex flexDir={{ base: "column", xl: "row" }}>
-        <Flex flexDir="column">
+        {/* Agenda section */}
+        <Flex flexDir="column" flex={{ base: "auto", xl: 1 }}>
           <Button
             w="100%"
-            onClick={agenda}
+            onClick={agendaClick}
             size="md"
             borderRadius="0"
             _hover={{ bg: "blackAlpha.800" }}
@@ -286,10 +252,11 @@ const Home: NextPage<home> = ({
             <Text>AGENDA</Text>
           </Button>
           <Flex
-            flexDir={{ base: "column", xl: "row" }}
+            flexDir={{ base: "column", sm: "row", xl: "row" }}
             my={{ base: "15px", xl: 0 }}
+            flexWrap="wrap"
           >
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" flex="1" minW={{ base: "100%", sm: "50%" }}>
               {daftarAgenda[0] !== undefined && (
                 <AgendaCell
                   key={daftarAgenda[0].id}
@@ -317,7 +284,7 @@ const Home: NextPage<home> = ({
                 />
               )}
             </Flex>
-            <Flex flexDirection="column">
+            <Flex flexDirection="column" flex="1" minW={{ base: "100%", sm: "50%" }}>
               {daftarAgenda[2] !== undefined && (
                 <AgendaCell
                   key={daftarAgenda[2].id}
@@ -347,69 +314,68 @@ const Home: NextPage<home> = ({
             </Flex>
           </Flex>
         </Flex>
-        <AspectRatio minW="315">
-          <Box
-            onClick={onOpen}
-            bgImage="url(play.png)"
-            bgSize="100px"
-            bgRepeat="no-repeat"
-            width="10px"
-            bgPosition="center"
-          >
-            <AspectRatio
-              sx={{ filter: "opacity(50%)" }}
-              _hover={{ filter: "opacity(25%)" }}
-              width="100%"
-              height="100%"
-            >
-              <Img src="/yt.png" objectFit="fill" alt="yt-uinrf" />
-            </AspectRatio>
-          </Box>
+
+        {/* Video section — autoplay, muted, inline */}
+        <AspectRatio
+          ratio={16 / 9}
+          minW={{ base: "100%", xl: "400px" }}
+          maxW={{ xl: "480px" }}
+        >
+          <iframe
+            title="Profil SI"
+            src="https://www.youtube.com/embed/BcQ6ZpkJsOQ?autoplay=1&mute=1&loop=1&playlist=BcQ6ZpkJsOQ&controls=1&modestbranding=1"
+            allow="autoplay; encrypted-media"
+            allowFullScreen
+            style={{ border: 0 }}
+          />
         </AspectRatio>
-        <Flex flex="1" flexDirection="column" color="white">
-          <Box bgColor="teal.700" height="55%">
-            <Box m="10">
-              <Link
-                href="http://jurnal.radenfatah.ac.id/index.php/jusifo"
-                isExternal
-              >
-                <Flex flexDirection="row">
-                  <ExternalLinkIcon mr="2" mt="0.5" />
-                  <Text fontWeight="bold">JUSIFO</Text>
-                </Flex>
-              </Link>
-              <Text fontSize="xs">e-ISSN 2623-1662</Text>
-              <Text fontSize="xs">p-ISSN 2460-092X</Text>
-            </Box>
+
+        {/* Right sidebar links */}
+        <Flex flex={{ base: "auto", xl: 1 }} flexDirection="column" color="white">
+          <Box bgColor="teal.700" flex="1" p={{ base: 6, md: 10 }}>
+            <Link
+              href="http://jurnal.radenfatah.ac.id/index.php/jusifo"
+              isExternal
+            >
+              <Flex flexDirection="row" align="center">
+                <ExternalLinkIcon mr="2" />
+                <Text fontWeight="bold">JUSIFO</Text>
+              </Flex>
+            </Link>
+            <Text fontSize="xs" mt={1}>e-ISSN 2623-1662</Text>
+            <Text fontSize="xs">p-ISSN 2460-092X</Text>
           </Box>
-          <Box bgColor="teal.600" height="45%">
-            <Box mx="10" my="8">
-              <Link href="http://e-skripsi.radenfatah.ac.id/" isExternal>
-                <Flex flexDirection="row">
-                  <ExternalLinkIcon mr="2" mt="0.5" />
-                  <Text fontWeight="semibold">
-                    Sistem Informasi Bina Skripsi
-                  </Text>
-                </Flex>
-              </Link>
-              <Link href="https://silayak.radenfatah.ac.id/" isExternal>
-                <Flex flexDirection="row">
-                  <ExternalLinkIcon mr="2" mt="0.5" />
-                  <Text fontWeight="semibold">
-                    Sistem Informasi Layanan Akademik Mahasiswa
-                  </Text>
-                </Flex>
-              </Link>
-            </Box>
+          <Box bgColor="teal.600" flex="1" p={{ base: 6, md: 10 }}>
+            <Link href="http://e-skripsi.radenfatah.ac.id/" isExternal>
+              <Flex flexDirection="row" align="center" mb={2}>
+                <ExternalLinkIcon mr="2" />
+                <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>
+                  Sistem Informasi Bina Skripsi
+                </Text>
+              </Flex>
+            </Link>
+            <Link href="https://silayak.radenfatah.ac.id/" isExternal>
+              <Flex flexDirection="row" align="center">
+                <ExternalLinkIcon mr="2" />
+                <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>
+                  Sistem Informasi Layanan Akademik
+                </Text>
+              </Flex>
+            </Link>
           </Box>
         </Flex>
       </Flex>
+
       <Divider />
-      <Box mx="8%" p="4%">
+
+      {/* === PROFIL SECTION === */}
+      <Box mx={{ base: "5%", md: "8%" }} py={{ base: "6%", md: "4%" }}>
         <Box fontSize={{ base: "xs", lg: "md" }}>
           <div dangerouslySetInnerHTML={{ __html: daftarProfil[6].text }} />
         </Box>
       </Box>
+
+      {/* === BERITA === */}
       <Berita
         gambar1={`${server}/storage/${daftarBerita[0].thumbnail}`}
         judul1={dots(65, daftarBerita[0].judul)}
@@ -432,82 +398,67 @@ const Home: NextPage<home> = ({
         detail5={dots(670, daftarBerita[4].detail)}
         dylink5={`/berita/${replace(daftarBerita[4].judul)}`}
       />
+
       <Divider />
+
+      {/* === KONTAK + PENGUMUMAN + PENDAFTARAN === */}
       <Flex
         flexDir={{ base: "column", xl: "row" }}
-        py="25"
+        py={{ base: 6, md: "25px" }}
         justifyContent="center"
-        px={{ base: 25, xl: 125 }}
+        px={{ base: "5%", md: "5%", xl: "8%" }}
         bg="gray.100"
+        gap={{ base: 4, xl: 0 }}
       >
+        {/* Kontak & Sosial Media */}
         <Flex
-          my={{ base: 25 }}
-          px="10"
+          my={{ base: 2, xl: "25px" }}
+          px={{ base: 6, md: 10 }}
+          py={{ base: 6, md: 0 }}
           flexDir="column"
           bgColor="blue.600"
-          width={{ base: "100%", xl: "300px" }}
+          width={{ base: "100%", xl: "280px" }}
+          flexShrink={0}
+          rounded={{ base: "lg", xl: "none" }}
         >
-          <Text color="white" fontWeight="bold" pt="8" mb="8">
+          <Text color="white" fontWeight="bold" pt="8" mb="8" fontSize={{ base: "md", md: "lg" }}>
             Kontak & Sosial Media
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={SiFacebook} w="25px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href={daftarInfo.Info_1 ?? ""}
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_1 ?? ""} isExternal>
               Facebook
             </Link>
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={SiInstagram} w="25px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href={daftarInfo.Info_2 ?? ""}
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_2 ?? ""} isExternal>
               Instagram
             </Link>
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={MdPhone} w="25px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href={`tel:${daftarInfo.Info_3 ?? ""}`}
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href={`tel:${daftarInfo.Info_3 ?? ""}`} isExternal>
               Telepon
             </Link>
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={MdEmail} w="25px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href={`mailto:${daftarInfo.Info_4 ?? ""}`}
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href={`mailto:${daftarInfo.Info_4 ?? ""}`} isExternal>
               E-Mail
             </Link>
           </Text>
           <Text fontSize="sm" color="white" pb="12">
             <Icon as={SiYoutube} w="25px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href={daftarInfo.Info_5 ?? ""}
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_5 ?? ""} isExternal>
               YouTube
             </Link>
           </Text>
         </Flex>
-        <Flex flexDir="column" my="25" mx={{ base: 25, xl: 75 }}>
-          <Text fontSize="24" py="2%" fontWeight="medium">
+
+        {/* Pengumuman */}
+        <Flex flexDir="column" my={{ base: 2, xl: "25px" }} mx={{ base: 0, xl: "5%" }} flex={1} minW={0}>
+          <Text fontSize={{ base: "20", md: "24" }} py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="34px" h="auto" />
             &thinsp;
             <Link
@@ -522,7 +473,7 @@ const Home: NextPage<home> = ({
               PENGUMUMAN
             </Link>
           </Text>
-          <Flex flexDir="column" width={{ xl: "450px", "2xl": "600px" }}>
+          <Flex flexDir="column" width="100%" maxW={{ xl: "450px", "2xl": "600px" }}>
             {daftarPengumuman[0] !== undefined && (
               <React.Fragment>
                 <PengumumanCell
@@ -587,186 +538,107 @@ const Home: NextPage<home> = ({
             )}
           </Flex>
         </Flex>
+
+        {/* Info Pendaftaran */}
         <Flex
-          my={{ base: 25 }}
-          px="10"
+          my={{ base: 2, xl: "25px" }}
+          px={{ base: 6, md: 10 }}
+          py={{ base: 6, md: 0 }}
           flexDir="column"
-          width={{ base: "100%", xl: "300px" }}
+          width={{ base: "100%", xl: "280px" }}
           border="solid lightgray 1px"
+          flexShrink={0}
+          rounded={{ base: "lg", xl: "none" }}
+          bg="white"
         >
-          <Text color="gray" fontWeight="bold" pt="8" mb="12">
+          <Text color="gray" fontWeight="bold" pt="8" mb="12" fontSize={{ base: "md", md: "lg" }}>
             INFO PENDAFTARAN
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href="https://snpmb.bppp.kemdikbud.go.id/"
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href="https://snpmb.bppp.kemdikbud.go.id/" isExternal>
               SNPMB
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href="https://span.ptkin.ac.id/"
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href="https://span.ptkin.ac.id/" isExternal>
               SPAN-PTKIN
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href="https://um-ptkin.ac.id/"
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href="https://um-ptkin.ac.id/" isExternal>
               UM-PTKIN
             </Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="12">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              href="https://um-mandiri.radenfatah.ac.id/"
-              isExternal
-            >
+            <Link verticalAlign="top" fontWeight="semibold" href="https://um-mandiri.radenfatah.ac.id/" isExternal>
               UM-MANDIRI
             </Link>
           </Text>
         </Flex>
       </Flex>
+
       <Divider />
+
+      {/* === DAFTAR DOSEN + STATS === */}
       <Flex
         bg="gray.50"
         flexDirection={{ base: "column", xl: "row" }}
         justifyContent="center"
-        py="25"
-        px={{ base: 25, xl: 125 }}
+        py={{ base: 6, md: "25px" }}
+        px={{ base: "5%", md: "5%", xl: "8%" }}
+        gap={{ base: 6, xl: 8 }}
       >
-        <Flex
-          flexDir="column"
-          w={{ base: "95%", xl: "260px" }}
-          my="4"
-          mr={{ base: 0, xl: 13 }}
-        >
-          {daftarIframe2 && (
-            <iframe
-              title="Jadwal Sholat"
-              style={{ height: "281px" }}
-              loading="lazy"
-              scrolling="no"
-              src="https://timesprayer.com/widgets.php?frame=2&amp;lang=en&amp;name=palembang&amp;avachang=true&amp;time=0"
-            />
-          )}
-        </Flex>
-        <Flex flexDir="column" ml={{ base: 0, xl: 25, "2xl": 50 }}>
-          <Text fontSize="20" fontWeight="medium">
-            <Icon as={FcApprove} w="30px" h="auto" />
-            &thinsp;
-            <Link
-              verticalAlign="top"
-              fontWeight="semibold"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/kehadiran");
-              }}
-              href={"/kehadiran"}
-            >
-              KEHADIRAN
-            </Link>
+        {/* Daftar Dosen */}
+        <Flex flexDir="column" flex={1}>
+          <Text fontSize={{ base: "18", md: "20" }} fontWeight="semibold" mb={4}>
+            👩‍🏫 DAFTAR DOSEN
           </Text>
-          <Flex flexDir="row" flexWrap="wrap">
-            {daftarKehadiran !== null &&
-              daftarKehadiran
-                .filter((item) => item.jabatan === "Ketua Program Studi")
-                .map((item) => {
-                  return (
-                    <KehadiranCell
-                      key={item.id}
-                      id={item.id}
-                      gambar={`${server}/storage/${item.avatar}`}
-                      judul={item.name}
-                      deskripsi={item.jabatan}
-                      hadir={item.hadir}
-                      dylink={`/kehadiran/${replace(item.name)}`}
-                    />
-                  );
-                })}
-            {daftarKehadiran !== null &&
-              daftarKehadiran
-                .filter((item) => item.jabatan === "Sekretaris Program Studi")
-                .map((item) => {
-                  return (
-                    <KehadiranCell
-                      key={item.id}
-                      id={item.id}
-                      gambar={`${server}/storage/${item.avatar}`}
-                      judul={item.name}
-                      deskripsi={item.jabatan}
-                      hadir={item.hadir}
-                      dylink={`/kehadiran/${replace(item.name)}`}
-                    />
-                  );
-                })}
-            {daftarKehadiran !== null &&
-              daftarKehadiran
-                .filter((item) => item.jabatan === "Kepala Laboratorium")
-                .map((item) => {
-                  return (
-                    <KehadiranCell
-                      key={item.id}
-                      id={item.id}
-                      gambar={`${server}/storage/${item.avatar}`}
-                      judul={item.name}
-                      deskripsi={item.jabatan}
-                      hadir={item.hadir}
-                      dylink={`/kehadiran/${replace(item.name)}`}
-                    />
-                  );
-                })}
-            {isSmallerThan1280 && (
-              <KehadiranCell
-                id={consistentRandomObject.id}
-                gambar={`${server}/storage/${consistentRandomObject.avatar}`}
-                judul={consistentRandomObject.name}
-                deskripsi={consistentRandomObject.jabatan}
-                hadir={consistentRandomObject.hadir}
-                dylink={`/kehadiran/${replace(consistentRandomObject.name)}`}
+          <Flex
+            flexDir="column"
+            gap={3}
+          >
+            {daftarDosen.map((item) => (
+              <DosenCard
+                key={item.id}
+                name={item.name}
+                jabatan={item.jabatan}
+                avatar={`${server}/storage/${item.avatar}`}
               />
-            )}
-            {isLargerThan1400 && (
-              <KehadiranCell
-                id={consistentRandomObject.id}
-                gambar={`${server}/storage/${consistentRandomObject.avatar}`}
-                judul={consistentRandomObject.name}
-                deskripsi={consistentRandomObject.jabatan}
-                hadir={consistentRandomObject.hadir}
-                dylink={`/kehadiran/${replace(consistentRandomObject.name)}`}
-              />
-            )}
+            ))}
           </Flex>
+          <Button
+            mt={4}
+            size="sm"
+            variant="outline"
+            colorScheme="blue"
+            onClick={() => router.push("/profil")}
+            alignSelf="flex-start"
+          >
+            Lihat Semua Dosen →
+          </Button>
         </Flex>
-        <Flex my="4" ml={{ base: 0, xl: 75 }}>
+
+        {/* Stats */}
+        <Flex my={{ base: 0, xl: 4 }} flexShrink={0}>
           <Stats />
         </Flex>
       </Flex>
+
+      {/* === LOKASI === */}
       <Flex flexDir="column">
         <Flex
           flexDir="row"
-          mt={{ base: "6vw", xl: "1.5vw" }}
-          ml={{ base: "3vw", xl: "1.5vw" }}
+          mt={{ base: "24px", xl: "1.5vw" }}
+          ml={{ base: "5%", xl: "1.5vw" }}
+          align="center"
         >
           <Icon as={FcGlobe} w="34px" h="auto" />
           &thinsp;
-          <Text fontSize="24" fontWeight="semibold">
+          <Text fontSize={{ base: "20", md: "24" }} fontWeight="semibold">
             LOKASI
           </Text>
         </Flex>
@@ -800,13 +672,13 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      daftarAgenda,
-      daftarPengumuman,
-      daftarKehadiran,
-      daftarBerita,
-      daftarSlide,
-      daftarProfil,
-      daftarInfo,
+      daftarAgenda: daftarAgenda ?? [],
+      daftarPengumuman: daftarPengumuman ?? [],
+      daftarKehadiran: daftarKehadiran ?? [],
+      daftarBerita: daftarBerita ?? [],
+      daftarSlide: daftarSlide ?? [],
+      daftarProfil: daftarProfil ?? [],
+      daftarInfo: daftarInfo ?? null,
     },
   };
 };
