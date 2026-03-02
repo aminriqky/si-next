@@ -1,19 +1,19 @@
-import type {GetStaticProps, NextPage} from "next";
+import type { GetStaticProps, NextPage } from "next";
 import React from "react";
-import {Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Heading, Tab, TabPanel} from "@chakra-ui/react";
+import { Box, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Heading, Tab, TabPanel } from "@chakra-ui/react";
 import DataTable from "../public/datatable";
 import ExNav from "../public/exnav";
 import Menu from "../public/menu";
-import {profil} from "./api/profil";
-import {penelitian} from "./api/penelitian";
-import {haki} from "./api/haki";
-import type {haki as hakiList, penelitian as penelitianList, profil as profilList} from "../public/types";
+import { profil } from "./api/profil";
+import { penelitian } from "./api/penelitian";
+import { haki } from "./api/haki";
+import type { haki as hakiList, penelitian as penelitianList, profil as profilList } from "../public/types";
 import dynamic from "next/dynamic";
-import {server} from "../config";
+import { server } from "../config";
 
 const PageTab = dynamic(
   () => import('../public/pagetab'),
-  {ssr: false}
+  { ssr: false }
 )
 
 interface penelitian {
@@ -22,10 +22,10 @@ interface penelitian {
   daftarPenelitian: Array<penelitianList>;
 }
 
-const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenelitian}) => {
+const Penelitian: NextPage<penelitian> = ({ daftarProfil, daftarHaki, daftarPenelitian }) => {
   const reorderKeys = (obj) => {
-    const {name, ...rest} = obj;
-    return {name, ...rest};
+    const { name, ...rest } = obj;
+    return { name, ...rest };
   };
 
   const reorderedData1 = daftarPenelitian.map(reorderKeys);
@@ -98,7 +98,7 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
           }
 
           if (Array.isArray(fileData) && fileData.length > 0) {
-            const {download_link, original_name} = fileData[0];
+            const { download_link, original_name } = fileData[0];
 
             return (
               <Button size="xs" onClick={() => window.open(`${server}/storage/${download_link}`, '_blank')}>
@@ -151,7 +151,7 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
           }
 
           if (Array.isArray(fileData) && fileData.length > 0) {
-            const {download_link, original_name} = fileData[0];
+            const { download_link, original_name } = fileData[0];
 
             return (
               <Button size="xs" onClick={() => window.open(`${server}/storage/${download_link}`, '_blank')}>
@@ -169,7 +169,7 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
     return {
       name: col,
       label: col.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // Capitalize and remove underscores
-      options: hiddenColumn ? hiddenColumn.options : {display: true},
+      options: hiddenColumn ? hiddenColumn.options : { display: true },
     };
   });
 
@@ -178,7 +178,7 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
     return {
       name: col,
       label: col.replace(/_/g, " ").replace(/\b\w/g, (c) => c.toUpperCase()), // Capitalize and remove underscores
-      options: hiddenColumn ? hiddenColumn.options : {display: true},
+      options: hiddenColumn ? hiddenColumn.options : { display: true },
     };
   });
 
@@ -188,53 +188,81 @@ const Penelitian: NextPage<penelitian> = ({daftarProfil, daftarHaki, daftarPenel
   return (
     <Menu>
       <PageTab judul="Penelitian"
-               breadcrumb={
-                 <Breadcrumb my={{base: "5%", xl: "80px"}} mx="6%" textColor="white" pos="absolute">
-                   <Heading>Penelitian</Heading>
-                   <BreadcrumbItem>
-                     <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
-                   </BreadcrumbItem>
-                   <BreadcrumbItem>
-                     <BreadcrumbLink href='/penelitian'>Penelitian</BreadcrumbLink>
-                   </BreadcrumbItem>
-                 </Breadcrumb>
-               }
-               tab={
-                 <React.Fragment>
-                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                     Grup Penelitian
-                   </Tab>
-                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                     Hasil Penelitian
-                   </Tab>
-                   <Tab w="full" justifyContent="flex-start" rounded="md" mt="0.25vw">
-                     HaKI
-                   </Tab>
-                 </React.Fragment>
-               }>
-        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
-          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
-            <Box fontSize={{base: "xs", lg: "md"}}>
-              <div dangerouslySetInnerHTML={{__html: daftarProfil[9].text}}/>
+        breadcrumb={
+          <Breadcrumb my={{ base: "5%", xl: "80px" }} mx="6%" textColor="white" pos="absolute">
+            <Heading fontSize={{ base: "xl", md: "2xl", lg: "3xl" }}>Penelitian</Heading>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/'>Beranda</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbItem>
+              <BreadcrumbLink href='/penelitian'>Penelitian</BreadcrumbLink>
+            </BreadcrumbItem>
+          </Breadcrumb>
+        }
+        tab={
+          <React.Fragment>
+            <Tab
+              w={{ base: "auto", xl: "full" }}
+              whiteSpace="nowrap"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+              fontSize={{ base: "xs", sm: "sm", md: "md" }}
+              px={{ base: 3, md: 4 }}
+            >
+              Grup Penelitian
+            </Tab>
+            <Tab
+              w={{ base: "auto", xl: "full" }}
+              whiteSpace="nowrap"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+              fontSize={{ base: "xs", sm: "sm", md: "md" }}
+              px={{ base: 3, md: 4 }}
+            >
+              Hasil Penelitian
+            </Tab>
+            <Tab
+              w={{ base: "auto", xl: "full" }}
+              whiteSpace="nowrap"
+              justifyContent="flex-start"
+              rounded="md"
+              mt="0.25vw"
+              fontSize={{ base: "xs", sm: "sm", md: "md" }}
+              px={{ base: 3, md: 4 }}
+            >
+              HaKI
+            </Tab>
+          </React.Fragment>
+        }>
+        <TabPanel p={0} mt={{ base: 4, xl: 0 }}>
+          <Box w="100%" bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p={{ base: "4%", md: "4%" }} overflowX="auto">
+            <Box fontSize={{ base: "xs", lg: "md" }}>
+              <div dangerouslySetInnerHTML={{ __html: daftarProfil[9].text }} />
             </Box>
           </Box>
         </TabPanel>
-        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
-          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
-            <Box fontSize={{base: "xs", lg: "md"}}>
-              <div dangerouslySetInnerHTML={{__html: daftarProfil[10].text}}/>
-              <DataTable title="Hasil Penelitian" columns={kolomTerformat1} data={peneliti}/>
+        <TabPanel p={0} mt={{ base: 4, xl: 0 }}>
+          <Box w="100%" bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p={{ base: "4%", md: "4%" }} overflowX="auto">
+            <Box fontSize={{ base: "xs", lg: "md" }}>
+              <div dangerouslySetInnerHTML={{ __html: daftarProfil[10].text }} />
+              <Box overflowX="auto" mx={{ base: "-2%", md: 0 }}>
+                <DataTable title="Hasil Penelitian" columns={kolomTerformat1} data={peneliti} />
+              </Box>
             </Box>
           </Box>
         </TabPanel>
-        <TabPanel p={0} mt={{base: "5%", xl: 0}}>
-          <Box w={{xl: "68vw"}} bg="white" opacity="0.9" zIndex="999" ml={{xl: "4%"}} p="4%">
-            <div dangerouslySetInnerHTML={{__html: daftarProfil[4].text}}/>
-            <DataTable title="Hak Kekayaan Intelektual" columns={kolomTerformat2} data={haki}/>
+        <TabPanel p={0} mt={{ base: 4, xl: 0 }}>
+          <Box w="100%" bg="white" opacity="0.9" zIndex="999" ml={{ xl: "4%" }} p={{ base: "4%", md: "4%" }} overflowX="auto">
+            <div dangerouslySetInnerHTML={{ __html: daftarProfil[4].text }} />
+            <Box overflowX="auto" mx={{ base: "-2%", md: 0 }}>
+              <DataTable title="Hak Kekayaan Intelektual" columns={kolomTerformat2} data={haki} />
+            </Box>
           </Box>
         </TabPanel>
       </PageTab>
-      <ExNav/>
+      <ExNav />
     </Menu>
   );
 };
@@ -245,7 +273,7 @@ export const getStaticProps: GetStaticProps = async () => {
   const daftarPenelitian = await penelitian();
 
   return {
-    props: {daftarProfil, daftarHaki, daftarPenelitian},
+    props: { daftarProfil, daftarHaki, daftarPenelitian },
     revalidate: 15,
   };
 };
