@@ -33,7 +33,7 @@ import Stats from "../public/stats";
 import dayjs from "dayjs";
 import "dayjs/locale/id";
 import dynamic from "next/dynamic";
-import { agenda } from "./api/agenda";
+// import { agenda } from "./api/agenda"; // BAGIAN AGENDA DIKOMENTARI
 import { pengumuman } from "./api/pengumuman";
 import { kehadiran } from "./api/kehadiran";
 import { berita } from "./api/berita";
@@ -53,6 +53,9 @@ import type {
 } from "../public/types";
 
 const Berita = dynamic(() => import("../public/berita"));
+
+/* BAGIAN AGENDA DIKOMENTARI */
+/*
 const AgendaCell = dynamic(() => import("../public/dynamic/AgendaCell"), {
   loading: () => (
     <React.Fragment>
@@ -81,6 +84,8 @@ const AgendaCell = dynamic(() => import("../public/dynamic/AgendaCell"), {
     </React.Fragment>
   ),
 });
+*/
+
 const PengumumanCell = dynamic(
   () => import("../public/dynamic/PengumumanCell"),
   {
@@ -111,7 +116,6 @@ const PengumumanCell = dynamic(
   },
 );
 
-/** Dosen card for the homepage */
 const DosenCard = ({ name, jabatan, avatar }: { name: string; jabatan: string; avatar: string }) => (
   <Flex
     align="center"
@@ -135,19 +139,10 @@ const DosenCard = ({ name, jabatan, avatar }: { name: string; jabatan: string; a
       borderColor="blue.100"
     />
     <Box ml={3} minW={0}>
-      <Text
-        fontWeight="semibold"
-        fontSize={{ base: "sm", md: "md" }}
-        noOfLines={1}
-        color="gray.800"
-      >
+      <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }} noOfLines={1} color="gray.800">
         {name}
       </Text>
-      <Text
-        fontSize={{ base: "xs", md: "sm" }}
-        color="gray.500"
-        noOfLines={1}
-      >
+      <Text fontSize={{ base: "xs", md: "sm" }} color="gray.500" noOfLines={1}>
         {jabatan}
       </Text>
     </Box>
@@ -189,12 +184,14 @@ const Home: NextPage<home> = ({
     }
   }
 
+  /* BAGIAN AGENDA DIKOMENTARI */
+  /*
   const agendaClick = (e: React.FormEvent) => {
     e.preventDefault();
     router.push("/agenda");
   };
+  */
 
-  // Guard: if backend data is unavailable, show loading component
   if (
     !daftarProfil?.length ||
     !daftarBerita?.length ||
@@ -211,7 +208,6 @@ const Home: NextPage<home> = ({
     );
   }
 
-  // Get up to 6 dosen for display
   const daftarDosen = daftarKehadiran.slice(0, 6);
 
   return (
@@ -235,9 +231,9 @@ const Home: NextPage<home> = ({
         }
       />
 
-      {/* === AGENDA + VIDEO + LINKS === */}
       <Flex flexDir={{ base: "column", xl: "row" }}>
-        {/* Agenda section */}
+        
+        {/* BAGIAN AGENDA DIKOMENTARI 
         <Flex flexDir="column" flex={{ base: "auto", xl: 1 }}>
           <Button
             w="100%"
@@ -260,10 +256,7 @@ const Home: NextPage<home> = ({
               {daftarAgenda[0] !== undefined && (
                 <AgendaCell
                   key={daftarAgenda[0].id}
-                  hari={dayjs(daftarAgenda[0].waktu)
-                    .locale("id")
-                    .format("ddd")
-                    .toUpperCase()}
+                  hari={dayjs(daftarAgenda[0].waktu).locale("id").format("ddd").toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[0].waktu).format("DD/MM")}
                   judul={dots(28, daftarAgenda[0].judul)}
                   tempat={dots(18, daftarAgenda[0].tempat)}
@@ -273,10 +266,7 @@ const Home: NextPage<home> = ({
               {daftarAgenda[1] !== undefined && (
                 <AgendaCell
                   key={daftarAgenda[1].id}
-                  hari={dayjs(daftarAgenda[1].waktu)
-                    .locale("id")
-                    .format("ddd")
-                    .toUpperCase()}
+                  hari={dayjs(daftarAgenda[1].waktu).locale("id").format("ddd").toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[1].waktu).format("DD/MM")}
                   judul={dots(28, daftarAgenda[1].judul)}
                   tempat={dots(18, daftarAgenda[1].tempat)}
@@ -288,10 +278,7 @@ const Home: NextPage<home> = ({
               {daftarAgenda[2] !== undefined && (
                 <AgendaCell
                   key={daftarAgenda[2].id}
-                  hari={dayjs(daftarAgenda[2].waktu)
-                    .locale("id")
-                    .format("ddd")
-                    .toUpperCase()}
+                  hari={dayjs(daftarAgenda[2].waktu).locale("id").format("ddd").toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[2].waktu).format("DD/MM")}
                   judul={dots(28, daftarAgenda[2].judul)}
                   tempat={dots(18, daftarAgenda[2].tempat)}
@@ -301,10 +288,7 @@ const Home: NextPage<home> = ({
               {daftarAgenda[3] !== undefined && (
                 <AgendaCell
                   key={daftarAgenda[3].id}
-                  hari={dayjs(daftarAgenda[3].waktu)
-                    .locale("id")
-                    .format("ddd")
-                    .toUpperCase()}
+                  hari={dayjs(daftarAgenda[3].waktu).locale("id").format("ddd").toUpperCase()}
                   hariBulan={dayjs(daftarAgenda[3].waktu).format("DD/MM")}
                   judul={dots(28, daftarAgenda[3].judul)}
                   tempat={dots(18, daftarAgenda[3].tempat)}
@@ -314,13 +298,9 @@ const Home: NextPage<home> = ({
             </Flex>
           </Flex>
         </Flex>
+        */}
 
-        {/* Video section — autoplay, muted, inline */}
-        <AspectRatio
-          ratio={16 / 9}
-          minW={{ base: "100%", xl: "400px" }}
-          maxW={{ xl: "480px" }}
-        >
+        <AspectRatio ratio={16 / 9} minW={{ base: "100%", xl: "400px" }} flex={{ base: "auto", xl: 2 }}>
           <iframe
             title="Profil SI"
             src="https://www.youtube.com/embed/BcQ6ZpkJsOQ?autoplay=1&mute=1&loop=1&playlist=BcQ6ZpkJsOQ&controls=1&modestbranding=1"
@@ -330,13 +310,9 @@ const Home: NextPage<home> = ({
           />
         </AspectRatio>
 
-        {/* Right sidebar links */}
         <Flex flex={{ base: "auto", xl: 1 }} flexDirection="column" color="white">
           <Box bgColor="teal.700" flex="1" p={{ base: 6, md: 10 }}>
-            <Link
-              href="http://jurnal.radenfatah.ac.id/index.php/jusifo"
-              isExternal
-            >
+            <Link href="http://jurnal.radenfatah.ac.id/index.php/jusifo" isExternal>
               <Flex flexDirection="row" align="center">
                 <ExternalLinkIcon mr="2" />
                 <Text fontWeight="bold">JUSIFO</Text>
@@ -349,17 +325,13 @@ const Home: NextPage<home> = ({
             <Link href="http://e-skripsi.radenfatah.ac.id/" isExternal>
               <Flex flexDirection="row" align="center" mb={2}>
                 <ExternalLinkIcon mr="2" />
-                <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>
-                  Sistem Informasi Bina Skripsi
-                </Text>
+                <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>Sistem Informasi Bina Skripsi</Text>
               </Flex>
             </Link>
             <Link href="https://silayak.radenfatah.ac.id/" isExternal>
               <Flex flexDirection="row" align="center">
                 <ExternalLinkIcon mr="2" />
-                <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>
-                  Sistem Informasi Layanan Akademik
-                </Text>
+                <Text fontWeight="semibold" fontSize={{ base: "sm", md: "md" }}>Sistem Informasi Layanan Akademik</Text>
               </Flex>
             </Link>
           </Box>
@@ -368,14 +340,12 @@ const Home: NextPage<home> = ({
 
       <Divider />
 
-      {/* === PROFIL SECTION === */}
       <Box mx={{ base: "5%", md: "8%" }} py={{ base: "6%", md: "4%" }}>
         <Box fontSize={{ base: "xs", lg: "md" }}>
           <div dangerouslySetInnerHTML={{ __html: daftarProfil[6].text }} />
         </Box>
       </Box>
 
-      {/* === BERITA === */}
       <Berita
         gambar1={`${server}/storage/${daftarBerita[0].thumbnail}`}
         judul1={dots(65, daftarBerita[0].judul)}
@@ -401,7 +371,6 @@ const Home: NextPage<home> = ({
 
       <Divider />
 
-      {/* === KONTAK + PENGUMUMAN + PENDAFTARAN === */}
       <Flex
         flexDir={{ base: "column", xl: "row" }}
         py={{ base: 6, md: "25px" }}
@@ -410,7 +379,6 @@ const Home: NextPage<home> = ({
         bg="gray.100"
         gap={{ base: 4, xl: 0 }}
       >
-        {/* Kontak & Sosial Media */}
         <Flex
           my={{ base: 2, xl: "25px" }}
           px={{ base: 6, md: 10 }}
@@ -421,125 +389,56 @@ const Home: NextPage<home> = ({
           flexShrink={0}
           rounded={{ base: "lg", xl: "none" }}
         >
-          <Text color="white" fontWeight="bold" pt="8" mb="8" fontSize={{ base: "md", md: "lg" }}>
-            Kontak & Sosial Media
-          </Text>
+          <Text color="white" fontWeight="bold" pt="8" mb="8" fontSize={{ base: "md", md: "lg" }}>Kontak & Sosial Media</Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={SiFacebook} w="25px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_1 ?? ""} isExternal>
-              Facebook
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_1 ?? ""} isExternal>Facebook</Link>
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={SiInstagram} w="25px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_2 ?? ""} isExternal>
-              Instagram
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_2 ?? ""} isExternal>Instagram</Link>
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={MdPhone} w="25px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href={`tel:${daftarInfo.Info_3 ?? ""}`} isExternal>
-              Telepon
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href={`tel:${daftarInfo.Info_3 ?? ""}`} isExternal>Telepon</Link>
           </Text>
           <Text fontSize="sm" color="white" pb="2">
             <Icon as={MdEmail} w="25px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href={`mailto:${daftarInfo.Info_4 ?? ""}`} isExternal>
-              E-Mail
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href={`mailto:${daftarInfo.Info_4 ?? ""}`} isExternal>E-Mail</Link>
           </Text>
           <Text fontSize="sm" color="white" pb="12">
             <Icon as={SiYoutube} w="25px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_5 ?? ""} isExternal>
-              YouTube
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href={daftarInfo.Info_5 ?? ""} isExternal>YouTube</Link>
           </Text>
         </Flex>
 
-        {/* Pengumuman */}
         <Flex flexDir="column" my={{ base: 2, xl: "25px" }} mx={{ base: 0, xl: "5%" }} flex={1} minW={0}>
           <Text fontSize={{ base: "20", md: "24" }} py="2%" fontWeight="medium">
             <Icon as={FcTemplate} w="34px" h="auto" />
-            &thinsp;
+             
             <Link
               verticalAlign="top"
               fontWeight="semibold"
-              onClick={(e) => {
-                e.preventDefault();
-                router.push("/pengumuman");
-              }}
+              onClick={(e) => { e.preventDefault(); router.push("/pengumuman"); }}
               href={"/pengumuman"}
             >
               PENGUMUMAN
             </Link>
           </Text>
           <Flex flexDir="column" width="100%" maxW={{ xl: "450px", "2xl": "600px" }}>
-            {daftarPengumuman[0] !== undefined && (
-              <React.Fragment>
+            {daftarPengumuman.slice(0, 5).map((p, i) => (
+              <React.Fragment key={p.id}>
                 <PengumumanCell
-                  key={daftarPengumuman[0].id}
-                  judul={daftarPengumuman[0].judul}
-                  tanggal={dayjs(daftarPengumuman[0].updated_at)
-                    .locale("id")
-                    .format("dddd, DD MMMM YYYY")}
-                  dylink={`/pengumuman/${replace(daftarPengumuman[0].judul)}`}
+                  judul={p.judul}
+                  tanggal={dayjs(p.updated_at).locale("id").format("dddd, DD MMMM YYYY")}
+                  dylink={`/pengumuman/${replace(p.judul)}`}
                 />
-                <Divider />
+                {i < 4 && <Divider />}
               </React.Fragment>
-            )}
-            {daftarPengumuman[1] !== undefined && (
-              <React.Fragment>
-                <PengumumanCell
-                  key={daftarPengumuman[1].id}
-                  judul={daftarPengumuman[1].judul}
-                  tanggal={dayjs(daftarPengumuman[1].updated_at)
-                    .locale("id")
-                    .format("dddd, DD MMMM YYYY")}
-                  dylink={`/pengumuman/${replace(daftarPengumuman[1].judul)}`}
-                />
-                <Divider />
-              </React.Fragment>
-            )}
-            {daftarPengumuman[2] !== undefined && (
-              <React.Fragment>
-                <PengumumanCell
-                  key={daftarPengumuman[2].id}
-                  judul={daftarPengumuman[2].judul}
-                  tanggal={dayjs(daftarPengumuman[2].updated_at)
-                    .locale("id")
-                    .format("dddd, DD MMMM YYYY")}
-                  dylink={`/pengumuman/${replace(daftarPengumuman[2].judul)}`}
-                />
-                <Divider />
-              </React.Fragment>
-            )}
-            {daftarPengumuman[3] !== undefined && (
-              <React.Fragment>
-                <PengumumanCell
-                  key={daftarPengumuman[3].id}
-                  judul={daftarPengumuman[3].judul}
-                  tanggal={dayjs(daftarPengumuman[3].updated_at)
-                    .locale("id")
-                    .format("dddd, DD MMMM YYYY")}
-                  dylink={`/pengumuman/${replace(daftarPengumuman[3].judul)}`}
-                />
-                <Divider />
-              </React.Fragment>
-            )}
-            {daftarPengumuman[4] !== undefined && (
-              <PengumumanCell
-                key={daftarPengumuman[4].id}
-                judul={daftarPengumuman[4].judul}
-                tanggal={dayjs(daftarPengumuman[4].updated_at)
-                  .locale("id")
-                  .format("dddd, DD MMMM YYYY")}
-                dylink={`/pengumuman/${replace(daftarPengumuman[4].judul)}`}
-              />
-            )}
+            ))}
           </Flex>
         </Flex>
 
-        {/* Info Pendaftaran */}
         <Flex
           my={{ base: 2, xl: "25px" }}
           px={{ base: 6, md: 10 }}
@@ -551,39 +450,28 @@ const Home: NextPage<home> = ({
           rounded={{ base: "lg", xl: "none" }}
           bg="white"
         >
-          <Text color="gray" fontWeight="bold" pt="8" mb="12" fontSize={{ base: "md", md: "lg" }}>
-            INFO PENDAFTARAN
+          <Text color="gray" fontWeight="bold" pt="8" mb="12" fontSize={{ base: "md", md: "lg" }}>INFO PENDAFTARAN</Text>
+          <Text fontSize="sm" color="gray" pb="2">
+            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
+            <Link verticalAlign="top" fontWeight="semibold" href="https://snpmb.bppp.kemdikbud.go.id/" isExternal>SNPMB</Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href="https://snpmb.bppp.kemdikbud.go.id/" isExternal>
-              SNPMB
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href="https://span.ptkin.ac.id/" isExternal>SPAN-PTKIN</Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="2">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href="https://span.ptkin.ac.id/" isExternal>
-              SPAN-PTKIN
-            </Link>
-          </Text>
-          <Text fontSize="sm" color="gray" pb="2">
-            <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href="https://um-ptkin.ac.id/" isExternal>
-              UM-PTKIN
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href="https://um-ptkin.ac.id/" isExternal>UM-PTKIN</Link>
           </Text>
           <Text fontSize="sm" color="gray" pb="12">
             <Icon as={FcGraduationCap} w="30px" h="auto" mr="20px" />
-            <Link verticalAlign="top" fontWeight="semibold" href="https://um-mandiri.radenfatah.ac.id/" isExternal>
-              UM-MANDIRI
-            </Link>
+            <Link verticalAlign="top" fontWeight="semibold" href="https://um-mandiri.radenfatah.ac.id/" isExternal>UM-MANDIRI</Link>
           </Text>
         </Flex>
       </Flex>
 
       <Divider />
 
-      {/* === DAFTAR DOSEN + STATS === */}
       <Flex
         bg="gray.50"
         flexDirection={{ base: "column", xl: "row" }}
@@ -592,15 +480,9 @@ const Home: NextPage<home> = ({
         px={{ base: "5%", md: "5%", xl: "8%" }}
         gap={{ base: 6, xl: 8 }}
       >
-        {/* Daftar Dosen */}
         <Flex flexDir="column" flex={1}>
-          <Text fontSize={{ base: "18", md: "20" }} fontWeight="semibold" mb={4}>
-            👩‍🏫 DAFTAR DOSEN
-          </Text>
-          <Flex
-            flexDir="column"
-            gap={3}
-          >
+          <Text fontSize={{ base: "18", md: "20" }} fontWeight="semibold" mb={4}>👩‍🏫 DAFTAR DOSEN</Text>
+          <Flex flexDir="column" gap={3}>
             {daftarDosen.map((item) => (
               <DosenCard
                 key={item.id}
@@ -610,48 +492,22 @@ const Home: NextPage<home> = ({
               />
             ))}
           </Flex>
-          <Button
-            mt={4}
-            size="sm"
-            variant="outline"
-            colorScheme="blue"
-            onClick={() => router.push("/profil")}
-            alignSelf="flex-start"
-          >
+          <Button mt={4} size="sm" variant="outline" colorScheme="blue" onClick={() => router.push("/profil")} alignSelf="flex-start">
             Lihat Semua Dosen →
           </Button>
         </Flex>
-
-        {/* Stats */}
-        <Flex my={{ base: 0, xl: 4 }} flexShrink={0}>
-          <Stats />
-        </Flex>
+        <Flex my={{ base: 0, xl: 4 }} flexShrink={0}><Stats /></Flex>
       </Flex>
 
-      {/* === LOKASI === */}
       <Flex flexDir="column">
-        <Flex
-          flexDir="row"
-          mt={{ base: "24px", xl: "1.5vw" }}
-          ml={{ base: "5%", xl: "1.5vw" }}
-          align="center"
-        >
+        <Flex flexDir="row" mt={{ base: "24px", xl: "1.5vw" }} ml={{ base: "5%", xl: "1.5vw" }} align="center">
           <Icon as={FcGlobe} w="34px" h="auto" />
-          &thinsp;
-          <Text fontSize={{ base: "20", md: "24" }} fontWeight="semibold">
-            LOKASI
-          </Text>
+          <Text fontSize={{ base: "20", md: "24" }} fontWeight="semibold">LOKASI</Text>
         </Flex>
-        &emsp;
         {daftarIframe1 && (
           <iframe
-            title="Lokasi Prodi SI"
-            width="100%"
-            height="440px"
-            loading="lazy"
-            frameBorder="0"
-            scrolling="no"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31874.457135338303!2d104.75533903955079!3d-3.011849799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d2209209ceb%3A0x434396ad1d19af8a!2sFakultas%20Sains%20dan%20Teknologi%20Kampus%20B%20UIN%20Raden%20Fatah%20Palembang!5e0!3m2!1sid!2sid!4v1630623924194!5m2!1sid!2sid"
+            title="Lokasi Prodi SI" width="100%" height="440px" loading="lazy"
+            frameBorder="0" scrolling="no" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d31874.457135338303!2d104.75533903955079!3d-3.011849799999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e3b9d2209209ceb%3A0x434396ad1d19af8a!2sFakultas%20Sains%20dan%20Teknologi%20Kampus%20B%20UIN%20Raden%20Fatah%20Palembang!5e0!3m2!1sid!2sid!4v1630623924194!5m2!1sid!2sid"
           />
         )}
       </Flex>
@@ -662,7 +518,7 @@ const Home: NextPage<home> = ({
 };
 
 export const getServerSideProps: GetServerSideProps = async () => {
-  const daftarAgenda = await agenda();
+  // const daftarAgenda = await agenda(); // BAGIAN AGENDA DIKOMENTARI
   const daftarPengumuman = await pengumuman();
   const daftarKehadiran = await kehadiran();
   const daftarBerita = await berita();
@@ -672,7 +528,7 @@ export const getServerSideProps: GetServerSideProps = async () => {
 
   return {
     props: {
-      daftarAgenda: daftarAgenda ?? [],
+      daftarAgenda: [], // Kirim array kosong agar tidak error
       daftarPengumuman: daftarPengumuman ?? [],
       daftarKehadiran: daftarKehadiran ?? [],
       daftarBerita: daftarBerita ?? [],
